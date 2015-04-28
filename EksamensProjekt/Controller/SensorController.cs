@@ -12,7 +12,8 @@ namespace EksamensProjekt.Controller
     {
         public void CreateSensor(int serialNumber, string type)
         {
-            DBFacades.SensorDBFacade.CreateSensor(new Sensor(serialNumber, type));
+            Sensor s = new Sensor(serialNumber, type);
+            DBFacades.SensorDBFacade.CreateSensor(s);
         }
     }
 }
