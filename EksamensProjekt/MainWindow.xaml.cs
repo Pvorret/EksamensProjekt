@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using EksamensProjekt.View;
 
 namespace EksamensProjekt
 {
@@ -23,6 +24,13 @@ namespace EksamensProjekt
         public MainWindow()
         {
             InitializeComponent();
+        }
+
+        private void CreateSensor_Button_Click(object sender, RoutedEventArgs e)
+        {
+            CreateSensor CS = new CreateSensor();
+            CS.Show();
+            Close();
         }
     }
 }
