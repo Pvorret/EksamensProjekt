@@ -6,7 +6,11 @@ using System.Threading.Tasks;
 
 namespace EksamensProjekt.Controller
 {
-    class Controller
+    class SensorController
     {
+        public void CreateSensor(int serialNumber, string type)
+        {
+
+        }
     }
 }
