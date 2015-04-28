@@ -1,0 +1,13 @@
+﻿<Window x:Class="EksamensProjekt.View.CreateSensor"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="CreateSensor" Height="193.234" Width="300" WindowStartupLocation="CenterScreen">
+    <Grid Margin="0,0,0,-3">
+        <ComboBox Name="Type_ComboBox" HorizontalAlignment="Left" Margin="141,75,0,0" VerticalAlignment="Top" Width="120"/>
+        <TextBox Name="SerialNumber_TextBox" HorizontalAlignment="Left" Height="23" Margin="141,28,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
+        <Label Content="Serienummer:" HorizontalAlignment="Left" Margin="32,28,0,0" VerticalAlignment="Top"/>
+        <Label Content="Type:" HorizontalAlignment="Left" Margin="32,75,0,0" VerticalAlignment="Top"/>
+        <Button Name="CreateSensor_Button" Content="Tilføj" HorizontalAlignment="Left" Margin="159,122,0,0" VerticalAlignment="Top" Width="102" Click="CreateSensor_Button_Click"/>
+        <Button Name="Cancel_Button" Content="Annuller" HorizontalAlignment="Left" Margin="24,122,0,0" VerticalAlignment="Top" Width="102" Click="Cancel_Button_Click"/>
+    </Grid>
+</Window>
