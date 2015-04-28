@@ -15,7 +15,13 @@ namespace EksamensProjekt.Model
         {
             this.Name = name;
             this.CprNr = cprNr;
-
+            this.Gender = gender;
+            this.Age = age;
+            this.Address = address;
+            this.City = city;
+            this.PhoneNumber = phoneNumber;
+            this.Email = email;
+            
         }
     }
 }
