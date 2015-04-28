@@ -1,0 +1,14 @@
+﻿<Window x:Class="EksamensProjekt.View.CreateSensor"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Tilføj sensor" Height="180.597" Width="300">
+    <Grid>
+        <Button Name="Cancel_Button" Content="Annuller" HorizontalAlignment="Left" Margin="22,113,0,0" VerticalAlignment="Top" Width="102" Click="Cancel_Button_Click"/>
+        <TextBox Name="SerialNumber_TextBox" HorizontalAlignment="Left" Height="23" Margin="121,25,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="143"/>
+        <Label Content="Serienummer:" HorizontalAlignment="Left" Margin="22,25,0,0" VerticalAlignment="Top"/>
+        <Label Content="Type" HorizontalAlignment="Left" Margin="22,69,0,0" VerticalAlignment="Top"/>
+        <ComboBox Name="Type_ComboBox" HorizontalAlignment="Left" Margin="121,69,0,0" VerticalAlignment="Top" Width="143" SelectionChanged="Type_ComboBox_SelectionChanged"/>
+        <Button Name="AddSensor_Button" Content="Tilføj" HorizontalAlignment="Left" Margin="157,113,0,0" VerticalAlignment="Top" Width="102" RenderTransformOrigin="0,-0.364" Click="AddSensor_Button_Click"/>
+
+    </Grid>
+</Window>
