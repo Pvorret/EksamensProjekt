@@ -64,6 +64,7 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Controller\DBFacades\DBHelper.cs" />
     <Compile Include="Controller\DBFacades\SensorDBFacade.cs" />
     <Compile Include="Controller\SensorController.cs" />
     <Compile Include="MainWindow.xaml.cs">
@@ -76,6 +77,9 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Model\Citizen.cs" />
+    <Compile Include="Model\Person.cs" />
+    <Compile Include="Model\Relative.cs" />
     <Compile Include="Model\Sensor.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
