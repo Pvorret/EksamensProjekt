@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace EksamensProjekt.Model
 {
-    class Relative : Person
+    public class Relative : Person
     {
         public string Email { get; set; }
         public TimeSpan NotAvailable { get; set; }

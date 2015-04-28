@@ -30,7 +30,12 @@ namespace EksamensProjekt
         {
             CreateSensor CS = new CreateSensor();
             CS.Show();
-            Close();
+        }
+
+        private void CreateCitizen_Button_Click(object sender, RoutedEventArgs e)
+        {
+            CreateCitizen CC = new CreateCitizen();
+            CC.Show();
         }
     }
 }

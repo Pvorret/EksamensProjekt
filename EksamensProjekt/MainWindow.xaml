@@ -3,7 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         Title="Nødkald" Height="350" Width="525" WindowStartupLocation="CenterScreen" ResizeMode="NoResize" Cursor="Help">
     <Grid>
-        <Button Name="CreateCitizen_Button" Content="Opret Borgerdata" HorizontalAlignment="Left" Margin="196,92,0,0" VerticalAlignment="Top" Width="113"/>
+        <Button Name="CreateCitizen_Button" Content="Opret Borgerdata" HorizontalAlignment="Left" Margin="196,92,0,0" VerticalAlignment="Top" Width="113" Click="CreateCitizen_Button_Click"/>
         <Button Name="CreateSensor_Button" Content="Opret Sensor" HorizontalAlignment="Left" Margin="196,131,0,0" VerticalAlignment="Top" Width="113" Click="CreateSensor_Button_Click"/>
         <Label Name="Nødkald_Label" Content="Nødkald" FontSize="50px" FontStyle="Italic"  HorizontalAlignment="Left" Margin="157,10,0,0" VerticalAlignment="Top" Background="White">
             <Label.Foreground>
