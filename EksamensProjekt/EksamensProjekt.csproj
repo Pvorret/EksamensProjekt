@@ -61,6 +61,7 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Controller\DBFacades\DBHelper.cs" />
     <Compile Include="Controller\DBFacades\SensorDBFacade.cs" />
     <Compile Include="Controller\SensorController.cs" />
     <Compile Include="MainWindow.xaml.cs">
