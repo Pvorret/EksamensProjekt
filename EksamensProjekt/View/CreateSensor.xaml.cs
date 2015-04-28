@@ -30,13 +30,10 @@ namespace EksamensProjekt.View
             Type_ComboBox.Items.Add("GPS");
             Type_ComboBox.Items.Add("Seng");
         }
-
-
-        private void AddSensor_Button_Click(object sender, RoutedEventArgs e)
+        private void Type_ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            Controller.CreateSensor(SerialNumber_TextBox, Type_ComboBox);
-        }
 
+        }
         private void Cancel_Button_Click(object sender, RoutedEventArgs e)
         {
             MainWindow MW = new MainWindow();
@@ -44,9 +41,10 @@ namespace EksamensProjekt.View
             Close();
         }
 
-        private void Type_ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private void CreateSensor_Button_Click(object sender, RoutedEventArgs e)
         {
-
+            SensorController con = new SensorController();
+            con.CreateSensor(Convert.ToInt32(SerialNumber_TextBox), Type_ComboBox.SelectedItem.ToString());
         }
     }
 }
