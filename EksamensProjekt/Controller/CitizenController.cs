@@ -7,8 +7,19 @@ using EksamensProjekt.Model;
 
 namespace EksamensProjekt.Controller {
     class CitizenController {
-        private List<Relative> Relatives = new List<Relative>(); 
+        private List<Relative> Relatives = new List<Relative>();
 
+        //Mangler Parameter
+        public void CreateCitizen()
+        {
+
+        }
+
+        //Mangler Parameter
+        public void AddRelative()
+        {
+
+        }
 
     }
 }
