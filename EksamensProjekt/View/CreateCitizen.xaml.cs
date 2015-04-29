@@ -11,6 +11,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using EksamensProjekt.Controller;
 
 namespace EksamensProjekt.View
 {
@@ -19,6 +20,7 @@ namespace EksamensProjekt.View
     /// </summary>
     public partial class CreateCitizen : Window
     {
+        public CitizenController _controller;
         public CreateCitizen()
         {
             InitializeComponent();
@@ -31,7 +33,7 @@ namespace EksamensProjekt.View
 
         private void AddRelative_Button_Click(object sender, RoutedEventArgs e)
         {
-            AddRelative AR = new AddRelative();
+            AddRelative AR = new AddRelative(_controller);
             AR.Show();
         }
 

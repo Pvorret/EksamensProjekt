@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using EksamensProjekt.Model;
 
 namespace EksamensProjekt.Controller {
-    class CitizenController {
+    public class CitizenController {
         private List<Relative> Relatives = new List<Relative>();
 
         //Mangler Parameter
