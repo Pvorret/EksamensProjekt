@@ -9,9 +9,9 @@ namespace EksamensProjekt.Model
     public class Relative : Person
     {
         public string Email { get; set; }
-        public TimeSpan NotAvailable { get; set; }
+        public Dictionary<string, string> NotAvailable { get; set; }
 
-        public Relative(string name, string cprNr, string gender, string age, string address, string city, string phoneNumber, string email, List<string> NotAvailable)
+        public Relative(string name, string cprNr, string gender, string age, string address, string city, string phoneNumber, string email, Dictionary<string, string> NotAvailable)
         {
             this.Name = name;
             this.CprNr = cprNr;

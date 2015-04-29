@@ -79,8 +79,13 @@ namespace EksamensProjekt.Controller.DBFacades {
 
                     //NotAvailable skal ligges ind i Time tabllen med CPRNR for den Relative det er den er fra.
 
-                    SqlParameter sqlRelativeNotAvailable = new SqlParameter("@R_NotAvailable", r.NotAvailable);
-                    cmd2.Parameters.Add(sqlRelativeNotAvailable);
+                    foreach (KeyValuePair<string, string> notavailable in r.NotAvailable) {
+                        SqlParameter sqlDay = new SqlParameter("@T_Day", notavailable.Key);
+                        cmd.Parameters.Add(sqlDay);
+
+                        SqlParameter sqlTime = new SqlParameter("@T_TimePeriod", notavailable.Value);
+                        cmd.Parameters.Add(sqlTime);
+                    }                  
 
                     SqlParameter sqlRelativeAddress = new SqlParameter("@A_Address", r.Address);
                     cmd2.Parameters.Add(sqlRelativeAddress);
