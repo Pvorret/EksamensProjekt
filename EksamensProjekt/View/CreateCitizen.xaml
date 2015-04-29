@@ -24,7 +24,7 @@
         <Label Content="Sygdom" FontSize="14px" HorizontalAlignment="Left" Margin="281,20,0,0" VerticalAlignment="Top"/>
         <ComboBox Name="Illness_Dropdown" HorizontalAlignment="Left" Height="25" Margin="392,24,0,0" VerticalAlignment="Top" Width="151"/>
         <ListBox Name="CitizenIllness_ListBox" HorizontalAlignment="Left" Height="63" Margin="392,54,0,0" VerticalAlignment="Top" Width="151"/>
-        <Button Name="AddNewIllness_Button" Content="Tilføj ny sygdom" Height="25" HorizontalAlignment="Left" Margin="281,58,0,0" VerticalAlignment="Top" Width="100"/>
+        <Button Name="AddNewIllness_Button" Content="Tilføj ny sygdom" Height="25" HorizontalAlignment="Left" Margin="281,58,0,0" VerticalAlignment="Top" Width="100" Click="AddNewIllness_Button_Click"/>
         <Button Name="AddRelative_Button" Content="Tilføj pårørende" Height="25" HorizontalAlignment="Left" Margin="281,126,0,0" VerticalAlignment="Top" Width="100" Click="AddRelative_Button_Click"/>
         <ListBox Name="CitizenRelatives_ListBox" HorizontalAlignment="Left" Height="58" Margin="392,127,0,0" VerticalAlignment="Top" Width="151"/>
         <Label Content="Pleje tider" FontSize="14px" HorizontalAlignment="Left" Margin="281,190,0,0" VerticalAlignment="Top"/>
@@ -35,8 +35,8 @@
         <TextBox Name="HomeCareEnd_TextBox" HorizontalAlignment="Left" Height="25" Margin="482,228,0,0" TextWrapping="Wrap" Text="Slut" VerticalAlignment="Top" Width="61"/>
         <Button Name="AddHomeCareTime_Button" Content="Tilføj Tidspunkt" Height="25" HorizontalAlignment="Left" Margin="281,261,0,0" VerticalAlignment="Top" Width="100"/>
         <ListBox Name="HomeCareTimes_ListBox" HorizontalAlignment="Left" Height="58" Margin="392,261,0,0" VerticalAlignment="Top" Width="151"/>
-        <Button Name="CreateCitizen_Button" Content="Opret Borger" Height="25" HorizontalAlignment="Left" Margin="20,324,0,0" VerticalAlignment="Top" Width="100"/>
-        <Button Name="Cancel_Button" Content="Annuller" Height="25" HorizontalAlignment="Left" Margin="443,324,0,0" VerticalAlignment="Top" Width="100" Click="Cancel_Button_Click"/>
+        <Button Name="CreateCitizen_Button" Content="Opret Borger" Height="25" HorizontalAlignment="Left" Margin="20,332,0,0" VerticalAlignment="Top" Width="100"/>
+        <Button Name="Cancel_Button" Content="Annuller" Height="25" HorizontalAlignment="Left" Margin="443,332,0,0" VerticalAlignment="Top" Width="100" Click="Cancel_Button_Click"/>
 
     </Grid>
 </Window>

@@ -34,5 +34,11 @@ namespace EksamensProjekt.View
             AddRelative AR = new AddRelative();
             AR.Show();
         }
+
+        private void AddNewIllness_Button_Click(object sender, RoutedEventArgs e)
+        {
+            AddIllness AI = new AddIllness();
+            AI.Show();
+        }
     }
 }
