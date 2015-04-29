@@ -33,13 +33,23 @@ namespace EksamensProjekt.Controller.DBFacades {
                 SqlParameter sqlPhoneNumber = new SqlParameter("@C_PhoneNumber", citizen.PhoneNumber);
                 cmd.Parameters.Add(sqlPhoneNumber);
 
+                foreach (string s in citizen.Illness) {
+                    SqlParameter sqlIllness = new SqlParameter("@I_Name", s);
+                    cmd.Parameters.Add(sqlIllness);
+                }
+
                 SqlParameter sqlReligion = new SqlParameter("@C_Religion", citizen.Religion);
                 cmd.Parameters.Add(sqlReligion);
 
                 //HomeCare skal ligges ind i Time tabllen med CPRNR for den Citizen det er den er fra.
 
-                SqlParameter sqlHomeCare = new SqlParameter("@C_HomeCare", citizen.HomeCare);
-                cmd.Parameters.Add(sqlHomeCare);
+                foreach (KeyValuePair<string, string> homecare in citizen.HomeCare) {
+                    SqlParameter sqlDay = new SqlParameter("@T_Day", homecare.Key);
+                    cmd.Parameters.Add(sqlDay);
+
+                    SqlParameter sqlTime = new SqlParameter("@T_TimePeriod", homecare.Value);
+                    cmd.Parameters.Add(sqlTime);
+                }
 
                 SqlParameter sqlAddress = new SqlParameter("@A_Address", citizen.Address);
                 cmd.Parameters.Add(sqlAddress);
