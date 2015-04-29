@@ -12,13 +12,10 @@ namespace EksamensProjekt.Controller.DBFacades
 {
     static class SensorDBFacade
     {
-        static SqlConnection SensorSQL = new SqlConnection(DBHelper._connectionString);
+        public static SqlConnection dbconn;
         static SqlCommand cmd;
-        static public void CreateSensor(Sensor sensor)
+        public static void CreateSensor(Sensor sensor)
         {
-            cmd = new SqlCommand("SP_CreateSensor", SensorSQL);
-            cmd.CommandType = CommandType.StoredProcedure;
-
             int activatedToBit;
 
             if (sensor.Activated == false)
@@ -29,27 +26,65 @@ namespace EksamensProjekt.Controller.DBFacades
             {
                 activatedToBit = 1;
             }
-
             try
             {
-                SensorSQL.Open();
-
-                cmd.Parameters.Add("@S_SerialNumber", sensor.SerialNumber);
-                cmd.Parameters.Add("@S_Type");
-                cmd.Parameters.Add("@S_activated", activatedToBit);
-                cmd.Parameters.Add("@S_C_Citizen", "");
-                cmd.Parameters.Add("@S_Location", "");
-
+                ConnectDB();
+                cmd = new SqlCommand("SP_CreateSensor", dbconn);
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.Add("@SerialNumber", sensor.SerialNumber);
+                cmd.Parameters.Add("@Type", sensor.Type);
+                cmd.Parameters.Add("@activated", activatedToBit);
+                cmd.Parameters.Add("@Citizen", "");
+                cmd.Parameters.Add("@Location", "");
                 cmd.ExecuteNonQuery();
             }
-            catch
+            catch(Exception e)
             {
+                MessageBox.Show(e.Message);
                 MessageBox.Show("Error! Sensor not added to database");
             }
             finally
             {
-                SensorSQL.Close();
+                CloseDB();
             }
+        }
+        public static List<string> GetSensorType(int id)
+        {
+            List<string> sensortyper = new List<string>();
+            try
+            {
+                SqlCommand cmd = new SqlCommand("SP_GetSensorType", dbconn);
+                dbconn.Open();
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.Add(new SqlParameter("@ST_Id", id));
+                SqlDataReader reader = cmd.ExecuteReader();
+                
+                while (reader.Read())
+                {
+                    string sensortype = reader["ST_Type"].ToString();
+                    sensortyper.Add(sensortype);
+                }
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.Message);
+            }
+            finally
+            {
+                CloseDB();
+            }
+            return sensortyper;
+        }
+        public static void ConnectDB()
+        {
+            dbconn = new SqlConnection(DBHelper._connectionString);
+            dbconn.Open();
+        }
+
+        public static void CloseDB()
+        {
+            dbconn.Close();
+            dbconn.Dispose();
         }
     }
 }
