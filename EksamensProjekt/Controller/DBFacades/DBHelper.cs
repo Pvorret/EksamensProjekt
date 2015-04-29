@@ -10,7 +10,6 @@ namespace EksamensProjekt.Controller.DBFacades
 {
     public static class DBHelper
     {
-        static SqlConnection dbconn;
         public static string _connectionString = "Server=ealbd1.eal.local;" + "Database=EJL22_DB;" + "User Id=ejl22_usr;" + "Password=Baz1nga22;";
     }
 }

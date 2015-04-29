@@ -8,6 +8,7 @@ namespace EksamensProjekt.Model
 {
     public class Relative : Person
     {
+        public string CitizenCprNr { get; set; }
         public string Email { get; set; }
         public Dictionary<string, string> NotAvailable { get; set; }
 
@@ -23,5 +24,7 @@ namespace EksamensProjekt.Model
             this.Email = email;
             
         }
+
+        public Relative(string CitizenCprNr, string name, string cprNr, string gender, string age, string address, string city, string phoneNumber, string email, Dictionary<string, string> NotAvailable)
     }
 }

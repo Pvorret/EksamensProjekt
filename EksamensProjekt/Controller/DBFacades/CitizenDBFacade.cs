@@ -112,6 +112,8 @@ namespace EksamensProjekt.Controller.DBFacades {
                 SqlCommand cmd = new SqlCommand("SP_AddRelative", dbconn);
                 cmd.CommandType = CommandType.StoredProcedure;
 
+                SqlParameter sqlRelativeCitizenCPRNR = new SqlParameter();
+                
                 SqlParameter sqlRelativeName = new SqlParameter("@R_Name", relative.Name);
                 cmd.Parameters.Add(sqlRelativeName);
 
