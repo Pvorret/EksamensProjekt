@@ -57,7 +57,7 @@ namespace EksamensProjekt.Controller.DBFacades {
                 SqlParameter sqlCity = new SqlParameter("@A_City", citizen.City);
                 cmd.Parameters.Add(sqlCity);
 
-                SqlCommand cmd2 = new SqlCommand("SP_AddRelatives", dbconn);
+                SqlCommand cmd2 = new SqlCommand("SP_AddRelative", dbconn);
                 cmd.CommandType = CommandType.StoredProcedure;
 
                 foreach (Model.Relative r in citizen.Relatives) {
