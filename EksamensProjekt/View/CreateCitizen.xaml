@@ -16,7 +16,7 @@
         <Label Content="Tlf nr." FontSize="14px" HorizontalAlignment="Left" Margin="20,156,0,0" VerticalAlignment="Top"/>
         <TextBox Name="CitizenPhoneNumber_TextBox" HorizontalAlignment="Left" Height="25" Margin="118,160,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="151"/>
         <Label Content="Trosretning" FontSize="14px" HorizontalAlignment="Left" Margin="20,190,0,0" VerticalAlignment="Top"/>
-        <ComboBox Name="CitizenReligion_Dropdown" HorizontalAlignment="Left" Height="25" Margin="117,194,0,0" VerticalAlignment="Top" Width="151"/>
+        <ComboBox Name="CitizenReligion_Dropdown" HorizontalAlignment="Left" Height="25" Margin="117,194,0,0" VerticalAlignment="Top" Width="151" SelectionChanged="CitizenReligion_Dropdown_SelectionChanged"/>
         <Label Content="Addresse" FontSize="14px" HorizontalAlignment="Left" Margin="20,224,0,0" VerticalAlignment="Top"/>
         <TextBox Name="CitizenAddress_TextBox" HorizontalAlignment="Left" Height="25" Margin="118,228,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="151"/>
         <Label Content="Postnr + By" FontSize="14px" HorizontalAlignment="Left" Margin="20,258,0,0" VerticalAlignment="Top"/>

@@ -21,6 +21,7 @@ namespace EksamensProjekt.View
     public partial class CreateCitizen : Window
     {
         public CitizenController _controller;
+        AddReligion AR;
         public CreateCitizen()
         {
             _controller = new CitizenController();
@@ -44,12 +45,29 @@ namespace EksamensProjekt.View
         private void AddRelative_Button_Click(object sender, RoutedEventArgs e)
         {
             AddRelative AR = new AddRelative(_controller);
-            AR.Show();
+            AR.ShowDialog();
+            
+
         }
         private void AddNewIllness_Button_Click(object sender, RoutedEventArgs e)
         {
             AddIllness AI = new AddIllness();
             AI.Show();
         }
+
+        private void CitizenReligion_Dropdown_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (CitizenReligion_Dropdown.SelectedItem.ToString() == "Tilføj Anden")
+            {
+                AR = new AddReligion();
+                AR.ShowDialog();
+                CitizenReligion_Dropdown.Items.Add(AR.NewReligion);
+                CitizenReligion_Dropdown.SelectedItem = AR.NewReligion;               
+            }
+
+        }
+        
+        
+      
     }
 }

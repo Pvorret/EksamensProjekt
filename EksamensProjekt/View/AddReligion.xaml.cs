@@ -19,9 +19,20 @@ namespace EksamensProjekt.View
     /// </summary>
     public partial class AddReligion : Window
     {
+        public string NewReligion { get; set; }
+
         public AddReligion()
         {
             InitializeComponent();
         }
+
+        private void AddReligion_Button_Click(object sender, RoutedEventArgs e)
+        {
+            NewReligion = ReligionName_TextBox.Text;
+            this.Close();
+
+        }
+
+
     }
 }
