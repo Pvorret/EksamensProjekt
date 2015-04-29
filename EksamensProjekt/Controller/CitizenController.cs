@@ -28,5 +28,9 @@ namespace EksamensProjekt.Controller {
             Relatives.Add(new Relative(name, cprNr, gender, age, address, city, phoneNumber, email, notAvailable));
         }
 
+        public List<string> GetAllSensorType() {
+            return Controller.DBFacades.SensorDBFacade.GetSensorType(0);
+        }
+
     }
 }
