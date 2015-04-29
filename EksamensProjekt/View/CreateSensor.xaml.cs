@@ -42,7 +42,7 @@ namespace EksamensProjekt.View
         private void CreateSensor_Button_Click(object sender, RoutedEventArgs e)
         {
             SensorController con = new SensorController();
-            con.CreateSensor(Convert.ToInt32(SerialNumber_TextBox), Type_ComboBox.SelectedItem.ToString());
+            con.CreateSensor(Convert.ToInt32(SerialNumber_TextBox.Text), Type_ComboBox.SelectedItem.ToString());
         }
     }
 }
