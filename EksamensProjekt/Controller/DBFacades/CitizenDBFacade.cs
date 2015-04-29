@@ -145,6 +145,37 @@ namespace EksamensProjekt.Controller.DBFacades {
             }
         }
 
+        public static List<string> GetIllnessType(int id) {
+            List<string> IllnessList = new List<string>();
+
+            try {
+                ConnectDB();
+
+                SqlCommand cmd = new SqlCommand("GetIllnessType", dbconn);
+                cmd.CommandType = CommandType.StoredProcedure;
+
+                SqlParameter sqlId = new SqlParameter("@I_ID", id);
+                cmd.Parameters.Add(sqlId);
+
+                SqlDataReader rdr;
+                rdr = cmd.ExecuteReader();
+
+                while (rdr.HasRows && rdr.Read()) {
+                    string Illness = (string)rdr["I_Name"];
+                    IllnessList.Add(Illness);
+                }
+
+                CloseDB();
+
+                return IllnessList;
+
+            }
+            catch (SqlException e) {
+                
+                throw new Exception ("Error in getting Illness" + e.Message);
+            }
+        }
+
         private static void ConnectDB() {
             dbconn = new SqlConnection(DBHelper._connectionString);
             dbconn.Open();

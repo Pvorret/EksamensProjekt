@@ -32,5 +32,9 @@ namespace EksamensProjekt.Controller {
             return Controller.DBFacades.SensorDBFacade.GetSensorType(0);
         }
 
+        public List<string> GetAllIllness() {
+            return Controller.DBFacades.CitizenDBFacade.GetIllnessType(0);
+        }
+
     }
 }

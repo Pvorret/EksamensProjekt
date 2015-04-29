@@ -22,6 +22,8 @@ namespace EksamensProjekt.View
     {
         public CitizenController _controller;
         AddReligion AR;
+        Dictionary<string, string> notAvailableDic = new Dictionary<string, string>();
+        string timeNotAvailable;
         public CreateCitizen()
         {
             _controller = new CitizenController();
@@ -73,15 +75,32 @@ namespace EksamensProjekt.View
 
         private void AddHomeCareTime_Button_Click(object sender, RoutedEventArgs e)
         {
-            //Kig for AddRelative for hjælpe til denne del
-            /*
-            timeNotAvailable = NotAvailableStart_TextBox.Text + " - " + NotAvailableEnd_TextBox.Text;
-            NotAvailableTimes_ListBox.Items.Add(NotAvailableDays_Dropdown.SelectedItem.ToString() + ": " + timeNotAvailable);
-            notAvailableDic.Add(NotAvailableDays_Dropdown.SelectedItem.ToString(), timeNotAvailable);
+            timeNotAvailable = HomeCareStart_TextBox.Text + " - " + HomeCareEnd_TextBox.Text;
+            HomeCareTimes_ListBox.Items.Add(HomeCareDays_Dropdown.SelectedItem.ToString() + ": " + timeNotAvailable);
+            notAvailableDic.Add(HomeCareDays_Dropdown.SelectedItem.ToString(), timeNotAvailable);
 
-            NotAvailableStart_TextBox.Clear();
-            NotAvailableEnd_TextBox.Clear();
-             */
+            HomeCareStart_TextBox.Clear();
+            HomeCareEnd_TextBox.Clear();
+        }
+
+        private void CitizenSensorNeeds_Dropdown_DropDownOpened(object sender, EventArgs e) {
+            if (CitizenSensorNeeds_Dropdown.Items.Count == 0) {
+                foreach (string s in _controller.GetAllSensorType()) {
+                    CitizenSensorNeeds_Dropdown.Items.Add(s);
+                }
+            }
+        }
+
+        private void Illness_Dropdown_DropDownOpened(object sender, EventArgs e) {
+            if (Illness_Dropdown.Items.Count == 0) {
+                foreach (string s in _controller.GetAllIllness()) {
+                    Illness_Dropdown.Items.Add();
+                }
+            }
+        }
+
+        private void Illness_Dropdown_SelectionChanged(object sender, SelectionChangedEventArgs e) {
+            CitizenIllness_ListBox.Items.Add(Illness_Dropdown.SelectedItem);
         }
         
         

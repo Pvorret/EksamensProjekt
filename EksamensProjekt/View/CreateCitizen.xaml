@@ -22,9 +22,9 @@
         <Label Content="Postnr + By" FontSize="14px" HorizontalAlignment="Left" Margin="20,258,0,0" VerticalAlignment="Top"/>
         <TextBox Name="CitizenCity_TextBox" HorizontalAlignment="Left" Height="25" Margin="118,261,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="151"/>
         <Label Content="Sensor Behov" FontSize="14px" HorizontalAlignment="Left" Margin="20,291,0,0" VerticalAlignment="Top"/>
-        <ComboBox Name="CitizenSensorNeeds_Dropdown" HorizontalAlignment="Left" Height="25" Margin="117,295,0,0" VerticalAlignment="Top" Width="151"/>
+        <ComboBox Name="CitizenSensorNeeds_Dropdown" HorizontalAlignment="Left" Height="25" Margin="117,295,0,0" VerticalAlignment="Top" Width="151" DropDownOpened="CitizenSensorNeeds_Dropdown_DropDownOpened"/>
         <Label Content="Sygdom" FontSize="14px" HorizontalAlignment="Left" Margin="281,20,0,0" VerticalAlignment="Top"/>
-        <ComboBox Name="Illness_Dropdown" HorizontalAlignment="Left" Height="25" Margin="392,24,0,0" VerticalAlignment="Top" Width="151"/>
+        <ComboBox Name="Illness_Dropdown" HorizontalAlignment="Left" Height="25" Margin="392,24,0,0" VerticalAlignment="Top" Width="151" DropDownOpened="Illness_Dropdown_DropDownOpened" SelectionChanged="Illness_Dropdown_SelectionChanged"/>
         <ListBox Name="CitizenIllness_ListBox" HorizontalAlignment="Left" Height="63" Margin="392,54,0,0" VerticalAlignment="Top" Width="151"/>
         <Button Name="AddNewIllness_Button" Content="Tilføj ny sygdom" Height="25" HorizontalAlignment="Left" Margin="281,58,0,0" VerticalAlignment="Top" Width="100" Click="AddNewIllness_Button_Click"/>
         <Button Name="AddRelative_Button" Content="Tilføj pårørende" Height="25" HorizontalAlignment="Left" Margin="281,126,0,0" VerticalAlignment="Top" Width="100" Click="AddRelative_Button_Click"/>
