@@ -36,8 +36,6 @@ namespace EksamensProjekt.View
         }
         private void Cancel_Button_Click(object sender, RoutedEventArgs e)
         {
-            MainWindow MW = new MainWindow();
-            MW.Show();
             Close();
         }
 
