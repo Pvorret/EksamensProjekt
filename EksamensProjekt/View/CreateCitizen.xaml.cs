@@ -28,5 +28,11 @@ namespace EksamensProjekt.View
         {
             this.Close();
         }
+
+        private void AddRelative_Button_Click(object sender, RoutedEventArgs e)
+        {
+            AddRelative AR = new AddRelative();
+            AR.Show();
+        }
     }
 }
