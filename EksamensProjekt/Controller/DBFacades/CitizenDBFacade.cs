@@ -57,8 +57,8 @@ namespace EksamensProjekt.Controller.DBFacades {
                 SqlParameter sqlCity = new SqlParameter("@A_City", citizen.City);
                 cmd.Parameters.Add(sqlCity);
 
-                SqlCommand cmd2 = new SqlCommand("SP_AddRelatives", dbconn);
-                cmd.CommandType = CommandType.StoredProcedure;
+                SqlCommand cmd2 = new SqlCommand("SP_AddRelative", dbconn);
+                cmd2.CommandType = CommandType.StoredProcedure;
 
                 foreach (Model.Relative r in citizen.Relatives) {
                     
@@ -85,6 +85,7 @@ namespace EksamensProjekt.Controller.DBFacades {
 
                         SqlParameter sqlTime = new SqlParameter("@T_TimePeriod", notavailable.Value);
                         cmd.Parameters.Add(sqlTime);
+
                     }                  
 
                     SqlParameter sqlRelativeAddress = new SqlParameter("@A_Address", r.Address);
@@ -92,6 +93,9 @@ namespace EksamensProjekt.Controller.DBFacades {
 
                     SqlParameter sqlRelativeCity = new SqlParameter("@A_City", r.City);
                     cmd2.Parameters.Add(sqlRelativeCity);
+
+                    SqlParameter sqlRelativeCitizenCPRNR = new SqlParameter("@C_CPRNR", citizen.CprNr);
+                    cmd2.Parameters.Add(sqlRelativeCitizenCPRNR);
                 }
 
                 cmd.ExecuteNonQuery();
@@ -101,6 +105,42 @@ namespace EksamensProjekt.Controller.DBFacades {
             catch (SqlException e) {
 
                 throw new Exception("Error in creating Citizen" + e.Message);
+            }
+        }
+
+        public void AddRelatives (Model.Relative relative) {
+
+            try {
+                ConnectDB();
+
+                SqlCommand cmd = new SqlCommand("SP_AddRelative", dbconn);
+                cmd.CommandType = CommandType.StoredProcedure;
+
+                SqlParameter sqlRelativeCitizenCPRNR = new SqlParameter("@C_CPRNR", relative.CitizenCprNr);
+                cmd.Parameters.Add(sqlRelativeCitizenCPRNR);
+                
+                SqlParameter sqlRelativeName = new SqlParameter("@R_Name", relative.Name);
+                cmd.Parameters.Add(sqlRelativeName);
+
+                SqlParameter sqlRelativeCPRNR = new SqlParameter("@R_CPRNR", relative.CprNr);
+                cmd.Parameters.Add(sqlRelativeCPRNR);
+
+                SqlParameter sqlRelativeGender = new SqlParameter("@R_Gender", relative.Gender);
+                cmd.Parameters.Add(sqlRelativeGender);
+
+                SqlParameter sqlRelativeAge = new SqlParameter("@R_Age", relative.Age);
+                cmd.Parameters.Add(sqlRelativeAge);
+
+                SqlParameter sqlRelativePhoneNumber = new SqlParameter("@R_PhoneNumber", relative.PhoneNumber);
+                cmd.Parameters.Add(sqlRelativePhoneNumber);
+
+                cmd.ExecuteNonQuery();
+
+                CloseDB();
+            }
+            catch (SqlException e) {
+                
+                throw new Exception ("Error in adding Relative" + e.Message);
             }
         }
 
