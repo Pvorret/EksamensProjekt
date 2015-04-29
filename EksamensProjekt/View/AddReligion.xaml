@@ -5,7 +5,7 @@
     <Grid>
         <Label Content="Navn" FontSize="14px" HorizontalAlignment="Left" Margin="10,21,0,0" VerticalAlignment="Top"/>
         <TextBox Name="ReligionName_TextBox" HorizontalAlignment="Left" Height="25" Margin="68,25,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="165"/>
-        <Button Name="AddReligion_Button" Content="Tilføj Trosretning" HorizontalAlignment="Left" Margin="10,59,0,0" VerticalAlignment="Top" Height="25" Width="100"/>
+        <Button Name="AddReligion_Button" Content="Tilføj Trosretning" HorizontalAlignment="Left" Margin="10,59,0,0" VerticalAlignment="Top" Height="25" Width="100" Click="AddReligion_Button_Click"/>
         <Button Name="Cancel_Button" Content="Annuller" HorizontalAlignment="Left" Margin="133,59,0,0" VerticalAlignment="Top" Height="25" Width="100"/>
     </Grid>
 </Window>
