@@ -10,8 +10,10 @@ namespace EksamensProjekt.Controller {
         private List<Relative> Relatives = new List<Relative>();
 
         //Mangler Parameter
-        public void CreateCitizen(string name, string cprnr, string gender, string age, string address, string city, string phonenumber, List<string> illness, string religion, List<string > sensors, Dictionary<string, string> homeCare, List<string> relatives)
+        public void CreateCitizen(string name, string cprnr, string gender, string age, string address, string city, string phonenumber, List<string> illness, string religion, List<string> sensors, Dictionary<string, string> homeCare)
         {
+            Citizen citizen = new Citizen(name, cprnr, gender, age, address, city, phonenumber, illness, religion, sensors, homeCare);
+            citizen.Relatives = Relatives;
 
         }
 
