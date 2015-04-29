@@ -61,8 +61,8 @@ namespace EksamensProjekt.Controller.DBFacades
                 
                 while (reader.Read())
                 {
-                    string sensortype = reader["ST_Type"].ToString();
-                    sensortyper.Add(sensortype);
+                    string sensor = reader["ST_Type"].ToString();
+                    sensortype.Add(sensor);
                 }
             }
             catch (SqlException e)
