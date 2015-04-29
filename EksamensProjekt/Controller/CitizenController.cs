@@ -16,7 +16,7 @@ namespace EksamensProjekt.Controller {
         }
 
         //Brugt til tilføjelse af en pårørende i ændre borger
-        public void AddRelative(string citizenId, string name, string gender, string age, string address, string city, string phoneNumber, string email, List<string> notAvailable)
+        public void AddRelative(string citizenId, string name, string cprNr, string gender, string age, string address, string city, string phoneNumber, string email, List<string> notAvailable)
         {
 
         }
@@ -24,7 +24,6 @@ namespace EksamensProjekt.Controller {
         public void AddRelative(string name,string cprNr, string gender, string age, string address, string city, string phoneNumber, string email, Dictionary<string, string> notAvailable)
         {
             Relatives.Add(new Relative(name, cprNr, gender, age, address, city, phoneNumber, email, notAvailable));
-
         }
 
     }
