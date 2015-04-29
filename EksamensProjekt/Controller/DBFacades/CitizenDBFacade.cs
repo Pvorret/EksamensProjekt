@@ -36,6 +36,8 @@ namespace EksamensProjekt.Controller.DBFacades {
                 SqlParameter sqlReligion = new SqlParameter("@C_Religion", citizen.Religion);
                 cmd.Parameters.Add(sqlReligion);
 
+                //HomeCare skal ligges ind i Time tabllen med CPRNR for den Citizen det er den er fra.
+
                 SqlParameter sqlHomeCare = new SqlParameter("@C_HomeCare", citizen.HomeCare);
                 cmd.Parameters.Add(sqlHomeCare);
 
@@ -49,16 +51,41 @@ namespace EksamensProjekt.Controller.DBFacades {
                 cmd.CommandType = CommandType.StoredProcedure;
 
                 foreach (Model.Relative r in citizen.Relatives) {
+                    
+                    SqlParameter sqlRelativeName = new SqlParameter("@R_Name", r.Name);
+                    cmd2.Parameters.Add(sqlRelativeName);
 
+                    SqlParameter sqlRelativeCPRNR = new SqlParameter("@R_CPRNR", r.CprNr);
+                    cmd2.Parameters.Add(sqlRelativeCPRNR);
+
+                    SqlParameter sqlRelativeGender = new SqlParameter("@R_Gender", r.Gender);
+                    cmd2.Parameters.Add(sqlRelativeGender);
+
+                    SqlParameter sqlRelativeAge = new SqlParameter("@R_Age", r.Age);
+                    cmd2.Parameters.Add(sqlRelativeAge);
+
+                    SqlParameter sqlRelativePhoneNumber = new SqlParameter("@R_PhoneNumber", r.PhoneNumber);
+                    cmd2.Parameters.Add(sqlRelativePhoneNumber);
+
+                    //NotAvailable skal ligges ind i Time tabllen med CPRNR for den Relative det er den er fra.
+
+                    SqlParameter sqlRelativeNotAvailable = new SqlParameter("@R_NotAvailable", r.NotAvailable);
+                    cmd2.Parameters.Add(sqlRelativeNotAvailable);
+
+                    SqlParameter sqlRelativeAddress = new SqlParameter("@A_Address", r.Address);
+                    cmd2.Parameters.Add(sqlRelativeAddress);
+
+                    SqlParameter sqlRelativeCity = new SqlParameter("@A_City", r.City);
+                    cmd2.Parameters.Add(sqlRelativeCity);
                 }
 
                 cmd.ExecuteNonQuery();
 
                 CloseDB();
             }
-            catch (SqlException) {
+            catch (SqlException e) {
 
-                throw;
+                throw new Exception("Error in creating Citizen" + e.Message);
             }
         }
 
