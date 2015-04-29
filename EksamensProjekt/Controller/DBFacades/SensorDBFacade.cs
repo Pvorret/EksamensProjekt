@@ -14,7 +14,7 @@ namespace EksamensProjekt.Controller.DBFacades
     {
         public static SqlConnection dbconn;
         static SqlCommand cmd;
-        static public void CreateSensor(Sensor sensor)
+        public static void CreateSensor(Sensor sensor)
         {
             int activatedToBit;
 
@@ -47,6 +47,33 @@ namespace EksamensProjekt.Controller.DBFacades
             {
                 CloseDB();
             }
+        }
+        public static List<string> GetSensorType(int id)
+        {
+            List<string> sensortyper = new List<string>();
+            try
+            {
+                SqlCommand cmd = new SqlCommand("SP_GetSensorType", dbconn);
+                dbconn.Open();
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.Add(new SqlParameter("@ST_Id", id));
+                SqlDataReader reader = cmd.ExecuteReader();
+                
+                while (reader.Read())
+                {
+                    string sensortype = reader["ST_Type"].ToString();
+                    sensortyper.Add(sensortype);
+                }
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.Message);
+            }
+            finally
+            {
+                CloseDB();
+            }
+            return sensortyper;
         }
         public static void ConnectDB()
         {
