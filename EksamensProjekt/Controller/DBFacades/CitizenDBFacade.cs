@@ -8,9 +8,9 @@ using System.Data.SqlClient;
 
 namespace EksamensProjekt.Controller.DBFacades {
     class CitizenDBFacade {
-        
+
         static SqlConnection dbconn;
-        
+
         public void CreateCitizen(Model.Citizen citizen) {
             try {
                 ConnectDB();
@@ -48,14 +48,16 @@ namespace EksamensProjekt.Controller.DBFacades {
                 SqlCommand cmd2 = new SqlCommand("SP_AddRelatives", dbconn);
                 cmd.CommandType = CommandType.StoredProcedure;
 
-                
+                foreach (Model.Relative r in citizen.Relatives) {
+
+                }
 
                 cmd.ExecuteNonQuery();
 
                 CloseDB();
             }
             catch (SqlException) {
-                
+
                 throw;
             }
         }

@@ -53,6 +53,8 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Controller\CitizenController.cs" />
+    <Compile Include="Controller\DBFacades\CitizenDBFacade.cs" />
     <Compile Include="View\AddRelative.xaml.cs">
       <DependentUpon>AddRelative.xaml</DependentUpon>
     </Compile>
