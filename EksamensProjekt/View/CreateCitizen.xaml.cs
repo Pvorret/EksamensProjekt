@@ -11,6 +11,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using EksamensProjekt.Controller;
 
 namespace EksamensProjekt.View
 {
@@ -19,22 +20,32 @@ namespace EksamensProjekt.View
     /// </summary>
     public partial class CreateCitizen : Window
     {
+        public CitizenController _controller;
         public CreateCitizen()
         {
+            _controller = new CitizenController();
             InitializeComponent();
+            CitizenGender_Dropdown.Items.Add("Mand");
+            CitizenGender_Dropdown.Items.Add("Kvinde");
+
+            CitizenReligion_Dropdown.Items.Add("Kristendom");
+            CitizenReligion_Dropdown.Items.Add("Jødedom");
+            CitizenReligion_Dropdown.Items.Add("Islam");
+            CitizenReligion_Dropdown.Items.Add("Buddhisme");
+            CitizenReligion_Dropdown.Items.Add("Hinduisme");
+            CitizenReligion_Dropdown.Items.Add("Sikhisme");
+            CitizenReligion_Dropdown.Items.Add("Tilføj Anden");
         }
 
         private void Cancel_Button_Click(object sender, RoutedEventArgs e)
         {
             this.Close();
         }
-
         private void AddRelative_Button_Click(object sender, RoutedEventArgs e)
         {
-            AddRelative AR = new AddRelative();
+            AddRelative AR = new AddRelative(_controller);
             AR.Show();
         }
-
         private void AddNewIllness_Button_Click(object sender, RoutedEventArgs e)
         {
             AddIllness AI = new AddIllness();
