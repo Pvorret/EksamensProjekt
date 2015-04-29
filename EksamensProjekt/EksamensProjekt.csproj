@@ -55,8 +55,14 @@
     </ApplicationDefinition>
     <Compile Include="Controller\CitizenController.cs" />
     <Compile Include="Controller\DBFacades\CitizenDBFacade.cs" />
+    <Compile Include="View\AddIllness.xaml.cs">
+      <DependentUpon>AddIllness.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\AddRelative.xaml.cs">
       <DependentUpon>AddRelative.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\AddReligion.xaml.cs">
+      <DependentUpon>AddReligion.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\CreateCitizen.xaml.cs">
       <DependentUpon>CreateCitizen.xaml</DependentUpon>
@@ -79,7 +85,15 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="View\AddIllness.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\AddRelative.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\AddReligion.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
