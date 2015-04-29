@@ -7,7 +7,7 @@ using EksamensProjekt.Model;
 
 namespace EksamensProjekt.Controller {
     public class CitizenController {
-        private List<Relative> Relatives = new List<Relative>();
+        public List<Relative> Relatives = new List<Relative>();
 
         //Mangler Parameter
         public void CreateCitizen(string name, string cprnr, string gender, string age, string address, string city, string phonenumber, List<string> illness, string religion, List<string> sensors, Dictionary<string, string> homeCare)

@@ -46,7 +46,10 @@ namespace EksamensProjekt.View
         {
             AddRelative AR = new AddRelative(_controller);
             AR.ShowDialog();
-            
+            for (int i = 0; i < _controller.Relatives.Count; i++)
+			{
+                CitizenRelatives_ListBox.Items.Add(_controller.Relatives[i].Name);			 
+			}
 
         }
         private void AddNewIllness_Button_Click(object sender, RoutedEventArgs e)
@@ -61,10 +64,23 @@ namespace EksamensProjekt.View
             {
                 AR = new AddReligion();
                 AR.ShowDialog();
-                CitizenReligion_Dropdown.Items.Add(AR.NewReligion);
+                CitizenReligion_Dropdown.Items.Insert(CitizenReligion_Dropdown.Items.Count -1, AR.NewReligion);
                 CitizenReligion_Dropdown.SelectedItem = AR.NewReligion;               
             }
 
+        }
+
+        private void AddHomeCareTime_Button_Click(object sender, RoutedEventArgs e)
+        {
+            //Kig for AddRelative for hjælpe til denne del
+            /*
+            timeNotAvailable = NotAvailableStart_TextBox.Text + " - " + NotAvailableEnd_TextBox.Text;
+            NotAvailableTimes_ListBox.Items.Add(NotAvailableDays_Dropdown.SelectedItem.ToString() + ": " + timeNotAvailable);
+            notAvailableDic.Add(NotAvailableDays_Dropdown.SelectedItem.ToString(), timeNotAvailable);
+
+            NotAvailableStart_TextBox.Clear();
+            NotAvailableEnd_TextBox.Clear();
+             */
         }
         
         

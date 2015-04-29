@@ -35,7 +35,7 @@
         <TextBox Name="HomeCareStart_TextBox" HorizontalAlignment="Left" Height="25" Margin="392,228,0,0" TextWrapping="Wrap" Text="Start" VerticalAlignment="Top" Width="61"/>
         <Label Content="-" HorizontalAlignment="Left" FontSize="14px" Margin="461,224,0,0" VerticalAlignment="Top" RenderTransformOrigin="8.214,0.207"/>
         <TextBox Name="HomeCareEnd_TextBox" HorizontalAlignment="Left" Height="25" Margin="482,228,0,0" TextWrapping="Wrap" Text="Slut" VerticalAlignment="Top" Width="61"/>
-        <Button Name="AddHomeCareTime_Button" Content="Tilføj Tidspunkt" Height="25" HorizontalAlignment="Left" Margin="281,261,0,0" VerticalAlignment="Top" Width="100"/>
+        <Button Name="AddHomeCareTime_Button" Content="Tilføj Tidspunkt" Height="25" HorizontalAlignment="Left" Margin="281,261,0,0" VerticalAlignment="Top" Width="100" Click="AddHomeCareTime_Button_Click"/>
         <ListBox Name="HomeCareTimes_ListBox" HorizontalAlignment="Left" Height="58" Margin="392,261,0,0" VerticalAlignment="Top" Width="151"/>
         <Button Name="CreateCitizen_Button" Content="Opret Borger" Height="25" HorizontalAlignment="Left" Margin="20,332,0,0" VerticalAlignment="Top" Width="94"/>
         <Button Name="Cancel_Button" Content="Annuller" Height="25" HorizontalAlignment="Left" Margin="449,332,0,0" VerticalAlignment="Top" Width="94" Click="Cancel_Button_Click"/>
