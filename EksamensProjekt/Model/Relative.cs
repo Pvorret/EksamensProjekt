@@ -25,6 +25,17 @@ namespace EksamensProjekt.Model
             
         }
 
-        public Relative(string CitizenCprNr, string name, string cprNr, string gender, string age, string address, string city, string phoneNumber, string email, Dictionary<string, string> NotAvailable)
+        public Relative(string citizenCprNr, string name, string cprNr, string gender, string age, string address, string city, string phoneNumber, string email, Dictionary<string, string> NotAvailable) {
+
+            this.CitizenCprNr = citizenCprNr;
+            this.Name = name;
+            this.CprNr = cprNr;
+            this.Gender = gender;
+            this.Age = age;
+            this.Address = address;
+            this.City = city;
+            this.PhoneNumber = phoneNumber;
+            this.Email = email;
+        }
     }
 }

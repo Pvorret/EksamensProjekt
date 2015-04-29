@@ -85,6 +85,7 @@ namespace EksamensProjekt.Controller.DBFacades {
 
                         SqlParameter sqlTime = new SqlParameter("@T_TimePeriod", notavailable.Value);
                         cmd.Parameters.Add(sqlTime);
+
                     }                  
 
                     SqlParameter sqlRelativeAddress = new SqlParameter("@A_Address", r.Address);
@@ -92,6 +93,9 @@ namespace EksamensProjekt.Controller.DBFacades {
 
                     SqlParameter sqlRelativeCity = new SqlParameter("@A_City", r.City);
                     cmd2.Parameters.Add(sqlRelativeCity);
+
+                    SqlParameter sqlRelativeCitizenCPRNR = new SqlParameter("@C_CPRNR", citizen.CprNr);
+                    cmd2.Parameters.Add(sqlRelativeCitizenCPRNR);
                 }
 
                 cmd.ExecuteNonQuery();
@@ -112,7 +116,8 @@ namespace EksamensProjekt.Controller.DBFacades {
                 SqlCommand cmd = new SqlCommand("SP_AddRelative", dbconn);
                 cmd.CommandType = CommandType.StoredProcedure;
 
-                SqlParameter sqlRelativeCitizenCPRNR = new SqlParameter();
+                SqlParameter sqlRelativeCitizenCPRNR = new SqlParameter("@C_CPRNR", relative.CitizenCprNr);
+                cmd.Parameters.Add(sqlRelativeCitizenCPRNR);
                 
                 SqlParameter sqlRelativeName = new SqlParameter("@R_Name", relative.Name);
                 cmd.Parameters.Add(sqlRelativeName);
