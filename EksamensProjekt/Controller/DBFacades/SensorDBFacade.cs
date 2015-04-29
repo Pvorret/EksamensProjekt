@@ -12,7 +12,7 @@ namespace EksamensProjekt.Controller.DBFacades
 {
     static class SensorDBFacade
     {
-        static SqlConnection SensorSQL = new SqlConnection(DBHelper.DB_conn);
+        static SqlConnection SensorSQL = new SqlConnection(DBHelper._connectionString);
         static SqlCommand cmd;
         static public void CreateSensor(Sensor sensor)
         {
