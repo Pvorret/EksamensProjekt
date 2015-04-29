@@ -8,7 +8,9 @@ using System.Data.SqlClient;
 
 namespace EksamensProjekt.Controller.DBFacades {
     class CitizenDBFacade {
+        
         static SqlConnection dbconn;
+        
         public void CreateCitizen(Model.Citizen citizen) {
             try {
                 ConnectDB();
@@ -34,8 +36,6 @@ namespace EksamensProjekt.Controller.DBFacades {
                 SqlParameter sqlReligion = new SqlParameter("@C_Religion", citizen.Religion);
                 cmd.Parameters.Add(sqlReligion);
 
-                //HomeCare skal ligges ned i time med CPRNR for den Citizen
-
                 SqlParameter sqlHomeCare = new SqlParameter("@C_HomeCare", citizen.HomeCare);
                 cmd.Parameters.Add(sqlHomeCare);
 
@@ -48,13 +48,13 @@ namespace EksamensProjekt.Controller.DBFacades {
                 SqlCommand cmd2 = new SqlCommand("SP_AddRelatives", dbconn);
                 cmd.CommandType = CommandType.StoredProcedure;
 
-
+                
 
                 cmd.ExecuteNonQuery();
 
                 CloseDB();
             }
-            catch (Exception) {
+            catch (SqlException) {
                 
                 throw;
             }
