@@ -103,14 +103,16 @@ namespace EksamensProjekt.Controller.DBFacades {
                 throw new Exception("Error in creating Citizen" + e.Message);
             }
         }
-
-        private static void ConnectDB() {
+        public static void ConnectDB()
+        {
             dbconn = new SqlConnection(DBHelper._connectionString);
             dbconn.Open();
         }
 
-        private static void CloseDB() {
+        public static void CloseDB()
+        {
             dbconn.Close();
+            dbconn.Dispose();
         }
     }
 }

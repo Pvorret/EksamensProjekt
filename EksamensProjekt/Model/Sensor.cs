@@ -16,10 +16,10 @@ namespace EksamensProjekt.Model
 
         public Sensor(int serialnumber, string type)
         {
-            SerialNumber = serialnumber;
-            Type = type;
-            Location = "";
-            Activated = false;
+            this.SerialNumber = serialnumber;
+            this.Type = type;
+            this.Location = "";
+            this.Activated = false;
         }
     }
 }
