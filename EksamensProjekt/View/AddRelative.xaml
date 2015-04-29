@@ -1,8 +1,35 @@
 ﻿<Window x:Class="EksamensProjekt.View.AddRelative"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="AddRelative" Height="300" Width="300">
+        Title="Tilføj Pårørende" Height="500" Width="300" WindowStartupLocation="CenterScreen">
     <Grid>
-        
+        <Label Content="CPR-NR" FontSize="14px" HorizontalAlignment="Left" Margin="30,20,0,0" VerticalAlignment="Top"/>
+        <TextBox Name="RelativeBirthdate_TextBox" HorizontalAlignment="Left" Height="25" Margin="120,24,0,0" TextWrapping="Wrap" Text="" FontSize="14px" VerticalAlignment="Top" Width="65"/>
+        <TextBox Name="RelativeLast4CPR_TextBox" HorizontalAlignment="Left" Height="25" Margin="211,24,0,0" TextWrapping="Wrap" Text="" FontSize="14px" VerticalAlignment="Top" Width="60"/>
+        <Label Content="-" HorizontalAlignment="Left" FontSize="14px" Margin="190,20,0,0" VerticalAlignment="Top"/>
+        <Label Content="Navn" FontSize="14px" HorizontalAlignment="Left" Margin="30,54,0,0" VerticalAlignment="Top"/>
+        <TextBox Name="RelativeName_TextBox" HorizontalAlignment="Left" Height="25" Margin="120,57,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="151"/>
+        <Label Content="Køn" FontSize="14px" HorizontalAlignment="Left" Margin="30,88,0,0" VerticalAlignment="Top"/>
+        <ComboBox Name="RelativeGender_Dropdown" HorizontalAlignment="Left" Height="25" Margin="120,92,0,0" VerticalAlignment="Top" Width="151"/>
+        <Label Content="Alder" FontSize="14px" HorizontalAlignment="Left" Margin="30,122,0,0" VerticalAlignment="Top"/>
+        <TextBox Name="RelativeAge_TextBox" HorizontalAlignment="Left" Height="25" Margin="120,125,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="151"/>
+        <Label Content="Tlf nr." FontSize="14px" HorizontalAlignment="Left" Margin="30,156,0,0" VerticalAlignment="Top"/>
+        <TextBox Name="RelativePhoneNumber_TextBox" HorizontalAlignment="Left" Height="25" Margin="120,160,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="151"/>
+        <Label Content="Email" FontSize="14px" HorizontalAlignment="Left" Margin="30,190,0,0" VerticalAlignment="Top"/>
+        <TextBox Name="RelativeEmail_TextBox" HorizontalAlignment="Left" Height="25" Margin="120,194,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="151"/>
+        <Label Content="Addresse" FontSize="14px" HorizontalAlignment="Left" Margin="30,224,0,0" VerticalAlignment="Top"/>
+        <TextBox Name="RelativeAddress_TextBox" HorizontalAlignment="Left" Height="25" Margin="120,228,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="151"/>
+        <Label Content="Postnr + By" FontSize="14px" HorizontalAlignment="Left" Margin="30,258,0,0" VerticalAlignment="Top"/>
+        <TextBox Name="RelativeCity_TextBox" HorizontalAlignment="Left" Height="25" Margin="120,261,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="151"/>
+        <Label Content="Pleje tider" FontSize="14px" HorizontalAlignment="Left" Margin="30,291,0,0" VerticalAlignment="Top"/>
+        <Label Content="Dage" FontSize="14px" HorizontalAlignment="Left" Margin="120,291,0,0" VerticalAlignment="Top"/>
+        <ComboBox Name="HomeCareDays_Dropdown" HorizontalAlignment="Left" Height="25" Margin="186,295,0,0" VerticalAlignment="Top" Width="85"/>
+        <TextBox Name="HomeCareStart_TextBox" HorizontalAlignment="Left" Height="25" Margin="120,325,0,0" TextWrapping="Wrap" Text="Start" VerticalAlignment="Top" Width="61"/>
+        <Label Content="-" HorizontalAlignment="Left" FontSize="14px" Margin="189,321,0,0" VerticalAlignment="Top" RenderTransformOrigin="8.214,0.207"/>
+        <TextBox Name="HomeCareEnd_TextBox" HorizontalAlignment="Left" Height="25" Margin="210,325,0,0" TextWrapping="Wrap" Text="Slut" VerticalAlignment="Top" Width="61"/>
+        <Button Name="AddHomeCareTime_Button" Content="Tilføj Tidspunkt" Height="25" HorizontalAlignment="Left" Margin="15,355,0,0" VerticalAlignment="Top" Width="100"/>
+        <ListBox Name="HomeCareTimes_ListBox" HorizontalAlignment="Left" Height="58" Margin="120,355,0,0" VerticalAlignment="Top" Width="151"/>
+        <Button Name="AddRelative_Button" Content="Tilføj pårørende" HorizontalAlignment="Left" Margin="15,423,0,0" VerticalAlignment="Top" Width="100" Height="25"/>
+        <Button Name="Cancel_Button" Content="Annuller" HorizontalAlignment="Left" Margin="171,423,0,0" VerticalAlignment="Top" Width="100" Height="25" Click="Cancel_Button_Click"/>
     </Grid>
 </Window>

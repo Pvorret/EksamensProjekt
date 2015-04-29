@@ -23,5 +23,10 @@ namespace EksamensProjekt.View
         {
             InitializeComponent();
         }
+
+        private void Cancel_Button_Click(object sender, RoutedEventArgs e)
+        {
+            this.Close();
+        }
     }
 }
