@@ -55,7 +55,8 @@ namespace EksamensProjekt.View
         private void AddNewIllness_Button_Click(object sender, RoutedEventArgs e)
         {
             AddIllness AI = new AddIllness();
-            AI.Show();
+            AI.ShowDialog();
+            CitizenIllness_ListBox.Items.Add(AI.NewIllness);
         }
 
         private void CitizenReligion_Dropdown_SelectionChanged(object sender, SelectionChangedEventArgs e)

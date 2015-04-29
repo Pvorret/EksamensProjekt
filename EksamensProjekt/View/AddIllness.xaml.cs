@@ -17,11 +17,21 @@ namespace EksamensProjekt.View
     /// <summary>
     /// Interaction logic for AddIllness.xaml
     /// </summary>
+    
     public partial class AddIllness : Window
     {
+        public string NewIllness { get; set; }
+
         public AddIllness()
         {
             InitializeComponent();
         }
+
+        private void AddIllness_Button_Click(object sender, RoutedEventArgs e)
+        {
+            NewIllness = IllnessName_TextBox.Text;
+            this.Close();
+        }
+
     }
 }

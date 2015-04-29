@@ -4,7 +4,7 @@
         Title="Tilføj Borgerdata" Height="400" Width="575" WindowStartupLocation="CenterScreen">
     <Grid>
         <Label Content="CPR-NR" FontSize="14px" HorizontalAlignment="Left" Margin="20,20,0,0" VerticalAlignment="Top"/>
-        <TextBox Name="CitizenBirthdate_TextBox" HorizontalAlignment="Left" Height="25" Margin="110,24,0,0" TextWrapping="Wrap" Text="" FontSize="14px" VerticalAlignment="Top" Width="65"/>
+        <TextBox Name="CitizenBirthdate_TextBox" HorizontalAlignment="Left" Height="25" Margin="118,24,0,0" TextWrapping="Wrap" Text="" FontSize="14px" VerticalAlignment="Top" Width="65"/>
         <TextBox Name="CitizenLast4CPR_TextBox" HorizontalAlignment="Left" Height="25" Margin="208,24,0,0" TextWrapping="Wrap" Text="" FontSize="14px" VerticalAlignment="Top" Width="60"/>
         <Label Content="-" HorizontalAlignment="Left" FontSize="14px" Margin="187,20,0,0" VerticalAlignment="Top"/>
         <Label Content="Navn" FontSize="14px" HorizontalAlignment="Left" Margin="20,54,0,0" VerticalAlignment="Top"/>
