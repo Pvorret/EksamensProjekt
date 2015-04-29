@@ -50,7 +50,7 @@ namespace EksamensProjekt.Controller.DBFacades
         }
         public static List<string> GetSensorType(int id)
         {
-            List<string> sensortyper = new List<string>();
+            List<string> sensortype = new List<string>();
             try
             {
                 SqlCommand cmd = new SqlCommand("SP_GetSensorType", dbconn);
@@ -65,7 +65,7 @@ namespace EksamensProjekt.Controller.DBFacades
                     sensortyper.Add(sensortype);
                 }
             }
-            catch (Exception e)
+            catch (SqlException e)
             {
                 MessageBox.Show(e.Message);
             }
@@ -73,7 +73,7 @@ namespace EksamensProjekt.Controller.DBFacades
             {
                 CloseDB();
             }
-            return sensortyper;
+            return sensortype;
         }
         public static void ConnectDB()
         {

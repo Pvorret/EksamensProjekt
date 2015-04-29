@@ -29,7 +29,7 @@ namespace EksamensProjekt.Controller {
         }
 
         public List<string> GetAllSensorType() {
-            return Controller.DBFacades.SensorDBFacade.GetAllSensors();
+            return Controller.DBFacades.SensorDBFacade.GetSensorType(0);
         }
 
     }
