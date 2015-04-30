@@ -34,7 +34,6 @@ namespace EksamensProjekt.Controller.DBFacades
                 cmd.Parameters.Add("@SerialNumber", sensor.SerialNumber);
                 cmd.Parameters.Add("@Type", sensor.Type);
                 cmd.Parameters.Add("@activated", activatedToBit);
-                cmd.Parameters.Add("@Citizen", "");
                 cmd.Parameters.Add("@Location", "");
                 cmd.ExecuteNonQuery();
             }
