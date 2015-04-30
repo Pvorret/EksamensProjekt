@@ -20,15 +20,16 @@ namespace EksamensProjekt.View
     /// </summary>
     public partial class CreateSensor : Window
     {
+        CitizenController _controller;
         public CreateSensor()
         {
             InitializeComponent();
-            Type_ComboBox.Items.Add("Dør");
-            Type_ComboBox.Items.Add("Fald");
-            Type_ComboBox.Items.Add("Epilepsi");
-            Type_ComboBox.Items.Add("Røg");
-            Type_ComboBox.Items.Add("GPS");
-            Type_ComboBox.Items.Add("Seng");
+            _controller = new CitizenController();
+            _controller.GetAllSensorType();
+            foreach (string type in _controller.SensorTypes)
+            {
+                Type_ComboBox.Items.Add(type);
+            }
         }
         private void Type_ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
