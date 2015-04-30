@@ -52,6 +52,11 @@ namespace EksamensProjekt.Controller.DBFacades {
                     cmd.Parameters.Add(sqlTime);
                 }
 
+                foreach (KeyValuePair<string, int> sensortypeamount in citizen.SensorTypes) {
+                    cmd.Parameters.Add("@ST_Type", sensortypeamount.Key);
+                    cmd.Parameters.Add("@CST_AmountNeeded", sensortypeamount.Value);
+                }
+
                 SqlParameter sqlAddress = new SqlParameter("@A_Address", citizen.Address);
                 cmd.Parameters.Add(sqlAddress);
 
@@ -162,7 +167,7 @@ namespace EksamensProjekt.Controller.DBFacades {
             }
         }
 
-        public static List<string> GetIllnessType(int id) {
+        public static List<string> GetIllnessType() {
             List<string> IllnessList = new List<string>();
 
             try {
@@ -170,9 +175,6 @@ namespace EksamensProjekt.Controller.DBFacades {
 
                 SqlCommand cmd = new SqlCommand("GetIllnessType", dbconn);
                 cmd.CommandType = CommandType.StoredProcedure;
-
-                SqlParameter sqlId = new SqlParameter("@I_ID", id);
-                cmd.Parameters.Add(sqlId);
 
                 SqlDataReader rdr;
                 rdr = cmd.ExecuteReader();

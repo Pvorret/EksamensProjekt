@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using EksamensProjekt.Controller;
+using EksamensProjekt.Controller.DBFacades;
 using EksamensProjekt.Model;
 
 namespace EksamensProjekt.Controller
@@ -13,7 +13,7 @@ namespace EksamensProjekt.Controller
         public void CreateSensor(int serialNumber, string type)
         {
             Sensor s = new Sensor(serialNumber, type);
-            DBFacades.SensorDBFacade.CreateSensor(s);
+            SensorDBFacade.CreateSensor(s);
         }
     }
 }

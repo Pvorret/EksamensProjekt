@@ -66,14 +66,24 @@ namespace EksamensProjekt.View
             relativeCprNr = RelativeBirthdate_TextBox.Text + "-" + RelativeLast4CPR_TextBox.Text;
 
             _controller.AddRelative(RelativeName_TextBox.Text, relativeCprNr, RelativeGender_Dropdown.SelectedItem.ToString(), RelativeAge_TextBox.Text, RelativeAddress_TextBox.Text, RelativeCity_TextBox.Text, RelativePhoneNumber_TextBox.Text, RelativeEmail_TextBox.Text, notAvailableDic);
+
+            this.Close();
         }
 
         private void AddNotAvailableTime_Button_Click(object sender, RoutedEventArgs e)
         {
             timeNotAvailable = NotAvailableStart_TextBox.Text + " - " + NotAvailableEnd_TextBox.Text;
             NotAvailableTimes_ListBox.Items.Add(NotAvailableDays_Dropdown.SelectedItem.ToString() + ": " + timeNotAvailable);
-            notAvailableDic.Add(NotAvailableDays_Dropdown.SelectedItem.ToString(), timeNotAvailable);
+            try
+            {
+                notAvailableDic.Add(NotAvailableDays_Dropdown.SelectedItem.ToString(), timeNotAvailable);
 
+            }
+            catch (Exception t)
+            {
+                MessageBox.Show("Der kan kun tilføjes et tidsrum per dag");
+            }
+            
             NotAvailableStart_TextBox.Clear();
             NotAvailableEnd_TextBox.Clear();
         }
