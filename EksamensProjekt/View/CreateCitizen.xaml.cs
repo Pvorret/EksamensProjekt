@@ -112,8 +112,7 @@ namespace EksamensProjekt.View
         }
 
         private void CitizenSensorNeeds_Dropdown_SelectionChanged(object sender, SelectionChangedEventArgs e) {
-            CitizenSensorNeeds_ListBox.Items.Add(CitizenSensorNeeds_Dropdown.SelectedItem.ToString() + ": " + CitizenSensorNeedsAmount.Text);
-            SensorTypesList.Add(CitizenSensorNeeds_Dropdown.SelectedItem.ToString(), int.Parse(CitizenSensorNeedsAmount.Text));
+            
         }
 
         private void Illness_Dropdown_DropDownOpened(object sender, EventArgs e) {
@@ -132,6 +131,11 @@ namespace EksamensProjekt.View
         private void CreateCitizen_Button_Click(object sender, RoutedEventArgs e) {
             CitizenCPRNR = CitizenBirthdate_TextBox.Text + " - " + CitizenLast4CPR_TextBox.Text;
             _controller.CreateCitizen(CitizenName_TextBox.Text, CitizenCPRNR, CitizenGender_Dropdown.SelectedItem.ToString(), CitizenAge_TextBox.Text, CitizenAddress_TextBox.Text, CitizenCity_TextBox.Text, CitizenPhoneNumber_TextBox.Text, IllnessList, CitizenReligion_Dropdown.SelectedItem.ToString(), SensorTypesList, HomeCareDic);
+        }
+
+        private void AddSensorNeeds_Button_Click(object sender, RoutedEventArgs e) {
+            CitizenSensorNeeds_ListBox.Items.Add(CitizenSensorNeeds_Dropdown.SelectedItem.ToString() + ": " + CitizenSensorNeedsAmount.Text);
+            SensorTypesList.Add(CitizenSensorNeeds_Dropdown.SelectedItem.ToString(), int.Parse(CitizenSensorNeedsAmount.Text));
         }
     }
 }

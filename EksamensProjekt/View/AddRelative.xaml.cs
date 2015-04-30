@@ -66,6 +66,8 @@ namespace EksamensProjekt.View
             relativeCprNr = RelativeBirthdate_TextBox.Text + "-" + RelativeLast4CPR_TextBox.Text;
 
             _controller.AddRelative(RelativeName_TextBox.Text, relativeCprNr, RelativeGender_Dropdown.SelectedItem.ToString(), RelativeAge_TextBox.Text, RelativeAddress_TextBox.Text, RelativeCity_TextBox.Text, RelativePhoneNumber_TextBox.Text, RelativeEmail_TextBox.Text, notAvailableDic);
+
+            this.Close();
         }
 
         private void AddNotAvailableTime_Button_Click(object sender, RoutedEventArgs e)
