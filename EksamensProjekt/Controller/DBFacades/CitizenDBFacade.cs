@@ -37,10 +37,10 @@ namespace EksamensProjekt.Controller.DBFacades {
                 SqlParameter sqlPhoneNumber = new SqlParameter("@C_PhoneNumber", citizen.PhoneNumber);
                 cmd.Parameters.Add(sqlPhoneNumber);
 
-                SqlCommand cmd3 = new SqlCommand("SP_AddIllness", dbconn);
-                cmd3.CommandType = CommandType.StoredProcedure;
-
-                foreach (string s in citizen.Illness) {                    
+                foreach (string s in citizen.Illness) {
+                    SqlCommand cmd3 = new SqlCommand("SP_AddIllness", dbconn);
+                    cmd3.CommandType = CommandType.StoredProcedure;
+                    
                     SqlParameter sqlIllness = new SqlParameter("@I_Name", s);
                     cmd3.Parameters.Add(sqlIllness);
 
@@ -73,11 +73,13 @@ namespace EksamensProjekt.Controller.DBFacades {
 
                 //AddRelatives(citizen.Relatives);
                 
-                SqlCommand cmd2 = new SqlCommand("SP_AddRelative", dbconn);
-                cmd2.CommandType = CommandType.StoredProcedure;
+                
                 
                 foreach (Model.Relative r in citizen.Relatives) {
 
+                    SqlCommand cmd2 = new SqlCommand("SP_AddRelative", dbconn);
+                    cmd2.CommandType = CommandType.StoredProcedure;
+                    
                     SqlParameter sqlRelativeName = new SqlParameter("@R_Name", r.Name);
                     cmd2.Parameters.Add(sqlRelativeName);
 

@@ -130,7 +130,7 @@ namespace EksamensProjekt.View
         }
 
         private void CreateCitizen_Button_Click(object sender, RoutedEventArgs e) {
-            CitizenCPRNR = CitizenBirthdate_TextBox.Text + " - " + CitizenLast4CPR_TextBox.Text;
+            CitizenCPRNR = CitizenBirthdate_TextBox.Text + "-" + CitizenLast4CPR_TextBox.Text;
             _controller.CreateCitizen(CitizenName_TextBox.Text, CitizenCPRNR, CitizenGender_Dropdown.SelectedItem.ToString(), CitizenAge_TextBox.Text, CitizenAddress_TextBox.Text, CitizenCity_TextBox.Text, CitizenPhoneNumber_TextBox.Text, IllnessList, CitizenReligion_Dropdown.SelectedItem.ToString(), SensorTypesList, HomeCareDic);
             this.Close();
         }
