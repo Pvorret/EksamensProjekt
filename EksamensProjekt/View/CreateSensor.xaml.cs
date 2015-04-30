@@ -21,19 +21,17 @@ namespace EksamensProjekt.View
     public partial class CreateSensor : Window
     {
         CitizenController _controller;
+        SensorController con;
         public CreateSensor()
         {
             InitializeComponent();
             _controller = new CitizenController();
+            con = new SensorController();
             _controller.GetAllSensorType();
             foreach (string type in _controller.SensorTypes)
             {
                 Type_ComboBox.Items.Add(type);
             }
-        }
-        private void Type_ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-
         }
         private void Cancel_Button_Click(object sender, RoutedEventArgs e)
         {
@@ -42,7 +40,6 @@ namespace EksamensProjekt.View
 
         private void CreateSensor_Button_Click(object sender, RoutedEventArgs e)
         {
-            SensorController con = new SensorController();
             con.CreateSensor(Convert.ToInt32(SerialNumber_TextBox.Text), Type_ComboBox.SelectedItem.ToString());
         }
     }
