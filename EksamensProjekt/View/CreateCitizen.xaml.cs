@@ -31,6 +31,8 @@ namespace EksamensProjekt.View
         {
             _controller = new CitizenController();
             InitializeComponent();
+            _controller.GetAllIllness();
+            _controller.GetAllSensorType();
             CitizenGender_Dropdown.Items.Add("Mand");
             CitizenGender_Dropdown.Items.Add("Kvinde");
 
@@ -88,7 +90,7 @@ namespace EksamensProjekt.View
 
         private void CitizenSensorNeeds_Dropdown_DropDownOpened(object sender, EventArgs e) {
             if (CitizenSensorNeeds_Dropdown.Items.Count == 0) {
-                foreach (string s in _controller.GetAllSensorType()) {
+                foreach (string s in _controller.SensorTypes) {
                     CitizenSensorNeeds_Dropdown.Items.Add(s);
                 }
             }
@@ -101,7 +103,7 @@ namespace EksamensProjekt.View
 
         private void Illness_Dropdown_DropDownOpened(object sender, EventArgs e) {
             if (Illness_Dropdown.Items.Count == 0) {
-                foreach (string s in _controller.GetAllIllness()) {
+                foreach (string s in _controller.IllnessList) {
                     Illness_Dropdown.Items.Add(s);
                 }
             }
@@ -113,7 +115,7 @@ namespace EksamensProjekt.View
         }
 
         private void CreateCitizen_Button_Click(object sender, RoutedEventArgs e) {
-            CitizenCPRNR = CitizenBirthdate_TextBox.Text + CitizenLast4CPR_TextBox.Text;
+            CitizenCPRNR = CitizenBirthdate_TextBox.Text + " - " + CitizenLast4CPR_TextBox.Text;
             _controller.CreateCitizen(CitizenName_TextBox.Text, CitizenCPRNR, CitizenGender_Dropdown.SelectedItem.ToString(), CitizenAge_TextBox.Text, CitizenAddress_TextBox.Text, CitizenCity_TextBox.Text, CitizenPhoneNumber_TextBox.Text, IllnessList, CitizenReligion_Dropdown.SelectedItem.ToString(), SensorTypesList, HomeCareDic);
         }
     }
