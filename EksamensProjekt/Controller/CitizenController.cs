@@ -8,6 +8,8 @@ using EksamensProjekt.Model;
 namespace EksamensProjekt.Controller {
     public class CitizenController {
         public List<Relative> Relatives = new List<Relative>();
+        public List<string> SensorTypes = new List<string>();
+        public List<string> IllnessList = new List<string>();
 
         //Mangler Parameter
         public void CreateCitizen(string name, string cprnr, string gender, string age, string address, string city, string phonenumber, List<string> illness, string religion, List<string> sensorTypes, Dictionary<string, string> homeCare)
@@ -30,12 +32,12 @@ namespace EksamensProjekt.Controller {
             Relatives.Add(new Relative(name, cprNr, gender, age, address, city, phoneNumber, email, notAvailable));
         }
 
-        public List<string> GetAllSensorType() {
-            return Controller.DBFacades.SensorDBFacade.GetSensorType(0);
+        public void GetAllSensorType() {
+            SensorTypes = Controller.DBFacades.SensorDBFacade.GetSensorType(0);
         }
 
-        public List<string> GetAllIllness() {
-            return Controller.DBFacades.CitizenDBFacade.GetIllnessType(0);
+        public void GetAllIllness() {
+            IllnessList = Controller.DBFacades.CitizenDBFacade.GetIllnessType(0);
         }
 
     }
