@@ -52,6 +52,11 @@ namespace EksamensProjekt.Controller.DBFacades {
                     cmd.Parameters.Add(sqlTime);
                 }
 
+                foreach (KeyValuePair<string, int> sensortypeamount in citizen.SensorTypes) {
+                    cmd.Parameters.Add("@ST_Type", sensortypeamount.Key);
+                    cmd.Parameters.Add("@CST_AmountNeeded", sensortypeamount.Value);
+                }
+
                 SqlParameter sqlAddress = new SqlParameter("@A_Address", citizen.Address);
                 cmd.Parameters.Add(sqlAddress);
 

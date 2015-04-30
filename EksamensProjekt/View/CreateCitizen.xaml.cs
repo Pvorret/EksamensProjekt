@@ -24,7 +24,7 @@ namespace EksamensProjekt.View
         AddReligion AR;
         Dictionary<string, string> HomeCareDic = new Dictionary<string, string>();
         List<string> IllnessList = new List<string>();
-        List<string> SensorTypesList = new List<string>();
+        Dictionary<string, int> SensorTypesList = new Dictionary<string, int>();
         string timeHomeCare;
         string CitizenCPRNR;
         public CreateCitizen()
@@ -112,8 +112,8 @@ namespace EksamensProjekt.View
         }
 
         private void CitizenSensorNeeds_Dropdown_SelectionChanged(object sender, SelectionChangedEventArgs e) {
-            CitizenSensorNeeds_ListBox.Items.Add(CitizenSensorNeeds_Dropdown.SelectedItem.ToString());
-            SensorTypesList.Add(CitizenSensorNeeds_Dropdown.SelectedItem.ToString());
+            CitizenSensorNeeds_ListBox.Items.Add(CitizenSensorNeeds_Dropdown.SelectedItem.ToString() + ": " + CitizenSensorNeedsAmount.Text);
+            SensorTypesList.Add(CitizenSensorNeeds_Dropdown.SelectedItem.ToString(), int.Parse(CitizenSensorNeedsAmount.Text));
         }
 
         private void Illness_Dropdown_DropDownOpened(object sender, EventArgs e) {
