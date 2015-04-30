@@ -37,5 +37,6 @@ namespace EksamensProjekt
             CreateCitizen CC = new CreateCitizen();
             CC.Show();
         }
+
     }
 }

@@ -31,10 +31,10 @@ namespace EksamensProjekt.Controller.DBFacades
                 ConnectDB();
                 cmd = new SqlCommand("SP_CreateSensor", dbconn);
                 cmd.CommandType = CommandType.StoredProcedure;
-                cmd.Parameters.Add("@SerialNumber", sensor.SerialNumber);
-                cmd.Parameters.Add("@Type", sensor.Type);
-                cmd.Parameters.Add("@activated", activatedToBit);
-                cmd.Parameters.Add("@Location", "");
+                cmd.Parameters.Add(new SqlParameter("@SerialNumber", sensor.SerialNumber));
+                cmd.Parameters.Add(new SqlParameter("@Type", sensor.Type));
+                cmd.Parameters.Add(new SqlParameter("@activated", activatedToBit));
+                cmd.Parameters.Add(new SqlParameter("@Location", ""));
                 cmd.ExecuteNonQuery();
             }
             catch(Exception e)
