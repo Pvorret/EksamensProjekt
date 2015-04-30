@@ -89,9 +89,9 @@ namespace EksamensProjekt.View
         private void AddHomeCareTime_Button_Click(object sender, RoutedEventArgs e)
         {
             timeHomeCare = HomeCareStart_TextBox.Text + " - " + HomeCareEnd_TextBox.Text;
-            HomeCareTimes_ListBox.Items.Add(HomeCareDays_Dropdown.SelectedItem.ToString() + ": " + timeHomeCare);
             try
             {
+                HomeCareTimes_ListBox.Items.Add(HomeCareDays_Dropdown.SelectedItem.ToString() + ": " + timeHomeCare);
                 HomeCareDic.Add(HomeCareDays_Dropdown.SelectedItem.ToString(), timeHomeCare);
             }
             catch (Exception i)
