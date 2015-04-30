@@ -12,6 +12,9 @@ namespace EksamensProjekt.Controller.DBFacades {
 
         static SqlConnection dbconn;
 
+        //Relative er ikke blevet lagt ind
+        //Citizen Illness er ikke blevet koblet med Citizen
+
         public static void CreateCitizen(Model.Citizen citizen) {
             try {
                 ConnectDB();
@@ -34,9 +37,14 @@ namespace EksamensProjekt.Controller.DBFacades {
                 SqlParameter sqlPhoneNumber = new SqlParameter("@C_PhoneNumber", citizen.PhoneNumber);
                 cmd.Parameters.Add(sqlPhoneNumber);
 
-                foreach (string s in citizen.Illness) {
+                SqlCommand cmd3 = new SqlCommand("SP_AddIllness", dbconn);
+                cmd3.CommandType = CommandType.StoredProcedure;
+
+                foreach (string s in citizen.Illness) {                    
                     SqlParameter sqlIllness = new SqlParameter("@I_Name", s);
-                    cmd.Parameters.Add(sqlIllness);
+                    cmd3.Parameters.Add(sqlIllness);
+
+                    cmd3.Parameters.Add("@C_CPRNR", citizen.CprNr);
                 }
 
                 SqlParameter sqlReligion = new SqlParameter("@C_Religion", citizen.Religion);
@@ -87,10 +95,10 @@ namespace EksamensProjekt.Controller.DBFacades {
 
                     foreach (KeyValuePair<string, string> notavailable in r.NotAvailable) {
                         SqlParameter sqlDay = new SqlParameter("@T_Day", notavailable.Key);
-                        cmd.Parameters.Add(sqlDay);
+                        cmd2.Parameters.Add(sqlDay);
 
                         SqlParameter sqlTime = new SqlParameter("@T_TimePeriod", notavailable.Value);
-                        cmd.Parameters.Add(sqlTime);
+                        cmd2.Parameters.Add(sqlTime);
                     }
 
                     SqlParameter sqlRelativeAddress = new SqlParameter("@A_Address", r.Address);
