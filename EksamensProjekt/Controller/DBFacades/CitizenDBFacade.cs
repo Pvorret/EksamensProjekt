@@ -12,7 +12,7 @@ namespace EksamensProjekt.Controller.DBFacades {
 
         static SqlConnection dbconn;
 
-        public void CreateCitizen(Model.Citizen citizen) {
+        public static void CreateCitizen(Model.Citizen citizen) {
             try {
                 ConnectDB();
 
@@ -58,42 +58,46 @@ namespace EksamensProjekt.Controller.DBFacades {
                 SqlParameter sqlCity = new SqlParameter("@A_City", citizen.City);
                 cmd.Parameters.Add(sqlCity);
 
+                AddRelatives(citizen.Relatives);
+                
                 SqlCommand cmd2 = new SqlCommand("SP_AddRelative", dbconn);
                 cmd2.CommandType = CommandType.StoredProcedure;
 
+                //Brug den metode der ligger nedefor!
+                
                 foreach (Model.Relative r in citizen.Relatives) {
                     
-                    SqlParameter sqlRelativeName = new SqlParameter("@R_Name", r.Name);
-                    cmd2.Parameters.Add(sqlRelativeName);
+                    //SqlParameter sqlRelativeName = new SqlParameter("@R_Name", r.Name);
+                    //cmd2.Parameters.Add(sqlRelativeName);
 
-                    SqlParameter sqlRelativeCPRNR = new SqlParameter("@R_CPRNR", r.CprNr);
-                    cmd2.Parameters.Add(sqlRelativeCPRNR);
+                    //SqlParameter sqlRelativeCPRNR = new SqlParameter("@R_CPRNR", r.CprNr);
+                    //cmd2.Parameters.Add(sqlRelativeCPRNR);
 
-                    SqlParameter sqlRelativeGender = new SqlParameter("@R_Gender", r.Gender);
-                    cmd2.Parameters.Add(sqlRelativeGender);
+                    //SqlParameter sqlRelativeGender = new SqlParameter("@R_Gender", r.Gender);
+                    //cmd2.Parameters.Add(sqlRelativeGender);
 
-                    SqlParameter sqlRelativeAge = new SqlParameter("@R_Age", r.Age);
-                    cmd2.Parameters.Add(sqlRelativeAge);
+                    //SqlParameter sqlRelativeAge = new SqlParameter("@R_Age", r.Age);
+                    //cmd2.Parameters.Add(sqlRelativeAge);
 
-                    SqlParameter sqlRelativePhoneNumber = new SqlParameter("@R_PhoneNumber", r.PhoneNumber);
-                    cmd2.Parameters.Add(sqlRelativePhoneNumber);
+                    //SqlParameter sqlRelativePhoneNumber = new SqlParameter("@R_PhoneNumber", r.PhoneNumber);
+                    //cmd2.Parameters.Add(sqlRelativePhoneNumber);
 
-                    //NotAvailable skal ligges ind i Time tabllen med CPRNR for den Relative det er den er fra.
+                    ////NotAvailable skal ligges ind i Time tabllen med CPRNR for den Relative det er den er fra.
 
-                    foreach (KeyValuePair<string, string> notavailable in r.NotAvailable) {
-                        SqlParameter sqlDay = new SqlParameter("@T_Day", notavailable.Key);
-                        cmd.Parameters.Add(sqlDay);
+                    //foreach (KeyValuePair<string, string> notavailable in r.NotAvailable) {
+                    //    SqlParameter sqlDay = new SqlParameter("@T_Day", notavailable.Key);
+                    //    cmd.Parameters.Add(sqlDay);
 
-                        SqlParameter sqlTime = new SqlParameter("@T_TimePeriod", notavailable.Value);
-                        cmd.Parameters.Add(sqlTime);
+                    //    SqlParameter sqlTime = new SqlParameter("@T_TimePeriod", notavailable.Value);
+                    //    cmd.Parameters.Add(sqlTime);
 
-                    }                  
+                    //}                  
 
-                    SqlParameter sqlRelativeAddress = new SqlParameter("@A_Address", r.Address);
-                    cmd2.Parameters.Add(sqlRelativeAddress);
+                    //SqlParameter sqlRelativeAddress = new SqlParameter("@A_Address", r.Address);
+                    //cmd2.Parameters.Add(sqlRelativeAddress);
 
-                    SqlParameter sqlRelativeCity = new SqlParameter("@A_City", r.City);
-                    cmd2.Parameters.Add(sqlRelativeCity);
+                    //SqlParameter sqlRelativeCity = new SqlParameter("@A_City", r.City);
+                    //cmd2.Parameters.Add(sqlRelativeCity);
 
                     SqlParameter sqlRelativeCitizenCPRNR = new SqlParameter("@C_CPRNR", citizen.CprNr);
                     cmd2.Parameters.Add(sqlRelativeCitizenCPRNR);
@@ -109,33 +113,51 @@ namespace EksamensProjekt.Controller.DBFacades {
             }
         }
 
-        public void AddRelatives (Model.Relative relative) {
+        public static void AddRelatives (List<Model.Relative> relatives) {
 
             try {
                 ConnectDB();
 
-                SqlCommand cmd = new SqlCommand("SP_AddRelative", dbconn);
-                cmd.CommandType = CommandType.StoredProcedure;
+                foreach (Model.Relative r in relatives) {
 
-                SqlParameter sqlRelativeCitizenCPRNR = new SqlParameter("@C_CPRNR", relative.CitizenCprNr);
-                cmd.Parameters.Add(sqlRelativeCitizenCPRNR);
-                
-                SqlParameter sqlRelativeName = new SqlParameter("@R_Name", relative.Name);
-                cmd.Parameters.Add(sqlRelativeName);
+                    SqlCommand cmd = new SqlCommand("SP_AddRelative", dbconn);
+                    cmd.CommandType = CommandType.StoredProcedure;
 
-                SqlParameter sqlRelativeCPRNR = new SqlParameter("@R_CPRNR", relative.CprNr);
-                cmd.Parameters.Add(sqlRelativeCPRNR);
+                    SqlParameter sqlRelativeCitizenCPRNR = new SqlParameter("@C_CPRNR", r.CitizenCprNr);
+                    cmd.Parameters.Add(sqlRelativeCitizenCPRNR);
 
-                SqlParameter sqlRelativeGender = new SqlParameter("@R_Gender", relative.Gender);
-                cmd.Parameters.Add(sqlRelativeGender);
+                    SqlParameter sqlRelativeName = new SqlParameter("@R_Name", r.Name);
+                    cmd.Parameters.Add(sqlRelativeName);
 
-                SqlParameter sqlRelativeAge = new SqlParameter("@R_Age", relative.Age);
-                cmd.Parameters.Add(sqlRelativeAge);
+                    SqlParameter sqlRelativeCPRNR = new SqlParameter("@R_CPRNR", r.CprNr);
+                    cmd.Parameters.Add(sqlRelativeCPRNR);
 
-                SqlParameter sqlRelativePhoneNumber = new SqlParameter("@R_PhoneNumber", relative.PhoneNumber);
-                cmd.Parameters.Add(sqlRelativePhoneNumber);
+                    SqlParameter sqlRelativeGender = new SqlParameter("@R_Gender", r.Gender);
+                    cmd.Parameters.Add(sqlRelativeGender);
 
-                cmd.ExecuteNonQuery();
+                    SqlParameter sqlRelativeAge = new SqlParameter("@R_Age", r.Age);
+                    cmd.Parameters.Add(sqlRelativeAge);
+
+                    SqlParameter sqlRelativePhoneNumber = new SqlParameter("@R_PhoneNumber", r.PhoneNumber);
+                    cmd.Parameters.Add(sqlRelativePhoneNumber);
+
+                    foreach (KeyValuePair<string, string> notavailable in r.NotAvailable) {
+                        SqlParameter sqlDay = new SqlParameter("@T_Day", notavailable.Key);
+                        cmd.Parameters.Add(sqlDay);
+
+                        SqlParameter sqlTime = new SqlParameter("@T_TimePeriod", notavailable.Value);
+                        cmd.Parameters.Add(sqlTime);
+
+                    }
+
+                    SqlParameter sqlRelativeAddress = new SqlParameter("@A_Address", r.Address);
+                    cmd.Parameters.Add(sqlRelativeAddress);
+
+                    SqlParameter sqlRelativeCity = new SqlParameter("@A_City", r.City);
+                    cmd.Parameters.Add(sqlRelativeCity);
+
+                    cmd.ExecuteNonQuery();
+                }
 
                 CloseDB();
             }

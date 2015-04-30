@@ -10,17 +10,19 @@ namespace EksamensProjekt.Controller {
         public List<Relative> Relatives = new List<Relative>();
 
         //Mangler Parameter
-        public void CreateCitizen(string name, string cprnr, string gender, string age, string address, string city, string phonenumber, List<string> illness, string religion, List<string> sensors, Dictionary<string, string> homeCare)
+        public void CreateCitizen(string name, string cprnr, string gender, string age, string address, string city, string phonenumber, List<string> illness, string religion, List<string> sensorTypes, Dictionary<string, string> homeCare)
         {
-            Citizen citizen = new Citizen(name, cprnr, gender, age, address, city, phonenumber, illness, religion, sensors, homeCare);
+            Citizen citizen = new Citizen(name, cprnr, gender, age, address, city, phonenumber, illness, religion, sensorTypes, homeCare);
             citizen.Relatives = Relatives;
+
+            Controller.DBFacades.CitizenDBFacade.CreateCitizen(citizen);
 
         }
 
         //Brugt til tilføjelse af en pårørende i ændre borger
         public void AddRelative(string citizenId, string name, string cprNr, string gender, string age, string address, string city, string phoneNumber, string email, List<string> notAvailable)
         {
-
+            Controller.DBFacades.CitizenDBFacade.AddRelatives(Relatives);
         }
         //Brugt til opret borger
         public void AddRelative(string name,string cprNr, string gender, string age, string address, string city, string phoneNumber, string email, Dictionary<string, string> notAvailable)
