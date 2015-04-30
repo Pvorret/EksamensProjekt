@@ -44,7 +44,7 @@ namespace EksamensProjekt.Controller.DBFacades {
                     SqlParameter sqlIllness = new SqlParameter("@I_Name", s);
                     cmd3.Parameters.Add(sqlIllness);
 
-                    cmd3.Parameters.Add("@C_CPRNR", citizen.CprNr);
+                    cmd3.Parameters.Add(new SqlParameter("@C_CPRNR", citizen.CprNr));
                 }
 
                 SqlParameter sqlReligion = new SqlParameter("@C_Religion", citizen.Religion);
@@ -61,8 +61,8 @@ namespace EksamensProjekt.Controller.DBFacades {
                 }
 
                 foreach (KeyValuePair<string, int> sensortypeamount in citizen.SensorTypes) {
-                    cmd.Parameters.Add("@ST_Type", sensortypeamount.Key);
-                    cmd.Parameters.Add("@CST_AmountNeeded", sensortypeamount.Value);
+                    cmd.Parameters.Add(new SqlParameter("@ST_Type", sensortypeamount.Key));
+                    cmd.Parameters.Add(new SqlParameter("@CST_AmountNeeded", sensortypeamount.Value));
                 }
 
                 SqlParameter sqlAddress = new SqlParameter("@A_Address", citizen.Address);
