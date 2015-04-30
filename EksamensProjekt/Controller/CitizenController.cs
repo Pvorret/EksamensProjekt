@@ -11,7 +11,6 @@ namespace EksamensProjekt.Controller {
         public List<string> SensorTypes = new List<string>();
         public List<string> IllnessList = new List<string>();
 
-        //Mangler Parameter
         public void CreateCitizen(string name, string cprnr, string gender, string age, string address, string city, string phonenumber, List<string> illness, string religion, List<string> sensorTypes, Dictionary<string, string> homeCare)
         {
             Citizen citizen = new Citizen(name, cprnr, gender, age, address, city, phonenumber, illness, religion, sensorTypes, homeCare);
