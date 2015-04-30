@@ -25,6 +25,7 @@ namespace EksamensProjekt.Model
             this.PhoneNumber = phoneNumber;
             this.Illness = illness;
             this.Religion = religion;
+            this.SensorTypes = sensorTypes;
             this.HomeCare = homeCare;
         }
     }

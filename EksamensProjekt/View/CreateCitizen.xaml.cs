@@ -61,6 +61,7 @@ namespace EksamensProjekt.View
         {
             AddRelative AR = new AddRelative(_controller);
             AR.ShowDialog();
+            //_controller = AR._controller;
             for (int i = 0; i < _controller.Relatives.Count; i++)
 			{
                 CitizenRelatives_ListBox.Items.Add(_controller.Relatives[i].Name);			 

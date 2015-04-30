@@ -28,7 +28,6 @@ namespace EksamensProjekt.View
         public AddRelative(CitizenController _controller)
         {
             InitializeComponent();
-            _controller = new CitizenController();
             this._controller = _controller;
             RelativeGender_Dropdown.Items.Add("Mand");
             RelativeGender_Dropdown.Items.Add("Kvinde");
@@ -74,6 +73,8 @@ namespace EksamensProjekt.View
         {
             timeNotAvailable = NotAvailableStart_TextBox.Text + " - " + NotAvailableEnd_TextBox.Text;
             NotAvailableTimes_ListBox.Items.Add(NotAvailableDays_Dropdown.SelectedItem.ToString() + ": " + timeNotAvailable);
+            notAvailableDic.Add(NotAvailableDays_Dropdown.SelectedItem.ToString(), timeNotAvailable);
+            /*
             try
             {
                 notAvailableDic.Add(NotAvailableDays_Dropdown.SelectedItem.ToString(), timeNotAvailable);
@@ -83,7 +84,7 @@ namespace EksamensProjekt.View
             {
                 MessageBox.Show("Der kan kun tilføjes et tidsrum per dag");
             }
-            
+            */
             NotAvailableStart_TextBox.Clear();
             NotAvailableEnd_TextBox.Clear();
         }

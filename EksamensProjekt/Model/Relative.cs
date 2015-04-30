@@ -22,6 +22,7 @@ namespace EksamensProjekt.Model
             this.City = city;
             this.PhoneNumber = phoneNumber;
             this.Email = email;
+            this.NotAvailable = NotAvailable;
             
         }
 
