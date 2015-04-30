@@ -13,7 +13,6 @@ namespace EksamensProjekt.Controller.DBFacades
     static class SensorDBFacade
     {
         public static SqlConnection dbconn;
-        public static string _connectionString = "Server=ealdb1.eal.local;" + "Database=EJL22_DB;" + "User Id=ejl22_usr;" + "Password=Baz1nga22;";
         static SqlCommand cmd;
         public static void CreateSensor(Sensor sensor)
         {
@@ -78,7 +77,7 @@ namespace EksamensProjekt.Controller.DBFacades
         }
         public static void ConnectDB()
         {
-            dbconn = new SqlConnection(_connectionString);
+            dbconn = new SqlConnection(DBHelper._connectionString);
             dbconn.Open();
         }
 
