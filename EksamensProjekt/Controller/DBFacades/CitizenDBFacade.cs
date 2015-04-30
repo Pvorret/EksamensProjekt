@@ -93,6 +93,8 @@ namespace EksamensProjekt.Controller.DBFacades {
                     SqlParameter sqlRelativePhoneNumber = new SqlParameter("@R_PhoneNumber", r.PhoneNumber);
                     cmd2.Parameters.Add(sqlRelativePhoneNumber);
 
+                    cmd2.Parameters.Add(new SqlParameter("@R_Email", r.Email));
+
                     foreach (KeyValuePair<string, string> notavailable in r.NotAvailable) {
                         SqlParameter sqlDay = new SqlParameter("@T_Day", notavailable.Key);
                         cmd2.Parameters.Add(sqlDay);
