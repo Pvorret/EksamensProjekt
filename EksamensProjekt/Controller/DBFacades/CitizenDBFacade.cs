@@ -42,7 +42,7 @@ namespace EksamensProjekt.Controller.DBFacades {
                 SqlParameter sqlReligion = new SqlParameter("@C_Religion", citizen.Religion);
                 cmd.Parameters.Add(sqlReligion);
 
-                //HomeCare skal ligges ind i Time tabllen med CPRNR for den Citizen det er den er fra.
+                //HomeCare skal ligges ind i Time tabllen med CPRNR for den Citizen den er fra.
 
                 foreach (KeyValuePair<string, string> homecare in citizen.HomeCare) {
                     SqlParameter sqlDay = new SqlParameter("@T_Day", homecare.Key);

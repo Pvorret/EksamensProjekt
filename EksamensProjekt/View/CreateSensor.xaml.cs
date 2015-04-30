@@ -45,5 +45,9 @@ namespace EksamensProjekt.View
             SensorController con = new SensorController();
             con.CreateSensor(Convert.ToInt32(SerialNumber_TextBox.Text), Type_ComboBox.SelectedItem.ToString());
         }
+
+        private void Type_ComboBox_SelectionChanged_1(object sender, SelectionChangedEventArgs e) {
+
+        }
     }
 }

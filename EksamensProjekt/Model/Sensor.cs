@@ -12,7 +12,7 @@ namespace EksamensProjekt.Model
         public string Type { get; set; }
         public string Location { get; set; }
         public bool Activated { get; set; }
-        //Citizen Citizen { get; set; }
+        Citizen Citizen { get; set; }
 
         public Sensor(int serialnumber, string type)
         {

@@ -39,7 +39,6 @@ namespace EksamensProjekt.Controller.DBFacades
             }
             catch(Exception e)
             {
-                MessageBox.Show(e.Message);
                 MessageBox.Show("Error! Sensor not added to database");
             }
             finally
