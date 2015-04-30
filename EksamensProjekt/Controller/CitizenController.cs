@@ -37,7 +37,7 @@ namespace EksamensProjekt.Controller {
         }
 
         public void GetAllIllness() {
-            IllnessList = Controller.DBFacades.CitizenDBFacade.GetIllnessType(0);
+            IllnessList = Controller.DBFacades.CitizenDBFacade.GetIllnessType();
         }
 
     }

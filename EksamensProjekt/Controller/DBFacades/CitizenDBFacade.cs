@@ -162,7 +162,7 @@ namespace EksamensProjekt.Controller.DBFacades {
             }
         }
 
-        public static List<string> GetIllnessType(int id) {
+        public static List<string> GetIllnessType() {
             List<string> IllnessList = new List<string>();
 
             try {
@@ -170,9 +170,6 @@ namespace EksamensProjekt.Controller.DBFacades {
 
                 SqlCommand cmd = new SqlCommand("GetIllnessType", dbconn);
                 cmd.CommandType = CommandType.StoredProcedure;
-
-                SqlParameter sqlId = new SqlParameter("@I_ID", id);
-                cmd.Parameters.Add(sqlId);
 
                 SqlDataReader rdr;
                 rdr = cmd.ExecuteReader();

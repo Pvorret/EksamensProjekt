@@ -43,6 +43,14 @@ namespace EksamensProjekt.View
             CitizenReligion_Dropdown.Items.Add("Hinduisme");
             CitizenReligion_Dropdown.Items.Add("Sikhisme");
             CitizenReligion_Dropdown.Items.Add("Tilføj Anden");
+
+            HomeCareDays_Dropdown.Items.Add("Mandag");
+            HomeCareDays_Dropdown.Items.Add("Tirsdag");
+            HomeCareDays_Dropdown.Items.Add("Onsdag");
+            HomeCareDays_Dropdown.Items.Add("Torsdag");
+            HomeCareDays_Dropdown.Items.Add("Fredag");
+            HomeCareDays_Dropdown.Items.Add("Lørdag");
+            HomeCareDays_Dropdown.Items.Add("Søndag");
         }
 
         private void Cancel_Button_Click(object sender, RoutedEventArgs e)
