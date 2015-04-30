@@ -82,7 +82,14 @@ namespace EksamensProjekt.View
         {
             timeHomeCare = HomeCareStart_TextBox.Text + " - " + HomeCareEnd_TextBox.Text;
             HomeCareTimes_ListBox.Items.Add(HomeCareDays_Dropdown.SelectedItem.ToString() + ": " + timeHomeCare);
-            HomeCareDic.Add(HomeCareDays_Dropdown.SelectedItem.ToString(), timeHomeCare);
+            try
+            {
+                HomeCareDic.Add(HomeCareDays_Dropdown.SelectedItem.ToString(), timeHomeCare);
+            }
+            catch (Exception i)
+            {
+                MessageBox.Show("Man kan kun have et tidsrum per dag");
+            }
 
             HomeCareStart_TextBox.Clear();
             HomeCareEnd_TextBox.Clear();
