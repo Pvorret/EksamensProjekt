@@ -91,10 +91,14 @@ namespace EksamensProjekt.View
             }
         }
 
+        private void CitizenSensorNeeds_Dropdown_SelectionChanged(object sender, SelectionChangedEventArgs e) {
+            CitizenSensorNeeds_ListBox.Items.Add(CitizenSensorNeeds_Dropdown.SelectedItem);
+        }
+
         private void Illness_Dropdown_DropDownOpened(object sender, EventArgs e) {
             if (Illness_Dropdown.Items.Count == 0) {
                 foreach (string s in _controller.GetAllIllness()) {
-                    Illness_Dropdown.Items.Add();
+                    Illness_Dropdown.Items.Add(s);
                 }
             }
         }
@@ -102,8 +106,5 @@ namespace EksamensProjekt.View
         private void Illness_Dropdown_SelectionChanged(object sender, SelectionChangedEventArgs e) {
             CitizenIllness_ListBox.Items.Add(Illness_Dropdown.SelectedItem);
         }
-        
-        
-      
     }
 }

@@ -1,7 +1,7 @@
 ﻿<Window x:Class="EksamensProjekt.View.CreateCitizen"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="Tilføj Borgerdata" Height="400" Width="575" WindowStartupLocation="CenterScreen">
+        Title="Tilføj Borgerdata" Height="460" Width="575" WindowStartupLocation="CenterScreen">
     <Grid>
         <Label Content="CPR-NR" FontSize="14px" HorizontalAlignment="Left" Margin="20,20,0,0" VerticalAlignment="Top"/>
         <TextBox Name="CitizenBirthdate_TextBox" HorizontalAlignment="Left" Height="25" Margin="118,24,0,0" TextWrapping="Wrap" Text="" FontSize="14px" VerticalAlignment="Top" Width="65"/>
@@ -22,7 +22,7 @@
         <Label Content="Postnr + By" FontSize="14px" HorizontalAlignment="Left" Margin="20,258,0,0" VerticalAlignment="Top"/>
         <TextBox Name="CitizenCity_TextBox" HorizontalAlignment="Left" Height="25" Margin="118,261,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="151"/>
         <Label Content="Sensor Behov" FontSize="14px" HorizontalAlignment="Left" Margin="20,291,0,0" VerticalAlignment="Top"/>
-        <ComboBox Name="CitizenSensorNeeds_Dropdown" HorizontalAlignment="Left" Height="25" Margin="117,295,0,0" VerticalAlignment="Top" Width="151" DropDownOpened="CitizenSensorNeeds_Dropdown_DropDownOpened"/>
+        <ComboBox Name="CitizenSensorNeeds_Dropdown" HorizontalAlignment="Left" Height="25" Margin="117,295,0,0" VerticalAlignment="Top" Width="151" DropDownOpened="CitizenSensorNeeds_Dropdown_DropDownOpened" SelectionChanged="CitizenSensorNeeds_Dropdown_SelectionChanged"/>
         <Label Content="Sygdom" FontSize="14px" HorizontalAlignment="Left" Margin="281,20,0,0" VerticalAlignment="Top"/>
         <ComboBox Name="Illness_Dropdown" HorizontalAlignment="Left" Height="25" Margin="392,24,0,0" VerticalAlignment="Top" Width="151" DropDownOpened="Illness_Dropdown_DropDownOpened" SelectionChanged="Illness_Dropdown_SelectionChanged"/>
         <ListBox Name="CitizenIllness_ListBox" HorizontalAlignment="Left" Height="63" Margin="392,54,0,0" VerticalAlignment="Top" Width="151"/>
@@ -37,7 +37,8 @@
         <TextBox Name="HomeCareEnd_TextBox" HorizontalAlignment="Left" Height="25" Margin="482,228,0,0" TextWrapping="Wrap" Text="Slut" VerticalAlignment="Top" Width="61"/>
         <Button Name="AddHomeCareTime_Button" Content="Tilføj Tidspunkt" Height="25" HorizontalAlignment="Left" Margin="281,261,0,0" VerticalAlignment="Top" Width="100" Click="AddHomeCareTime_Button_Click"/>
         <ListBox Name="HomeCareTimes_ListBox" HorizontalAlignment="Left" Height="58" Margin="392,261,0,0" VerticalAlignment="Top" Width="151"/>
-        <Button Name="CreateCitizen_Button" Content="Opret Borger" Height="25" HorizontalAlignment="Left" Margin="20,332,0,0" VerticalAlignment="Top" Width="94"/>
-        <Button Name="Cancel_Button" Content="Annuller" Height="25" HorizontalAlignment="Left" Margin="449,332,0,0" VerticalAlignment="Top" Width="94" Click="Cancel_Button_Click"/>
+        <Button Name="CreateCitizen_Button" Content="Opret Borger" Height="25" HorizontalAlignment="Left" Margin="20,390,0,0" VerticalAlignment="Top" Width="94"/>
+        <Button Name="Cancel_Button" Content="Annuller" Height="25" HorizontalAlignment="Left" Margin="449,390,0,0" VerticalAlignment="Top" Width="94" Click="Cancel_Button_Click"/>
+        <ListBox Name="CitizenSensorNeeds_ListBox" HorizontalAlignment="Left" Height="58" Margin="117,325,0,0" VerticalAlignment="Top" Width="151"/>
     </Grid>
 </Window>
