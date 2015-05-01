@@ -120,6 +120,7 @@ namespace EksamensProjekt.Controller.DBFacades
                 SqlCommand cmd = new SqlCommand("SP_DeleteSensor", dbconn);
                 cmd.CommandType = CommandType.StoredProcedure;
                 cmd.Parameters.Add(new SqlParameter("@SerialNumber", serialNumber));
+                cmd.ExecuteNonQuery();
                 return true;
             }
             catch (SqlException e)
