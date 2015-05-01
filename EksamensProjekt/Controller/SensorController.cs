@@ -31,12 +31,8 @@ namespace EksamensProjekt.Controller
         }
         public bool DeleteSensor(int serialNumber)
         {
-            if (SensorDBFacade.DeleteSensor(serialNumber) == true)
-            {
-                return true;
-            }
-            else
-                return false;
+            return SensorDBFacade.DeleteSensor(serialNumber)
         }
+        
     }
 }

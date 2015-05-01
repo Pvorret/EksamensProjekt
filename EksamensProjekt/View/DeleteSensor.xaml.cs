@@ -40,6 +40,7 @@ namespace EksamensProjekt.View
         private void Select_ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             for (int i = 0; i < con.Sensors.Count; i++)
+            {
                 if (Convert.ToInt32(Select_ComboBox.SelectedItem) == con.Sensors[i].SerialNumber)
                 {
                     Type_Label.Content = con.Sensors[i].Type;
@@ -53,18 +54,21 @@ namespace EksamensProjekt.View
                         Activ_Label.Content = "I brug";
                     }
                 }
+            }
         }
 
         private void Delete_Button_Click(object sender, RoutedEventArgs e)
         {
             for (int i = 0; i < con.Sensors.Count; i++)
+            {
                 if (Convert.ToInt32(Select_ComboBox.SelectedItem) == con.Sensors[i].SerialNumber)
                 {
-                    if(con.DeleteSensor(con.Sensors[i].SerialNumber) == true)
+                    if (con.DeleteSensor(con.Sensors[i].SerialNumber) == true)
                     {
                         Select_ComboBox.Items.Remove(Select_ComboBox.SelectedItem);
                     }
                 }
+            }
             
         }
     }
