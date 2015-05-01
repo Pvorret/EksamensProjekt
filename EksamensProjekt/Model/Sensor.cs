@@ -21,5 +21,6 @@ namespace EksamensProjekt.Model
             this.Location = "";
             this.Activated = false;
         }
+        public Sensor() { }
     }
 }

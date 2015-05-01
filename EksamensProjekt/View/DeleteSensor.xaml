@@ -1,0 +1,15 @@
+﻿<Window x:Class="EksamensProjekt.View.DeleteSensor"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="DeleteSensor" Height="240.298" Width="300">
+    <Grid Margin="0,0,0,-8">
+        <Button Name="Cancel_Button" Content="Annuller" HorizontalAlignment="Left" Margin="164,171,0,0" VerticalAlignment="Top" Width="100" Click="Cancel_Button_Click"/>
+        <Button Name="Delete_Button" Content="Slet sensor" HorizontalAlignment="Left" Margin="23,171,0,0" VerticalAlignment="Top" Width="100" Click="Delete_Button_Click"/>
+        <ComboBox Name="Select_ComboBox" HorizontalAlignment="Left" Margin="23,23,0,0" VerticalAlignment="Top" Width="120" SelectionChanged="Select_ComboBox_SelectionChanged"/>
+        <Label Content="Type:" HorizontalAlignment="Left" Margin="23,69,0,0" VerticalAlignment="Top"/>
+        <Label Name="Type_Label" Content="" HorizontalAlignment="Left" Margin="105,69,0,0" VerticalAlignment="Top" Width="90"/>
+        <Label Content="Aktiveret:" HorizontalAlignment="Left" Margin="23,100,0,0" VerticalAlignment="Top"/>
+        <Label Name="Activ_Label" Content="" HorizontalAlignment="Left" Margin="105,100,0,0" VerticalAlignment="Top"/>
+
+    </Grid>
+</Window>

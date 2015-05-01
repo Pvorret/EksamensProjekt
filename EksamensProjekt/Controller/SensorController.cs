@@ -10,10 +10,33 @@ namespace EksamensProjekt.Controller
 {
     class SensorController
     {
+        public List<Sensor> Sensors = new List<Sensor>();
         public void CreateSensor(int serialNumber, string type)
         {
             Sensor s = new Sensor(serialNumber, type);
             SensorDBFacade.CreateSensor(s);
+        }
+        public void GetSensor(int serialNumber)
+        {
+            Sensors = SensorDBFacade.GetSensor(serialNumber);
+        }
+        public List<int> GetSerialNumberList(List<Sensor> sensorList)
+        {
+            List<int> serialnumbers = new List<int>();
+            foreach (Sensor s in sensorList)
+            {
+                serialnumbers.Add(s.SerialNumber);
+            }
+            return serialnumbers;
+        }
+        public bool DeleteSensor(int serialNumber)
+        {
+            if (SensorDBFacade.DeleteSensor(serialNumber) == true)
+            {
+                return true;
+            }
+            else
+                return false;
         }
     }
 }

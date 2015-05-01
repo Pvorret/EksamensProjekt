@@ -38,5 +38,11 @@ namespace EksamensProjekt
             CC.Show();
         }
 
+        private void DeleteSensor_Button_Click(object sender, RoutedEventArgs e)
+        {
+            DeleteSensor DS = new DeleteSensor();
+            DS.Show();
+        }
+
     }
 }
