@@ -166,7 +166,6 @@ namespace EksamensProjekt.Controller.DBFacades {
                 throw new Exception("Error in adding Relative" + e.Message);
             }
         }
-
         public static void AddRelatives (List<Model.Relative> relatives) {
 
             try {
