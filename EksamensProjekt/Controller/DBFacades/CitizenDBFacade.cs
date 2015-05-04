@@ -62,38 +62,38 @@ namespace EksamensProjekt.Controller.DBFacades {
                 cmd.Parameters.Add(new SqlParameter("@A_City", citizen.City));
 
 
-                //SqlCommand cmd2 = new SqlCommand("SP_AddRelative", dbconn);
-                //cmd2.CommandType = CommandType.StoredProcedure;
+                SqlCommand cmd2 = new SqlCommand("SP_AddRelative", dbconn);
+                cmd2.CommandType = CommandType.StoredProcedure;
 
-                //foreach (Model.Relative r in citizen.Relatives)
-                //{
-                //    cmd2.Parameters.Add(new SqlParameter("@R_CPRNR", r.CprNr));
+                foreach (Model.Relative r in citizen.Relatives)
+                {
+                    cmd2.Parameters.Add(new SqlParameter("@R_CPRNR", r.CprNr));
 
-                //    cmd2.Parameters.Add(new SqlParameter("@R_Name", r.Name));
+                    cmd2.Parameters.Add(new SqlParameter("@R_Name", r.Name));
 
-                //    cmd2.Parameters.Add(new SqlParameter("@R_Age", r.Age));
+                    cmd2.Parameters.Add(new SqlParameter("@R_Age", r.Age));
 
-                //    cmd2.Parameters.Add(new SqlParameter("@R_Gender", r.Gender));
+                    cmd2.Parameters.Add(new SqlParameter("@R_Gender", r.Gender));
 
-                //    cmd2.Parameters.Add(new SqlParameter("@R_PhoneNumber", r.PhoneNumber));
+                    cmd2.Parameters.Add(new SqlParameter("@R_PhoneNumber", r.PhoneNumber));
 
-                //    cmd2.Parameters.Add(new SqlParameter("@R_Email", r.Email));
+                    cmd2.Parameters.Add(new SqlParameter("@R_Email", r.Email));
 
-                //    cmd2.Parameters.Add(new SqlParameter("@A_Address", r.Address));
+                    cmd2.Parameters.Add(new SqlParameter("@A_Address", r.Address));
 
-                //    cmd2.Parameters.Add(new SqlParameter("@A_City", r.City));
+                    cmd2.Parameters.Add(new SqlParameter("@A_City", r.City));
 
-                //    foreach (KeyValuePair<string, string> notavailable in r.NotAvailable)
-                //    {
-                //        cmd2.Parameters.Add(new SqlParameter("@T_TimePeriod", notavailable.Value));
-                //        cmd2.Parameters.Add(new SqlParameter("@T_Day", notavailable.Key));
-                //    }
+                    foreach (KeyValuePair<string, string> notavailable in r.NotAvailable)
+                    {
+                        cmd2.Parameters.Add(new SqlParameter("@T_TimePeriod", notavailable.Value));
+                        cmd2.Parameters.Add(new SqlParameter("@T_Day", notavailable.Key));
+                    }
 
-                //    cmd2.Parameters.Add(new SqlParameter("@C_CPRNR", citizen.CprNr));
+                    cmd2.Parameters.Add(new SqlParameter("@C_CPRNR", citizen.CprNr));
 
-                //}
-
+                }
                 cmd.ExecuteNonQuery();
+                cmd2.ExecuteNonQuery();
 
                 CloseDB();
             }
@@ -123,49 +123,49 @@ namespace EksamensProjekt.Controller.DBFacades {
             }
         }
 
-        public static void AddRelative(Model.Citizen c)
-        {
-            try
-            {
-                ConnectDB();
-                SqlCommand cmd2 = new SqlCommand("SP_AddRelative", dbconn);
-                cmd2.CommandType = CommandType.StoredProcedure;
+        //public static void AddRelative(Model.Citizen c)
+        //{
+        //    try
+        //    {
+        //        ConnectDB();
+        //        SqlCommand cmd2 = new SqlCommand("SP_AddRelative", dbconn);
+        //        cmd2.CommandType = CommandType.StoredProcedure;
 
-                foreach (Model.Relative r in c.Relatives)
-                {
-                    cmd2.Parameters.Add(new SqlParameter("@R_CPRNR", r.CprNr));
+        //        foreach (Model.Relative r in c.Relatives)
+        //        {
+        //            cmd2.Parameters.Add(new SqlParameter("@R_CPRNR", r.CprNr));
 
-                    cmd2.Parameters.Add(new SqlParameter("@R_Name", r.Name));
+        //            cmd2.Parameters.Add(new SqlParameter("@R_Name", r.Name));
 
-                    cmd2.Parameters.Add(new SqlParameter("@R_Age", r.Age));
+        //            cmd2.Parameters.Add(new SqlParameter("@R_Age", r.Age));
 
-                    cmd2.Parameters.Add(new SqlParameter("@R_Gender", r.Gender));
+        //            cmd2.Parameters.Add(new SqlParameter("@R_Gender", r.Gender));
 
-                    cmd2.Parameters.Add(new SqlParameter("@R_PhoneNumber", r.PhoneNumber));
+        //            cmd2.Parameters.Add(new SqlParameter("@R_PhoneNumber", r.PhoneNumber));
 
-                    cmd2.Parameters.Add(new SqlParameter("@R_Email", r.Email));
+        //            cmd2.Parameters.Add(new SqlParameter("@R_Email", r.Email));
 
-                    cmd2.Parameters.Add(new SqlParameter("@A_Address", r.Address));
+        //            cmd2.Parameters.Add(new SqlParameter("@A_Address", r.Address));
 
-                    cmd2.Parameters.Add(new SqlParameter("@A_City", r.City));
+        //            cmd2.Parameters.Add(new SqlParameter("@A_City", r.City));
 
-                    foreach (KeyValuePair<string, string> notavailable in r.NotAvailable)
-                    {
-                        cmd2.Parameters.Add(new SqlParameter("@T_TimePeriod", notavailable.Value));
-                        cmd2.Parameters.Add(new SqlParameter("@T_Day", notavailable.Key));
-                    }
+        //            foreach (KeyValuePair<string, string> notavailable in r.NotAvailable)
+        //            {
+        //                cmd2.Parameters.Add(new SqlParameter("@T_TimePeriod", notavailable.Value));
+        //                cmd2.Parameters.Add(new SqlParameter("@T_Day", notavailable.Key));
+        //            }
 
-                    cmd2.Parameters.Add(new SqlParameter("@C_CPRNR", c.CprNr));
+        //            cmd2.Parameters.Add(new SqlParameter("@C_CPRNR", c.CprNr));
 
-                }
-                cmd2.ExecuteNonQuery();
+        //        }
+        //        cmd2.ExecuteNonQuery();
 
-            }
-            catch (SqlException e)
-            {
-                throw new Exception("Error in adding Relative" + e.Message);
-            }
-        }
+        //    }
+        //    catch (SqlException e)
+        //    {
+        //        throw new Exception("Error in adding Relative" + e.Message);
+        //    }
+        //}
         public static void AddRelatives (List<Model.Relative> relatives) {
 
             try {
