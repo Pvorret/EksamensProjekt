@@ -43,8 +43,6 @@ namespace EksamensProjekt.Controller.DBFacades {
 
                 cmd.Parameters.Add(new SqlParameter("@C_Religion", citizen.Religion));
 
-                //HomeCare skal ligges ind i Time tabllen med CPRNR for den Citizen den er fra.
-
                 foreach (KeyValuePair<string, string> homecare in citizen.HomeCare) {
 
                     cmd.Parameters.Add(new SqlParameter("@T_Day", homecare.Key));
@@ -176,38 +174,27 @@ namespace EksamensProjekt.Controller.DBFacades {
                     SqlCommand cmd = new SqlCommand("SP_AddRelative", dbconn);
                     cmd.CommandType = CommandType.StoredProcedure;
 
-                    SqlParameter sqlRelativeCitizenCPRNR = new SqlParameter("@C_CPRNR", r.CitizenCprNr);
-                    cmd.Parameters.Add(sqlRelativeCitizenCPRNR);
+                    cmd.Parameters.Add(new SqlParameter("@C_CPRNR", r.CitizenCprNr));
 
-                    SqlParameter sqlRelativeName = new SqlParameter("@R_Name", r.Name);
-                    cmd.Parameters.Add(sqlRelativeName);
+                    cmd.Parameters.Add(new SqlParameter("@R_Name", r.Name));
 
-                    SqlParameter sqlRelativeCPRNR = new SqlParameter("@R_CPRNR", r.CprNr);
-                    cmd.Parameters.Add(sqlRelativeCPRNR);
+                    cmd.Parameters.Add( new SqlParameter("@R_CPRNR", r.CprNr));
 
-                    SqlParameter sqlRelativeGender = new SqlParameter("@R_Gender", r.Gender);
-                    cmd.Parameters.Add(sqlRelativeGender);
+                    cmd.Parameters.Add(new SqlParameter("@R_Gender", r.Gender));
 
-                    SqlParameter sqlRelativeAge = new SqlParameter("@R_Age", r.Age);
-                    cmd.Parameters.Add(sqlRelativeAge);
+                    cmd.Parameters.Add(new SqlParameter("@R_Age", r.Age));
 
-                    SqlParameter sqlRelativePhoneNumber = new SqlParameter("@R_PhoneNumber", r.PhoneNumber);
-                    cmd.Parameters.Add(sqlRelativePhoneNumber);
+                    cmd.Parameters.Add(new SqlParameter("@R_PhoneNumber", r.PhoneNumber));
 
                     foreach (KeyValuePair<string, string> notavailable in r.NotAvailable) {
-                        SqlParameter sqlDay = new SqlParameter("@T_Day", notavailable.Key);
-                        cmd.Parameters.Add(sqlDay);
+                        cmd.Parameters.Add(new SqlParameter("@T_Day", notavailable.Key));
 
-                        SqlParameter sqlTime = new SqlParameter("@T_TimePeriod", notavailable.Value);
-                        cmd.Parameters.Add(sqlTime);
+                        cmd.Parameters.Add(new SqlParameter("@T_TimePeriod", notavailable.Value));
 
                     }
+                    cmd.Parameters.Add(new SqlParameter("@A_Address", r.Address));
 
-                    SqlParameter sqlRelativeAddress = new SqlParameter("@A_Address", r.Address);
-                    cmd.Parameters.Add(sqlRelativeAddress);
-
-                    SqlParameter sqlRelativeCity = new SqlParameter("@A_City", r.City);
-                    cmd.Parameters.Add(sqlRelativeCity);
+                    cmd.Parameters.Add(new SqlParameter("@A_City", r.City));
 
                     cmd.ExecuteNonQuery();
                 }
