@@ -40,7 +40,7 @@ namespace EksamensProjekt.Controller.DBFacades {
                 foreach (string s in citizen.Illness) {
                     SqlCommand cmd3 = new SqlCommand("SP_AddIllness", dbconn);
                     cmd3.CommandType = CommandType.StoredProcedure;
-                    
+
                     SqlParameter sqlIllness = new SqlParameter("@I_Name", s);
                     cmd3.Parameters.Add(sqlIllness);
 
@@ -72,8 +72,6 @@ namespace EksamensProjekt.Controller.DBFacades {
                 cmd.Parameters.Add(sqlCity);
 
                 //AddRelatives(citizen.Relatives);
-                
-                
                 
                 foreach (Model.Relative r in citizen.Relatives) {
 
