@@ -31,14 +31,15 @@ namespace EksamensProjekt.Controller.DBFacades
                 ConnectDB();
                 cmd = new SqlCommand("SP_CreateSensor", dbconn);
                 cmd.CommandType = CommandType.StoredProcedure;
-                cmd.Parameters.Add("@SerialNumber", sensor.SerialNumber);
-                cmd.Parameters.Add("@Type", sensor.Type);
-                cmd.Parameters.Add("@activated", activatedToBit);
-                cmd.Parameters.Add("@Location", "");
+                cmd.Parameters.Add(new SqlParameter("@SerialNumber", sensor.SerialNumber));
+                cmd.Parameters.Add(new SqlParameter("@Type", sensor.Type));
+                cmd.Parameters.Add(new SqlParameter("@activated", activatedToBit));
+                cmd.Parameters.Add(new SqlParameter("@Location", ""));
                 cmd.ExecuteNonQuery();
             }
             catch(Exception e)
             {
+                MessageBox.Show(e.Message);
                 MessageBox.Show("Error! Sensor not added to database");
             }
             finally
@@ -72,6 +73,65 @@ namespace EksamensProjekt.Controller.DBFacades
                 CloseDB();
             }
             return sensortype;
+        }
+        public static List<Sensor> GetSensor(int serialNumber)
+        {
+            List<Sensor> sensors = new List<Sensor>();
+            try
+            {
+                ConnectDB();
+                SqlCommand cmd = new SqlCommand("SP_GetSensor", dbconn);
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.Add(new SqlParameter("@SerialNumber", serialNumber));
+                SqlDataReader reader = cmd.ExecuteReader();
+
+                while (reader.Read())
+                {
+                    Sensor sensor = new Sensor();
+                    sensor.SerialNumber = Convert.ToInt32(reader["S_SerialNumber"]);
+                    sensor.Location = reader["S_Location"].ToString();
+                    if (Convert.ToInt32(reader["S_Activated"]) == 0)
+                    {
+                        sensor.Activated = false;
+                    }
+                    if (Convert.ToInt32(reader["S_Activated"]) == 1)
+                    {
+                        sensor.Activated = true;
+                    }
+                    sensor.Type = reader["ST_Type"].ToString();
+                    sensors.Add(sensor);
+                }
+            }
+            catch (SqlException e)
+            {
+                MessageBox.Show(e.Message);
+            }
+            finally
+            {
+                CloseDB();
+            }
+            return sensors;
+        }
+        public static bool DeleteSensor(int serialNumber)
+        {
+            try
+            {
+                ConnectDB();
+                SqlCommand cmd = new SqlCommand("SP_DeleteSensor", dbconn);
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.Add(new SqlParameter("@SerialNumber", serialNumber));
+                cmd.ExecuteNonQuery();
+                return true;
+            }
+            catch (SqlException e)
+            {
+                MessageBox.Show(e.Message);
+                return false;
+            }
+            finally
+            {
+                CloseDB();
+            }
         }
         public static void ConnectDB()
         {

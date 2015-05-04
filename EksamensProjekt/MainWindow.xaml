@@ -5,6 +5,7 @@
     <Grid Cursor="Arrow">
         <Button Name="CreateCitizen_Button" Content="Opret Borgerdata" HorizontalAlignment="Left" Margin="196,92,0,0" VerticalAlignment="Top" Width="113" Click="CreateCitizen_Button_Click"/>
         <Button Name="CreateSensor_Button" Content="Opret Sensor" HorizontalAlignment="Left" Margin="196,131,0,0" VerticalAlignment="Top" Width="113" Click="CreateSensor_Button_Click"/>
+        <Button Name="DeleteSensor_Button" Content="Slet Sensor" HorizontalAlignment="Left" Margin="196,171,0,0" VerticalAlignment="Top" Width="113" Click="DeleteSensor_Button_Click"/>
         <Label Name="Nødkald_Label" Content="Nødkald" FontSize="50px" FontStyle="Italic"  HorizontalAlignment="Left" Margin="157,10,0,0" VerticalAlignment="Top" Background="White">
             <Label.Foreground>
                 <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
@@ -13,6 +14,8 @@
                 </LinearGradientBrush>
             </Label.Foreground>
         </Label>
+        
+
 
     </Grid>
 </Window>

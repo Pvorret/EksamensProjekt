@@ -73,6 +73,7 @@ namespace EksamensProjekt.View
             AddIllness AI = new AddIllness();
             AI.ShowDialog();
             CitizenIllness_ListBox.Items.Add(AI.NewIllness);
+            IllnessList.Add(AI.NewIllness);
         }
 
         private void CitizenReligion_Dropdown_SelectionChanged(object sender, SelectionChangedEventArgs e)

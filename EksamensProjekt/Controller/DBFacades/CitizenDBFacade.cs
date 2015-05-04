@@ -22,42 +22,34 @@ namespace EksamensProjekt.Controller.DBFacades {
                 SqlCommand cmd = new SqlCommand("SP_CreateCitizen", dbconn);
                 cmd.CommandType = CommandType.StoredProcedure;
 
-                SqlParameter sqlName = new SqlParameter("@C_Name", citizen.Name);
-                cmd.Parameters.Add(sqlName);
+                cmd.Parameters.Add(new SqlParameter("@C_Name", citizen.Name));
 
-                SqlParameter sqlCPRNR = new SqlParameter("@C_CPRNR", citizen.CprNr);
-                cmd.Parameters.Add(sqlCPRNR);
+                cmd.Parameters.Add(new SqlParameter("@C_CPRNR", citizen.CprNr));
 
-                SqlParameter sqlGender = new SqlParameter("@C_Gender", citizen.Gender);
-                cmd.Parameters.Add(sqlGender);
+                cmd.Parameters.Add(new SqlParameter("@C_Gender", citizen.Gender));
 
-                SqlParameter sqlAge = new SqlParameter("@C_Age", citizen.Age);
-                cmd.Parameters.Add(sqlAge);
+                cmd.Parameters.Add(new SqlParameter("@C_Age", citizen.Age));
 
-                SqlParameter sqlPhoneNumber = new SqlParameter("@C_PhoneNumber", citizen.PhoneNumber);
-                cmd.Parameters.Add(sqlPhoneNumber);
+                cmd.Parameters.Add(new SqlParameter("@C_PhoneNumber", citizen.PhoneNumber));
 
-                foreach (string s in citizen.Illness) {
-                    SqlCommand cmd3 = new SqlCommand("SP_AddIllness", dbconn);
-                    cmd3.CommandType = CommandType.StoredProcedure;
+                //SqlCommand cmd3 = new SqlCommand("SP_AddIllness", dbconn);
+                //cmd3.CommandType = CommandType.StoredProcedure;
+                //foreach (string s in citizen.Illness) {
 
-                    SqlParameter sqlIllness = new SqlParameter("@I_Name", s);
-                    cmd3.Parameters.Add(sqlIllness);
+                //    cmd3.Parameters.Add(new SqlParameter("@I_Name", s));
 
-                    cmd3.Parameters.Add(new SqlParameter("@C_CPRNR", citizen.CprNr));
-                }
+                //    cmd3.Parameters.Add(new SqlParameter("@C_CPRNR", citizen.CprNr));
+                //}
 
-                SqlParameter sqlReligion = new SqlParameter("@C_Religion", citizen.Religion);
-                cmd.Parameters.Add(sqlReligion);
+                cmd.Parameters.Add(new SqlParameter("@C_Religion", citizen.Religion));
 
                 //HomeCare skal ligges ind i Time tabllen med CPRNR for den Citizen den er fra.
 
                 foreach (KeyValuePair<string, string> homecare in citizen.HomeCare) {
-                    SqlParameter sqlDay = new SqlParameter("@T_Day", homecare.Key);
-                    cmd.Parameters.Add(sqlDay);
 
-                    SqlParameter sqlTime = new SqlParameter("@T_TimePeriod", homecare.Value);
-                    cmd.Parameters.Add(sqlTime);
+                    cmd.Parameters.Add(new SqlParameter("@T_Day", homecare.Key));
+
+                    cmd.Parameters.Add(new SqlParameter("@T_TimePeriod", homecare.Value));
                 }
 
                 foreach (KeyValuePair<string, int> sensortypeamount in citizen.SensorTypes) {
@@ -65,53 +57,41 @@ namespace EksamensProjekt.Controller.DBFacades {
                     cmd.Parameters.Add(new SqlParameter("@CST_AmountNeeded", sensortypeamount.Value));
                 }
 
-                SqlParameter sqlAddress = new SqlParameter("@A_Address", citizen.Address);
-                cmd.Parameters.Add(sqlAddress);
+                cmd.Parameters.Add(new SqlParameter("@A_Address", citizen.Address));
 
-                SqlParameter sqlCity = new SqlParameter("@A_City", citizen.City);
-                cmd.Parameters.Add(sqlCity);
+                cmd.Parameters.Add(new SqlParameter("@A_City", citizen.City));
 
-                //AddRelatives(citizen.Relatives);
-                
-                foreach (Model.Relative r in citizen.Relatives) {
 
-                    SqlCommand cmd2 = new SqlCommand("SP_AddRelative", dbconn);
-                    cmd2.CommandType = CommandType.StoredProcedure;
-                    
-                    SqlParameter sqlRelativeName = new SqlParameter("@R_Name", r.Name);
-                    cmd2.Parameters.Add(sqlRelativeName);
+                //SqlCommand cmd2 = new SqlCommand("SP_AddRelative", dbconn);
+                //cmd2.CommandType = CommandType.StoredProcedure;
 
-                    SqlParameter sqlRelativeCPRNR = new SqlParameter("@R_CPRNR", r.CprNr);
-                    cmd2.Parameters.Add(sqlRelativeCPRNR);
+                //foreach (Model.Relative r in citizen.Relatives)
+                //{
+                //    cmd2.Parameters.Add(new SqlParameter("@R_CPRNR", r.CprNr));
 
-                    SqlParameter sqlRelativeGender = new SqlParameter("@R_Gender", r.Gender);
-                    cmd2.Parameters.Add(sqlRelativeGender);
+                //    cmd2.Parameters.Add(new SqlParameter("@R_Name", r.Name));
 
-                    SqlParameter sqlRelativeAge = new SqlParameter("@R_Age", r.Age);
-                    cmd2.Parameters.Add(sqlRelativeAge);
+                //    cmd2.Parameters.Add(new SqlParameter("@R_Age", r.Age));
 
-                    SqlParameter sqlRelativePhoneNumber = new SqlParameter("@R_PhoneNumber", r.PhoneNumber);
-                    cmd2.Parameters.Add(sqlRelativePhoneNumber);
+                //    cmd2.Parameters.Add(new SqlParameter("@R_Gender", r.Gender));
 
-                    cmd2.Parameters.Add(new SqlParameter("@R_Email", r.Email));
+                //    cmd2.Parameters.Add(new SqlParameter("@R_PhoneNumber", r.PhoneNumber));
 
-                    foreach (KeyValuePair<string, string> notavailable in r.NotAvailable) {
-                        SqlParameter sqlDay = new SqlParameter("@T_Day", notavailable.Key);
-                        cmd2.Parameters.Add(sqlDay);
+                //    cmd2.Parameters.Add(new SqlParameter("@R_Email", r.Email));
 
-                        SqlParameter sqlTime = new SqlParameter("@T_TimePeriod", notavailable.Value);
-                        cmd2.Parameters.Add(sqlTime);
-                    }
+                //    cmd2.Parameters.Add(new SqlParameter("@A_Address", r.Address));
 
-                    SqlParameter sqlRelativeAddress = new SqlParameter("@A_Address", r.Address);
-                    cmd2.Parameters.Add(sqlRelativeAddress);
+                //    cmd2.Parameters.Add(new SqlParameter("@A_City", r.City));
 
-                    SqlParameter sqlRelativeCity = new SqlParameter("@A_City", r.City);
-                    cmd2.Parameters.Add(sqlRelativeCity);
+                //    foreach (KeyValuePair<string, string> notavailable in r.NotAvailable)
+                //    {
+                //        cmd2.Parameters.Add(new SqlParameter("@T_TimePeriod", notavailable.Value));
+                //        cmd2.Parameters.Add(new SqlParameter("@T_Day", notavailable.Key));
+                //    }
 
-                    SqlParameter sqlRelativeCitizenCPRNR = new SqlParameter("@C_CPRNR", citizen.CprNr);
-                    cmd2.Parameters.Add(sqlRelativeCitizenCPRNR);
-                }
+                //    cmd2.Parameters.Add(new SqlParameter("@C_CPRNR", citizen.CprNr));
+
+                //}
 
                 cmd.ExecuteNonQuery();
 
@@ -123,6 +103,69 @@ namespace EksamensProjekt.Controller.DBFacades {
             }
         }
 
+        public static void AddIllnessToCitizen(Model.Citizen citizen)
+        {
+            try
+            {
+                ConnectDB();
+                SqlCommand cmd3 = new SqlCommand("SP_AddIllness", dbconn);
+                cmd3.CommandType = CommandType.StoredProcedure;
+                foreach (string s in citizen.Illness)
+                {
+                    cmd3.Parameters.Add(new SqlParameter("@I_Name", s));
+                    cmd3.Parameters.Add(new SqlParameter("@C_CPRNR", citizen.CprNr));
+                }
+                cmd3.ExecuteNonQuery();
+            }
+            catch (SqlException e)
+            {
+                throw new Exception("Error in Add Illness" + e.Message);
+            }
+        }
+
+        public static void AddRelative(Model.Citizen c)
+        {
+            try
+            {
+                ConnectDB();
+                SqlCommand cmd2 = new SqlCommand("SP_AddRelative", dbconn);
+                cmd2.CommandType = CommandType.StoredProcedure;
+
+                foreach (Model.Relative r in c.Relatives)
+                {
+                    cmd2.Parameters.Add(new SqlParameter("@R_CPRNR", r.CprNr));
+
+                    cmd2.Parameters.Add(new SqlParameter("@R_Name", r.Name));
+
+                    cmd2.Parameters.Add(new SqlParameter("@R_Age", r.Age));
+
+                    cmd2.Parameters.Add(new SqlParameter("@R_Gender", r.Gender));
+
+                    cmd2.Parameters.Add(new SqlParameter("@R_PhoneNumber", r.PhoneNumber));
+
+                    cmd2.Parameters.Add(new SqlParameter("@R_Email", r.Email));
+
+                    cmd2.Parameters.Add(new SqlParameter("@A_Address", r.Address));
+
+                    cmd2.Parameters.Add(new SqlParameter("@A_City", r.City));
+
+                    foreach (KeyValuePair<string, string> notavailable in r.NotAvailable)
+                    {
+                        cmd2.Parameters.Add(new SqlParameter("@T_TimePeriod", notavailable.Value));
+                        cmd2.Parameters.Add(new SqlParameter("@T_Day", notavailable.Key));
+                    }
+
+                    cmd2.Parameters.Add(new SqlParameter("@C_CPRNR", c.CprNr));
+
+                }
+                cmd2.ExecuteNonQuery();
+
+            }
+            catch (SqlException e)
+            {
+                throw new Exception("Error in adding Relative" + e.Message);
+            }
+        }
         public static void AddRelatives (List<Model.Relative> relatives) {
 
             try {
