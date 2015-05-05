@@ -11,7 +11,7 @@
         <TextBox Name="Date_TextBox" HorizontalAlignment="Left" Height="25" Margin="132,113,0,0" TextWrapping="Wrap" Text="Dag" VerticalAlignment="Top" Width="73"/>
         <Label Content="-" FontSize="14px" HorizontalAlignment="Left" Margin="209,114,0,0" VerticalAlignment="Top" RenderTransformOrigin="1.009,0.243"/>
         <TextBox Name="Time_TextBox" HorizontalAlignment="Left" Height="25" Margin="230,113,0,0" TextWrapping="Wrap" Text="Tidspunkt" VerticalAlignment="Top" Width="73"/>
-        <Button Name="TimeRightNow_Button" Content="Nuværende tid" HorizontalAlignment="Left" Margin="132,143,0,0" VerticalAlignment="Top" Width="100" Height="25"/>
+        <Button Name="TimeRightNow_Button" Content="Nuværende tid" HorizontalAlignment="Left" Margin="132,143,0,0" VerticalAlignment="Top" Width="100" Height="25" Click="TimeRightNow_Button_Click"/>
         <Button Name="Activate_Button" Content="Aktiver" HorizontalAlignment="Left" Margin="53,187,0,0" VerticalAlignment="Top" Width="100" Height="25"/>
         <Button Name="Back_Button" Content="Tilbage" HorizontalAlignment="Left" Margin="232,187,0,0" VerticalAlignment="Top" Width="100" Height="25" Click="Back_Button_Click"/>
 

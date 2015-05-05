@@ -11,6 +11,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using System.Globalization;
 
 namespace EksamensProjekt.View
 {
@@ -19,6 +20,7 @@ namespace EksamensProjekt.View
     /// </summary>
     public partial class ActivateSensor : Window
     {
+        
         public ActivateSensor()
         {
             InitializeComponent();
@@ -27,6 +29,13 @@ namespace EksamensProjekt.View
         private void Back_Button_Click(object sender, RoutedEventArgs e)
         {
             Close();
+        }
+
+        private void TimeRightNow_Button_Click(object sender, RoutedEventArgs e)
+        {
+            CultureInfo c = new CultureInfo("da-DK"); //Laver et CulturInfo object c hvor vi siger at dens cultur skal være dansk
+            Date_TextBox.Text = c.DateTimeFormat.GetDayName(DateTime.Today.DayOfWeek); //Her bruger vi object c til at convert ugens dag til dansk sprog
+            Time_TextBox.Text = DateTime.Now.Hour.ToString() + ":" + DateTime.Now.Minute.ToString();
         }
     }
 }
