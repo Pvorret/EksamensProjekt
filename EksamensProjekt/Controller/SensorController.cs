@@ -20,6 +20,7 @@ namespace EksamensProjekt.Controller
         {
             Sensors = SensorDBFacade.GetSensor(serialNumber);
         }
+        
         public List<int> GetSerialNumberList(List<Sensor> sensorList)
         {
             List<int> serialnumbers = new List<int>();

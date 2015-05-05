@@ -144,5 +144,35 @@ namespace EksamensProjekt.Controller.DBFacades
             dbconn.Close();
             dbconn.Dispose();
         }
+
+        public static List<string> GetSensorFromCitizen(string CprNr)
+        {
+            List<string> SensorTypes = new List<string>();
+
+            try
+            {
+                ConnectDB();
+
+                SqlCommand cmd = new SqlCommand("SP_GetSensorFromCitizen", dbconn);
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.Add(new SqlParameter("@CprNr", CprNr));
+                SqlDataReader rdr;
+                rdr = cmd.ExecuteReader();
+
+                while (rdr.HasRows && rdr.Read())
+                {
+                    SensorTypes.Add(Convert.ToString(rdr["ST_Type"]));
+                }
+            }
+            catch (SqlException e)
+            {
+                throw new Exception("Error in getting SensorTypes" + e.Message);
+            }
+            finally
+            {
+                CloseDB();
+            }
+            return SensorTypes;
+        }
     }
 }

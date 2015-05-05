@@ -12,8 +12,7 @@ namespace EksamensProjekt.Controller.DBFacades {
 
         static SqlConnection dbconn;
 
-        //Relative er ikke blevet lagt ind
-        //Citizen Illness er ikke blevet koblet med Citizen
+       
 
         public static void CreateCitizen(Model.Citizen citizen) {
             try {
@@ -210,29 +209,32 @@ namespace EksamensProjekt.Controller.DBFacades {
         public static List<string> GetIllnessType() {
             List<string> IllnessList = new List<string>();
 
-            try {
+            try 
+            {
                 ConnectDB();
 
-                SqlCommand cmd = new SqlCommand("GetIllnessType", dbconn);
+                SqlCommand cmd = new SqlCommand("SP_GetIllnessType", dbconn);
                 cmd.CommandType = CommandType.StoredProcedure;
 
                 SqlDataReader rdr;
                 rdr = cmd.ExecuteReader();
 
-                while (rdr.HasRows && rdr.Read()) {
+                while (rdr.HasRows && rdr.Read()) 
+                {
                     string Illness = (string)rdr["I_Name"];
                     IllnessList.Add(Illness);
                 }
-
-                CloseDB();
-
-                return IllnessList;
-
             }
-            catch (SqlException e) {
-                
+            catch (SqlException e) 
+            {
                 throw new Exception ("Error in getting Illness" + e.Message);
             }
+            finally
+            {
+                CloseDB();
+            }
+            return IllnessList;
+
         }
 
         private static void ConnectDB() {
@@ -242,6 +244,36 @@ namespace EksamensProjekt.Controller.DBFacades {
 
         private static void CloseDB() {
             dbconn.Close();
+        }
+
+        public static List<Model.Citizen> GetAllCitizen()
+        {
+            List<Model.Citizen> Citizens = new List<Model.Citizen>();
+
+            try
+            {
+                ConnectDB();
+
+                SqlCommand cmd = new SqlCommand("SP_GetAllCitizen", dbconn);
+                cmd.CommandType = CommandType.StoredProcedure;
+
+                SqlDataReader rdr;
+                rdr = cmd.ExecuteReader();
+
+                while (rdr.HasRows && rdr.Read())
+                {
+                    Citizens.Add(new Model.Citizen(Convert.ToString(rdr["C_Name"]), Convert.ToString(rdr["C_CPRNR"])));
+                }
+            }
+            catch (SqlException e)
+            {
+                throw new Exception("Error in getting Citizen" + e.Message);
+            }
+            finally
+            {
+                CloseDB();
+            }
+            return Citizens;
         }
     }
 }

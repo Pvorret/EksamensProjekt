@@ -28,5 +28,10 @@ namespace EksamensProjekt.Model
             this.SensorTypes = sensorTypes;
             this.HomeCare = homeCare;
         }
+        public Citizen(string name, string cprNr)
+        {
+            this.Name = name;
+            this.CprNr = cprNr;
+        }
     }
 }

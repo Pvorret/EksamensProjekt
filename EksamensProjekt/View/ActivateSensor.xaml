@@ -4,7 +4,7 @@
         Title="ActivateSensor" Height="275" Width="400" WindowStartupLocation="CenterScreen">
     <Grid>
         <Label Content="Borger:" FontSize="14px" HorizontalAlignment="Left" Margin="53,20,0,0" VerticalAlignment="Top"/>
-        <ComboBox Name="Citizen_Dropdown" HorizontalAlignment="Left" Margin="132,24,0,0" VerticalAlignment="Top" Width="200" Height="25"/>
+        <ComboBox Name="Citizen_Dropdown" HorizontalAlignment="Left" Margin="132,24,0,0" VerticalAlignment="Top" Width="200" Height="25" SelectionChanged="Citizen_Dropdown_SelectionChanged"/>
         <Label Content="Sensor:" FontSize="14px" HorizontalAlignment="Left" Margin="53,74,0,0" VerticalAlignment="Top"/>
         <ComboBox Name="Sensor_DropDown" HorizontalAlignment="Left" Margin="132,74,0,0" VerticalAlignment="Top" Width="131" Height="25"/>
         <Label Content="Tidspunkt:" FontSize="14px" HorizontalAlignment="Left" Margin="53,109,0,0" VerticalAlignment="Top"/>

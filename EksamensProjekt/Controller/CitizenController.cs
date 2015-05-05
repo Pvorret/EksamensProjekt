@@ -12,7 +12,7 @@ namespace EksamensProjekt.Controller {
         public List<Relative> Relatives = new List<Relative>();
         public List<string> SensorTypes = new List<string>();
         public List<string> IllnessList = new List<string>();
-
+        public List<Citizen> Citizens = new List<Citizen>();
         //Den har nico lavet
         public void CreateCitizen(string name, string cprnr, string gender, string age, string address, string city, string phonenumber, List<string> illness, string religion, Dictionary<string, int> sensorTypes, Dictionary<string, string> homeCare)
         {
@@ -37,6 +37,15 @@ namespace EksamensProjekt.Controller {
 
         public void GetAllSensorType() {
             SensorTypes = SensorDBFacade.GetSensorType(0);
+        }
+
+        public void GetSensorFromCitizen(string CprNr)
+        {
+            SensorTypes = SensorDBFacade.GetSensorFromCitizen(CprNr);
+        }
+        public void GetAllCitizen()
+        {
+            Citizens = CitizenDBFacade.GetAllCitizen();
         }
 
         public void GetAllIllness() {
