@@ -15,5 +15,6 @@
         <Button Name="CreateCitizen_Button" Content="Opret Borgerdata" HorizontalAlignment="Left" Margin="195,130,0,0" VerticalAlignment="Top" Width="125" Click="CreateCitizen_Button_Click"/>
         <Button Name="CreateSensor_Button" Content="Opret Sensor" HorizontalAlignment="Left" Margin="195,169,0,0" VerticalAlignment="Top" Width="125" Click="CreateSensor_Button_Click"/>
         <Button Name="DeleteSensor_Button" Content="Slet Sensor" HorizontalAlignment="Left" Margin="195,209,0,0" VerticalAlignment="Top" Width="125" Click="DeleteSensor_Button_Click"/>
+        <Button Name="ConnectSensorAndCitizen_Button" Content="Forbind Sensor og Borger" HorizontalAlignment="Left" Margin="180,246,0,0" VerticalAlignment="Top" Width="155" Click="ConnectSensorAndCitizen_Button_Click"/>
     </Grid>
 </Window>

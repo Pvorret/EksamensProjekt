@@ -50,5 +50,11 @@ namespace EksamensProjekt
             AS.Show();
         }
 
+        private void ConnectSensorAndCitizen_Button_Click(object sender, RoutedEventArgs e)
+        {
+            ConnectSensorToCitizen CS = new ConnectSensorToCitizen();
+            CS.Show();
+        }
+
     }
 }
