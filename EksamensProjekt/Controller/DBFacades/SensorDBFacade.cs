@@ -112,6 +112,7 @@ namespace EksamensProjekt.Controller.DBFacades
             }
             return sensors;
         }
+
         public static bool DeleteSensor(int serialNumber)
         {
             try
@@ -173,6 +174,29 @@ namespace EksamensProjekt.Controller.DBFacades
                 CloseDB();
             }
             return SensorTypes;
+        }
+
+        public static void ConnectSensorToCitizen(int SensorSerialNumber, string CPRNR, string SensorLocation)//NY
+        {
+            try
+            {
+                ConnectDB();
+                cmd = new SqlCommand("SP_ConnectSensorToCitizen", dbconn);
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.Add(new SqlParameter("@SerialNumber", SensorSerialNumber));
+                cmd.Parameters.Add(new SqlParameter("@CPRNR", CPRNR));
+                cmd.Parameters.Add(new SqlParameter("@Location", SensorLocation));
+                cmd.ExecuteNonQuery();
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.Message);
+                MessageBox.Show("Error! Sensor and Citizen not Connected");
+            }
+            finally
+            {
+                CloseDB();
+            }
         }
     }
 }
