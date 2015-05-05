@@ -44,5 +44,11 @@ namespace EksamensProjekt
             DS.Show();
         }
 
+        private void ActiveSensor_Button_Click(object sender, RoutedEventArgs e)
+        {
+            ActivateSensor AS = new ActivateSensor();
+            AS.Show();
+        }
+
     }
 }
