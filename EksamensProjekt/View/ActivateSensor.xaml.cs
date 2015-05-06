@@ -32,6 +32,7 @@ namespace EksamensProjekt.View
             {
                 Citizen_Dropdown.Items.Add(_controller.Citizens[i].Name);
             }
+            
         }
         private void Back_Button_Click(object sender, RoutedEventArgs e)
         {
@@ -61,6 +62,7 @@ namespace EksamensProjekt.View
                     }
                 }
             }
+            MessageBox.Show("Citizen og Sensor er forbundet!");
             
         }
     }

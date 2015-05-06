@@ -42,7 +42,7 @@ namespace EksamensProjekt.Controller
         }
 
 
-        public void ConnectSensorToCitizen(int SensorSerialNumber, string CPRNR, string SensorLocation)
+        public void ConnectSensorToCitizen(int SensorSerialNumber, string CPRNR, string SensorLocation)//NY
         {
             SensorDBFacade.ConnectSensorToCitizen(SensorSerialNumber, CPRNR, SensorLocation);
         }
