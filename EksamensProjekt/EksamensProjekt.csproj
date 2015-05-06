@@ -55,6 +55,9 @@
     </ApplicationDefinition>
     <Compile Include="Controller\CitizenController.cs" />
     <Compile Include="Controller\DBFacades\CitizenDBFacade.cs" />
+    <Compile Include="Controller\DBFacades\RuleSetDBFacade.cs" />
+    <Compile Include="Controller\RuleSetController.cs" />
+    <Compile Include="Model\SensorLog.cs" />
     <Compile Include="View\ActivateSensor.xaml.cs">
       <DependentUpon>ActivateSensor.xaml</DependentUpon>
     </Compile>
@@ -157,6 +160,12 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\SensorRuleSets\SensorRuleSets.csproj">
+      <Project>{c2888c18-da1d-4b45-a05c-3cce3357f742}</Project>
+      <Name>SensorRuleSets</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
