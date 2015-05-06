@@ -30,15 +30,6 @@ namespace EksamensProjekt.Controller.DBFacades {
 
                 cmd.Parameters.Add(new SqlParameter("@C_Religion", citizen.Religion));
 
-                foreach (KeyValuePair<string, int> sensortypeamount in citizen.SensorTypes) {
-                    SqlCommand cmd2 = new SqlCommand("SP_AddSensorTypeFromCitizenCPRNR", dbconn);
-                    cmd2.CommandType = CommandType.StoredProcedure;
-                    
-                    cmd2.Parameters.Add(new SqlParameter("@C_CPRNR", citizen.CprNr));
-                    cmd2.Parameters.Add(new SqlParameter("@ST_Type", sensortypeamount.Key));
-                    cmd2.Parameters.Add(new SqlParameter("@CST_AmountNeeded", sensortypeamount.Value));
-                }
-
                 cmd.Parameters.Add(new SqlParameter("@A_Address", citizen.Address));
 
                 cmd.Parameters.Add(new SqlParameter("@A_City", citizen.City));
@@ -52,6 +43,19 @@ namespace EksamensProjekt.Controller.DBFacades {
 
                 throw new Exception("Error in creating Citizen" + e.Message);
             }
+        }
+
+        public static void AddSensorType(string cprnr, Dictionary<string, int> sensortype) {
+
+            foreach (KeyValuePair<string, int> sensortypeamount in sensortype) {
+                    SqlCommand cmd = new SqlCommand("SP_AddSensorTypeFromCitizenCPRNR", dbconn);
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.Add(new SqlParameter("@C_CPRNR", cprnr));
+                    cmd.Parameters.Add(new SqlParameter("@ST_Type", sensortypeamount.Key));
+                    cmd.Parameters.Add(new SqlParameter("@CST_AmountNeeded", sensortypeamount.Value));
+
+                    cmd.ExecuteNonQuery();
+                }
         }
         public static void AddTime(string cprnr, Dictionary<string, string> times)
         {
