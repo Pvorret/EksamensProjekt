@@ -21,6 +21,7 @@ namespace EksamensProjekt.Controller {
             citizen.Relatives = Relatives;
 
             CitizenDBFacade.CreateCitizen(citizen);
+            CitizenDBFacade.AddRelative(citizen);
             CitizenDBFacade.AddIllnessToCitizen(citizen);
 
         }

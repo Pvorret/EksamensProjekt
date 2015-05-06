@@ -62,7 +62,6 @@ namespace EksamensProjekt.View
                     }
                 }
             }
-            MessageBox.Show("Citizen og Sensor er forbundet!");
             
         }
     }

@@ -71,6 +71,7 @@ namespace EksamensProjekt.View
         private void Connect_Button_Click(object sender, RoutedEventArgs e)
         {
             _SensorController.ConnectSensorToCitizen(int.Parse(Sensor_Dropdown.SelectedItem.ToString()), CPRNR_TextBox.Text, SensorLocation_TextBox.Text);
+            MessageBox.Show("Citizen og Sensor er forbundet!");
         }
 
     }
