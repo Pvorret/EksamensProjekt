@@ -55,6 +55,8 @@
     </ApplicationDefinition>
     <Compile Include="Controller\CitizenController.cs" />
     <Compile Include="Controller\DBFacades\CitizenDBFacade.cs" />
+    <Compile Include="Controller\DBFacades\ProcessingDBFacade.cs" />
+    <Compile Include="Controller\ProcessingController.cs" />
     <Compile Include="View\ActivateSensor.xaml.cs">
       <DependentUpon>ActivateSensor.xaml</DependentUpon>
     </Compile>
