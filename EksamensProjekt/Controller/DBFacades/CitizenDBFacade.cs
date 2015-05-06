@@ -33,10 +33,11 @@ namespace EksamensProjekt.Controller.DBFacades {
 
                 cmd.Parameters.Add(new SqlParameter("@C_Religion", citizen.Religion));
 
-                SqlCommand cmd2 = new SqlCommand("SP_AddSensorType", dbconn);
-                cmd2.CommandType = CommandType.StoredProcedure;
-
                 foreach (KeyValuePair<string, int> sensortypeamount in citizen.SensorTypes) {
+                    SqlCommand cmd2 = new SqlCommand("SP_AddSensorTypeFromCitizenCPRNR", dbconn);
+                    cmd2.CommandType = CommandType.StoredProcedure;
+                    
+                    cmd2.Parameters.Add(new SqlParameter("@C_CPRNR", citizen.CprNr));
                     cmd2.Parameters.Add(new SqlParameter("@ST_Type", sensortypeamount.Key));
                     cmd2.Parameters.Add(new SqlParameter("@CST_AmountNeeded", sensortypeamount.Value));
                 }
