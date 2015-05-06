@@ -1,11 +1,9 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
-VisualStudioVersion = 12.0.31101.0
+VisualStudioVersion = 12.0.30501.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EksamensProjekt", "EksamensProjekt\EksamensProjekt.csproj", "{2A59E381-DA1A-432E-BC1A-0A8BDBC06E72}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SensorRuleSets", "SensorRuleSets\SensorRuleSets.csproj", "{C2888C18-DA1D-4B45-A05C-3CCE3357F742}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -17,10 +15,6 @@ Global
 		{2A59E381-DA1A-432E-BC1A-0A8BDBC06E72}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2A59E381-DA1A-432E-BC1A-0A8BDBC06E72}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2A59E381-DA1A-432E-BC1A-0A8BDBC06E72}.Release|Any CPU.Build.0 = Release|Any CPU
-		{C2888C18-DA1D-4B45-A05C-3CCE3357F742}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{C2888C18-DA1D-4B45-A05C-3CCE3357F742}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{C2888C18-DA1D-4B45-A05C-3CCE3357F742}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{C2888C18-DA1D-4B45-A05C-3CCE3357F742}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
