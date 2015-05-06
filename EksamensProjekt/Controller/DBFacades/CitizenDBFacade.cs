@@ -47,7 +47,10 @@ namespace EksamensProjekt.Controller.DBFacades {
 
         public static void AddSensorType(string cprnr, Dictionary<string, int> sensortype) {
 
-            foreach (KeyValuePair<string, int> sensortypeamount in sensortype) {
+            try {
+                ConnectDB();
+                foreach (KeyValuePair<string, int> sensortypeamount in sensortype) {
+
                     SqlCommand cmd = new SqlCommand("SP_AddSensorTypeFromCitizenCPRNR", dbconn);
                     cmd.CommandType = CommandType.StoredProcedure;
                     cmd.Parameters.Add(new SqlParameter("@C_CPRNR", cprnr));
@@ -56,6 +59,12 @@ namespace EksamensProjekt.Controller.DBFacades {
 
                     cmd.ExecuteNonQuery();
                 }
+                CloseDB();
+            }
+            catch (SqlException e) {
+                
+                throw new Exception("Error in adding a SensorTypes to a Citizen " + e.Message);
+            }
         }
         public static void AddTime(string cprnr, Dictionary<string, string> times)
         {
@@ -69,7 +78,9 @@ namespace EksamensProjekt.Controller.DBFacades {
                     cmd.Parameters.Add(new SqlParameter("@CPRNR", cprnr));
                     cmd.Parameters.Add(new SqlParameter("@T_Day", time.Key));
                     cmd.Parameters.Add(new SqlParameter("@T_TimePeriod", time.Value));
+                    cmd.ExecuteNonQuery();
                 }
+                CloseDB();
             }
             catch (SqlException e)
             {
@@ -92,6 +103,7 @@ namespace EksamensProjekt.Controller.DBFacades {
                     cmd3.ExecuteNonQuery();
             
                 }
+                CloseDB();
             }
             catch (SqlException e)
             {
@@ -130,7 +142,7 @@ namespace EksamensProjekt.Controller.DBFacades {
                     cmd2.ExecuteNonQuery();
 
                 }
-                
+                CloseDB();
             }
             catch (SqlException e)
             {
@@ -211,16 +223,6 @@ namespace EksamensProjekt.Controller.DBFacades {
 
         }
 
-        private static void ConnectDB() {
-            dbconn = new SqlConnection(DBHelper._connectionString);
-            dbconn.Open();
-        }
-
-        private static void CloseDB() {
-            dbconn.Close();
-            dbconn.Dispose();
-        }
-
         public static List<Model.Citizen> GetAllCitizen()
         {
             List<Model.Citizen> Citizens = new List<Model.Citizen>();
@@ -249,6 +251,16 @@ namespace EksamensProjekt.Controller.DBFacades {
                 CloseDB();
             }
             return Citizens;
+        }
+
+        private static void ConnectDB() {
+            dbconn = new SqlConnection(DBHelper._connectionString);
+            dbconn.Open();
+        }
+
+        private static void CloseDB() {
+            dbconn.Close();
+            dbconn.Dispose();
         }
     }
 }
