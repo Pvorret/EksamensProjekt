@@ -29,7 +29,6 @@ namespace EksamensProjekt.View
             InitializeComponent();
             _SensorController.GetAllSensors();
             _CitizenController.GetAllCitizen();
-
             for (int i = 0; i < _SensorController.Sensors.Count; i++)
             {
                 if (_SensorController.Sensors[i].Activated == false)
@@ -37,7 +36,6 @@ namespace EksamensProjekt.View
                     Sensor_Dropdown.Items.Add(_SensorController.Sensors[i].SerialNumber);
                 }
             }
-
             for (int i = 0; i < _CitizenController.Citizens.Count; i++)
             {
                 Citizen_DropDown.Items.Add(_CitizenController.Citizens[i].Name);
@@ -73,8 +71,21 @@ namespace EksamensProjekt.View
 
         private void Connect_Button_Click(object sender, RoutedEventArgs e)
         {
-            _SensorController.ConnectSensorToCitizen(int.Parse(Sensor_Dropdown.SelectedItem.ToString()), CPRNR_TextBox.Text, SensorLocation_TextBox.Text);
-            MessageBox.Show("Citizen og Sensor er forbundet!");
+            try
+            {
+                if(Sensor_Dropdown.SelectedIndex != -1 && SensorLocation_TextBox.Text != "" && Citizen_DropDown.SelectedIndex != -1)
+                {
+                _SensorController.ConnectSensorToCitizen(int.Parse(Sensor_Dropdown.SelectedItem.ToString()), CPRNR_TextBox.Text, SensorLocation_TextBox.Text);
+                MessageBox.Show("Citizen og Sensor er forbundet!");
+                Close();
+                }
+                
+            }
+            catch (Exception d)
+            {
+                throw new Exception("Error! Du mangler at indputte nogle informationer" + d.Message);
+            }
+
         }
 
     }
