@@ -24,11 +24,13 @@ namespace EksamensProjekt.Model
             this.ContactPerson = contactPerson;
             this.ContactMessage = contactMessage;
         }
-        public SensorLog(int id, int sensorSerialNumber, DateTime activationTime)
+        public SensorLog(int sensorSerialNumber, DateTime activationTime)
         {
-            this.ID = id;
             this.SensorSerialNumber = sensorSerialNumber;
             this.ActivationTime = activationTime;
+        }
+        public SensorLog()
+        {
         }
     }
 }

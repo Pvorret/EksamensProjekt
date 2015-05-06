@@ -4,22 +4,28 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using EksamensProjekt.Controller.DBFacades;
+using EksamensProjekt.Model;
 using SensorRuleSets;
 
 namespace EksamensProjekt.Controller
 {
     class RuleSetController
     {
-        public int SensorLogID { get; set; }
+        public SensorLog SensorLog;
 
-        public void CreateSensorLog(int SerialNumber, string activationTime)
+        public void CreateSensorLog(int serialNumber, string activationTime)
         {
-            SensorLogID = RuleSetDBFacade.CreateSensorLog(SerialNumber, activationTime);
+            SensorLog = new SensorLog(serialNumber, Convert.ToDateTime(activationTime));
+            SensorLog = RuleSetDBFacade.CreateSensorLog(SensorLog);
         }
 
         public void UpdateSensorLog(string contactTime, string contactPerson, string contactMessage)
         {
-            RuleSetDBFacade.UpdateSensorLog(SensorLogID, contactTime, contactPerson, contactMessage);
+            SensorLog = new SensorLog();
+            SensorLog.ContactTime = Convert.ToDateTime(contactTime);
+            SensorLog.ContactPerson = contactPerson;
+            SensorLog.ContactMessage = contactMessage;
+            RuleSetDBFacade.UpdateSensorLog(SensorLog);
         }
     }
 }
