@@ -15,7 +15,7 @@ namespace EksamensProjekt.Controller.DBFacades {
        
 
         public static void CreateCitizen(Model.Citizen citizen) {
-            //try {
+            try {
                 ConnectDB();
 
                 SqlCommand cmd = new SqlCommand("SP_CreateCitizen", dbconn);
@@ -31,74 +31,29 @@ namespace EksamensProjekt.Controller.DBFacades {
 
                 cmd.Parameters.Add(new SqlParameter("@C_PhoneNumber", citizen.PhoneNumber));
 
-                //SqlCommand cmd3 = new SqlCommand("SP_AddIllness", dbconn);
-                //cmd3.CommandType = CommandType.StoredProcedure;
-                //foreach (string s in citizen.Illness) {
-
-                //    cmd3.Parameters.Add(new SqlParameter("@I_Name", s));
-
-                //    cmd3.Parameters.Add(new SqlParameter("@C_CPRNR", citizen.CprNr));
-                //}
-
                 cmd.Parameters.Add(new SqlParameter("@C_Religion", citizen.Religion));
 
-                //foreach (KeyValuePair<string, string> homecare in citizen.HomeCare) {
-
-                //    cmd.Parameters.Add(new SqlParameter("@T_Day", homecare.Key));
-
-                //    cmd.Parameters.Add(new SqlParameter("@T_TimePeriod", homecare.Value));
-                //}
+                SqlCommand cmd2 = new SqlCommand("SP_AddSensorType", dbconn);
+                cmd2.CommandType = CommandType.StoredProcedure;
 
                 foreach (KeyValuePair<string, int> sensortypeamount in citizen.SensorTypes) {
-                    cmd.Parameters.Add(new SqlParameter("@ST_Type", sensortypeamount.Key));
-                    cmd.Parameters.Add(new SqlParameter("@CST_AmountNeeded", sensortypeamount.Value));
+                    cmd2.Parameters.Add(new SqlParameter("@ST_Type", sensortypeamount.Key));
+                    cmd2.Parameters.Add(new SqlParameter("@CST_AmountNeeded", sensortypeamount.Value));
                 }
 
                 cmd.Parameters.Add(new SqlParameter("@A_Address", citizen.Address));
 
                 cmd.Parameters.Add(new SqlParameter("@A_City", citizen.City));
 
-
-                
-                //foreach (Model.Relative r in citizen.Relatives)
-                //{
-                //    SqlCommand cmd2 = new SqlCommand("SP_AddRelative", dbconn);
-                //    cmd2.CommandType = CommandType.StoredProcedure;
-
-                //    cmd2.Parameters.Add(new SqlParameter("@R_CPRNR", r.CprNr));
-
-                //    cmd2.Parameters.Add(new SqlParameter("@R_Name", r.Name));
-
-                //    cmd2.Parameters.Add(new SqlParameter("@R_Age", r.Age));
-            
-                //    cmd2.Parameters.Add(new SqlParameter("@R_Gender", r.Gender));
-
-                //    cmd2.Parameters.Add(new SqlParameter("@R_PhoneNumber", r.PhoneNumber));
-
-                //    cmd2.Parameters.Add(new SqlParameter("@R_Email", r.Email));
-
-                //    cmd2.Parameters.Add(new SqlParameter("@A_Address", r.Address));
-
-                //    cmd2.Parameters.Add(new SqlParameter("@A_City", r.City));
-
-                //    foreach (KeyValuePair<string, string> notavailable in r.NotAvailable)
-                //    {
-                //        cmd2.Parameters.Add(new SqlParameter("@T_TimePeriod", notavailable.Value));
-                //        cmd2.Parameters.Add(new SqlParameter("@T_Day", notavailable.Key));
-                //    }
-
-                //    cmd2.Parameters.Add(new SqlParameter("@C_CPRNR", citizen.CprNr));
-                //    cmd2.ExecuteNonQuery();
-                //}
                 cmd.ExecuteNonQuery();
                 
 
                 CloseDB();
-            //}
-            //catch (SqlException e) {
+            }
+            catch (SqlException e) {
 
-            //    throw new Exception("Error in creating Citizen" + e.Message);
-            //}
+                throw new Exception("Error in creating Citizen" + e.Message);
+            }
         }
         public static void AddTime(string cprnr, Dictionary<string, string> times)
         {
