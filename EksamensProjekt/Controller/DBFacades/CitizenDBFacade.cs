@@ -15,7 +15,7 @@ namespace EksamensProjekt.Controller.DBFacades {
        
 
         public static void CreateCitizen(Model.Citizen citizen) {
-            try {
+            //try {
                 ConnectDB();
 
                 SqlCommand cmd = new SqlCommand("SP_CreateCitizen", dbconn);
@@ -42,12 +42,12 @@ namespace EksamensProjekt.Controller.DBFacades {
 
                 cmd.Parameters.Add(new SqlParameter("@C_Religion", citizen.Religion));
 
-                foreach (KeyValuePair<string, string> homecare in citizen.HomeCare) {
+                //foreach (KeyValuePair<string, string> homecare in citizen.HomeCare) {
 
-                    cmd.Parameters.Add(new SqlParameter("@T_Day", homecare.Key));
+                //    cmd.Parameters.Add(new SqlParameter("@T_Day", homecare.Key));
 
-                    cmd.Parameters.Add(new SqlParameter("@T_TimePeriod", homecare.Value));
-                }
+                //    cmd.Parameters.Add(new SqlParameter("@T_TimePeriod", homecare.Value));
+                //}
 
                 foreach (KeyValuePair<string, int> sensortypeamount in citizen.SensorTypes) {
                     cmd.Parameters.Add(new SqlParameter("@ST_Type", sensortypeamount.Key));
@@ -70,7 +70,7 @@ namespace EksamensProjekt.Controller.DBFacades {
                 //    cmd2.Parameters.Add(new SqlParameter("@R_Name", r.Name));
 
                 //    cmd2.Parameters.Add(new SqlParameter("@R_Age", r.Age));
-
+            
                 //    cmd2.Parameters.Add(new SqlParameter("@R_Gender", r.Gender));
 
                 //    cmd2.Parameters.Add(new SqlParameter("@R_PhoneNumber", r.PhoneNumber));
@@ -94,10 +94,29 @@ namespace EksamensProjekt.Controller.DBFacades {
                 
 
                 CloseDB();
-            }
-            catch (SqlException e) {
+            //}
+            //catch (SqlException e) {
 
-                throw new Exception("Error in creating Citizen" + e.Message);
+            //    throw new Exception("Error in creating Citizen" + e.Message);
+            //}
+        }
+        public static void AddTime(string cprnr, Dictionary<string, string> times)
+        {
+            try
+            {
+                ConnectDB();
+                foreach (KeyValuePair<string, string> time in times)
+                {
+                    SqlCommand cmd = new SqlCommand("SP_AddTime", dbconn);
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.Add(new SqlParameter("@C_CPRNR", cprnr));
+                    cmd.Parameters.Add(new SqlParameter("@T_Day", time.Key));
+                    cmd.Parameters.Add(new SqlParameter("@T_TimePeriod", time.Value));
+                }
+            }
+            catch (SqlException e)
+            {
+                throw new Exception("Error! Kunne ikke tilføje time" + e.Message);
             }
         }
 
@@ -128,11 +147,12 @@ namespace EksamensProjekt.Controller.DBFacades {
             try
             {
                 ConnectDB();
-                SqlCommand cmd2 = new SqlCommand("SP_AddRelative", dbconn);
-                cmd2.CommandType = CommandType.StoredProcedure;
 
                 foreach (Model.Relative r in c.Relatives)
                 {
+                    SqlCommand cmd2 = new SqlCommand("SP_AddRelative", dbconn);
+                    cmd2.CommandType = CommandType.StoredProcedure;
+
                     cmd2.Parameters.Add(new SqlParameter("@R_CPRNR", r.CprNr));
 
                     cmd2.Parameters.Add(new SqlParameter("@R_Name", r.Name));
@@ -156,10 +176,10 @@ namespace EksamensProjekt.Controller.DBFacades {
                     }
 
                     cmd2.Parameters.Add(new SqlParameter("@C_CPRNR", c.CprNr));
+                    cmd2.ExecuteNonQuery();
 
                 }
-                cmd2.ExecuteNonQuery();
-
+                
             }
             catch (SqlException e)
             {
