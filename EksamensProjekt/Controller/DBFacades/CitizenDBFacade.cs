@@ -11,9 +11,6 @@ namespace EksamensProjekt.Controller.DBFacades {
     class CitizenDBFacade {
 
         static SqlConnection dbconn;
-
-       
-
         public static void CreateCitizen(Model.Citizen citizen) {
             try {
                 ConnectDB();
@@ -217,6 +214,7 @@ namespace EksamensProjekt.Controller.DBFacades {
 
         private static void CloseDB() {
             dbconn.Close();
+            dbconn.Dispose();
         }
 
         public static List<Model.Citizen> GetAllCitizen()
