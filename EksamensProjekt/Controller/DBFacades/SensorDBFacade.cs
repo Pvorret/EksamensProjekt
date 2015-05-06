@@ -146,7 +146,7 @@ namespace EksamensProjekt.Controller.DBFacades
             dbconn.Dispose();
         }
 
-        public static List<string> GetSensorFromCitizen(string CprNr)
+        public static List<string> GetSensorTypeFromCitizen(string CprNr)
         {
             List<string> SensorTypes = new List<string>();
 
@@ -154,7 +154,7 @@ namespace EksamensProjekt.Controller.DBFacades
             {
                 ConnectDB();
 
-                SqlCommand cmd = new SqlCommand("SP_GetSensorFromCitizen", dbconn);
+                SqlCommand cmd = new SqlCommand("SP_GetSensorTypeFromCitizen", dbconn);
                 cmd.CommandType = CommandType.StoredProcedure;
                 cmd.Parameters.Add(new SqlParameter("@CprNr", CprNr));
                 SqlDataReader rdr;
