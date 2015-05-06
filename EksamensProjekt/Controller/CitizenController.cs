@@ -21,7 +21,12 @@ namespace EksamensProjekt.Controller {
             citizen.Relatives = Relatives;
 
             CitizenDBFacade.CreateCitizen(citizen);
+            CitizenDBFacade.AddTime(citizen.CprNr, citizen.HomeCare);
             CitizenDBFacade.AddRelative(citizen);
+            foreach (Relative relative in citizen.Relatives)
+            {
+                CitizenDBFacade.AddTime(relative.CprNr, relative.NotAvailable);
+            }
             CitizenDBFacade.AddIllnessToCitizen(citizen);
 
         }

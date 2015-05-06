@@ -109,7 +109,7 @@ namespace EksamensProjekt.Controller.DBFacades {
                 {
                     SqlCommand cmd = new SqlCommand("SP_AddTime", dbconn);
                     cmd.CommandType = CommandType.StoredProcedure;
-                    cmd.Parameters.Add(new SqlParameter("@C_CPRNR", cprnr));
+                    cmd.Parameters.Add(new SqlParameter("@CPRNR", cprnr));
                     cmd.Parameters.Add(new SqlParameter("@T_Day", time.Key));
                     cmd.Parameters.Add(new SqlParameter("@T_TimePeriod", time.Value));
                 }
@@ -168,12 +168,6 @@ namespace EksamensProjekt.Controller.DBFacades {
                     cmd2.Parameters.Add(new SqlParameter("@A_Address", r.Address));
 
                     cmd2.Parameters.Add(new SqlParameter("@A_City", r.City));
-
-                    foreach (KeyValuePair<string, string> notavailable in r.NotAvailable)
-                    {
-                        cmd2.Parameters.Add(new SqlParameter("@T_TimePeriod", notavailable.Value));
-                        cmd2.Parameters.Add(new SqlParameter("@T_Day", notavailable.Key));
-                    }
 
                     cmd2.Parameters.Add(new SqlParameter("@C_CPRNR", c.CprNr));
                     cmd2.ExecuteNonQuery();
