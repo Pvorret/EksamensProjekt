@@ -32,7 +32,10 @@ namespace EksamensProjekt.View
 
             for (int i = 0; i < _SensorController.Sensors.Count; i++)
             {
-                Sensor_Dropdown.Items.Add(_SensorController.Sensors[i].SerialNumber);
+                if (_SensorController.Sensors[i].Activated == false)
+                {
+                    Sensor_Dropdown.Items.Add(_SensorController.Sensors[i].SerialNumber);
+                }
             }
 
             for (int i = 0; i < _CitizenController.Citizens.Count; i++)
