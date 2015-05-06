@@ -47,9 +47,9 @@ namespace EksamensProjekt.Controller {
             SensorTypes = SensorDBFacade.GetSensorType(0);
         }
 
-        public void GetSensorFromCitizen(string CprNr)
+        public void GetSensorTypeFromCitizen(string CprNr)
         {
-            SensorTypes = SensorDBFacade.GetSensorFromCitizen(CprNr);
+            SensorTypes = SensorDBFacade.GetSensorTypeFromCitizen(CprNr);
         }
         public void GetAllCitizen()
         {

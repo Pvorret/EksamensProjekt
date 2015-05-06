@@ -55,7 +55,7 @@ namespace EksamensProjekt.View
             {
                 if (_controller.Citizens[i].Name == Citizen_Dropdown.SelectedItem.ToString())
                 {
-                    _controller.GetSensorFromCitizen(_controller.Citizens[i].CprNr);
+                    _controller.GetSensorTypeFromCitizen(_controller.Citizens[i].CprNr);
                     for (int j = 0; j < _controller.SensorTypes.Count; j++)
                     {
                         Sensor_DropDown.Items.Add(_controller.SensorTypes[j]);
