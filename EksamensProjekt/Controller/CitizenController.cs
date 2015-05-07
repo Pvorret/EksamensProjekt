@@ -22,7 +22,7 @@ namespace EksamensProjekt.Controller {
 
             CitizenDBFacade.CreateCitizen(citizen);
             CitizenDBFacade.AddTime(citizen.CprNr, citizen.HomeCare);
-            CitizenDBFacade.AddSensorType(citizen.CprNr, citizen.SensorTypes);
+            CitizenDBFacade.AddSensorType(citizen.CprNr, citizen.SensorTypesNeeded);
             CitizenDBFacade.AddRelative(citizen);
             foreach (Relative relative in citizen.Relatives)
             {
