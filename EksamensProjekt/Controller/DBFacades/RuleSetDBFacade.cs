@@ -80,10 +80,34 @@ namespace EksamensProjekt.Controller.DBFacades
             return sensorrules;
         }
 
-        public static Dictionary<string, int> GetSensorRuleManagementFromSensorSerialNumber()
+        public static Dictionary<string, int> GetSensorRuleManagementFromSensorSerialNumber(int serialNumber)
         {
-            Dictionary<string, int> rulemanagement = new Dictionary<string, int>();
-            return rulemanagement;
+            Dictionary<string, int> ruleManagement = new Dictionary<string, int>();
+            try
+            {
+                ConnectDB();
+
+                SqlCommand cmd = new SqlCommand("SP_GetSensorRuleManagementFromSerialNumber", dbconn);
+                cmd.Parameters.Add(new SqlParameter("@serialNumber", serialNumber));
+                cmd.CommandType = CommandType.StoredProcedure;
+
+                SqlDataReader rdr;
+                rdr = cmd.ExecuteReader();
+
+                while (rdr.HasRows && rdr.Read())
+                {
+                    ruleManagement.Add(rdr["SRM_RuleSet"].ToString(), Convert.ToInt32(rdr["SRM_ID"]));
+                }
+            }
+            catch (SqlException e)
+            {
+                throw new Exception(e.Message);
+            }
+            finally
+            {
+                CloseDB();
+            }
+            return ruleManagement;
         }
 
     }
