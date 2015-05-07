@@ -10,7 +10,7 @@ namespace EksamensProjekt.Model
     {
         public List<string> Illness { get; set; }
         public string Religion { get; set; }
-        public Dictionary<string, int> SensorTypes { get; set; }
+        public Dictionary<string, int> SensorTypesNeeded { get; set; }
         public Dictionary<string, string> HomeCare { get; set; }
         public List<Relative> Relatives { get; set; }
 
@@ -25,7 +25,7 @@ namespace EksamensProjekt.Model
             this.PhoneNumber = phoneNumber;
             this.Illness = illness;
             this.Religion = religion;
-            this.SensorTypes = sensorTypes;
+            this.SensorTypesNeeded = sensorTypes;
             this.HomeCare = homeCare;
         }
         public Citizen(string name, string cprNr)

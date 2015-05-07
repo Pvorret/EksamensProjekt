@@ -107,5 +107,11 @@ namespace EksamensProjekt.Controller.DBFacades
             return sensorrules;
         }
 
+        public static Dictionary<string, int> GetSensorRuleManagementFromSensorSerialNumber()
+        {
+            Dictionary<string, int> rulemanagement = new Dictionary<string, int>();
+            return rulemanagement;
+        }
+
     }
 }
