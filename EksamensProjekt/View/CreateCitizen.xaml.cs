@@ -68,7 +68,6 @@ namespace EksamensProjekt.View
 			{
                 CitizenRelatives_ListBox.Items.Add(_controller.Relatives[i].Name);			 
 			}
-
         }
         private void AddNewIllness_Button_Click(object sender, RoutedEventArgs e)
         {
@@ -92,20 +91,22 @@ namespace EksamensProjekt.View
 
         private void AddHomeCareTime_Button_Click(object sender, RoutedEventArgs e)
         {
-            timeHomeCare = HomeCareStart_TextBox.Text + " - " + HomeCareEnd_TextBox.Text;
+            timeHomeCare = HomeCareStartHour_TextBox.Text + ":" + HomeCareStartMinute_TextBox.Text + " - "  + HomeCareEndHour_TextBox.Text + ":" + HomeCareEndMinute_TextBox.Text;
             try
             {
                 HomeCareTimes_ListBox.Items.Add(HomeCareDays_Dropdown.SelectedItem.ToString() + ": " + timeHomeCare);
                 Days.Add(HomeCareDays_Dropdown.SelectedItem.ToString());
-                StartTime.Add(Convert.ToDateTime(HomeCareStart_TextBox.Text));
-                EndTime.Add(Convert.ToDateTime(HomeCareEnd_TextBox.Text));
+                StartTime.Add(Convert.ToDateTime(HomeCareStartHour_TextBox.Text + ":" + HomeCareStartMinute_TextBox.Text));
+                EndTime.Add(Convert.ToDateTime(HomeCareEndHour_TextBox.Text + ":" + HomeCareEndMinute_TextBox.Text));
             }
             catch (Exception i)
             {
                 MessageBox.Show("Man kan kun have et tidsrum per dag" + i.Message);
             }
-            HomeCareStart_TextBox.Clear();
-            HomeCareEnd_TextBox.Clear();
+            HomeCareStartHour_TextBox.Clear();
+            HomeCareStartMinute_TextBox.Clear();
+            HomeCareEndHour_TextBox.Clear();
+            HomeCareEndMinute_TextBox.Clear();
         }
         private void CitizenSensorNeeds_Dropdown_DropDownOpened(object sender, EventArgs e) {
             if (CitizenSensorNeeds_Dropdown.Items.Count == 0) {

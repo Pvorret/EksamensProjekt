@@ -25,6 +25,7 @@
         <Label Content="Amount" HorizontalAlignment="Left" Margin="183,294,0,0" VerticalAlignment="Top" Width="53"/>
         <TextBox Name="CitizenSensorNeedsAmount" HorizontalAlignment="Left" Height="23" Margin="236,295,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="33"/>
         <Button Name="AddSensorNeeds_Button" Content="Tilføj SensorBehov" Height="25" HorizontalAlignment="Left" Margin="10,295,0,0" VerticalAlignment="Top" Width="102" Click="AddSensorNeeds_Button_Click"/>
+        <ListBox Name="CitizenSensorNeeds_ListBox" HorizontalAlignment="Left" Height="58" Margin="117,325,0,0" VerticalAlignment="Top" Width="151"/>
         <Label Content="Sygdom" FontSize="14px" HorizontalAlignment="Left" Margin="281,20,0,0" VerticalAlignment="Top"/>
         <ComboBox Name="Illness_Dropdown" HorizontalAlignment="Left" Height="25" Margin="392,24,0,0" VerticalAlignment="Top" Width="151" DropDownOpened="Illness_Dropdown_DropDownOpened" SelectionChanged="Illness_Dropdown_SelectionChanged"/>
         <ListBox Name="CitizenIllness_ListBox" HorizontalAlignment="Left" Height="63" Margin="392,54,0,0" VerticalAlignment="Top" Width="151"/>
@@ -34,13 +35,19 @@
         <Label Content="Pleje tider" FontSize="14px" HorizontalAlignment="Left" Margin="281,190,0,0" VerticalAlignment="Top"/>
         <Label Content="Dage" FontSize="14px" HorizontalAlignment="Left" Margin="392,190,0,0" VerticalAlignment="Top"/>
         <ComboBox Name="HomeCareDays_Dropdown" HorizontalAlignment="Left" Height="25" Margin="458,194,0,0" VerticalAlignment="Top" Width="85"/>
-        <TextBox Name="HomeCareStart_TextBox" HorizontalAlignment="Left" Height="25" Margin="392,228,0,0" TextWrapping="Wrap" Text="Start" VerticalAlignment="Top" Width="61"/>
-        <Label Content="-" HorizontalAlignment="Left" FontSize="14px" Margin="459,224,0,0" VerticalAlignment="Top" RenderTransformOrigin="8.214,0.207"/>
-        <TextBox Name="HomeCareEnd_TextBox" HorizontalAlignment="Left" Height="25" Margin="482,228,0,0" TextWrapping="Wrap" Text="Slut" VerticalAlignment="Top" Width="61"/>
-        <Button Name="AddHomeCareTime_Button" Content="Tilføj Tidspunkt" Height="25" HorizontalAlignment="Left" Margin="281,261,0,0" VerticalAlignment="Top" Width="100" Click="AddHomeCareTime_Button_Click"/>
-        <ListBox Name="HomeCareTimes_ListBox" HorizontalAlignment="Left" Height="58" Margin="392,261,0,0" VerticalAlignment="Top" Width="151"/>
+        <Label Content="t" HorizontalAlignment="Left" Margin="398,219,0,0" VerticalAlignment="Top"/>
+        <TextBox Name="HomeCareStartHour_TextBox" HorizontalAlignment="Left" Height="25" Margin="392,247,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="30"/>
+        <Label Content="m" HorizontalAlignment="Left" Margin="430,219,0,0" VerticalAlignment="Top"/>
+        <TextBox Name="HomeCareStartMinute_TextBox" HorizontalAlignment="Left" Height="25" Margin="426,247,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="30"/>
+        <Label Content="-" HorizontalAlignment="Left" FontSize="14px" Margin="459,243,0,0" VerticalAlignment="Top" RenderTransformOrigin="8.214,0.207"/>
+        <Label Content="t" HorizontalAlignment="Left" Margin="486,219,0,0" VerticalAlignment="Top"/>
+        <TextBox Name="HomeCareEndHour_TextBox" HorizontalAlignment="Left" Height="25" Margin="480,247,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="30"/>
+        <Label Content="m" HorizontalAlignment="Left" Margin="517,220,0,0" VerticalAlignment="Top"/>
+        <TextBox Name="HomeCareEndMinute_TextBox" HorizontalAlignment="Left" Height="25" Margin="513,247,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="30"/>
+        <Button Name="AddHomeCareTime_Button" Content="Tilføj Tidspunkt" Height="25" HorizontalAlignment="Left" Margin="281,277,0,0" VerticalAlignment="Top" Width="100" Click="AddHomeCareTime_Button_Click"/>
+        <ListBox Name="HomeCareTimes_ListBox" HorizontalAlignment="Left" Height="58" Margin="392,277,0,0" VerticalAlignment="Top" Width="151"/>
         <Button Name="CreateCitizen_Button" Content="Opret Borger" Height="25" HorizontalAlignment="Left" Margin="20,390,0,0" VerticalAlignment="Top" Width="94" Click="CreateCitizen_Button_Click"/>
         <Button Name="Cancel_Button" Content="Annuller" Height="25" HorizontalAlignment="Left" Margin="449,390,0,0" VerticalAlignment="Top" Width="94" Click="Cancel_Button_Click"/>
-        <ListBox Name="CitizenSensorNeeds_ListBox" HorizontalAlignment="Left" Height="58" Margin="117,325,0,0" VerticalAlignment="Top" Width="151"/>
+
     </Grid>
 </Window>
