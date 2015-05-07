@@ -140,7 +140,7 @@ namespace EksamensProjekt.Controller.DBFacades
             try
             {
                 ConnectDB();
-                SqlCommand cmd = new SqlCommand("SP_GetRElativeTime", dbconn);
+                SqlCommand cmd = new SqlCommand("SP_GetRelativeTime", dbconn);
                 cmd.CommandType = CommandType.StoredProcedure;
                 cmd.Parameters.Add("@Citizen_CPRNR", cprNr);
                 SqlDataReader reader = cmd.ExecuteReader();
