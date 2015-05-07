@@ -14,7 +14,7 @@ namespace EksamensProjekt.Controller.DBFacades
     {
         public static SqlConnection dbconn;
         static SqlCommand cmd;
-        public static void CreateSensor(Sensor sensor)
+        public static void CreateSensor(Sensor sensor)//Stefan
         {
             int activatedToBit;
 
@@ -133,6 +133,14 @@ namespace EksamensProjekt.Controller.DBFacades
             {
                 CloseDB();
             }
+        }
+        public static List<string> GetRelativeTime(int serialNumber)
+        {
+            List<string> RelativTime = new List<string>();
+
+
+
+            return RelativTime;
         }
         public static void ConnectDB()
         {
