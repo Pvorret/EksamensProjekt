@@ -159,7 +159,7 @@ namespace EksamensProjekt.Controller.DBFacades
                     string day = rdr["T_Day"].ToString();
                     int id = Convert.ToInt32(rdr["TRR_ID"]);
 
-
+                    TimeRangeRule TRR = new TimeRangeRule(actingRule, cprNr, new Time(id, startTime, endTime, day));
                 }
             }
             catch (SqlException e)
