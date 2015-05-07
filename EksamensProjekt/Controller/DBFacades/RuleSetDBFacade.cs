@@ -51,7 +51,7 @@ namespace EksamensProjekt.Controller.DBFacades
             return sensorLog;
         }
         public static void UpdateSensorLog(SensorLog sl)
-        {//This shit
+        {
             try
             {
                 ConnectDB();
