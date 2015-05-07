@@ -27,5 +27,18 @@ namespace EksamensProjekt.Controller
             SensorLog.ContactMessage = contactMessage;
             RuleSetDBFacade.UpdateSensorLog(SensorLog);
         }
+
+        public void GetSensorRuleFromSerialNumber(int serialnumber) {
+            List<SensorRule> sensorruleList = new List<SensorRule>();
+
+            foreach(SensorRule s in sensorruleList) {
+                SensorRule sensorrule = new SensorRule(s.SensorDependency, s.WaitOrLook, s.TimeToWait, s.TimeToWait);
+                SensorRuleSet.SensorRule.BehandleinputfraRuleSetController(sensorrule);
+            }
+
+            RuleSetDBFacade.GetSensorRuleFromSerialNumber(serialnumber);
+
+            
+        }
     }
 }
