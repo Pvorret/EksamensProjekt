@@ -136,6 +136,9 @@ namespace EksamensProjekt.Controller.DBFacades
             }
             return ruleManagement;
         }
+        public static void GetTimeRangeRuleFromSensorSerialNumber(int serialNumber)
+        {
 
+        }
     }
 }
