@@ -107,19 +107,26 @@ namespace EksamensProjekt.Controller.DBFacades
             return sensorrules;
         }
 
-        public static void AddSensorRuleManagement(Model.SensorRule SR) {
-            try{
+        public static void AddSensorRuleManagement(string cprnr, Dictionary<string, int> RuleManagement) {
+            try {
                 ConnectDB();
-                SqlCommand cmd = new SqlCommand("SP_AddSensorRuleManagement", dbconn);
-                cmd.CommandType = CommandType.StoredProcedure;
+                foreach (KeyValuePair<string, int> sensortypeamount in RuleManagement) {
 
-                cmd.Parameters.Add(new SqlParameter("@C_CPRNR", SR.CprNr));
-                cmd.Parameters.Add(new SqlParameter("@ST_Type", SR.type));
-                cmd.Parameters.Add(new SqlParameter("CST_AmountNeeded", SR.Type));
 
-                cmd.ExecuteNonQuery();                
-               }
-               CloseDB(); 
+                    SqlCommand cmd = new SqlCommand("SP_AddSensorRuleManagement", dbconn);
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.Add(new SqlParameter("@C_CPRNR", cprnr));
+                    cmd.Parameters.Add(new SqlParameter("@ST_Type", sensortypeamount.Key));
+                    cmd.Parameters.Add(new SqlParameter("CST_AmountNeeded", sensortypeamount.Value));
+
+                    cmd.ExecuteNonQuery();
+                }
+                CloseDB();
+            }
+            catch (SqlException e) {
+
+                throw new Exception("Error adding SensorRuleManagement" + e.Message);
+            }
         }
 
         public static Dictionary<string, int> GetSensorRuleManagementFromSensorSerialNumber()
