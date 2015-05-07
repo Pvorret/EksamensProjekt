@@ -8,9 +8,6 @@ namespace EksamensProjekt.Model
 {
     public class Time
     {
-        /// <summary>
-        /// kadskmsadkmdsakmsdamksadkmakmkmdskmasmksadkskkads
-        /// </summary>
         public int ID { get; set; }
         public DateTime StartTime { get; set; }
         public DateTime EndTime { get; set; }
@@ -32,6 +29,5 @@ namespace EksamensProjekt.Model
             this.Day = day;
         }
 
-        
     }
 }
