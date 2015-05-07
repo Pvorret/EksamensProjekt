@@ -143,7 +143,7 @@ namespace EksamensProjekt.Controller.DBFacades
                 ConnectDB();
                 SqlCommand cmd = new SqlCommand("SP_GetRelativeTimeFromCitizen", dbconn);
                 cmd.CommandType = CommandType.StoredProcedure;
-                cmd.Parameters.Add("@Citizen_CPRNR", cprNr);
+                cmd.Parameters.Add(new SqlParameter("@Citizen_CPRNR", cprNr));
                 SqlDataReader reader = cmd.ExecuteReader();
 
                 while (reader.Read())
@@ -181,7 +181,7 @@ namespace EksamensProjekt.Controller.DBFacades
                 ConnectDB();
                 SqlCommand cmd = new SqlCommand("SP_GetCitizenTimeFromSensor", dbconn);
                 cmd.CommandType = CommandType.StoredProcedure;
-                cmd.Parameters.Add("@SerialNumber", serialNumber);
+                cmd.Parameters.Add(new SqlParameter("@SerialNumber", serialNumber));
                 SqlDataReader reader = cmd.ExecuteReader();
 
                 while (reader.Read())

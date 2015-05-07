@@ -6,7 +6,6 @@ using System.Threading.Tasks;
 using System.Data;
 using System.Data.SqlClient;
 using EksamensProjekt.Model;
-using SensorRuleSet;
 
 namespace EksamensProjekt.Controller.DBFacades
 {
@@ -75,7 +74,7 @@ namespace EksamensProjekt.Controller.DBFacades
         }
 
         public static List<SensorRule> GetSensorRuleFromSerialNumber(int serialNumber) {
-            List<SensorRule> sensorrules = new List<SensorRule>();
+            List<SensorRule> sensorruleList = new List<SensorRule>();
 
             try {
                 ConnectDB();
@@ -94,7 +93,7 @@ namespace EksamensProjekt.Controller.DBFacades
                     int TimeToWait = (int)rdr["SR_TimeToWait"];
                     int TimeToLook = (int)rdr["SR_TimeToLook"];
                     SensorRule sensorrule = new SensorRule(SensorDependency, WaitOrLook, TimeToWait, TimeToLook);
-                    sensorrules.Add(sensorrule);
+                    sensorruleList.Add(sensorrule);
                 }
 
                 CloseDB();
@@ -104,7 +103,7 @@ namespace EksamensProjekt.Controller.DBFacades
                 throw new Exception("Error in getting SensorRules");
             }           
 
-            return sensorrules;
+            return sensorruleList;
         }
 
         public static Dictionary<string, int> GetSensorRuleManagementFromSensorSerialNumber(int serialNumber)

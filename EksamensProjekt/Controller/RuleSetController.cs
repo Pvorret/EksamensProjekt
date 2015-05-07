@@ -5,7 +5,6 @@ using System.Text;
 using System.Threading.Tasks;
 using EksamensProjekt.Controller.DBFacades;
 using EksamensProjekt.Model;
-using SensorRuleSet; //HER ER DEN
 
 namespace EksamensProjekt.Controller
 {
@@ -30,10 +29,10 @@ namespace EksamensProjekt.Controller
 
         public void GetSensorRuleFromSerialNumber(int serialnumber) {
 
-            foreach(SensorRule s in RuleSetDBFacade.GetSensorRuleFromSerialNumber(serialnumber)) {
+            foreach (SensorRule s in RuleSetDBFacade.GetSensorRuleFromSerialNumber(serialnumber)) {
                 SensorRule sensorrule = new SensorRule(s.SensorDependency, s.WaitOrLook, s.TimeToWait, s.TimeToWait);
-                SensorRuleSet.SensorRule.BehandleinputfraRuleSetController(sensorrule);
-            } 
+                SensorRule.BehandleinputfraRuleSetController(sensorrule);
+            }
         }
     }
 }
