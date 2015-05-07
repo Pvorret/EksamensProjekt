@@ -134,13 +134,38 @@ namespace EksamensProjekt.Controller.DBFacades
                 CloseDB();
             }
         }
-        public static List<string> GetRelativeTime(int serialNumber)
+        public static void GetRelativeTime(string cprNr)
         {
-            List<string> RelativTime = new List<string>();
+            List<Relative> R_RelativeTimeList = new List<Relative>(); // R_CPRNR, R_Name, A_Address, A_City, CRT_T_ID, T_Day, T_TimePeriod
+            try
+            {
+                ConnectDB();
+                SqlCommand cmd = new SqlCommand("SP_GetRElativeTime", dbconn);
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.Add("@Citizen_CPRNR", cprNr);
+                SqlDataReader reader = cmd.ExecuteReader();
 
+                while (reader.Read())
+                {
+                    string R_CPRNR = reader["RCPRNR"].ToString();
+                    string R_Name = reader["R_Name"].ToString();
+                    string A_Address = reader["A_Address"].ToString();
+                    string A_City = reader["A_City"].ToString();
+                    string CRT_T_ID = reader["CRT_T_ID"].ToString();
+                    string T_Day = reader["T_Day"].ToString();
+                    string T_TimePeriod = reader["T_TimePeriod"].ToString();
 
+                    //R_RelativeTimeList.Add(new Relative())
+                }
+            }
+            catch
+            {
 
-            return RelativTime;
+            }
+            finally
+            {
+
+            }
         }
         public static void ConnectDB()
         {
