@@ -141,7 +141,7 @@ namespace EksamensProjekt.Controller.DBFacades
             try
             {
                 ConnectDB();
-                SqlCommand cmd = new SqlCommand("SP_GetRElativeTime", dbconn);
+                SqlCommand cmd = new SqlCommand("SP_GetRelativeTimeFromCitizen", dbconn);
                 cmd.CommandType = CommandType.StoredProcedure;
                 cmd.Parameters.Add("@Citizen_CPRNR", cprNr);
                 SqlDataReader reader = cmd.ExecuteReader();
@@ -159,7 +159,7 @@ namespace EksamensProjekt.Controller.DBFacades
                     string T_Day = reader["T_Day"].ToString();
 
                     Relative relative = new Relative(R_CPRNR, R_Name, R_Phone, A_Address, A_City);
-                    relative.NotAvailable.Add(new Time(T_StartTime, T_EndTime, T_Day));
+                    relative.NotAvailableTimes.Add(new Time(T_StartTime, T_EndTime, T_Day));
                     RelativeTimeList.Add(relative);                 
                 }
             }
@@ -173,10 +173,41 @@ namespace EksamensProjekt.Controller.DBFacades
             }
             return RelativeTimeList;
         }
-        public static List<Sensor> GetCitizenTime(int serialNumber)
+        public static List<Citizen> GetCitizenTime(int serialNumber)//stefan
         {
-            List<Sensor> CitizenTimeList = new List<Sensor>();
+            List<Citizen> CitizenTimeList = new List<Citizen>();
+            try
+            {
+                ConnectDB();
+                SqlCommand cmd = new SqlCommand("SP_GetCitizenFromSensor", dbconn);
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.Add("@SerialNumber", serialNumber);
+                SqlDataReader reader = cmd.ExecuteReader();
 
+                while (reader.Read())//C_CPRNR, C_Name, A_Address, A_City, T_Day, T_TimePeriod
+                {
+                    string C_CPRNR = reader["C_CPRNR"].ToString();
+                    string C_Name = reader["C_Name"].ToString();
+                    string A_Address = reader["A_Address"].ToString();
+                    string A_City = reader["A_City"].ToString();
+                    DateTime T_StartTime = DateTime.Parse(reader["T_StartTime"].ToString());
+                    DateTime T_EndTime = DateTime.Parse(reader["T_EndTime"].ToString());
+                    string T_Day = reader["T_Day"].ToString();
+
+                    Citizen citizen = new Citizen(C_CPRNR, C_Name, A_Address, A_City);
+                    citizen.HomeCareTimes.Add(new Time(T_StartTime, T_EndTime, T_Day));
+                    CitizenTimeList.Add(citizen);
+
+                }
+            }
+            catch(SqlException e)
+            {
+                MessageBox.Show(e.Message);
+            }
+            finally
+            {
+                CloseDB();
+            }
             return CitizenTimeList;
         }
         public static void ConnectDB()
