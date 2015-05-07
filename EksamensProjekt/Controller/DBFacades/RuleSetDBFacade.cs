@@ -74,5 +74,11 @@ namespace EksamensProjekt.Controller.DBFacades
             }
         }
 
+        public static List<SensorRule> GetSensorRuleFromSerialNumber() {
+
+
+            return sensorrules;
+        }
+
     }
 }
