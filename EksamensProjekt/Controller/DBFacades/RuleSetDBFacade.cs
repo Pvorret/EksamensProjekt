@@ -115,7 +115,7 @@ namespace EksamensProjekt.Controller.DBFacades
                 ConnectDB();
 
                 SqlCommand cmd = new SqlCommand("SP_GetSensorRuleManagementFromSerialNumber", dbconn);
-                cmd.Parameters.Add(new SqlParameter("@serialNumber", serialNumber));
+                cmd.Parameters.Add(new SqlParameter("@SerialNumber", serialNumber));
                 cmd.CommandType = CommandType.StoredProcedure;
 
                 SqlDataReader rdr;
@@ -138,7 +138,35 @@ namespace EksamensProjekt.Controller.DBFacades
         }
         public static void GetTimeRangeRuleFromSensorSerialNumber(int serialNumber)
         {
+            try
+            {
+                ConnectDB();
 
+                SqlCommand cmd = new SqlCommand("SP_GetTimeRangeRuleManagementFromSerialNumber", dbconn);
+                cmd.Parameters.Add(new SqlParameter("@SerialNumber", serialNumber));
+                cmd.CommandType = CommandType.StoredProcedure;
+
+                SqlDataReader rdr;
+                rdr = cmd.ExecuteReader();
+
+                while (rdr.HasRows && rdr.Read())
+                {
+
+                    DateTime startTime = Convert.ToDateTime(rdr["T_StartTime"]);
+                    DateTime endTime = Convert.ToDateTime(rdr["T_EndTime"]);
+                    string day = rdr["T_Day"].ToString();
+                    int id = Convert.ToInt32(rdr["TRR_ID"]);
+
+                }
+            }
+            catch (SqlException e)
+            {
+                throw new Exception(e.Message);
+            }
+            finally
+            {
+                CloseDB();
+            }
         }
     }
 }
