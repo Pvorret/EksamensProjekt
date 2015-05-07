@@ -66,18 +66,19 @@ namespace EksamensProjekt.Controller.DBFacades {
                 throw new Exception("Error in adding a SensorTypes to a Citizen " + e.Message);
             }
         }
-        public static void AddTime(string cprnr, Dictionary<string, string> times)
+        public static void AddTime(string cprnr, List<Model.Time> times)
         {
             try
             {
                 ConnectDB();
-                foreach (KeyValuePair<string, string> time in times)
+                foreach (Model.Time time in times)
                 {
                     SqlCommand cmd = new SqlCommand("SP_AddTime", dbconn);
                     cmd.CommandType = CommandType.StoredProcedure;
                     cmd.Parameters.Add(new SqlParameter("@CPRNR", cprnr));
-                    cmd.Parameters.Add(new SqlParameter("@T_Day", time.Key));
-                    cmd.Parameters.Add(new SqlParameter("@T_TimePeriod", time.Value));
+                    cmd.Parameters.Add(new SqlParameter("@T_Day", time.Day));
+                    cmd.Parameters.Add(new SqlParameter("@T_StartTime", time.StartTime));
+                    cmd.Parameters.Add(new SqlParameter("@T_EndTime", time.EndTime));
                     cmd.ExecuteNonQuery();
                 }
                 CloseDB();
@@ -97,7 +98,6 @@ namespace EksamensProjekt.Controller.DBFacades {
                 {
                     SqlCommand cmd3 = new SqlCommand("SP_AddIllness", dbconn);
                     cmd3.CommandType = CommandType.StoredProcedure;
-                
                     cmd3.Parameters.Add(new SqlParameter("@I_Name", s));
                     cmd3.Parameters.Add(new SqlParameter("@C_CPRNR", citizen.CprNr));
                     cmd3.ExecuteNonQuery();
@@ -121,23 +121,14 @@ namespace EksamensProjekt.Controller.DBFacades {
                 {
                     SqlCommand cmd2 = new SqlCommand("SP_AddRelative", dbconn);
                     cmd2.CommandType = CommandType.StoredProcedure;
-
                     cmd2.Parameters.Add(new SqlParameter("@R_CPRNR", r.CprNr));
-
                     cmd2.Parameters.Add(new SqlParameter("@R_Name", r.Name));
-
                     cmd2.Parameters.Add(new SqlParameter("@R_Age", r.Age));
-
                     cmd2.Parameters.Add(new SqlParameter("@R_Gender", r.Gender));
-
                     cmd2.Parameters.Add(new SqlParameter("@R_PhoneNumber", r.PhoneNumber));
-
                     cmd2.Parameters.Add(new SqlParameter("@R_Email", r.Email));
-
                     cmd2.Parameters.Add(new SqlParameter("@A_Address", r.Address));
-
                     cmd2.Parameters.Add(new SqlParameter("@A_City", r.City));
-
                     cmd2.Parameters.Add(new SqlParameter("@C_CPRNR", c.CprNr));
                     cmd2.ExecuteNonQuery();
 
@@ -149,48 +140,48 @@ namespace EksamensProjekt.Controller.DBFacades {
                 throw new Exception("Error in adding Relative" + e.Message);
             }
         }
-        public static void AddRelatives (List<Model.Relative> relatives) {
+        //public static void AddRelatives (List<Model.Relative> relatives) {
 
-            try {
-                ConnectDB();
+        //    try {
+        //        ConnectDB();
 
-                foreach (Model.Relative r in relatives) {
+        //        foreach (Model.Relative r in relatives) {
 
-                    SqlCommand cmd = new SqlCommand("SP_AddRelative", dbconn);
-                    cmd.CommandType = CommandType.StoredProcedure;
+        //            SqlCommand cmd = new SqlCommand("SP_AddRelative", dbconn);
+        //            cmd.CommandType = CommandType.StoredProcedure;
 
-                    cmd.Parameters.Add(new SqlParameter("@C_CPRNR", r.CitizenCprNr));
+        //            cmd.Parameters.Add(new SqlParameter("@C_CPRNR", r.CitizenCprNr));
 
-                    cmd.Parameters.Add(new SqlParameter("@R_Name", r.Name));
+        //            cmd.Parameters.Add(new SqlParameter("@R_Name", r.Name));
 
-                    cmd.Parameters.Add( new SqlParameter("@R_CPRNR", r.CprNr));
+        //            cmd.Parameters.Add( new SqlParameter("@R_CPRNR", r.CprNr));
 
-                    cmd.Parameters.Add(new SqlParameter("@R_Gender", r.Gender));
+        //            cmd.Parameters.Add(new SqlParameter("@R_Gender", r.Gender));
 
-                    cmd.Parameters.Add(new SqlParameter("@R_Age", r.Age));
+        //            cmd.Parameters.Add(new SqlParameter("@R_Age", r.Age));
 
-                    cmd.Parameters.Add(new SqlParameter("@R_PhoneNumber", r.PhoneNumber));
+        //            cmd.Parameters.Add(new SqlParameter("@R_PhoneNumber", r.PhoneNumber));
 
-                    foreach (KeyValuePair<string, string> notavailable in r.NotAvailable) {
-                        cmd.Parameters.Add(new SqlParameter("@T_Day", notavailable.Key));
+        //            foreach (KeyValuePair<string, string> notavailable in r.NotAvailable) {
+        //                cmd.Parameters.Add(new SqlParameter("@T_Day", notavailable.Key));
 
-                        cmd.Parameters.Add(new SqlParameter("@T_TimePeriod", notavailable.Value));
+        //                cmd.Parameters.Add(new SqlParameter("@T_TimePeriod", notavailable.Value));
 
-                    }
-                    cmd.Parameters.Add(new SqlParameter("@A_Address", r.Address));
+        //            }
+        //            cmd.Parameters.Add(new SqlParameter("@A_Address", r.Address));
 
-                    cmd.Parameters.Add(new SqlParameter("@A_City", r.City));
+        //            cmd.Parameters.Add(new SqlParameter("@A_City", r.City));
 
-                    cmd.ExecuteNonQuery();
-                }
+        //            cmd.ExecuteNonQuery();
+        //        }
 
-                CloseDB();
-            }
-            catch (SqlException e) {
+        //        CloseDB();
+        //    }
+        //    catch (SqlException e) {
                 
-                throw new Exception ("Error in adding Relative" + e.Message);
-            }
-        }
+        //        throw new Exception ("Error in adding Relative" + e.Message);
+        //    }
+        //}
 
         public static List<string> GetIllnessType() {
             List<string> IllnessList = new List<string>();

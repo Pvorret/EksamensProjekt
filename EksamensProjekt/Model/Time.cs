@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace EksamensProjekt.Model
 {
-    class Time
+    public class Time
     {
         /// <summary>
         /// kadskmsadkmdsakmsdamksadkmakmkmdskmasmksadkskkads
@@ -31,5 +31,7 @@ namespace EksamensProjekt.Model
             this.EndTime = endTime;
             this.Day = day;
         }
+
+        
     }
 }

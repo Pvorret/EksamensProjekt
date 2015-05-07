@@ -90,7 +90,7 @@ namespace EksamensProjekt.Controller.DBFacades
 
                 while (rdr.HasRows && rdr.Read()) {
                     int SensorDependency = (int)rdr["SR_S_SensorDependecy"];
-                    bool WaitOrLook = rdr.GetBoolean(int.Parse(rdr["SR_WaitOrLook"].ToString()));
+                    bool WaitOrLook = rdr.GetBoolean(int.Parse(rdr["SR_WaitOrLook"].ToString());
                     int TimeToWait = (int)rdr["SR_TimeToWait"];
                     int TimeToLook = (int)rdr["SR_TimeToLook"];
                     SensorRule sensorrule = new SensorRule(SensorDependency, WaitOrLook, TimeToWait, TimeToLook);
@@ -107,34 +107,32 @@ namespace EksamensProjekt.Controller.DBFacades
             return sensorruleList;
         }
 
-        public static Dictionary<string, int> GetSensorRuleManagementFromSensorSerialNumber(int serialNumber)
-        {
-            Dictionary<string, int> ruleManagement = new Dictionary<string, int>();
-            try
-            {
+        public static void AddSensorRuleManagement(string cprnr, Dictionary<string, int> RuleManagement) {
+            try {
                 ConnectDB();
+                foreach (KeyValuePair<string, int> sensortypeamount in RuleManagement) {
 
-                SqlCommand cmd = new SqlCommand("SP_GetSensorRuleManagementFromSerialNumber", dbconn);
-                cmd.Parameters.Add(new SqlParameter("@serialNumber", serialNumber));
-                cmd.CommandType = CommandType.StoredProcedure;
 
-                SqlDataReader rdr;
-                rdr = cmd.ExecuteReader();
+                    SqlCommand cmd = new SqlCommand("SP_AddSensorRuleManagement", dbconn);
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.Add(new SqlParameter("@C_CPRNR", cprnr));
+                    cmd.Parameters.Add(new SqlParameter("@ST_Type", sensortypeamount.Key));
+                    cmd.Parameters.Add(new SqlParameter("CST_AmountNeeded", sensortypeamount.Value));
 
-                while (rdr.HasRows && rdr.Read())
-                {
-                    ruleManagement.Add(rdr["SRM_RuleSet"].ToString(), Convert.ToInt32(rdr["SRM_ID"]));
+                    cmd.ExecuteNonQuery();
                 }
-            }
-            catch (SqlException e)
-            {
-                throw new Exception(e.Message);
-            }
-            finally
-            {
                 CloseDB();
             }
-            return ruleManagement;
+            catch (SqlException e) {
+
+                throw new Exception("Error adding SensorRuleManagement" + e.Message);
+            }
+        }
+
+        public static Dictionary<string, int> GetSensorRuleManagementFromSensorSerialNumber()
+        {
+            Dictionary<string, int> rulemanagement = new Dictionary<string, int>();
+            return rulemanagement;
         }
         public static void GetTimeRangeRuleFromSensorSerialNumber(int serialNumber)
         {

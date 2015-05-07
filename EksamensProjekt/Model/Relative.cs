@@ -10,9 +10,11 @@ namespace EksamensProjekt.Model
     {
         public string CitizenCprNr { get; set; }
         public string Email { get; set; }
-        public Dictionary<string, string> NotAvailable { get; set; }
+        public List<Time> NotAvailableTimes { get; set; }
 
-        public Relative(string name, string cprNr, string gender, string age, string address, string city, string phoneNumber, string email, Dictionary<string, string> NotAvailable)
+        public TimeSpan TimeSpan { get; set; }
+
+        public Relative(string name, string cprNr, string gender, string age, string address, string city, string phoneNumber, string email, List<Time> notAvailableTimes)
         {
             this.Name = name;
             this.CprNr = cprNr;
@@ -22,8 +24,7 @@ namespace EksamensProjekt.Model
             this.City = city;
             this.PhoneNumber = phoneNumber;
             this.Email = email;
-            this.NotAvailable = NotAvailable;
-            
+            this.NotAvailableTimes = notAvailableTimes;
         }
 
         public Relative(string citizenCprNr, string name, string cprNr, string gender, string age, string address, string city, string phoneNumber, string email, Dictionary<string, string> NotAvailable) {
