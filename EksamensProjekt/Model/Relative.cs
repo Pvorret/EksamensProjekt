@@ -39,10 +39,11 @@ namespace EksamensProjekt.Model
             this.PhoneNumber = phoneNumber;
             this.Email = email;
         }
-        public Relative(string cprNr, string name, string address, string city)//Stefan
+        public Relative(string cprNr, string name, string phoneNumber, string address, string city)//Stefan
         {
             this.CprNr = cprNr;
             this.Name = name;
+            this.PhoneNumber = phoneNumber;
             this.Address = address;
             this.City = city;
         }

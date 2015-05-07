@@ -74,10 +74,59 @@ namespace EksamensProjekt.Controller.DBFacades
             }
         }
 
-        public static List<SensorRule> GetSensorRuleFromSerialNumber() {
+        public static List<SensorRule> GetSensorRuleFromSerialNumber(int serialNumber) {
+            List<SensorRule> sensorruleList = new List<SensorRule>();
+
+            try {
+                ConnectDB();
+                
+                SqlCommand cmd = new SqlCommand("SP_GetSensorRuleFromSerialNumber", dbconn);
+                cmd.CommandType = CommandType.StoredProcedure;
+
+                cmd.Parameters.Add(new SqlParameter("@S_SerialNumber", serialNumber));
+
+                SqlDataReader rdr;
+                rdr = cmd.ExecuteReader();
+
+                while (rdr.HasRows && rdr.Read()) {
+                    int SensorDependency = (int)rdr["SR_S_SensorDependecy"];
+                    bool WaitOrLook = ()rdr["SR_WaitOrLook"];
+                    int TimeToWait = (int)rdr["SR_TimeToWait"];
+                    int TimeToLook = (int)rdr["SR_TimeToLook"];
+                    SensorRule sensorrule = new SensorRule(SensorDependency, WaitOrLook, TimeToWait, TimeToLook);
+                    sensorruleList.Add(sensorrule);
+                }
+
+                CloseDB();
+            }
+            catch (SqlException e) {
+                
+                throw new Exception("Error in getting SensorRules " + e.Message);
+            }           
+
+            return sensorruleList;
+        }
+
+        public static void AddSensorRuleManagement(string cprnr, Dictionary<string, int> RuleManagement) {
+            try {
+                ConnectDB();
+                foreach (KeyValuePair<string, int> sensortypeamount in RuleManagement) {
 
 
-            return sensorrules;
+                    SqlCommand cmd = new SqlCommand("SP_AddSensorRuleManagement", dbconn);
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.Add(new SqlParameter("@C_CPRNR", cprnr));
+                    cmd.Parameters.Add(new SqlParameter("@ST_Type", sensortypeamount.Key));
+                    cmd.Parameters.Add(new SqlParameter("CST_AmountNeeded", sensortypeamount.Value));
+
+                    cmd.ExecuteNonQuery();
+                }
+                CloseDB();
+            }
+            catch (SqlException e) {
+
+                throw new Exception("Error adding SensorRuleManagement" + e.Message);
+            }
         }
 
         public static Dictionary<string, int> GetSensorRuleManagementFromSensorSerialNumber()
@@ -85,6 +134,9 @@ namespace EksamensProjekt.Controller.DBFacades
             Dictionary<string, int> rulemanagement = new Dictionary<string, int>();
             return rulemanagement;
         }
+        public static void GetTimeRangeRuleFromSensorSerialNumber(int serialNumber)
+        {
 
+        }
     }
 }

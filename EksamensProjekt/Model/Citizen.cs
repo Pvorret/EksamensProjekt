@@ -34,5 +34,12 @@ namespace EksamensProjekt.Model
             this.Name = name;
             this.CprNr = cprNr;
         }
+        public Citizen(string cprNr, string name, string address, string city)
+        {
+            this.CprNr = cprNr;
+            this.Name = name;
+            this.Address = address;
+            this.City = city;
+        }
     }
 }
