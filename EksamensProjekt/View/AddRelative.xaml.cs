@@ -65,13 +65,15 @@ namespace EksamensProjekt.View
 
         private void AddNotAvailableTime_Button_Click(object sender, RoutedEventArgs e)
         {
-            timeNotAvailable = NotAvailableStart_TextBox.Text + " - " + NotAvailableEnd_TextBox.Text;
+            timeNotAvailable = NotAvailableStartHour_TextBox.Text + ":" + NotAvailableStartMinute_TextBox + " - " + NotAvailableEndHour_TextBox.Text + ":" + NotAvailableEndMinute_TextBox.Text;
             NotAvailableTimes_ListBox.Items.Add(NotAvailableDays_Dropdown.SelectedItem.ToString() + ": " + timeNotAvailable);
             Days.Add(NotAvailableDays_Dropdown.SelectedItem.ToString());
-            StartTime.Add(Convert.ToDateTime(NotAvailableStart_TextBox.Text + ":00"));
-            EndTime.Add(Convert.ToDateTime(NotAvailableEnd_TextBox.Text + ":00"));
-            NotAvailableStart_TextBox.Clear();
-            NotAvailableEnd_TextBox.Clear();
+            StartTime.Add(Convert.ToDateTime(NotAvailableStartHour_TextBox.Text + ":" + NotAvailableStartMinute_TextBox.Text));
+            EndTime.Add(Convert.ToDateTime(NotAvailableEndHour_TextBox.Text + ":" + NotAvailableEndMinute_TextBox.Text));
+            NotAvailableStartHour_TextBox.Clear();
+            NotAvailableStartMinute_TextBox.Clear();
+            NotAvailableEndHour_TextBox.Clear();
+            NotAvailableEndMinute_TextBox.Clear();
         }
         private void AddRelative_Button_Click(object sender, RoutedEventArgs e)
         {
