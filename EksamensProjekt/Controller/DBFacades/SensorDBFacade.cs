@@ -179,12 +179,12 @@ namespace EksamensProjekt.Controller.DBFacades
             try
             {
                 ConnectDB();
-                SqlCommand cmd = new SqlCommand("SP_GetCitizenFromSensor", dbconn);
+                SqlCommand cmd = new SqlCommand("SP_GetCitizenTimeFromSensor", dbconn);
                 cmd.CommandType = CommandType.StoredProcedure;
                 cmd.Parameters.Add(new SqlParameter("@SerialNumber", serialNumber));
                 SqlDataReader reader = cmd.ExecuteReader();
 
-                while (reader.Read())//C_CPRNR, C_Name, A_Address, A_City, T_Day, T_TimePeriod
+                while (reader.Read())
                 {
                     string C_CPRNR = reader["C_CPRNR"].ToString();
                     string C_Name = reader["C_Name"].ToString();
