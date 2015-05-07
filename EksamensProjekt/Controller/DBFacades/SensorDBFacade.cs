@@ -14,6 +14,7 @@ namespace EksamensProjekt.Controller.DBFacades
     {
         public static SqlConnection dbconn;
         static SqlCommand cmd;
+
         public static void CreateSensor(Sensor sensor)//Stefan
         {
             int activatedToBit;
@@ -134,38 +135,49 @@ namespace EksamensProjekt.Controller.DBFacades
                 CloseDB();
             }
         }
-        public static void GetRelativeTime(string cprNr)
+        public static List<Relative> GetRelativeTime(string cprNr)//Stefan
         {
-            List<Relative> R_RelativeTimeList = new List<Relative>(); // R_CPRNR, R_Name, A_Address, A_City, CRT_T_ID, T_Day, T_TimePeriod
+            List<Relative> RelativeTimeList = new List<Relative>();
             try
             {
                 ConnectDB();
-                SqlCommand cmd = new SqlCommand("SP_GetRElativeTime", dbconn);
+                SqlCommand cmd = new SqlCommand("SP_GetRelativeTimeFromCitizen", dbconn);
                 cmd.CommandType = CommandType.StoredProcedure;
                 cmd.Parameters.Add("@Citizen_CPRNR", cprNr);
                 SqlDataReader reader = cmd.ExecuteReader();
 
                 while (reader.Read())
                 {
-                    string R_CPRNR = reader["RCPRNR"].ToString();
+                    string R_CPRNR = reader["R_CPRNR"].ToString();
                     string R_Name = reader["R_Name"].ToString();
+                    string R_Phone = reader["R_Phonenumber"].ToString();
                     string A_Address = reader["A_Address"].ToString();
                     string A_City = reader["A_City"].ToString();
-                    string CRT_T_ID = reader["CRT_T_ID"].ToString();
+                    
+                    DateTime T_StartTime = DateTime.Parse(reader["StartTime"].ToString());
+                    DateTime T_EndTime = DateTime.Parse(reader["EndTime"].ToString());
                     string T_Day = reader["T_Day"].ToString();
-                    string T_TimePeriod = reader["T_TimePeriod"].ToString();
 
-                    //R_RelativeTimeList.Add(new Relative())
+                    Relative relative = new Relative(R_CPRNR, R_Name, R_Phone, A_Address, A_City);
+                    relative.NotAvailable.Add(new Time(T_StartTime, T_EndTime, T_Day));
+                    RelativeTimeList.Add(relative);                 
                 }
             }
-            catch
+            catch(SqlException e)
             {
-
+                MessageBox.Show(e.Message);
             }
             finally
             {
-
+                CloseDB();
             }
+            return RelativeTimeList;
+        }
+        public static List<Sensor> GetCitizenTime(int serialNumber)
+        {
+            List<Sensor> CitizenTimeList = new List<Sensor>();
+
+            return CitizenTimeList;
         }
         public static void ConnectDB()
         {
