@@ -19,5 +19,10 @@ namespace SensorRuleSet
             this.TimeToWait = timeToWait;
             this.TimeToLook = timeToWait;
         }
+
+        public static void BehandleinputfraRuleSetController() {
+            //Navnet skal ændres og der skal sættes en return værdi.
+            //Der skal kodes hvad der skal behandles.
+        }
     }
 }

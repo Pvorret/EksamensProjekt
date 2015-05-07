@@ -75,7 +75,7 @@ namespace EksamensProjekt.Controller.DBFacades
         }
 
         public static List<SensorRule> GetSensorRuleFromSerialNumber(int serialNumber) {
-            List<SensorRule> sensorrules = new List<SensorRule>();
+            List<SensorRule> sensorruleList = new List<SensorRule>();
 
             try {
                 ConnectDB();
@@ -94,17 +94,17 @@ namespace EksamensProjekt.Controller.DBFacades
                     int TimeToWait = (int)rdr["SR_TimeToWait"];
                     int TimeToLook = (int)rdr["SR_TimeToLook"];
                     SensorRule sensorrule = new SensorRule(SensorDependency, WaitOrLook, TimeToWait, TimeToLook);
-                    sensorrules.Add(sensorrule);
+                    sensorruleList.Add(sensorrule);
                 }
 
                 CloseDB();
             }
-            catch (SqlException) {
+            catch (SqlException e) {
                 
-                throw new Exception("Error in getting SensorRules");
+                throw new Exception("Error in getting SensorRules " + e.Message);
             }           
 
-            return sensorrules;
+            return sensorruleList;
         }
 
         public static Dictionary<string, int> GetSensorRuleManagementFromSensorSerialNumber(int serialNumber)
