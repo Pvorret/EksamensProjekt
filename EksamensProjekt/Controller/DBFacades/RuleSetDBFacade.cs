@@ -74,8 +74,35 @@ namespace EksamensProjekt.Controller.DBFacades
             }
         }
 
-        public static List<SensorRule> GetSensorRuleFromSerialNumber() {
+        public static List<SensorRule> GetSensorRuleFromSerialNumber(int serialNumber) {
+            List<SensorRule> sensorrules = new List<SensorRule>();
 
+            try {
+                ConnectDB();
+                
+                SqlCommand cmd = new SqlCommand("SP_GetSensorRuleFromSerialNumber", dbconn);
+                cmd.CommandType = CommandType.StoredProcedure;
+
+                cmd.Parameters.Add(new SqlParameter("@S_SerialNumber", serialNumber));
+
+                SqlDataReader rdr;
+                rdr = cmd.ExecuteReader();
+
+                while (rdr.HasRows && rdr.Read()) {
+                    int SensorDependency = (int)rdr["SR_S_SensorDependecy"];
+                    bool WaitOrLook = ()rdr["SR_WaitOrLook"];
+                    int TimeToWait = (int)rdr["SR_TimeToWait"];
+                    int TimeToLook = (int)rdr["SR_TimeToLook"];
+                    SensorRule sensorrule = new SensorRule(SensorDependency, WaitOrLook, TimeToWait, TimeToLook);
+                    sensorrules.Add(sensorrule);
+                }
+
+                CloseDB();
+            }
+            catch (SqlException) {
+                
+                throw new Exception("Error in getting SensorRules");
+            }           
 
             return sensorrules;
         }
