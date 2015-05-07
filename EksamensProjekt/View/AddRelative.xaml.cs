@@ -65,7 +65,7 @@ namespace EksamensProjekt.View
 
         private void AddNotAvailableTime_Button_Click(object sender, RoutedEventArgs e)
         {
-            timeNotAvailable = NotAvailableStartHour_TextBox.Text + ":" + NotAvailableStartMinute_TextBox + " - " + NotAvailableEndHour_TextBox.Text + ":" + NotAvailableEndMinute_TextBox.Text;
+            timeNotAvailable = NotAvailableStartHour_TextBox.Text + ":" + NotAvailableStartMinute_TextBox.Text + " - " + NotAvailableEndHour_TextBox.Text + ":" + NotAvailableEndMinute_TextBox.Text;
             NotAvailableTimes_ListBox.Items.Add(NotAvailableDays_Dropdown.SelectedItem.ToString() + ": " + timeNotAvailable);
             Days.Add(NotAvailableDays_Dropdown.SelectedItem.ToString());
             StartTime.Add(Convert.ToDateTime(NotAvailableStartHour_TextBox.Text + ":" + NotAvailableStartMinute_TextBox.Text));
