@@ -173,6 +173,12 @@ namespace EksamensProjekt.Controller.DBFacades
             }
             return RelativeTimeList;
         }
+        public static List<Sensor> GetCitizenTime(int serialNumber)
+        {
+            List<Sensor> CitizenTimeList = new List<Sensor>();
+
+            return CitizenTimeList;
+        }
         public static void ConnectDB()
         {
             dbconn = new SqlConnection(DBHelper._connectionString);
