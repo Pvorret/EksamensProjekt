@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using EksamensProjekt.Controller.DBFacades;
 using EksamensProjekt.Model;
+using SensorRuleSet;
 
 namespace EksamensProjekt.Controller
 {
