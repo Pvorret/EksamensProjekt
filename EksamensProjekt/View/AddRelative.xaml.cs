@@ -68,8 +68,8 @@ namespace EksamensProjekt.View
             timeNotAvailable = NotAvailableStart_TextBox.Text + " - " + NotAvailableEnd_TextBox.Text;
             NotAvailableTimes_ListBox.Items.Add(NotAvailableDays_Dropdown.SelectedItem.ToString() + ": " + timeNotAvailable);
             Days.Add(NotAvailableDays_Dropdown.SelectedItem.ToString());
-            StartTime.Add(Convert.ToDateTime(NotAvailableStart_TextBox.Text));
-            EndTime.Add(Convert.ToDateTime(NotAvailableEnd_TextBox.Text));
+            StartTime.Add(Convert.ToDateTime(NotAvailableStart_TextBox.Text + ":00"));
+            EndTime.Add(Convert.ToDateTime(NotAvailableEnd_TextBox.Text + ":00"));
             NotAvailableStart_TextBox.Clear();
             NotAvailableEnd_TextBox.Clear();
         }
