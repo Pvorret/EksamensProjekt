@@ -28,12 +28,17 @@ namespace EksamensProjekt.Controller
             RuleSetDBFacade.UpdateSensorLog(SensorLog);
         }
 
-        public List<SensorRule> GetSensorRuleFromSerialNumber(int serialnumber) {
+        public void GetSensorRuleFromSerialNumber(int serialnumber) {
             List<SensorRule> sensorruleList = new List<SensorRule>();
+
+            foreach(SensorRule s in sensorruleList) {
+                SensorRule sensorrule = new SensorRule(s.SensorDependency, s.WaitOrLook, s.TimeToWait, s.TimeToWait);
+                SensorRuleSet.SensorRule.BehandleinputfraRuleSetController(sensorrule);
+            }
 
             RuleSetDBFacade.GetSensorRuleFromSerialNumber(serialnumber);
 
-            return sensorruleList;
+            
         }
     }
 }
