@@ -21,7 +21,7 @@
         <TextBox Name="CitizenAddress_TextBox" HorizontalAlignment="Left" Height="25" Margin="118,228,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="151"/>
         <Label Content="Postnr + By" FontSize="14px" HorizontalAlignment="Left" Margin="20,258,0,0" VerticalAlignment="Top"/>
         <TextBox Name="CitizenCity_TextBox" HorizontalAlignment="Left" Height="25" Margin="118,261,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="151"/>
-        <ComboBox Name="CitizenSensorNeeds_Dropdown" HorizontalAlignment="Left" Height="25" Margin="117,295,0,0" VerticalAlignment="Top" Width="66" DropDownOpened="CitizenSensorNeeds_Dropdown_DropDownOpened" SelectionChanged="CitizenSensorNeeds_Dropdown_SelectionChanged"/>
+        <ComboBox Name="CitizenSensorNeeds_Dropdown" HorizontalAlignment="Left" Height="25" Margin="117,295,0,0" VerticalAlignment="Top" Width="66" DropDownOpened="CitizenSensorNeeds_Dropdown_DropDownOpened"/>
         <Label Content="Amount" HorizontalAlignment="Left" Margin="183,294,0,0" VerticalAlignment="Top" Width="53"/>
         <TextBox Name="CitizenSensorNeedsAmount" HorizontalAlignment="Left" Height="23" Margin="236,295,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="33"/>
         <Button Name="AddSensorNeeds_Button" Content="Tilføj SensorBehov" Height="25" HorizontalAlignment="Left" Margin="10,295,0,0" VerticalAlignment="Top" Width="102" Click="AddSensorNeeds_Button_Click"/>
