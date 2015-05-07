@@ -22,7 +22,9 @@ namespace EksamensProjekt.View
     {
         public CitizenController _controller;
         AddReligion AR;
-        Dictionary<string, string> HomeCareDic = new Dictionary<string, string>();
+        List<string> Days = new List<string>();
+        List<DateTime> StartTime = new List<DateTime>();
+        List<DateTime> EndTime = new List<DateTime>();
         List<string> IllnessList = new List<string>();
         Dictionary<string, int> SensorTypesList = new Dictionary<string, int>();
         string timeHomeCare;
@@ -94,17 +96,17 @@ namespace EksamensProjekt.View
             try
             {
                 HomeCareTimes_ListBox.Items.Add(HomeCareDays_Dropdown.SelectedItem.ToString() + ": " + timeHomeCare);
-                HomeCareDic.Add(HomeCareDays_Dropdown.SelectedItem.ToString(), timeHomeCare);
+                Days.Add(HomeCareDays_Dropdown.SelectedItem.ToString());
+                StartTime.Add(Convert.ToDateTime(HomeCareStart_TextBox.Text));
+                EndTime.Add(Convert.ToDateTime(HomeCareEnd_TextBox.Text));
             }
             catch (Exception i)
             {
-                MessageBox.Show("Man kan kun have et tidsrum per dag");
+                MessageBox.Show("Man kan kun have et tidsrum per dag" + i.Message);
             }
-
             HomeCareStart_TextBox.Clear();
             HomeCareEnd_TextBox.Clear();
         }
-
         private void CitizenSensorNeeds_Dropdown_DropDownOpened(object sender, EventArgs e) {
             if (CitizenSensorNeeds_Dropdown.Items.Count == 0) {
                 foreach (string s in _controller.SensorTypes) {
@@ -112,11 +114,6 @@ namespace EksamensProjekt.View
                 }
             }
         }
-
-        private void CitizenSensorNeeds_Dropdown_SelectionChanged(object sender, SelectionChangedEventArgs e) {
-            
-        }
-
         private void Illness_Dropdown_DropDownOpened(object sender, EventArgs e) {
             if (Illness_Dropdown.Items.Count == 0) {
                 foreach (string s in _controller.IllnessList) {
@@ -124,21 +121,20 @@ namespace EksamensProjekt.View
                 }
             }
         }
-
         private void Illness_Dropdown_SelectionChanged(object sender, SelectionChangedEventArgs e) {
             CitizenIllness_ListBox.Items.Add(Illness_Dropdown.SelectedItem.ToString());
             IllnessList.Add(Illness_Dropdown.SelectedItem.ToString());
         }
-
-        private void CreateCitizen_Button_Click(object sender, RoutedEventArgs e) {
-            CitizenCPRNR = CitizenBirthdate_TextBox.Text + "-" + CitizenLast4CPR_TextBox.Text;
-            _controller.CreateCitizen(CitizenName_TextBox.Text, CitizenCPRNR, CitizenGender_Dropdown.SelectedItem.ToString(), CitizenAge_TextBox.Text, CitizenAddress_TextBox.Text, CitizenCity_TextBox.Text, CitizenPhoneNumber_TextBox.Text, IllnessList, CitizenReligion_Dropdown.SelectedItem.ToString(), SensorTypesList, HomeCareDic);
-            this.Close();
-        }
-
-        private void AddSensorNeeds_Button_Click(object sender, RoutedEventArgs e) {
+        private void AddSensorNeeds_Button_Click(object sender, RoutedEventArgs e)
+        {
             CitizenSensorNeeds_ListBox.Items.Add(CitizenSensorNeeds_Dropdown.SelectedItem.ToString() + ": " + CitizenSensorNeedsAmount.Text);
             SensorTypesList.Add(CitizenSensorNeeds_Dropdown.SelectedItem.ToString(), int.Parse(CitizenSensorNeedsAmount.Text));
         }
+        private void CreateCitizen_Button_Click(object sender, RoutedEventArgs e) {
+            CitizenCPRNR = CitizenBirthdate_TextBox.Text + "-" + CitizenLast4CPR_TextBox.Text;
+            _controller.CreateCitizen(CitizenName_TextBox.Text, CitizenCPRNR, CitizenGender_Dropdown.SelectedItem.ToString(), CitizenAge_TextBox.Text, CitizenAddress_TextBox.Text, CitizenCity_TextBox.Text, CitizenPhoneNumber_TextBox.Text, IllnessList, CitizenReligion_Dropdown.SelectedItem.ToString(), SensorTypesList, Days, StartTime, EndTime);
+            this.Close();
+        }
+        
     }
 }
