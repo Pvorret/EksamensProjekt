@@ -151,11 +151,14 @@ namespace EksamensProjekt.Controller.DBFacades
 
                 while (rdr.HasRows && rdr.Read())
                 {
+                    string cprNr = rdr["TRR_R_CPRNR"].ToString();
+                    string actingRule = rdr["TRR_ActingRule"].ToString();
 
                     DateTime startTime = Convert.ToDateTime(rdr["T_StartTime"]);
                     DateTime endTime = Convert.ToDateTime(rdr["T_EndTime"]);
                     string day = rdr["T_Day"].ToString();
                     int id = Convert.ToInt32(rdr["TRR_ID"]);
+
 
                 }
             }
