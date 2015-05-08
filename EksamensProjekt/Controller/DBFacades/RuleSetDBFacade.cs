@@ -171,24 +171,24 @@ namespace EksamensProjekt.Controller.DBFacades
             }
             return timerangerules;
         }
-        public static void AddSensorRuleFromSerialNumber(int serialNumber) {
+        public static void AddSensorRuleFromSerialNumber(int serialNumber, SensorRule sensorrule) {
             try {
                 ConnectDB();
 
                 SqlCommand cmd = new SqlCommand("SP_AddSensorRuleFromSerialNumber", dbconn);
                 cmd.CommandType = CommandType.StoredProcedure;
 
-                cmd.Parameters.Add(new SqlParameter("@S_SerialNumber", serialNumber));
+                cmd.Parameters.Add(new SqlParameter("@SRM_S_SerialNumber", serialNumber));
 
-                SqlDataReader rdr;
-                rdr = cmd.ExecuteReader();
-
-                while (rdr.HasRows && rdr.Read()) {
-
-                }
+                cmd.Parameters.Add(new SqlParameter("@SR_R_SensorDependency", sensorrule.SensorDependency));
+                cmd.Parameters.Add(new SqlParameter("@SR_WaitOrLook", sensorrule.WaitOrLook));
+                cmd.Parameters.Add(new SqlParameter("@SR_TimeToWait", sensorrule.TimeToWait));
+                cmd.Parameters.Add(new SqlParameter("@SR_TimeToLook", sensorrule.TimeToLook));
+                
+                cmd.ExecuteNonQuery();
             }
             catch (SqlException e) {
-                
+
                 throw new Exception("Error in storing SensorRule i DB " + e.Message);
             }
         }
