@@ -1,11 +1,13 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
-VisualStudioVersion = 12.0.31101.0
+VisualStudioVersion = 12.0.30501.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EksamensProjekt", "EksamensProjekt\EksamensProjekt.csproj", "{2A59E381-DA1A-432E-BC1A-0A8BDBC06E72}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SensorRuleSet", "SensorRuleSet\SensorRuleSet.csproj", "{24927CDA-00EA-4B64-9DEC-9204B8239F36}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnitTestBehandleSensorInput", "UnitTestBehandleSensorInput\UnitTestBehandleSensorInput.csproj", "{C1AF0E9C-E676-4EAC-AD77-44CF30A7A55C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{24927CDA-00EA-4B64-9DEC-9204B8239F36}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{24927CDA-00EA-4B64-9DEC-9204B8239F36}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{24927CDA-00EA-4B64-9DEC-9204B8239F36}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C1AF0E9C-E676-4EAC-AD77-44CF30A7A55C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C1AF0E9C-E676-4EAC-AD77-44CF30A7A55C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C1AF0E9C-E676-4EAC-AD77-44CF30A7A55C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C1AF0E9C-E676-4EAC-AD77-44CF30A7A55C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
