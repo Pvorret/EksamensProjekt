@@ -182,6 +182,10 @@ namespace EksamensProjekt.Controller.DBFacades
 
                 cmd.Parameters.Add(new SqlParameter("@SR_R_SensorDependency", sensorrule.SensorDependency));
                 cmd.Parameters.Add(new SqlParameter("@SR_WaitOrLook", sensorrule.WaitOrLook));
+                cmd.Parameters.Add(new SqlParameter("@SR_TimeToWait", sensorrule.TimeToWait));
+                cmd.Parameters.Add(new SqlParameter("@SR_TimeToLook", sensorrule.TimeToLook));
+                
+                cmd.ExecuteNonQuery();
             }
             catch (SqlException e) {
 
