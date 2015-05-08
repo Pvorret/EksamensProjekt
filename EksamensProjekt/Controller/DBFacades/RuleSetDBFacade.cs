@@ -114,9 +114,9 @@ namespace EksamensProjekt.Controller.DBFacades
                 ConnectDB();
 
                 SqlCommand cmd = new SqlCommand("SP_GetSensorRuleManagementFromSerialNumber", dbconn);
-                cmd.Parameters.Add(new SqlParameter("@SerialNumber", serialNumber));
                 cmd.CommandType = CommandType.StoredProcedure;
-
+                cmd.Parameters.Add(new SqlParameter("@SerialNumber", serialNumber));
+                
                 SqlDataReader rdr;
                 rdr = cmd.ExecuteReader();
 
@@ -135,16 +135,17 @@ namespace EksamensProjekt.Controller.DBFacades
             }
             return ruleManagement;
         }
-        public static void GetTimeRangeRuleFromSensorSerialNumber(int serialNumber)
+        public static List<TimeRangeRule> GetTimeRangeRuleFromSensorSerialNumber(int serialNumber)
         {
+            List<TimeRangeRule> timerangerules = new List<TimeRangeRule>();
             try
             {
                 ConnectDB();
 
                 SqlCommand cmd = new SqlCommand("SP_GetTimeRangeRuleManagementFromSerialNumber", dbconn);
-                cmd.Parameters.Add(new SqlParameter("@SerialNumber", serialNumber));
                 cmd.CommandType = CommandType.StoredProcedure;
-
+                cmd.Parameters.Add(new SqlParameter("@SerialNumber", serialNumber));
+                
                 SqlDataReader rdr;
                 rdr = cmd.ExecuteReader();
 
@@ -159,6 +160,7 @@ namespace EksamensProjekt.Controller.DBFacades
                     int id = Convert.ToInt32(rdr["TRR_ID"]);
 
                     TimeRangeRule TRR = new TimeRangeRule(actingRule, cprNr, new Time(id, startTime, endTime, day));
+                    timerangerules.Add(TRR);
                 }
             }
             catch (SqlException e)
@@ -169,6 +171,7 @@ namespace EksamensProjekt.Controller.DBFacades
             {
                 CloseDB();
             }
+            return timerangerules;
         }
     }
 }
