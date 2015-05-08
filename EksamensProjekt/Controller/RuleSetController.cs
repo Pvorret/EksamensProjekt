@@ -36,5 +36,9 @@ namespace EksamensProjekt.Controller
                 SensorRule.BehandleinputfraRuleSetController(sensorrule);
             }
         }
+        public void AddSensorRuleFromSerialNumber(int serialNumber)
+        {
+
+        }
     }
 }

@@ -23,7 +23,6 @@ namespace EksamensProjekt.Controller.DBFacades
             dbconn.Close();
             dbconn.Dispose();
         }
-
         public static SensorLog CreateSensorLog(SensorLog sl)
         {
             SensorLog sensorLog = new SensorLog(sl.SensorSerialNumber, sl.ActivationTime);
@@ -73,7 +72,6 @@ namespace EksamensProjekt.Controller.DBFacades
                 CloseDB();
             }
         }
-
         public static List<SensorRule> GetSensorRuleFromSerialNumber(int serialNumber) {
             List<SensorRule> sensorruleList = new List<SensorRule>();
 
@@ -106,7 +104,6 @@ namespace EksamensProjekt.Controller.DBFacades
 
             return sensorruleList;
         }
-
         public static Dictionary<string, int> GetSensorRuleManagementFromSensorSerialNumber(int serialNumber)
         {
             Dictionary<string, int> ruleManagement = new Dictionary<string, int>();
@@ -173,6 +170,31 @@ namespace EksamensProjekt.Controller.DBFacades
                 CloseDB();
             }
             return timerangerules;
+        }
+        public static void AddSensorRuleFromSerialNumber(int serialNumber) {
+            try {
+                ConnectDB();
+
+                SqlCommand cmd = new SqlCommand("SP_AddSensorRuleFromSerialNumber", dbconn);
+                cmd.CommandType = CommandType.StoredProcedure;
+
+                cmd.Parameters.Add(new SqlParameter("@S_SerialNumber", serialNumber));
+
+                SqlDataReader rdr;
+                rdr = cmd.ExecuteReader();
+
+                while (rdr.HasRows && rdr.Read()) {
+
+                }
+            }
+            catch (SqlException e) {
+                
+                throw new Exception("Error in storing SensorRule i DB " + e.Message);
+            }
+        }
+        public static void AddTimeRangeRuleFromSensorSerialNumber(int serialNumber)
+        {
+
         }
     }
 }
