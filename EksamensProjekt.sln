@@ -7,7 +7,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EksamensProjekt", "Eksamens
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SensorRuleSet", "SensorRuleSet\SensorRuleSet.csproj", "{24927CDA-00EA-4B64-9DEC-9204B8239F36}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnitTestBehandleSensorInput", "UnitTestBehandleSensorInput\UnitTestBehandleSensorInput.csproj", "{C1AF0E9C-E676-4EAC-AD77-44CF30A7A55C}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnitTest", "UnitTestBehandleSensorInput\UnitTest.csproj", "{C1AF0E9C-E676-4EAC-AD77-44CF30A7A55C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

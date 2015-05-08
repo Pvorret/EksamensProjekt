@@ -5,9 +5,9 @@ using EksamensProjekt.Controller.DBFacades;
 
 namespace UnitTestBehandleSensorInput {
     [TestClass]
-    public class UnitTest1 {
+    public class UnitTestBehandleSensorInput {
         [TestMethod]
-        public void TestMethod1() {
+        public void TestMethod1GetSensorRuleFromSerialNumber() {
         }
     }
 }
