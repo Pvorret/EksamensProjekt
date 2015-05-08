@@ -23,7 +23,6 @@ namespace EksamensProjekt.Controller.DBFacades
             dbconn.Close();
             dbconn.Dispose();
         }
-
         public static SensorLog CreateSensorLog(SensorLog sl)
         {
             SensorLog sensorLog = new SensorLog(sl.SensorSerialNumber, sl.ActivationTime);
@@ -73,7 +72,6 @@ namespace EksamensProjekt.Controller.DBFacades
                 CloseDB();
             }
         }
-
         public static List<SensorRule> GetSensorRuleFromSerialNumber(int serialNumber) {
             List<SensorRule> sensorruleList = new List<SensorRule>();
 
@@ -106,7 +104,6 @@ namespace EksamensProjekt.Controller.DBFacades
 
             return sensorruleList;
         }
-
         public static Dictionary<string, int> GetSensorRuleManagementFromSensorSerialNumber(int serialNumber)
         {
             Dictionary<string, int> ruleManagement = new Dictionary<string, int>();
@@ -115,9 +112,9 @@ namespace EksamensProjekt.Controller.DBFacades
                 ConnectDB();
 
                 SqlCommand cmd = new SqlCommand("SP_GetSensorRuleManagementFromSerialNumber", dbconn);
-                cmd.Parameters.Add(new SqlParameter("@SerialNumber", serialNumber));
                 cmd.CommandType = CommandType.StoredProcedure;
-
+                cmd.Parameters.Add(new SqlParameter("@SerialNumber", serialNumber));
+                
                 SqlDataReader rdr;
                 rdr = cmd.ExecuteReader();
 
@@ -136,16 +133,17 @@ namespace EksamensProjekt.Controller.DBFacades
             }
             return ruleManagement;
         }
-        public static void GetTimeRangeRuleFromSensorSerialNumber(int serialNumber)
+        public static List<TimeRangeRule> GetTimeRangeRuleFromSensorSerialNumber(int serialNumber)
         {
+            List<TimeRangeRule> timerangerules = new List<TimeRangeRule>();
             try
             {
                 ConnectDB();
 
                 SqlCommand cmd = new SqlCommand("SP_GetTimeRangeRuleManagementFromSerialNumber", dbconn);
-                cmd.Parameters.Add(new SqlParameter("@SerialNumber", serialNumber));
                 cmd.CommandType = CommandType.StoredProcedure;
-
+                cmd.Parameters.Add(new SqlParameter("@SerialNumber", serialNumber));
+                
                 SqlDataReader rdr;
                 rdr = cmd.ExecuteReader();
 
@@ -160,6 +158,7 @@ namespace EksamensProjekt.Controller.DBFacades
                     int id = Convert.ToInt32(rdr["TRR_ID"]);
 
                     TimeRangeRule TRR = new TimeRangeRule(actingRule, cprNr, new Time(id, startTime, endTime, day));
+                    timerangerules.Add(TRR);
                 }
             }
             catch (SqlException e)
@@ -170,6 +169,7 @@ namespace EksamensProjekt.Controller.DBFacades
             {
                 CloseDB();
             }
+            return timerangerules;
         }
 
         public static void AddSensroRuleFromSerialNumber(int serialNumber) {

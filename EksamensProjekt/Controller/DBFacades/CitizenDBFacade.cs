@@ -6,10 +6,11 @@ using System.Threading.Tasks;
 using System.Data;
 using System.Data.SqlClient;
 using EksamensProjekt.Controller.DBFacades;
+using EksamensProjekt.Model;
+using System.Windows;
 
 namespace EksamensProjekt.Controller.DBFacades {
     class CitizenDBFacade {
-
         static SqlConnection dbconn;
         public static void CreateCitizen(Model.Citizen citizen) {
             try {
@@ -44,7 +45,6 @@ namespace EksamensProjekt.Controller.DBFacades {
                 throw new Exception("Error in creating Citizen" + e.Message);
             }
         }
-
         public static void AddSensorType(string cprnr, Dictionary<string, int> sensortype) {
 
             try {
@@ -88,7 +88,6 @@ namespace EksamensProjekt.Controller.DBFacades {
                 throw new Exception("Error! Kunne ikke tilføje time" + e.Message);
             }
         }
-
         public static void AddIllnessToCitizen(Model.Citizen citizen)
         {
             try
@@ -110,7 +109,6 @@ namespace EksamensProjekt.Controller.DBFacades {
                 throw new Exception("Error in Add Illness" + e.Message);
             }
         }
-
         public static void AddRelative(Model.Citizen c)
         {
             try
@@ -182,7 +180,6 @@ namespace EksamensProjekt.Controller.DBFacades {
         //        throw new Exception ("Error in adding Relative" + e.Message);
         //    }
         //}
-
         public static List<string> GetIllnessType() {
             List<string> IllnessList = new List<string>();
 
@@ -213,7 +210,6 @@ namespace EksamensProjekt.Controller.DBFacades {
             return IllnessList;
 
         }
-
         public static List<Model.Citizen> GetAllCitizen()
         {
             List<Model.Citizen> Citizens = new List<Model.Citizen>();
@@ -243,12 +239,85 @@ namespace EksamensProjekt.Controller.DBFacades {
             }
             return Citizens;
         }
+        public static List<Relative> GetRelativeTime(string cprNr)//Stefan
+        {
+            List<Relative> RelativeTimeList = new List<Relative>();
+            try
+            {
+                ConnectDB();
+                SqlCommand cmd = new SqlCommand("SP_GetRelativeTimeFromCitizen", dbconn);
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.Add(new SqlParameter("@Citizen_CPRNR", cprNr));
+                SqlDataReader reader = cmd.ExecuteReader();
 
+                while (reader.Read())
+                {
+                    string R_CPRNR = reader["R_CPRNR"].ToString();
+                    string R_Name = reader["R_Name"].ToString();
+                    string R_Phone = reader["R_Phonenumber"].ToString();
+                    string A_Address = reader["A_Address"].ToString();
+                    string A_City = reader["A_City"].ToString();
+
+                    DateTime T_StartTime = DateTime.Parse(reader["StartTime"].ToString());
+                    DateTime T_EndTime = DateTime.Parse(reader["EndTime"].ToString());
+                    string T_Day = reader["T_Day"].ToString();
+
+                    Relative relative = new Relative(R_CPRNR, R_Name, R_Phone, A_Address, A_City);
+                    relative.NotAvailableTimes.Add(new Time(T_StartTime, T_EndTime, T_Day));
+                    RelativeTimeList.Add(relative);
+                }
+            }
+            catch (SqlException e)
+            {
+                MessageBox.Show(e.Message);
+            }
+            finally
+            {
+                CloseDB();
+            }
+            return RelativeTimeList;
+        }
+        public static List<Citizen> GetCitizenTime(int serialNumber)//stefan
+        {
+            List<Citizen> CitizenTimeList = new List<Citizen>();
+            try
+            {
+                ConnectDB();
+                SqlCommand cmd = new SqlCommand("SP_GetCitizenTimeFromSensor", dbconn);
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.Add(new SqlParameter("@SerialNumber", serialNumber));
+                SqlDataReader reader = cmd.ExecuteReader();
+
+                while (reader.Read())
+                {
+                    string C_CPRNR = reader["C_CPRNR"].ToString();
+                    string C_Name = reader["C_Name"].ToString();
+                    string A_Address = reader["A_Address"].ToString();
+                    string A_City = reader["A_City"].ToString();
+                    DateTime T_StartTime = DateTime.Parse(reader["T_StartTime"].ToString());
+                    DateTime T_EndTime = DateTime.Parse(reader["T_EndTime"].ToString());
+                    string T_Day = reader["T_Day"].ToString();
+
+                    Citizen citizen = new Citizen(C_CPRNR, C_Name, A_Address, A_City);
+                    citizen.HomeCareTimes.Add(new Time(T_StartTime, T_EndTime, T_Day));
+                    CitizenTimeList.Add(citizen);
+
+                }
+            }
+            catch (SqlException e)
+            {
+                MessageBox.Show(e.Message);
+            }
+            finally
+            {
+                CloseDB();
+            }
+            return CitizenTimeList;
+        }
         private static void ConnectDB() {
             dbconn = new SqlConnection(DBHelper._connectionString);
             dbconn.Open();
         }
-
         private static void CloseDB() {
             dbconn.Close();
             dbconn.Dispose();

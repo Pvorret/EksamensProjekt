@@ -18,6 +18,9 @@ namespace EksamensProjekt.Helper {
             this.CPRNR = cpr;
             this.TimeRange = timeRange;
         }
-        
+        public void GetTimeRangeRuleFromSensorSerialNumber(int serialNumber)
+        {
+
+        }
     }
 }
