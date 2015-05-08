@@ -41,7 +41,7 @@ namespace EksamensProjekt.Controller
             SensorRule sensorRule = new SensorRule(sensorDependency, waitOrLook, timeToWait, timeToLook);
             RuleSetDBFacade.AddSensorRuleFromSerialNumber(serialNumber, sensorRule);
         }
-        public void AddTimeRangeRuleFromSerialNumber() {
+        public void AddTimeRangeRuleFromSerialNumber(int serialNumber, string day, DateTime startTime, DateTime endTime, string relativeCprNr, string actingRule, bool contactHelper) {
 
         }
         public Dictionary<string, int> GetSensorRuleManagementSensorSerialNumber(int serialNumber)
