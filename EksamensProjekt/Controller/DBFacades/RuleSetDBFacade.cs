@@ -23,7 +23,6 @@ namespace EksamensProjekt.Controller.DBFacades
             dbconn.Close();
             dbconn.Dispose();
         }
-
         public static SensorLog CreateSensorLog(SensorLog sl)
         {
             SensorLog sensorLog = new SensorLog(sl.SensorSerialNumber, sl.ActivationTime);
@@ -73,7 +72,6 @@ namespace EksamensProjekt.Controller.DBFacades
                 CloseDB();
             }
         }
-
         public static List<SensorRule> GetSensorRuleFromSerialNumber(int serialNumber) {
             List<SensorRule> sensorruleList = new List<SensorRule>();
 
@@ -106,7 +104,6 @@ namespace EksamensProjekt.Controller.DBFacades
 
             return sensorruleList;
         }
-
         public static Dictionary<string, int> GetSensorRuleManagementFromSensorSerialNumber(int serialNumber)
         {
             Dictionary<string, int> ruleManagement = new Dictionary<string, int>();

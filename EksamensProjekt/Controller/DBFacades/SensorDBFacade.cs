@@ -14,7 +14,6 @@ namespace EksamensProjekt.Controller.DBFacades
     {
         public static SqlConnection dbconn;
         static SqlCommand cmd;
-
         public static void CreateSensor(Sensor sensor)//Stefan
         {
             int activatedToBit;
@@ -113,7 +112,6 @@ namespace EksamensProjekt.Controller.DBFacades
             }
             return sensors;
         }
-
         public static bool DeleteSensor(int serialNumber)
         {
             try
@@ -135,93 +133,16 @@ namespace EksamensProjekt.Controller.DBFacades
                 CloseDB();
             }
         }
-        public static List<Relative> GetRelativeTime(string cprNr)//Stefan
-        {
-            List<Relative> RelativeTimeList = new List<Relative>();
-            try
-            {
-                ConnectDB();
-                SqlCommand cmd = new SqlCommand("SP_GetRelativeTimeFromCitizen", dbconn);
-                cmd.CommandType = CommandType.StoredProcedure;
-                cmd.Parameters.Add(new SqlParameter("@Citizen_CPRNR", cprNr));
-                SqlDataReader reader = cmd.ExecuteReader();
-
-                while (reader.Read())
-                {
-                    string R_CPRNR = reader["R_CPRNR"].ToString();
-                    string R_Name = reader["R_Name"].ToString();
-                    string R_Phone = reader["R_Phonenumber"].ToString();
-                    string A_Address = reader["A_Address"].ToString();
-                    string A_City = reader["A_City"].ToString();
-                    
-                    DateTime T_StartTime = DateTime.Parse(reader["StartTime"].ToString());
-                    DateTime T_EndTime = DateTime.Parse(reader["EndTime"].ToString());
-                    string T_Day = reader["T_Day"].ToString();
-
-                    Relative relative = new Relative(R_CPRNR, R_Name, R_Phone, A_Address, A_City);
-                    relative.NotAvailableTimes.Add(new Time(T_StartTime, T_EndTime, T_Day));
-                    RelativeTimeList.Add(relative);                 
-                }
-            }
-            catch(SqlException e)
-            {
-                MessageBox.Show(e.Message);
-            }
-            finally
-            {
-                CloseDB();
-            }
-            return RelativeTimeList;
-        }
-        public static List<Citizen> GetCitizenTime(int serialNumber)//stefan
-        {
-            List<Citizen> CitizenTimeList = new List<Citizen>();
-            try
-            {
-                ConnectDB();
-                SqlCommand cmd = new SqlCommand("SP_GetCitizenTimeFromSensor", dbconn);
-                cmd.CommandType = CommandType.StoredProcedure;
-                cmd.Parameters.Add(new SqlParameter("@SerialNumber", serialNumber));
-                SqlDataReader reader = cmd.ExecuteReader();
-
-                while (reader.Read())
-                {
-                    string C_CPRNR = reader["C_CPRNR"].ToString();
-                    string C_Name = reader["C_Name"].ToString();
-                    string A_Address = reader["A_Address"].ToString();
-                    string A_City = reader["A_City"].ToString();
-                    DateTime T_StartTime = DateTime.Parse(reader["T_StartTime"].ToString());
-                    DateTime T_EndTime = DateTime.Parse(reader["T_EndTime"].ToString());
-                    string T_Day = reader["T_Day"].ToString();
-
-                    Citizen citizen = new Citizen(C_CPRNR, C_Name, A_Address, A_City);
-                    citizen.HomeCareTimes.Add(new Time(T_StartTime, T_EndTime, T_Day));
-                    CitizenTimeList.Add(citizen);
-
-                }
-            }
-            catch(SqlException e)
-            {
-                MessageBox.Show(e.Message);
-            }
-            finally
-            {
-                CloseDB();
-            }
-            return CitizenTimeList;
-        }
         public static void ConnectDB()
         {
             dbconn = new SqlConnection(DBHelper._connectionString);
             dbconn.Open();
         }
-
         public static void CloseDB()
         {
             dbconn.Close();
             dbconn.Dispose();
         }
-
         public static List<string> GetSensorTypeFromCitizen(string CprNr)
         {
             List<string> SensorTypes = new List<string>();
@@ -251,7 +172,6 @@ namespace EksamensProjekt.Controller.DBFacades
             }
             return SensorTypes;
         }
-
         public static void ConnectSensorToCitizen(int SensorSerialNumber, string CPRNR, string SensorLocation)//NY
         {
             try
