@@ -171,5 +171,6 @@ namespace EksamensProjekt.Controller.DBFacades
             }
             return timerangerules;
         }
+
     }
 }
