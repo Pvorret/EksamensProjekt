@@ -201,6 +201,8 @@ namespace EksamensProjekt.Controller.DBFacades
                 SqlCommand cmd = new SqlCommand("SP_AddTimeRangeRuleFromSensorSerialNumber", dbconn);
                 cmd.CommandType = CommandType.StoredProcedure;
                 cmd.Parameters.Add(new SqlParameter("@S_SerialNumber", serialNumber));
+                cmd.Parameters.Add(new SqlParameter("@T_Day", timeRange.Time));
+                cmd.Parameters.Add(new SqlParameter("@T_StartTime", timeRange.Time.StartTime));
                     
 
             }

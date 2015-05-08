@@ -11,7 +11,7 @@ namespace EksamensProjekt.Helper {
         public string CPRNR { get; set; }
         public string ActingRule { get; set; }
         public bool ContactHelper { get; set; }
-        public Time TimeRange { get; set; }
+        public Time Time { get; set; }
 
         public TimeRangeRule(string cpr, string actingRule, Time timeRange) 
         {
