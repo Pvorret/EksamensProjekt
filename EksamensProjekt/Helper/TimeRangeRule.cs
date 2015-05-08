@@ -19,9 +19,5 @@ namespace EksamensProjekt.Helper {
             this.CPRNR = cpr;
             this.Time = time;
         }
-        public List<TimeRangeRule> GetTimeRangeRuleFromSensorSerialNumber(int serialNumber)
-        {
-            return Controller.DBFacades.RuleSetDBFacade.GetTimeRangeRuleFromSensorSerialNumber(serialNumber);
-        }
     }
 }

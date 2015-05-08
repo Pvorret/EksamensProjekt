@@ -88,7 +88,7 @@ namespace EksamensProjekt.Controller.DBFacades
 
                 while (rdr.HasRows && rdr.Read()) {
                     int SensorDependency = (int)rdr["SR_S_SensorDependecy"];
-                    bool WaitOrLook = rdr.GetBoolean(int.Parse(rdr["SR_WaitOrLook"].ToString()));
+                    bool WaitOrLook = Convert.ToBoolean(int.Parse(rdr["SR_WaitOrLook"].ToString()));
                     int TimeToWait = (int)rdr["SR_TimeToWait"];
                     int TimeToLook = (int)rdr["SR_TimeToLook"];
                     SensorRule sensorrule = new SensorRule(SensorDependency, WaitOrLook, TimeToWait, TimeToLook);
@@ -186,11 +186,17 @@ namespace EksamensProjekt.Controller.DBFacades
                 cmd.Parameters.Add(new SqlParameter("@SR_TimeToLook", sensorrule.TimeToLook));
                 
                 cmd.ExecuteNonQuery();
+
+                CloseDB();
             }
             catch (SqlException e) {
 
                 throw new Exception("Error in storing SensorRule i DB " + e.Message);
             }
+        }
+        public static void AddSensorRuleManagement(string ruleSet, int serialNumber)
+        {
+
         }
         public static void AddTimeRangeRuleFromSensorSerialNumber(int serialNumber, TimeRangeRule timeRange)
         {
@@ -202,7 +208,13 @@ namespace EksamensProjekt.Controller.DBFacades
                 cmd.Parameters.Add(new SqlParameter("@S_SerialNumber", serialNumber));
                 cmd.Parameters.Add(new SqlParameter("@T_Day", timeRange.Time));
                 cmd.Parameters.Add(new SqlParameter("@T_StartTime", timeRange.Time.StartTime));
-                    
+                cmd.Parameters.Add(new SqlParameter("@T_Endtime", timeRange.Time.EndTime));
+                cmd.Parameters.Add(new SqlParameter("@TRR_R_CPRNR", timeRange.CPRNR));
+                cmd.Parameters.Add(new SqlParameter("@TRR_ActingRule", timeRange.ActingRule));
+                cmd.Parameters.Add(new SqlParameter("@TRR_ContactHelper", Convert.ToInt32(timeRange.ContactHelper)));
+                cmd.ExecuteNonQuery();
+
+                CloseDB();
 
             }
             catch (SqlException e)
