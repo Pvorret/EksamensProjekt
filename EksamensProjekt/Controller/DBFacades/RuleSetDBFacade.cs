@@ -7,6 +7,7 @@ using System.Data;
 using System.Data.SqlClient;
 using EksamensProjekt.Model;
 using EksamensProjekt.Helper;
+using EksamensProjekt.Helper;
 
 namespace EksamensProjekt.Controller.DBFacades
 {
@@ -192,7 +193,7 @@ namespace EksamensProjekt.Controller.DBFacades
                 throw new Exception("Error in storing SensorRule i DB " + e.Message);
             }
         }
-        public static void AddTimeRangeRuleFromSensorSerialNumber(int serialNumber, string day, DateTime startTime, DateTime endTime, string relativeCprNr, string actingRule, bool contactHelper)
+        public static void AddTimeRangeRuleFromSensorSerialNumber(int serialNumber, TimeRangeRule timeRange)
         {
             try
             {
