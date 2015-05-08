@@ -9,7 +9,7 @@ using EksamensProjekt.Helper;
 
 namespace EksamensProjekt.Controller
 {
-    class RuleSetController
+    public class RuleSetController
     {
         public SensorLog SensorLog;
         

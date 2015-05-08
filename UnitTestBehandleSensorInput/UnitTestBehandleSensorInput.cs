@@ -10,5 +10,10 @@ namespace UnitTest {
         public void TestMethod1GetSensorRuleFromSerialNumber() {
 
         }
+        [TestMethod]
+        public void TestAddAndGetTimeRangeRuleFromSensorSerialNumber()
+        {
+
+        }
     }
 }
