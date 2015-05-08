@@ -186,6 +186,8 @@ namespace EksamensProjekt.Controller.DBFacades
                 cmd.Parameters.Add(new SqlParameter("@SR_TimeToLook", sensorrule.TimeToLook));
                 
                 cmd.ExecuteNonQuery();
+
+                CloseDB();
             }
             catch (SqlException e) {
 
@@ -206,7 +208,9 @@ namespace EksamensProjekt.Controller.DBFacades
                 cmd.Parameters.Add(new SqlParameter("@TRR_R_CPRNR", timeRange.CPRNR));
                 cmd.Parameters.Add(new SqlParameter("@TRR_ActingRule", timeRange.ActingRule));
                 cmd.Parameters.Add(new SqlParameter("@TRR_ContactHelper", Convert.ToInt32(timeRange.ContactHelper)));
-                cmd.ExecuteNonQuery();    
+                cmd.ExecuteNonQuery();
+
+                CloseDB();
 
             }
             catch (SqlException e)
