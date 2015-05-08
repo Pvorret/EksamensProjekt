@@ -10,7 +10,7 @@ using EksamensProjekt.Helper;
 
 namespace EksamensProjekt.Controller.DBFacades
 {
-    class RuleSetDBFacade
+    public class RuleSetDBFacade
     {
         static SqlConnection dbconn;
         private static void ConnectDB()

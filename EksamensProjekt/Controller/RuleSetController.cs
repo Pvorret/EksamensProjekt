@@ -9,7 +9,7 @@ using EksamensProjekt.Helper;
 
 namespace EksamensProjekt.Controller
 {
-    class RuleSetController
+    public class RuleSetController
     {
         public SensorLog SensorLog;
         
@@ -31,11 +31,13 @@ namespace EksamensProjekt.Controller
         }
 
         public void AddSensorRuleManagement();
-        public void GetSensorRuleFromSerialNumber(int serialnumber) {
+        public List<SensorRule> GetSensorRuleFromSerialNumber(int serialnumber) {
             foreach (SensorRule s in RuleSetDBFacade.GetSensorRuleFromSerialNumber(serialnumber)) {
                 SensorRule sensorrule = new SensorRule(s.SensorDependency, s.WaitOrLook, s.TimeToWait, s.TimeToWait);
                 SensorRule.BehandleinputfraRuleSetController(sensorrule);
             }
+
+            return RuleSetDBFacade.GetSensorRuleFromSerialNumber(serialnumber);
         }
         public void AddSensorRuleFromSerialNumber(int serialNumber, int sensorDependency, bool waitOrLook, int timeToWait, int timeToLook)//Stefan
         {
