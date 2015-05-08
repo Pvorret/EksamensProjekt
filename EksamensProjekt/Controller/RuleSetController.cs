@@ -40,5 +40,9 @@ namespace EksamensProjekt.Controller
         {
 
         }
+
+        public void AddTimeRangeRuleFromSerialNumber() {
+
+        }
     }
 }
