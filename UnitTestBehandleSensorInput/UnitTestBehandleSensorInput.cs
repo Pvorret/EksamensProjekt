@@ -25,5 +25,10 @@ namespace UnitTest {
                 Assert.AreEqual(s, sensorrule);
             }
         }
+        [TestMethod]
+        public void TestAddAndGetTimeRangeRuleFromSensorSerialNumber()
+        {
+
+        }
     }
 }

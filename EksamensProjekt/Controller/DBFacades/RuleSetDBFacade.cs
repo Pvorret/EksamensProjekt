@@ -196,7 +196,19 @@ namespace EksamensProjekt.Controller.DBFacades
         }
         public static void AddSensorRuleManagement(string ruleSet, int serialNumber)
         {
+            try
+            {
+                ConnectDB();
+                SqlCommand cmd = new SqlCommand("SP_AddSensorRuleManagement", dbconn);
 
+                cmd.Parameters.Add(new SqlParameter("@SRM_RuleSet", ruleSet));
+                cmd.Parameters.Add(new SqlParameter("@SRM_S_SerialNumber", serialNumber));
+                cmd.ExecuteNonQuery();
+            }
+            catch (SqlException e)
+            {
+                throw new Exception("Error! Kunne ikke tilføje det til Databasen " + e.Message);
+            }
         }
         public static void AddTimeRangeRuleFromSensorSerialNumber(int serialNumber, TimeRangeRule timeRange)
         {
