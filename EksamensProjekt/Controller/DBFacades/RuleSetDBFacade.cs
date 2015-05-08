@@ -182,15 +182,31 @@ namespace EksamensProjekt.Controller.DBFacades
 
                 cmd.Parameters.Add(new SqlParameter("@SR_R_SensorDependency", sensorrule.SensorDependency));
                 cmd.Parameters.Add(new SqlParameter("@SR_WaitOrLook", sensorrule.WaitOrLook));
+                cmd.Parameters.Add(new SqlParameter("@SR_TimeToWait", sensorrule.TimeToWait));
+                cmd.Parameters.Add(new SqlParameter("@SR_TimeToLook", sensorrule.TimeToLook));
+                
+                cmd.ExecuteNonQuery();
             }
             catch (SqlException e) {
 
                 throw new Exception("Error in storing SensorRule i DB " + e.Message);
             }
         }
-        public static void AddTimeRangeRuleFromSensorSerialNumber(int serialNumber)
+        public static void AddTimeRangeRuleFromSensorSerialNumber(int serialNumber, string day, DateTime startTime, DateTime endTime, string relativeCprNr, string actingRule, bool contactHelper)
         {
+            try
+            {
+                ConnectDB();
+                SqlCommand cmd = new SqlCommand("SP_AddTimeRangeRuleFromSensorSerialNumber", dbconn);
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.Add(new SqlParameter("@S_SerialNumber", serialNumber));
+                    
 
+            }
+            catch (SqlException e)
+            {
+                throw new Exception("Error! TimeRangeRule kunne ikke tilføjes" + e.Message);
+            }
         }
     }
 }
