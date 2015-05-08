@@ -58,9 +58,9 @@
     <Compile Include="Controller\DBFacades\RuleSetDBFacade.cs" />
     <Compile Include="Controller\RuleSetController.cs" />
     <Compile Include="Model\SensorLog.cs" />
-    <Compile Include="Model\SensorRule.cs" />
+    <Compile Include="Helper\SensorRule.cs" />
     <Compile Include="Model\Time.cs" />
-    <Compile Include="Model\TimeRangeRule.cs" />
+    <Compile Include="Helper\TimeRangeRule.cs" />
     <Compile Include="View\ActivateSensor.xaml.cs">
       <DependentUpon>ActivateSensor.xaml</DependentUpon>
     </Compile>

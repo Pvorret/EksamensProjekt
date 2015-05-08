@@ -5,12 +5,15 @@ using System.Text;
 using System.Threading.Tasks;
 using EksamensProjekt.Controller.DBFacades;
 using EksamensProjekt.Model;
+using EksamensProjekt.Helper;
 
 namespace EksamensProjekt.Controller
 {
     class RuleSetController
     {
         public SensorLog SensorLog;
+        
+        
 
         public void CreateSensorLog(int serialNumber, string activationTime)
         {
@@ -28,7 +31,6 @@ namespace EksamensProjekt.Controller
         }
 
         public void GetSensorRuleFromSerialNumber(int serialnumber) {
-
             foreach (SensorRule s in RuleSetDBFacade.GetSensorRuleFromSerialNumber(serialnumber)) {
                 SensorRule sensorrule = new SensorRule(s.SensorDependency, s.WaitOrLook, s.TimeToWait, s.TimeToWait);
                 SensorRule.BehandleinputfraRuleSetController(sensorrule);
