@@ -6,7 +6,7 @@
     <ProjectGuid>{C1AF0E9C-E676-4EAC-AD77-44CF30A7A55C}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>UnitTestBehandleSensorInput</RootNamespace>
+    <RootNamespace>UnitTest</RootNamespace>
     <AssemblyName>UnitTestBehandleSensorInput</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
@@ -50,7 +50,7 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
-    <Compile Include="UnitTest1.cs" />
+    <Compile Include="UnitTestBehandleSensorInput.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
