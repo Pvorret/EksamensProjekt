@@ -30,6 +30,7 @@ namespace EksamensProjekt.Controller
             RuleSetDBFacade.UpdateSensorLog(SensorLog);
         }
 
+        public void AddSensorRuleManagement();
         public void GetSensorRuleFromSerialNumber(int serialnumber) {
             foreach (SensorRule s in RuleSetDBFacade.GetSensorRuleFromSerialNumber(serialnumber)) {
                 SensorRule sensorrule = new SensorRule(s.SensorDependency, s.WaitOrLook, s.TimeToWait, s.TimeToWait);
