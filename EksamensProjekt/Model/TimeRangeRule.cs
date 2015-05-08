@@ -16,5 +16,6 @@ namespace EksamensProjekt.Model {
             this.CPRNR = cpr;
             this.TimeRange = timeRange;
         }
+        
     }
 }
