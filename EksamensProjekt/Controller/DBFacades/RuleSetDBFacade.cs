@@ -171,8 +171,7 @@ namespace EksamensProjekt.Controller.DBFacades
             }
             return timerangerules;
         }
-
-        public static void AddSensroRuleFromSerialNumber(int serialNumber) {
+        public static void AddSensorRuleFromSerialNumber(int serialNumber) {
             try {
                 ConnectDB();
 
@@ -192,6 +191,10 @@ namespace EksamensProjekt.Controller.DBFacades
                 
                 throw new Exception("Error in storing SensorRule i DB " + e.Message);
             }
+        }
+        public static void AddTimeRangeRuleFromSensorSerialNumber(int serialNumber)
+        {
+
         }
     }
 }
