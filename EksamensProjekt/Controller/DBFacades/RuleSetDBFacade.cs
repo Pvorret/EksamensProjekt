@@ -194,6 +194,10 @@ namespace EksamensProjekt.Controller.DBFacades
                 throw new Exception("Error in storing SensorRule i DB " + e.Message);
             }
         }
+        public static void AddSensorRuleManagement(string ruleSet, int serialNumber)
+        {
+
+        }
         public static void AddTimeRangeRuleFromSensorSerialNumber(int serialNumber, TimeRangeRule timeRange)
         {
             try
