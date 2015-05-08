@@ -18,5 +18,6 @@ namespace EksamensProjekt.Helper {
             this.CPRNR = cpr;
             this.TimeRange = timeRange;
         }
+        
     }
 }
