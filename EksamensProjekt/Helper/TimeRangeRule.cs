@@ -13,10 +13,11 @@ namespace EksamensProjekt.Helper {
         public bool ContactHelper { get; set; }
         public Time Time { get; set; }
 
-        public TimeRangeRule(string cpr, string actingRule) 
+        public TimeRangeRule(string cpr, string actingRule, Time time) 
         {
             this.ActingRule = actingRule;
             this.CPRNR = cpr;
+            this.Time = time;
         }
         public List<TimeRangeRule> GetTimeRangeRuleFromSensorSerialNumber(int serialNumber)
         {
