@@ -10,6 +10,7 @@ namespace EksamensProjekt.Helper {
     class TimeRangeRule {
         public string CPRNR { get; set; }
         public string ActingRule { get; set; }
+        public bool ContactHelper { get; set; }
         public Time TimeRange { get; set; }
 
         public TimeRangeRule(string cpr, string actingRule, Time timeRange) 
