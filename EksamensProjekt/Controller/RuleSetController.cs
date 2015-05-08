@@ -36,9 +36,10 @@ namespace EksamensProjekt.Controller
                 SensorRule.BehandleinputfraRuleSetController(sensorrule);
             }
         }
-        public void AddSensorRuleFromSerialNumber(int serialNumber)
+        public void AddSensorRuleFromSerialNumber(int serialNumber, int sensorDependency, bool waitOrLook, int timeToWait, int timeToLook)//Stefan
         {
-
+            SensorRule sensorRule = new SensorRule(sensorDependency, waitOrLook, timeToWait, timeToLook);
+            RuleSetDBFacade.AddSensorRuleFromSerialNumber(serialNumber, sensorRule);
         }
     }
 }
