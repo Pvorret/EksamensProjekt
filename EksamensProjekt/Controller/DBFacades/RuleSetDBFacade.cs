@@ -7,7 +7,6 @@ using System.Data;
 using System.Data.SqlClient;
 using EksamensProjekt.Model;
 using EksamensProjekt.Helper;
-using EksamensProjekt.Helper;
 
 namespace EksamensProjekt.Controller.DBFacades
 {
