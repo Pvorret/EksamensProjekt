@@ -30,7 +30,10 @@ namespace EksamensProjekt.Controller
             RuleSetDBFacade.UpdateSensorLog(SensorLog);
         }
 
-        public void AddSensorRuleManagement();
+        public void AddSensorRuleManagement(string ruleset, int serialnumber) {
+            RuleSetDBFacade.AddSensorRuleManagement(ruleset, serialnumber);
+        }
+
         public void GetSensorRuleFromSerialNumber(int serialnumber) {
             foreach (SensorRule s in RuleSetDBFacade.GetSensorRuleFromSerialNumber(serialnumber)) {
                 SensorRule sensorrule = new SensorRule(s.SensorDependency, s.WaitOrLook, s.TimeToWait, s.TimeToWait);
@@ -42,6 +45,7 @@ namespace EksamensProjekt.Controller
             SensorRule sensorRule = new SensorRule(sensorDependency, waitOrLook, timeToWait, timeToLook);
             RuleSetDBFacade.AddSensorRuleFromSerialNumber(serialNumber, sensorRule);
         }
+
         public void AddTimeRangeRuleFromSerialNumber(int serialNumber, string day, DateTime startTime, DateTime endTime, string relativeCprNr, string actingRule, bool contactHelper) {
             TimeRangeRule timerange = new TimeRangeRule(relativeCprNr, actingRule, new Time(startTime, endTime, day));
             RuleSetDBFacade.AddTimeRangeRuleFromSensorSerialNumber(serialNumber, timerange);
