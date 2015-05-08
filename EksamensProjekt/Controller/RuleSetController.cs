@@ -13,6 +13,8 @@ namespace EksamensProjekt.Controller
     {
         public SensorLog SensorLog;
         
+        
+
         public void CreateSensorLog(int serialNumber, string activationTime)
         {
             SensorLog = new SensorLog(serialNumber, Convert.ToDateTime(activationTime));
@@ -36,6 +38,9 @@ namespace EksamensProjekt.Controller
         }
         public void AddSensorRuleFromSerialNumber(int serialNumber)
         {
+
+        }
+        public void AddTimeRangeRuleFromSerialNumber() {
 
         }
         public Dictionary<string, int> GetSensorRuleManagementSensorSerialNumber(int serialNumber)
