@@ -7,7 +7,6 @@ using System.Data;
 using System.Data.SqlClient;
 using EksamensProjekt.Model;
 using EksamensProjekt.Helper;
-using EksamensProjekt.Helper;
 
 namespace EksamensProjekt.Controller.DBFacades
 {
@@ -89,7 +88,7 @@ namespace EksamensProjekt.Controller.DBFacades
 
                 while (rdr.HasRows && rdr.Read()) {
                     int SensorDependency = (int)rdr["SR_S_SensorDependecy"];
-                    bool WaitOrLook = rdr.GetBoolean(int.Parse(rdr["SR_WaitOrLook"].ToString()));
+                    bool WaitOrLook = Convert.ToBoolean(int.Parse(rdr["SR_WaitOrLook"].ToString()));
                     int TimeToWait = (int)rdr["SR_TimeToWait"];
                     int TimeToLook = (int)rdr["SR_TimeToLook"];
                     SensorRule sensorrule = new SensorRule(SensorDependency, WaitOrLook, TimeToWait, TimeToLook);
