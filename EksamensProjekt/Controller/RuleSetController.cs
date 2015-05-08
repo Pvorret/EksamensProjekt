@@ -49,5 +49,9 @@ namespace EksamensProjekt.Controller
         {
             return DBFacades.RuleSetDBFacade.GetSensorRuleManagementFromSensorSerialNumber(serialNumber);
         }
+        public List<TimeRangeRule> GetTimeRangeRuleFromSensorSerialNumber(int serialNumber)
+        {
+            return DBFacades.RuleSetDBFacade.GetTimeRangeRuleFromSensorSerialNumber(serialNumber);
+        }
     }
 }
