@@ -172,5 +172,26 @@ namespace EksamensProjekt.Controller.DBFacades
             return timerangerules;
         }
 
+        public static void AddSensroRuleFromSerialNumber(int serialNumber) {
+            try {
+                ConnectDB();
+
+                SqlCommand cmd = new SqlCommand("SP_AddSensorRuleFromSerialNumber", dbconn);
+                cmd.CommandType = CommandType.StoredProcedure;
+
+                cmd.Parameters.Add(new SqlParameter("@S_SerialNumber", serialNumber));
+
+                SqlDataReader rdr;
+                rdr = cmd.ExecuteReader();
+
+                while (rdr.HasRows && rdr.Read()) {
+
+                }
+            }
+            catch (SqlException e) {
+                
+                throw new Exception("Error in storing SensorRule i DB " + e.Message);
+            }
+        }
     }
 }
