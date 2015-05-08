@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using System.Data;
 using System.Data.SqlClient;
 using EksamensProjekt.Model;
+using EksamensProjekt.Helper;
 
 namespace EksamensProjekt.Controller.DBFacades
 {
