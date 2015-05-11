@@ -8,6 +8,7 @@ namespace EksamensProjekt.Model
 {
     public class Relative : Person
     {
+        public int ID { get; set; }
         public string CitizenCprNr { get; set; }
         public string Email { get; set; }
         public List<Time> NotAvailableTimes { get; set; }

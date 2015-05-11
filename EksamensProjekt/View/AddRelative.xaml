@@ -32,8 +32,8 @@
         <Label Content="t" HorizontalAlignment="Left" Margin="214,328,0,0" VerticalAlignment="Top"/>
         <TextBox Name="NotAvailableEndHour_TextBox" HorizontalAlignment="Left" Height="25" Margin="208,356,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="30"/>
         <Label Content="m" HorizontalAlignment="Left" Margin="245,329,0,0" VerticalAlignment="Top"/>
-        <Button Name="AddNotAvailableTime_Button" Content="Tilføj Tidspunkt" Height="25" HorizontalAlignment="Left" Margin="15,386,0,0" VerticalAlignment="Top" Width="100" Click="AddNotAvailableTime_Button_Click"/>
         <TextBox Name="NotAvailableEndMinute_TextBox" HorizontalAlignment="Left" Height="25" Margin="241,356,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="30"/>
+        <Button Name="AddNotAvailableTime_Button" Content="Tilføj Tidspunkt" Height="25" HorizontalAlignment="Left" Margin="15,386,0,0" VerticalAlignment="Top" Width="100" Click="AddNotAvailableTime_Button_Click"/>
         <ListBox Name="NotAvailableTimes_ListBox" HorizontalAlignment="Left" Height="58" Margin="120,386,0,0" VerticalAlignment="Top" Width="151"/>
         <Button Name="AddRelative_Button" Content="Tilføj pårørende" HorizontalAlignment="Left" Margin="15,454,0,0" VerticalAlignment="Top" Width="100" Height="25" Click="AddRelative_Button_Click"/>
         <Button Name="Cancel_Button" Content="Annuller" HorizontalAlignment="Left" Margin="171,454,0,0" VerticalAlignment="Top" Width="100" Height="25" Click="Cancel_Button_Click"/>

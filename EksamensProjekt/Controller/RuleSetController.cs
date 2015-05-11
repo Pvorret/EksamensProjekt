@@ -12,13 +12,13 @@ namespace EksamensProjekt.Controller
     public class RuleSetController
     {
         public SensorLog SensorLog;
-        
+        public int SensorRuleID { get; set; }
+
         public void CreateSensorLog(int serialNumber, string activationTime)
         {
             SensorLog = new SensorLog(serialNumber, Convert.ToDateTime(activationTime));
             SensorLog = RuleSetDBFacade.CreateSensorLog(SensorLog);
         }
-
         public void UpdateSensorLog(string contactTime, string contactPerson, string contactMessage)
         {
             SensorLog = new SensorLog();
@@ -27,17 +27,14 @@ namespace EksamensProjekt.Controller
             SensorLog.ContactMessage = contactMessage;
             RuleSetDBFacade.UpdateSensorLog(SensorLog);
         }
-
         public void AddSensorRuleManagement(string ruleset, int serialnumber) {
             RuleSetDBFacade.AddSensorRuleManagement(ruleset, serialnumber);
         }
-
         public List<SensorRule> GetSensorRuleFromSerialNumber(int serialnumber) {
             foreach (SensorRule s in RuleSetDBFacade.GetSensorRuleFromSerialNumber(serialnumber)) {
                 SensorRule sensorrule = new SensorRule(s.SensorDependency, s.WaitOrLook, s.TimeToWait, s.TimeToWait);
                 SensorRule.BehandleinputfraRuleSetController(sensorrule);
             }
-
             return RuleSetDBFacade.GetSensorRuleFromSerialNumber(serialnumber);
         }
         public void AddSensorRuleFromSerialNumber(int serialNumber, int sensorDependency, bool waitOrLook, int timeToWait, int timeToLook)//Stefan
@@ -45,7 +42,6 @@ namespace EksamensProjekt.Controller
             SensorRule sensorRule = new SensorRule(sensorDependency, waitOrLook, timeToWait, timeToLook);
             RuleSetDBFacade.AddSensorRuleFromSerialNumber(serialNumber, sensorRule);
         }
-
         public void AddTimeRangeRuleFromSerialNumber(int serialNumber, string day, DateTime startTime, DateTime endTime, string relativeCprNr, string actingRule, bool contactHelper) {
             TimeRangeRule timerange = new TimeRangeRule(relativeCprNr, actingRule, new Time(startTime, endTime, day));
             RuleSetDBFacade.AddTimeRangeRuleFromSensorSerialNumber(serialNumber, timerange);
