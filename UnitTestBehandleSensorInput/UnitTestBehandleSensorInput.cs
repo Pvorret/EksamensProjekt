@@ -63,7 +63,7 @@ namespace UnitTest {
                 string actingRule = "SR " + s.Id;
                 rulesetcontroller.AddTimeRangeRuleFromSerialNumber(randomSerialNumber, day, startTime, endTime, relativeCprNr, actingRule, contactHelper);
                 TimeRangeRule timerangerule = new TimeRangeRule(relativeCprNr, actingRule, contactHelper, new Time(startTime, endTime, day));
-                foreach (TimeRangeRule t in rulesetcontroller.GetTimeRangeRuleFromSensorSerialNumber(randomSerialNumber)) {
+                foreach (TimeRangeRule t in rulesetcontroller.GetTimeRangeRuleFromSerialNumber(randomSerialNumber)) {
                     Assert.AreEqual(t, timerangerule);
                 }
             }
