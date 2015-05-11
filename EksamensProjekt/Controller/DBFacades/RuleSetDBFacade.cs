@@ -25,19 +25,19 @@ namespace EksamensProjekt.Controller.DBFacades
         }
         public static SensorLog CreateSensorLog(SensorLog sl)
         {
-            SensorLog sensorLog = new SensorLog(sl.SensorSerialNumber, sl.ActivationTime);
+            SensorLog sensorLog = new SensorLog(sl.SerialNumber, sl.ActivationTime);
             try
             {
                 ConnectDB();
                 SqlCommand cmd = new SqlCommand("SP_CreateSensorLog", dbconn);
                 cmd.CommandType = CommandType.StoredProcedure;
-                cmd.Parameters.Add(new SqlParameter("@SerialNumber", sl.SensorSerialNumber));
+                cmd.Parameters.Add(new SqlParameter("@SerialNumber", sl.SerialNumber));
                 cmd.Parameters.Add(new SqlParameter("@ActivationTime", sl.ActivationTime));
                 SqlDataReader rdr = cmd.ExecuteReader();
                 
                 while(rdr.HasRows && rdr.Read())
                 {
-                    sensorLog.ID = Convert.ToInt32(rdr["SL_ID"]);
+                    sensorLog.Id = Convert.ToInt32(rdr["SL_ID"]);
                 }
             }
             catch (SqlException e)
@@ -57,7 +57,7 @@ namespace EksamensProjekt.Controller.DBFacades
                 ConnectDB();
                 SqlCommand cmd = new SqlCommand("SP_UpdateSensorLog", dbconn);
                 cmd.CommandType = CommandType.StoredProcedure;
-                cmd.Parameters.Add(new SqlParameter("@ID", sl.ID));
+                cmd.Parameters.Add(new SqlParameter("@ID", sl.Id));
                 cmd.Parameters.Add(new SqlParameter("@ContactPerson", sl.ContactPerson));
                 cmd.Parameters.Add(new SqlParameter("@ContactTime", sl.ContactTime));
                 cmd.Parameters.Add(new SqlParameter("@ContactMessage", sl.ContactMessage));
@@ -72,7 +72,7 @@ namespace EksamensProjekt.Controller.DBFacades
                 CloseDB();
             }
         }
-        public static List<SensorRule> GetSensorRuleFromSerialNumber(int serialNumber) {
+        public static List<SensorRule> GetSensorRuleFromSensorSerialNumber(int serialNumber) {
             List<SensorRule> sensorruleList = new List<SensorRule>();
 
             try {
@@ -171,7 +171,7 @@ namespace EksamensProjekt.Controller.DBFacades
             }
             return timerangerules;
         }
-        public static void AddSensorRuleFromSerialNumber(int serialNumber, SensorRule sensorRule) {
+        public static void AddSensorRuleFromSensorSerialNumber(int serialNumber, SensorRule sensorRule) {
             try {
                 ConnectDB();
 

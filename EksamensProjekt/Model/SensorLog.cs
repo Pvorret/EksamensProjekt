@@ -8,25 +8,25 @@ namespace EksamensProjekt.Model
 {
     public class SensorLog
     {
-        public int ID { get; set; }
-        public int SensorSerialNumber { get; set; }
+        public int Id { get; set; }
+        public int SerialNumber { get; set; }
         public DateTime ActivationTime { get; set; }
         public DateTime ContactTime { get; set; }
         public string ContactPerson { get; set; }
         public string ContactMessage { get; set; }
 
-        public SensorLog(int id, int sensorSerialNumber, DateTime activationTime, DateTime contactTime, string contactPerson, string contactMessage)
+        public SensorLog(int id, int serialNumber, DateTime activationTime, DateTime contactTime, string contactPerson, string contactMessage)
         {
-            this.ID = id;
-            this.SensorSerialNumber = sensorSerialNumber;
+            this.Id = id;
+            this.SerialNumber = serialNumber;
             this.ActivationTime = activationTime;
             this.ContactTime = contactTime;
             this.ContactPerson = contactPerson;
             this.ContactMessage = contactMessage;
         }
-        public SensorLog(int sensorSerialNumber, DateTime activationTime)
+        public SensorLog(int serialNumber, DateTime activationTime)
         {
-            this.SensorSerialNumber = sensorSerialNumber;
+            this.SerialNumber = serialNumber;
             this.ActivationTime = activationTime;
         }
         public SensorLog()
