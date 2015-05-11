@@ -12,13 +12,12 @@ namespace EksamensProjekt.Controller
     public class RuleSetController
     {
         public SensorLog SensorLog;
-        
+        public int SensorRuleId { get; set; }
         public void CreateSensorLog(int serialNumber, string activationTime)
         {
             SensorLog = new SensorLog(serialNumber, Convert.ToDateTime(activationTime));
             SensorLog = RuleSetDBFacade.CreateSensorLog(SensorLog);
         }
-
         public void UpdateSensorLog(string contactTime, string contactPerson, string contactMessage)
         {
             SensorLog = new SensorLog();
@@ -27,11 +26,9 @@ namespace EksamensProjekt.Controller
             SensorLog.ContactMessage = contactMessage;
             RuleSetDBFacade.UpdateSensorLog(SensorLog);
         }
-
         public void AddSensorRuleManagement(string ruleSet, int serialNumber) {
             RuleSetDBFacade.AddSensorRuleManagement(ruleSet, serialNumber);
         }
-
         public List<SensorRule> GetSensorRuleFromSerialNumber(int serialNumber) {
             foreach (SensorRule s in RuleSetDBFacade.GetSensorRuleFromSerialNumber(serialNumber)) {
                 SensorRule sensorrule = new SensorRule(s.Id, s.SensorDependency, s.WaitOrLook, s.TimeToWait, s.TimeToWait);
