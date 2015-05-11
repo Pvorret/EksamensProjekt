@@ -51,7 +51,7 @@ namespace EksamensProjekt.Controller.DBFacades {
                 ConnectDB();
                 foreach (KeyValuePair<string, int> sensortypeamount in sensorType) {
 
-                    SqlCommand cmd = new SqlCommand("SP_AddSensorTypeFromCitizenCPRNR", dbconn);
+                    SqlCommand cmd = new SqlCommand("SP_AddSensorTypeFromCitizenCprNr", dbconn);
                     cmd.CommandType = CommandType.StoredProcedure;
                     cmd.Parameters.Add(new SqlParameter("@C_CPRNR", cprNr));
                     cmd.Parameters.Add(new SqlParameter("@ST_Type", sensortypeamount.Key));
