@@ -167,14 +167,14 @@ namespace EksamensProjekt.Controller.DBFacades
             }
             return SensorTypes;
         }
-        public static void ConnectSensorToCitizen(int sensorSerialNumber, string cprNr, string sensorLocation)//NY
+        public static void ConnectSensorToCitizen(int serialNumber, string cprNr, string sensorLocation)//NY
         {
             try
             {
                 ConnectDB();
                 cmd = new SqlCommand("SP_ConnectSensorToCitizen", dbconn);
                 cmd.CommandType = CommandType.StoredProcedure;
-                cmd.Parameters.Add(new SqlParameter("@SerialNumber", sensorSerialNumber));
+                cmd.Parameters.Add(new SqlParameter("@SerialNumber", serialNumber));
                 cmd.Parameters.Add(new SqlParameter("@CPRNR", cprNr));
                 cmd.Parameters.Add(new SqlParameter("@Location", sensorLocation));
                 cmd.ExecuteNonQuery();

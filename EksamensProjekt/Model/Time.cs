@@ -8,7 +8,7 @@ namespace EksamensProjekt.Model
 {
     public class Time
     {
-        public int ID { get; set; }
+        public int Id { get; set; }
         public DateTime StartTime { get; set; }
         public DateTime EndTime { get; set; }
         public string Day { get; set; }
@@ -16,7 +16,7 @@ namespace EksamensProjekt.Model
 
         public Time(int id, DateTime startTime, DateTime endTime, string day)
         {
-            this.ID = id;
+            this.Id = id;
             this.StartTime = startTime;
             this.EndTime = endTime;
             this.Day = day;
