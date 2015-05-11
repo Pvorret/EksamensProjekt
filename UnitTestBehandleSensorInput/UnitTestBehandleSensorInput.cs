@@ -22,7 +22,6 @@ namespace UnitTest {
             sensorcontroller.CreateSensor(SerialNumber, "Hej Sensor");
 
             List<int> intlist = new List<int>();
-
             foreach (Sensor s in SensorDBFacade.GetSensor(0)) {
                 intlist.Add(s.SerialNumber);
             }
