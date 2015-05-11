@@ -14,9 +14,9 @@ namespace EksamensProjekt.Model
         public bool Activated { get; set; }
         Citizen Citizen { get; set; }
 
-        public Sensor(int serialnumber, string type)
+        public Sensor(int serialNumber, string type)
         {
-            this.SerialNumber = serialnumber;
+            this.SerialNumber = serialNumber;
             this.Type = type;
             this.Location = "";
             this.Activated = false;

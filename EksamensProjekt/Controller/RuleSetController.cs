@@ -12,13 +12,13 @@ namespace EksamensProjekt.Controller
     public class RuleSetController
     {
         public SensorLog SensorLog;
-        public int SensorRuleID { get; set; }
-
+        
         public void CreateSensorLog(int serialNumber, string activationTime)
         {
             SensorLog = new SensorLog(serialNumber, Convert.ToDateTime(activationTime));
             SensorLog = RuleSetDBFacade.CreateSensorLog(SensorLog);
         }
+
         public void UpdateSensorLog(string contactTime, string contactPerson, string contactMessage)
         {
             SensorLog = new SensorLog();
@@ -27,32 +27,36 @@ namespace EksamensProjekt.Controller
             SensorLog.ContactMessage = contactMessage;
             RuleSetDBFacade.UpdateSensorLog(SensorLog);
         }
-        public void AddSensorRuleManagement(string ruleset, int serialnumber) {
-            RuleSetDBFacade.AddSensorRuleManagement(ruleset, serialnumber);
+
+        public void AddSensorRuleManagement(string ruleSet, int serialNumber) {
+            RuleSetDBFacade.AddSensorRuleManagement(ruleSet, serialNumber);
         }
-        public List<SensorRule> GetSensorRuleFromSerialNumber(int serialnumber) {
-            foreach (SensorRule s in RuleSetDBFacade.GetSensorRuleFromSerialNumber(serialnumber)) {
-                SensorRule sensorrule = new SensorRule(s.SensorDependency, s.WaitOrLook, s.TimeToWait, s.TimeToWait);
+
+        public List<SensorRule> GetSensorRuleFromSerialNumber(int serialNumber) {
+            foreach (SensorRule s in RuleSetDBFacade.GetSensorRuleFromSerialNumber(serialNumber)) {
+                SensorRule sensorrule = new SensorRule(s.Id, s.SensorDependency, s.WaitOrLook, s.TimeToWait, s.TimeToWait);
                 SensorRule.BehandleinputfraRuleSetController(sensorrule);
             }
-            return RuleSetDBFacade.GetSensorRuleFromSerialNumber(serialnumber);
+
+            return RuleSetDBFacade.GetSensorRuleFromSerialNumber(serialNumber);
         }
         public void AddSensorRuleFromSerialNumber(int serialNumber, int sensorDependency, bool waitOrLook, int timeToWait, int timeToLook)//Stefan
         {
             SensorRule sensorRule = new SensorRule(sensorDependency, waitOrLook, timeToWait, timeToLook);
             RuleSetDBFacade.AddSensorRuleFromSerialNumber(serialNumber, sensorRule);
         }
+
         public void AddTimeRangeRuleFromSerialNumber(int serialNumber, string day, DateTime startTime, DateTime endTime, string relativeCprNr, string actingRule, bool contactHelper) {
-            TimeRangeRule timerange = new TimeRangeRule(relativeCprNr, actingRule, new Time(startTime, endTime, day));
-            RuleSetDBFacade.AddTimeRangeRuleFromSensorSerialNumber(serialNumber, timerange);
+            TimeRangeRule timerange = new TimeRangeRule(relativeCprNr, actingRule, contactHelper, new Time(startTime, endTime, day));
+            RuleSetDBFacade.AddTimeRangeRuleFromSerialNumber(serialNumber, timerange);
         }
-        public Dictionary<string, int> GetSensorRuleManagementSensorSerialNumber(int serialNumber)
+        public Dictionary<string, int> GetSensorRuleManagementFromSerialNumber(int serialNumber)
         {
-            return DBFacades.RuleSetDBFacade.GetSensorRuleManagementFromSensorSerialNumber(serialNumber);
+            return DBFacades.RuleSetDBFacade.GetSensorRuleManagementFromSerialNumber(serialNumber);
         }
-        public List<TimeRangeRule> GetTimeRangeRuleFromSensorSerialNumber(int serialNumber)
+        public List<TimeRangeRule> GetTimeRangeRuleFromSerialNumber(int serialNumber)
         {
-            return DBFacades.RuleSetDBFacade.GetTimeRangeRuleFromSensorSerialNumber(serialNumber);
+            return DBFacades.RuleSetDBFacade.GetTimeRangeRuleFromSerialNumber(serialNumber);
         }
     }
 }

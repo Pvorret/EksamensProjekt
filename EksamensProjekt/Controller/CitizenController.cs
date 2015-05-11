@@ -17,19 +17,19 @@ namespace EksamensProjekt.Controller {
         public List<Time> NotAvailableTimes = new List<Time>();
 
         //Den har nico lavet
-        public void CreateCitizen(string name, string cprnr, string gender, string age, string address, string city, string phonenumber, List<string> illness, string religion, Dictionary<string, int> sensorTypes, List<string> days, List<DateTime> startTime, List<DateTime> endTime)
+        public void CreateCitizen(string name, string cprNr, string gender, string age, string address, string city, string phoneNumber, List<string> illness, string religion, Dictionary<string, int> sensorTypes, List<string> days, List<DateTime> startTime, List<DateTime> endTime)
         {
             for (int i = 0; i < days.Count; i++)
             {
                 HomeCareTimes.Add(new Time(startTime[i], endTime[i], days[i]));
             }
 
-            Citizen citizen = new Citizen(name, cprnr, gender, age, address, city, phonenumber, illness, religion, sensorTypes, HomeCareTimes);
+            Citizen citizen = new Citizen(name, cprNr, gender, age, address, city, phoneNumber, illness, religion, sensorTypes, HomeCareTimes);
             citizen.Relatives = Relatives;
 
             CitizenDBFacade.CreateCitizen(citizen);
             CitizenDBFacade.AddTime(citizen.CprNr, citizen.HomeCareTimes);
-            CitizenDBFacade.AddSensorType(citizen.CprNr, citizen.SensorTypesNeeded);
+            CitizenDBFacade.AddSensorTypeToCitizen(citizen.CprNr, citizen.SensorTypesNeeded);
             CitizenDBFacade.AddRelative(citizen);
             foreach (Relative relative in citizen.Relatives)
             {
@@ -58,9 +58,9 @@ namespace EksamensProjekt.Controller {
             SensorTypes = SensorDBFacade.GetSensorType(0);
         }
 
-        public void GetSensorTypeFromCitizen(string CprNr)
+        public void GetSensorTypeFromCitizen(string cprNr)
         {
-            SensorTypes = SensorDBFacade.GetSensorTypeFromCitizen(CprNr);
+            SensorTypes = SensorDBFacade.GetSensorTypeFromCitizen(cprNr);
         }
         public void GetAllCitizen()
         {

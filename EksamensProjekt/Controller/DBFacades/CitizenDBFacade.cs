@@ -45,15 +45,15 @@ namespace EksamensProjekt.Controller.DBFacades {
                 throw new Exception("Error in creating Citizen" + e.Message);
             }
         }
-        public static void AddSensorType(string cprnr, Dictionary<string, int> sensortype) {
+        public static void AddSensorTypeToCitizen(string cprNr, Dictionary<string, int> sensorType) {
 
             try {
                 ConnectDB();
-                foreach (KeyValuePair<string, int> sensortypeamount in sensortype) {
+                foreach (KeyValuePair<string, int> sensortypeamount in sensorType) {
 
-                    SqlCommand cmd = new SqlCommand("SP_AddSensorTypeFromCitizenCPRNR", dbconn);
+                    SqlCommand cmd = new SqlCommand("SP_AddSensorTypeFromCitizenCprNr", dbconn);
                     cmd.CommandType = CommandType.StoredProcedure;
-                    cmd.Parameters.Add(new SqlParameter("@C_CPRNR", cprnr));
+                    cmd.Parameters.Add(new SqlParameter("@C_CPRNR", cprNr));
                     cmd.Parameters.Add(new SqlParameter("@ST_Type", sensortypeamount.Key));
                     cmd.Parameters.Add(new SqlParameter("@CST_AmountNeeded", sensortypeamount.Value));
 
@@ -66,7 +66,7 @@ namespace EksamensProjekt.Controller.DBFacades {
                 throw new Exception("Error in adding a SensorTypes to a Citizen " + e.Message);
             }
         }
-        public static void AddTime(string cprnr, List<Model.Time> times)
+        public static void AddTime(string cprNr, List<Model.Time> times)
         {
             try
             {
@@ -75,7 +75,7 @@ namespace EksamensProjekt.Controller.DBFacades {
                 {
                     SqlCommand cmd = new SqlCommand("SP_AddTime", dbconn);
                     cmd.CommandType = CommandType.StoredProcedure;
-                    cmd.Parameters.Add(new SqlParameter("@CPRNR", cprnr));
+                    cmd.Parameters.Add(new SqlParameter("@CPRNR", cprNr));
                     cmd.Parameters.Add(new SqlParameter("@T_Day", time.Day));
                     cmd.Parameters.Add(new SqlParameter("@T_StartTime", time.StartTime));
                     cmd.Parameters.Add(new SqlParameter("@T_EndTime", time.EndTime));
