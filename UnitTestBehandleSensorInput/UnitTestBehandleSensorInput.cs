@@ -15,13 +15,14 @@ namespace UnitTest {
             //bool wait = true;
             //int timeToWait = 20;
             //int timeToLook = 0;
-            
+
             //SensorRule sensorrule = new SensorRule(sensorDependency, wait, timeToWait, timeToLook);
 
             //RuleSetController rulesetcontroller = new RuleSetController();
             //rulesetcontroller.AddSensorRuleFromSerialNumber(randomSerialNumber, sensorDependency, wait, timeToWait, timeToLook);
 
-            //foreach (SensorRule s in rulesetcontroller.GetSensorRuleFromSerialNumber(randomSerialNumber)) {
+            //foreach (SensorRule s in rulesetcontroller.GetSensorRuleFromSerialNumber(randomSerialNumber))
+            //{
             //    Assert.AreEqual(s, sensorrule);
             //}
         }
