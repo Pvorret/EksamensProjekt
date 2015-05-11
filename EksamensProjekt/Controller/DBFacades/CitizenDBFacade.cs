@@ -45,7 +45,7 @@ namespace EksamensProjekt.Controller.DBFacades {
                 throw new Exception("Error in creating Citizen" + e.Message);
             }
         }
-        public static void AddSensorType(string cprNr, Dictionary<string, int> sensorType) {
+        public static void AddSensorTypeToCitizen(string cprNr, Dictionary<string, int> sensorType) {
 
             try {
                 ConnectDB();
