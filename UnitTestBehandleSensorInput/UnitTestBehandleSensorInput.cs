@@ -38,17 +38,38 @@ namespace UnitTest {
             }
 
             sensorcontroller.DeleteSensor(randomSerialNumber);
-
-
-            //int[] row = new int[] { 1, 333388, 555446, 787547, 797976, 879465 };
-            //int randomSerialNumber = row[random.Next(0, row.Length)];
            
         }
 
         [TestMethod]
         public void TestAddAndGetTimeRangeRuleFromSensorSerialNumber()
         {
+            RuleSetController rulesetcontroller = new RuleSetController();
+            SensorController sensorcontroller = new SensorController();
+            Random random = new Random();
+            int randomSerialNumber = random.Next(0, 1000);
+            sensorcontroller.CreateSensor(randomSerialNumber, "Hej med Sensor");
+            string day = "Mandag";
+            DateTime startTime = new DateTime();
+            startTime.AddHours(10);
+            startTime.AddMinutes(00);
+            DateTime endTime = new DateTime();
+            endTime.AddHours(12);
+            endTime.AddMinutes(00);
+            string relativeCprNr = "123456-1234";
+            bool contactHelper = true;
+            foreach (SensorRule s in rulesetcontroller.GetSensorRuleFromSerialNumber(randomSerialNumber)) {
+                string actingRule = "SR " + s.Id.ToString();
+                rulesetcontroller.AddTimeRangeRuleFromSerialNumber(randomSerialNumber, day, startTime, endTime, relativeCprNr, actingRule, contactHelper);
 
+                TimeRangeRule timerangerule = new TimeRangeRule(relativeCprNr, actingRule, new Time(startTime, endTime, day));
+
+                foreach (TimeRangeRule t in rulesetcontroller.GetTimeRangeRuleFromSensorSerialNumber(randomSerialNumber)) {
+                    Assert.AreEqual(t, timerangerule);
+                }                
+            }          
+
+            sensorcontroller.DeleteSensor(randomSerialNumber);            
         }
     }
 }

@@ -34,7 +34,7 @@ namespace EksamensProjekt.Controller
 
         public List<SensorRule> GetSensorRuleFromSerialNumber(int serialNumber) {
             foreach (SensorRule s in RuleSetDBFacade.GetSensorRuleFromSerialNumber(serialNumber)) {
-                SensorRule sensorrule = new SensorRule(s.SensorDependency, s.WaitOrLook, s.TimeToWait, s.TimeToWait);
+                SensorRule sensorrule = new SensorRule(s.Id, s.SensorDependency, s.WaitOrLook, s.TimeToWait, s.TimeToWait);
                 SensorRule.BehandleinputfraRuleSetController(sensorrule);
             }
 
