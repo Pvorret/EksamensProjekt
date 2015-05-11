@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace EksamensProjekt.Model
 {
-    class SensorLog
+    public class SensorLog
     {
         public int ID { get; set; }
         public int SensorSerialNumber { get; set; }

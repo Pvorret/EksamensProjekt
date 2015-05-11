@@ -7,7 +7,7 @@ using EksamensProjekt.Model;
 using EksamensProjekt.Controller;
 
 namespace EksamensProjekt.Helper {
-    class SensorRule {
+    public class SensorRule {
 
         public int SensorDependency { get; set; }
         public bool WaitOrLook { get; set; }

@@ -10,7 +10,7 @@ using EksamensProjekt.Helper;
 
 namespace EksamensProjekt.Controller.DBFacades
 {
-    class RuleSetDBFacade
+    public class RuleSetDBFacade
     {
         static SqlConnection dbconn;
         private static void ConnectDB()
@@ -171,19 +171,19 @@ namespace EksamensProjekt.Controller.DBFacades
             }
             return timerangerules;
         }
-        public static void AddSensorRuleFromSerialNumber(int serialNumber, SensorRule sensorrule) {
+        public static void AddSensorRuleFromSerialNumber(int serialNumber, SensorRule sensorRule) {
             try {
                 ConnectDB();
 
-                SqlCommand cmd = new SqlCommand("SP_AddSensorRuleFromSerialNumber", dbconn);
+                SqlCommand cmd = new SqlCommand("SP_AddSensorRuleFromSensorSerialNumber", dbconn);
                 cmd.CommandType = CommandType.StoredProcedure;
 
                 cmd.Parameters.Add(new SqlParameter("@SRM_S_SerialNumber", serialNumber));
 
-                cmd.Parameters.Add(new SqlParameter("@SR_R_SensorDependency", sensorrule.SensorDependency));
-                cmd.Parameters.Add(new SqlParameter("@SR_WaitOrLook", sensorrule.WaitOrLook));
-                cmd.Parameters.Add(new SqlParameter("@SR_TimeToWait", sensorrule.TimeToWait));
-                cmd.Parameters.Add(new SqlParameter("@SR_TimeToLook", sensorrule.TimeToLook));
+                cmd.Parameters.Add(new SqlParameter("@SR_R_SensorDependency", sensorRule.SensorDependency));
+                cmd.Parameters.Add(new SqlParameter("@SR_WaitOrLook", sensorRule.WaitOrLook));
+                cmd.Parameters.Add(new SqlParameter("@SR_TimeToWait", sensorRule.TimeToWait));
+                cmd.Parameters.Add(new SqlParameter("@SR_TimeToLook", sensorRule.TimeToLook));
                 
                 cmd.ExecuteNonQuery();
 
