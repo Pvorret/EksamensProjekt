@@ -13,8 +13,6 @@ namespace EksamensProjekt.Controller
     {
         public SensorLog SensorLog;
         
-        
-
         public void CreateSensorLog(int serialNumber, string activationTime)
         {
             SensorLog = new SensorLog(serialNumber, Convert.ToDateTime(activationTime));
@@ -30,15 +28,17 @@ namespace EksamensProjekt.Controller
             RuleSetDBFacade.UpdateSensorLog(SensorLog);
         }
 
-        public void AddSensorRuleManagement(string ruleSet, int serialNumber) {
-            RuleSetDBFacade.AddSensorRuleManagement(ruleSet, serialNumber);
+        public void AddSensorRuleManagement(string ruleset, int serialnumber) {
+            RuleSetDBFacade.AddSensorRuleManagement(ruleset, serialnumber);
         }
 
-        public void GetSensorRuleFromSerialNumber(int serialNumber) {
-            foreach (SensorRule s in RuleSetDBFacade.GetSensorRuleFromSerialNumber(serialNumber)) {
+        public List<SensorRule> GetSensorRuleFromSerialNumber(int serialnumber) {
+            foreach (SensorRule s in RuleSetDBFacade.GetSensorRuleFromSerialNumber(serialnumber)) {
                 SensorRule sensorrule = new SensorRule(s.SensorDependency, s.WaitOrLook, s.TimeToWait, s.TimeToWait);
                 SensorRule.BehandleinputfraRuleSetController(sensorrule);
             }
+
+            return RuleSetDBFacade.GetSensorRuleFromSerialNumber(serialnumber);
         }
         public void AddSensorRuleFromSerialNumber(int serialNumber, int sensorDependency, bool waitOrLook, int timeToWait, int timeToLook)//Stefan
         {
