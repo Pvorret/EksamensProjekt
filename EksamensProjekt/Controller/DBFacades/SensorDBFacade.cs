@@ -10,7 +10,7 @@ using System.Windows;
 
 namespace EksamensProjekt.Controller.DBFacades
 {
-    static class SensorDBFacade
+    public class SensorDBFacade
     {
         public static SqlConnection dbconn;
         static SqlCommand cmd;
@@ -22,7 +22,7 @@ namespace EksamensProjekt.Controller.DBFacades
         public static void CreateSensor(Sensor sensor)//Stefan
         {
             int activatedToBit;
-
+            
             if (sensor.Activated == false)
             {
                 activatedToBit = 0;

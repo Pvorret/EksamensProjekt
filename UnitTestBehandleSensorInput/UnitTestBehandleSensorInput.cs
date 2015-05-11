@@ -3,32 +3,73 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using EksamensProjekt.Controller;
 using EksamensProjekt.Helper;
 using EksamensProjekt.Controller.DBFacades;
+using EksamensProjekt.Model;
+using System.Collections.Generic;
 
 namespace UnitTest {
     [TestClass]
     public class UnitTestBehandleSensorInput {
         [TestMethod]
         public void TestAddandGetSensorRuleFromSerialNumber() {
+            RuleSetController rulesetcontroller = new RuleSetController();
+            SensorController sensorcontroller = new SensorController();
             Random random = new Random();
             int randomSerialNumber = random.Next(0, 1000);
-            int sensorDependency = 1777;
             bool wait = true;
             int timeToWait = 20;
             int timeToLook = 0;
 
-            SensorRule sensorrule = new SensorRule(sensorDependency, wait, timeToWait, timeToLook);
+            sensorcontroller.CreateSensor(randomSerialNumber, "Hej Sensor");
 
-            RuleSetController rulesetcontroller = new RuleSetController();
-            rulesetcontroller.AddSensorRuleFromSensorSerialNumber(randomSerialNumber, sensorDependency, wait, timeToWait, timeToLook);
+            List<int> intlist = new List<int>();
 
-            foreach (SensorRule s in rulesetcontroller.GetSensorRuleFromSensorSerialNumber(randomSerialNumber)) {
+            foreach (Sensor s in SensorDBFacade.GetSensor(0)) {
+                intlist.Add(s.SerialNumber);
+            }
+            int randomsensorDependency = intlist.ToArray()[random.Next(0, intlist.ToArray().Length)];
+
+            SensorRule sensorrule = new SensorRule(randomsensorDependency, wait, timeToWait, timeToLook);
+
+
+            rulesetcontroller.AddSensorRuleFromSerialNumber(randomSerialNumber, randomsensorDependency, wait, timeToWait, timeToLook);
+
+            foreach (SensorRule s in rulesetcontroller.GetSensorRuleFromSerialNumber(randomSerialNumber)) {
                 Assert.AreEqual(s, sensorrule);
             }
+
+            sensorcontroller.DeleteSensor(randomSerialNumber);
+           
         }
+
         [TestMethod]
         public void TestAddAndGetTimeRangeRuleFromSensorSerialNumber()
         {
+            RuleSetController rulesetcontroller = new RuleSetController();
+            SensorController sensorcontroller = new SensorController();
+            Random random = new Random();
+            int randomSerialNumber = random.Next(0, 1000);
+            sensorcontroller.CreateSensor(randomSerialNumber, "Hej med Sensor");
+            string day = "Mandag";
+            DateTime startTime = new DateTime();
+            startTime.AddHours(10);
+            startTime.AddMinutes(00);
+            DateTime endTime = new DateTime();
+            endTime.AddHours(12);
+            endTime.AddMinutes(00);
+            string relativeCprNr = "123456-1234";
+            bool contactHelper = true;
+            foreach (SensorRule s in rulesetcontroller.GetSensorRuleFromSerialNumber(randomSerialNumber)) {
+                string actingRule = "SR " + s.Id.ToString();
+                rulesetcontroller.AddTimeRangeRuleFromSerialNumber(randomSerialNumber, day, startTime, endTime, relativeCprNr, actingRule, contactHelper);
 
+                TimeRangeRule timerangerule = new TimeRangeRule(relativeCprNr, actingRule, new Time(startTime, endTime, day));
+
+                foreach (TimeRangeRule t in rulesetcontroller.GetTimeRangeRuleFromSensorSerialNumber(randomSerialNumber)) {
+                    Assert.AreEqual(t, timerangerule);
+                }                
+            }          
+
+            sensorcontroller.DeleteSensor(randomSerialNumber);            
         }
     }
 }

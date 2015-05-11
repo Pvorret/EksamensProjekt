@@ -8,7 +8,7 @@ using EksamensProjekt.Model;
 
 namespace EksamensProjekt.Controller
 {
-    class SensorController
+    public class SensorController
     {
         public List<Sensor> Sensors = new List<Sensor>();
         public void CreateSensor(int serialNumber, string type)
