@@ -72,7 +72,7 @@ namespace EksamensProjekt.Controller.DBFacades
                 CloseDB();
             }
         }
-        public static List<SensorRule> GetSensorRuleFromSensorSerialNumber(int serialNumber) {
+        public static List<SensorRule> GetSensorRuleFromSerialNumber(int serialNumber) {
             List<SensorRule> sensorruleList = new List<SensorRule>();
 
             try {
@@ -105,7 +105,7 @@ namespace EksamensProjekt.Controller.DBFacades
 
             return sensorruleList;
         }
-        public static Dictionary<string, int> GetSensorRuleManagementFromSensorSerialNumber(int serialNumber)
+        public static Dictionary<string, int> GetSensorRuleManagementFromSerialNumber(int serialNumber)
         {
             Dictionary<string, int> ruleManagement = new Dictionary<string, int>();
             try
@@ -134,7 +134,7 @@ namespace EksamensProjekt.Controller.DBFacades
             }
             return ruleManagement;
         }
-        public static List<TimeRangeRule> GetTimeRangeRuleFromSensorSerialNumber(int serialNumber)
+        public static List<TimeRangeRule> GetTimeRangeRuleFromSerialNumber(int serialNumber)
         {
             List<TimeRangeRule> timerangerules = new List<TimeRangeRule>();
             try
@@ -172,11 +172,11 @@ namespace EksamensProjekt.Controller.DBFacades
             }
             return timerangerules;
         }
-        public static void AddSensorRuleFromSensorSerialNumber(int serialNumber, SensorRule sensorRule) {
+        public static void AddSensorRuleFromSerialNumber(int serialNumber, SensorRule sensorRule) {
             try {
                 ConnectDB();
 
-                SqlCommand cmd = new SqlCommand("SP_AddSensorRuleFromSensorSerialNumber", dbconn);
+                SqlCommand cmd = new SqlCommand("SP_AddSensorRuleFromSerialNumber", dbconn);
                 cmd.CommandType = CommandType.StoredProcedure;
 
                 cmd.Parameters.Add(new SqlParameter("@SRM_S_SerialNumber", serialNumber));
@@ -211,12 +211,12 @@ namespace EksamensProjekt.Controller.DBFacades
                 throw new Exception("Error! Kunne ikke tilføje det til Databasen " + e.Message);
             }
         }
-        public static void AddTimeRangeRuleFromSensorSerialNumber(int serialNumber, TimeRangeRule timeRange)
+        public static void AddTimeRangeRuleFromSerialNumber(int serialNumber, TimeRangeRule timeRange)
         {
             try
             {
                 ConnectDB();
-                SqlCommand cmd = new SqlCommand("SP_AddTimeRangeRuleFromSensorSerialNumber", dbconn);
+                SqlCommand cmd = new SqlCommand("SP_AddTimeRangeRuleFromSerialNumber", dbconn);
                 cmd.CommandType = CommandType.StoredProcedure;
                 cmd.Parameters.Add(new SqlParameter("@S_SerialNumber", serialNumber));
                 cmd.Parameters.Add(new SqlParameter("@T_Day", timeRange.Time));
