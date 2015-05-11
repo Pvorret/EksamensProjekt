@@ -87,11 +87,12 @@ namespace EksamensProjekt.Controller.DBFacades
                 rdr = cmd.ExecuteReader();
 
                 while (rdr.HasRows && rdr.Read()) {
+                    int Id = (int)rdr["SR_ID"];
                     int SensorDependency = (int)rdr["SR_S_SensorDependecy"];
                     bool WaitOrLook = Convert.ToBoolean(int.Parse(rdr["SR_WaitOrLook"].ToString()));
                     int TimeToWait = (int)rdr["SR_TimeToWait"];
                     int TimeToLook = (int)rdr["SR_TimeToLook"];
-                    SensorRule sensorrule = new SensorRule(SensorDependency, WaitOrLook, TimeToWait, TimeToLook);
+                    SensorRule sensorrule = new SensorRule(Id, SensorDependency, WaitOrLook, TimeToWait, TimeToLook);
                     sensorruleList.Add(sensorrule);
                 }
 
@@ -171,19 +172,19 @@ namespace EksamensProjekt.Controller.DBFacades
             }
             return timerangerules;
         }
-        public static void AddSensorRuleFromSerialNumber(int serialNumber, SensorRule sensorrule) {
+        public static void AddSensorRuleFromSerialNumber(int serialNumber, SensorRule sensorRule) {
             try {
                 ConnectDB();
 
-                SqlCommand cmd = new SqlCommand("SP_AddSensorRuleFromSerialNumber", dbconn);
+                SqlCommand cmd = new SqlCommand("SP_AddSensorRuleFromSensorSerialNumber", dbconn);
                 cmd.CommandType = CommandType.StoredProcedure;
 
                 cmd.Parameters.Add(new SqlParameter("@SRM_S_SerialNumber", serialNumber));
 
-                cmd.Parameters.Add(new SqlParameter("@SR_R_SensorDependency", sensorrule.SensorDependency));
-                cmd.Parameters.Add(new SqlParameter("@SR_WaitOrLook", sensorrule.WaitOrLook));
-                cmd.Parameters.Add(new SqlParameter("@SR_TimeToWait", sensorrule.TimeToWait));
-                cmd.Parameters.Add(new SqlParameter("@SR_TimeToLook", sensorrule.TimeToLook));
+                cmd.Parameters.Add(new SqlParameter("@SR_R_SensorDependency", sensorRule.SensorDependency));
+                cmd.Parameters.Add(new SqlParameter("@SR_WaitOrLook", sensorRule.WaitOrLook));
+                cmd.Parameters.Add(new SqlParameter("@SR_TimeToWait", sensorRule.TimeToWait));
+                cmd.Parameters.Add(new SqlParameter("@SR_TimeToLook", sensorRule.TimeToLook));
                 
                 cmd.ExecuteNonQuery();
 
