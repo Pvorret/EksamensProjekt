@@ -18,7 +18,7 @@ namespace EksamensProjekt.Helper {
             this.SensorDependency = sensorDependency;
             this.WaitOrLook = waitOrLook;
             this.TimeToWait = timeToWait;
-            this.TimeToLook = timeToWait;
+            this.TimeToLook = timeToLook;
         }
 
         public static void BehandleinputfraRuleSetController(SensorRule sensorrule) {
