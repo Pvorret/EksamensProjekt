@@ -13,8 +13,6 @@ namespace EksamensProjekt.Controller
     {
         public SensorLog SensorLog;
         
-        
-
         public void CreateSensorLog(int serialNumber, string activationTime)
         {
             SensorLog = new SensorLog(serialNumber, Convert.ToDateTime(activationTime));
