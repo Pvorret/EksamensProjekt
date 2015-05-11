@@ -10,7 +10,7 @@ using System.Windows;
 
 namespace EksamensProjekt.Controller.DBFacades
 {
-    static class SensorDBFacade
+    public class SensorDBFacade
     {
         public static SqlConnection dbconn;
         static SqlCommand cmd;
