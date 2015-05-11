@@ -14,6 +14,11 @@ namespace EksamensProjekt.Controller.DBFacades
     {
         public static SqlConnection dbconn;
         static SqlCommand cmd;
+
+        public static void ConnectDB() {
+            dbconn = new SqlConnection(DBHelper._connectionString);
+            dbconn.Open();
+        }
         public static void CreateSensor(Sensor sensor)//Stefan
         {
             int activatedToBit;
@@ -133,17 +138,7 @@ namespace EksamensProjekt.Controller.DBFacades
                 CloseDB();
             }
         }
-        public static void ConnectDB()
-        {
-            dbconn = new SqlConnection(DBHelper._connectionString);
-            dbconn.Open();
-        }
-        public static void CloseDB()
-        {
-            dbconn.Close();
-            dbconn.Dispose();
-        }
-        public static List<string> GetSensorTypeFromCitizen(string CprNr)
+        public static List<string> GetSensorTypeFromCitizen(string cprNr)
         {
             List<string> SensorTypes = new List<string>();
 
@@ -153,7 +148,7 @@ namespace EksamensProjekt.Controller.DBFacades
 
                 SqlCommand cmd = new SqlCommand("SP_GetSensorTypeFromCitizen", dbconn);
                 cmd.CommandType = CommandType.StoredProcedure;
-                cmd.Parameters.Add(new SqlParameter("@CprNr", CprNr));
+                cmd.Parameters.Add(new SqlParameter("@CprNr", cprNr));
                 SqlDataReader rdr;
                 rdr = cmd.ExecuteReader();
 
@@ -172,16 +167,16 @@ namespace EksamensProjekt.Controller.DBFacades
             }
             return SensorTypes;
         }
-        public static void ConnectSensorToCitizen(int SensorSerialNumber, string CPRNR, string SensorLocation)//NY
+        public static void ConnectSensorToCitizen(int sensorSerialNumber, string cprNr, string sensorLocation)//NY
         {
             try
             {
                 ConnectDB();
                 cmd = new SqlCommand("SP_ConnectSensorToCitizen", dbconn);
                 cmd.CommandType = CommandType.StoredProcedure;
-                cmd.Parameters.Add(new SqlParameter("@SerialNumber", SensorSerialNumber));
-                cmd.Parameters.Add(new SqlParameter("@CPRNR", CPRNR));
-                cmd.Parameters.Add(new SqlParameter("@Location", SensorLocation));
+                cmd.Parameters.Add(new SqlParameter("@SerialNumber", sensorSerialNumber));
+                cmd.Parameters.Add(new SqlParameter("@CPRNR", cprNr));
+                cmd.Parameters.Add(new SqlParameter("@Location", sensorLocation));
                 cmd.ExecuteNonQuery();
             }
             catch (Exception e)
@@ -193,6 +188,11 @@ namespace EksamensProjekt.Controller.DBFacades
             {
                 CloseDB();
             }
+
+        }
+        public static void CloseDB() {
+            dbconn.Close();
+            dbconn.Dispose();
         }
     }
 }
