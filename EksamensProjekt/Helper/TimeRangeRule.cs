@@ -14,10 +14,11 @@ namespace EksamensProjekt.Helper {
         public bool ContactHelper { get; set; }
         public Time Time { get; set; }
 
-        public TimeRangeRule(string cpr, string actingRule, Time time) 
+        public TimeRangeRule(string cpr, string actingRule, bool contactHelper, Time time) 
         {
             this.ActingRule = actingRule;
             this.CPRNR = cpr;
+            this.ContactHelper = contactHelper;
             this.Time = time;
         }
     }

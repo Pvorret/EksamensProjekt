@@ -45,13 +45,13 @@ namespace EksamensProjekt.Controller.DBFacades {
                 throw new Exception("Error in creating Citizen" + e.Message);
             }
         }
-        public static void AddSensorType(string cprNr, Dictionary<string, int> sensorType) {
+        public static void AddSensorTypeToCitizen(string cprNr, Dictionary<string, int> sensorType) {
 
             try {
                 ConnectDB();
                 foreach (KeyValuePair<string, int> sensortypeamount in sensorType) {
 
-                    SqlCommand cmd = new SqlCommand("SP_AddSensorTypeFromCitizenCPRNR", dbconn);
+                    SqlCommand cmd = new SqlCommand("SP_AddSensorTypeFromCitizenCprNr", dbconn);
                     cmd.CommandType = CommandType.StoredProcedure;
                     cmd.Parameters.Add(new SqlParameter("@C_CPRNR", cprNr));
                     cmd.Parameters.Add(new SqlParameter("@ST_Type", sensortypeamount.Key));

@@ -27,7 +27,7 @@ namespace EksamensProjekt.Model
             this.NotAvailableTimes = notAvailableTimes;
         }
 
-        public Relative(string citizenCprNr, string name, string cprNr, string gender, string age, string address, string city, string phoneNumber, string email, Dictionary<string, string> NotAvailable) {
+        public Relative(string citizenCprNr, string name, string cprNr, string gender, string age, string address, string city, string phoneNumber, string email, Dictionary<string, string> notAvailable) {
 
             this.CitizenCprNr = citizenCprNr;
             this.Name = name;
