@@ -17,7 +17,7 @@ namespace EksamensProjekt.Controller.DBFacades
         public static void CreateSensor(Sensor sensor)//Stefan
         {
             int activatedToBit;
-
+            
             if (sensor.Activated == false)
             {
                 activatedToBit = 0;
