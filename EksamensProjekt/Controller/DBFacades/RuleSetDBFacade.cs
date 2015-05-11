@@ -157,8 +157,9 @@ namespace EksamensProjekt.Controller.DBFacades
                     DateTime endTime = Convert.ToDateTime(rdr["T_EndTime"]);
                     string day = rdr["T_Day"].ToString();
                     int id = Convert.ToInt32(rdr["TRR_ID"]);
+                    bool contactHelper = Convert.ToBoolean(int.Parse(rdr["TRR_ContactHelper"].ToString()));
 
-                    TimeRangeRule TRR = new TimeRangeRule(actingRule, cprNr, new Time(id, startTime, endTime, day));
+                    TimeRangeRule TRR = new TimeRangeRule(actingRule, cprNr, contactHelper, new Time(id, startTime, endTime, day));
                     timerangerules.Add(TRR);
                 }
             }

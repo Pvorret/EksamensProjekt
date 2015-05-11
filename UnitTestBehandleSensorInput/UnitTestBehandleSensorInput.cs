@@ -48,7 +48,7 @@ namespace UnitTest {
             SensorController sensorcontroller = new SensorController();
             Random random = new Random();
             int randomSerialNumber = random.Next(0, 1000);
-            sensorcontroller.CreateSensor(randomSerialNumber, "Hej med Sensor");
+            sensorcontroller.CreateSensor(randomSerialNumber, "Hej med dig Sensor");
             string day = "Mandag";
             DateTime startTime = new DateTime();
             startTime.AddHours(10);
@@ -58,16 +58,16 @@ namespace UnitTest {
             endTime.AddMinutes(00);
             string relativeCprNr = "123456-1234";
             bool contactHelper = true;
-            foreach (SensorRule s in rulesetcontroller.GetSensorRuleFromSerialNumber(randomSerialNumber)) {
-                string actingRule = "SR " + s.Id.ToString();
+            //string actingRule = "SR " + rulesetcontroller.GetSensorRuleFromSerialNumber(randomSerialNumber)[0].Id.ToString();
+            foreach (SensorRule s in RuleSetDBFacade.GetSensorRuleFromSerialNumber(randomSerialNumber)) {
+                string actingRule = "SR " + s.Id;
                 rulesetcontroller.AddTimeRangeRuleFromSerialNumber(randomSerialNumber, day, startTime, endTime, relativeCprNr, actingRule, contactHelper);
-
-                TimeRangeRule timerangerule = new TimeRangeRule(relativeCprNr, actingRule, new Time(startTime, endTime, day));
-
+                TimeRangeRule timerangerule = new TimeRangeRule(relativeCprNr, actingRule, contactHelper, new Time(startTime, endTime, day));
                 foreach (TimeRangeRule t in rulesetcontroller.GetTimeRangeRuleFromSensorSerialNumber(randomSerialNumber)) {
                     Assert.AreEqual(t, timerangerule);
-                }                
-            }          
+                }
+            }
+            
 
             sensorcontroller.DeleteSensor(randomSerialNumber);            
         }
