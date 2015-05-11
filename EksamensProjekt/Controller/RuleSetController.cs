@@ -28,17 +28,17 @@ namespace EksamensProjekt.Controller
             RuleSetDBFacade.UpdateSensorLog(SensorLog);
         }
 
-        public void AddSensorRuleManagement(string ruleset, int serialnumber) {
-            RuleSetDBFacade.AddSensorRuleManagement(ruleset, serialnumber);
+        public void AddSensorRuleManagement(string ruleSet, int serialNumber) {
+            RuleSetDBFacade.AddSensorRuleManagement(ruleSet, serialNumber);
         }
 
-        public List<SensorRule> GetSensorRuleFromSerialNumber(int serialnumber) {
-            foreach (SensorRule s in RuleSetDBFacade.GetSensorRuleFromSerialNumber(serialnumber)) {
+        public List<SensorRule> GetSensorRuleFromSerialNumber(int serialNumber) {
+            foreach (SensorRule s in RuleSetDBFacade.GetSensorRuleFromSerialNumber(serialNumber)) {
                 SensorRule sensorrule = new SensorRule(s.SensorDependency, s.WaitOrLook, s.TimeToWait, s.TimeToWait);
                 SensorRule.BehandleinputfraRuleSetController(sensorrule);
             }
 
-            return RuleSetDBFacade.GetSensorRuleFromSerialNumber(serialnumber);
+            return RuleSetDBFacade.GetSensorRuleFromSerialNumber(serialNumber);
         }
         public void AddSensorRuleFromSerialNumber(int serialNumber, int sensorDependency, bool waitOrLook, int timeToWait, int timeToLook)//Stefan
         {
