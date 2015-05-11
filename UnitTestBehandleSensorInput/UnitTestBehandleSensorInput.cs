@@ -1,6 +1,7 @@
 ﻿using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using EksamensProjekt;
+using EksamensProjekt.Controller;
 using EksamensProjekt.Controller.DBFacades;
 
 namespace UnitTest {
@@ -13,7 +14,6 @@ namespace UnitTest {
         [TestMethod]
         public void TestAddAndGetTimeRangeRuleFromSensorSerialNumber()
         {
-
         }
     }
 }
