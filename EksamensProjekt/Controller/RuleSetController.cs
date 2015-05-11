@@ -47,7 +47,7 @@ namespace EksamensProjekt.Controller
         }
 
         public void AddTimeRangeRuleFromSerialNumber(int serialNumber, string day, DateTime startTime, DateTime endTime, string relativeCprNr, string actingRule, bool contactHelper) {
-            TimeRangeRule timerange = new TimeRangeRule(relativeCprNr, actingRule,contactHelper, new Time(startTime, endTime, day));
+            TimeRangeRule timerange = new TimeRangeRule(relativeCprNr, actingRule, contactHelper, new Time(startTime, endTime, day));
             RuleSetDBFacade.AddTimeRangeRuleFromSerialNumber(serialNumber, timerange);
         }
         public Dictionary<string, int> GetSensorRuleManagementFromSerialNumber(int serialNumber)
