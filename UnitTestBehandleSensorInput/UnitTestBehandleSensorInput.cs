@@ -67,9 +67,8 @@ namespace UnitTest {
                     Assert.AreEqual(t, timerangerule);
                 }
             }
-            
 
-            sensorcontroller.DeleteSensor(randomSerialNumber);            
+            sensorcontroller.DeleteSensor(randomSerialNumber);
         }
     }
 }
