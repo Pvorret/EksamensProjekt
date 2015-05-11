@@ -14,12 +14,12 @@ namespace UnitTest {
             RuleSetController rulesetcontroller = new RuleSetController();
             SensorController sensorcontroller = new SensorController();
             Random random = new Random();
-            int randomSerialNumber = random.Next(0, 1000);
+            int SerialNumber = 220;
             bool wait = true;
             int timeToWait = 20;
             int timeToLook = 0;
 
-            sensorcontroller.CreateSensor(randomSerialNumber, "Hej Sensor");
+            sensorcontroller.CreateSensor(SerialNumber, "Hej Sensor");
 
             List<int> intlist = new List<int>();
 
@@ -31,13 +31,13 @@ namespace UnitTest {
             SensorRule sensorrule = new SensorRule(randomsensorDependency, wait, timeToWait, timeToLook);
 
 
-            rulesetcontroller.AddSensorRuleFromSerialNumber(randomSerialNumber, randomsensorDependency, wait, timeToWait, timeToLook);
+            rulesetcontroller.AddSensorRuleFromSerialNumber(SerialNumber, randomsensorDependency, wait, timeToWait, timeToLook);
 
-            foreach (SensorRule s in rulesetcontroller.GetSensorRuleFromSerialNumber(randomSerialNumber)) {
+            foreach (SensorRule s in rulesetcontroller.GetSensorRuleFromSerialNumber(SerialNumber)) {
                 Assert.AreEqual(s, sensorrule);
             }
 
-            sensorcontroller.DeleteSensor(randomSerialNumber);
+            sensorcontroller.DeleteSensor(SerialNumber);
            
         }
 
