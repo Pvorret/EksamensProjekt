@@ -74,6 +74,7 @@ namespace EksamensProjekt.View
                 {
                     CPRNR_TextBox.Text = _CitizenController.Citizens[i].CprNr;
                     _CitizenController.GetSensorsFromCitizen(_CitizenController.Citizens[i].CprNr);
+                    _CitizenController.GetRelativeFromCitizen(_CitizenController.Citizens[i].CprNr);
                     for (int j = 0; j < _CitizenController.Citizens[i].Sensors.Count; j++)
                     {
                         SensorDependency_Dropdown.Items.Add(_CitizenController.Citizens[i].Sensors[j].SerialNumber);
@@ -112,7 +113,7 @@ namespace EksamensProjekt.View
                         _RuleSetController.AddSensorRuleManagement("SR", Convert.ToInt32(Sensor_Dropdown.SelectedItem.ToString()));
                         _RuleSetController.AddSensorRuleFromSerialNumber(Convert.ToInt32(Sensor_Dropdown.SelectedItem.ToString()), Convert.ToInt32(SensorDependency_Dropdown.SelectedItem.ToString()), waitorLook, timeToWait, timeToLook);
                     }
-                    else if (RuleSet_DropDown.SelectedItem.ToString() == "Tidsrum Regel" && AddActingRule_CheckBox.IsChecked != true)
+                    else if (RuleSet_DropDown.SelectedItem.ToString() == "Tidsrums Regel" && AddActingRule_CheckBox.IsChecked == false)
                     {
                         bool contactHelper;
                         string relativeCprNr = "" ;
@@ -136,7 +137,7 @@ namespace EksamensProjekt.View
                         _RuleSetController.AddSensorRuleManagement("TRR", Convert.ToInt32(Sensor_Dropdown.SelectedItem.ToString()));
                         _RuleSetController.AddTimeRangeRuleFromSerialNumber(Convert.ToInt32(Sensor_Dropdown.SelectedItem.ToString()), Day_Dropdown.SelectedItem.ToString(), Convert.ToDateTime(StartHour_TextBox.Text + ":" + StartMinute_TextBox.Text), Convert.ToDateTime(EndHour_TextBox.Text + ":" + EndMinute_TextBox.Text), relativeCprNr , "", contactHelper); //Ikke done.
                     }
-                    else if (RuleSet_DropDown.SelectedItem.ToString() == "Tidsrum Regel" && AddActingRule_CheckBox.IsChecked == true)
+                    else if (RuleSet_DropDown.SelectedItem.ToString() == "Tidsrums Regel" && AddActingRule_CheckBox.IsChecked == true)
                     {
                         bool contactHelper;
                         string relativeCprNr = "";

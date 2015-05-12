@@ -33,5 +33,10 @@ namespace EksamensProjekt.Model
             this.Address = address;
             this.City = city;
         }
+        public Relative(string cprNr, string name)
+        {
+            this.CprNr = cprNr;
+            this.Name = name;
+        }
     }
 }

@@ -53,13 +53,13 @@ namespace EksamensProjekt.Controller {
             }
             Relatives.Add(new Relative(name, cprNr, gender, age, address, city, phoneNumber, email, NotAvailableTimes));
         }
-        public void GetSensorsFromCitizen(string citizenCprNr)
+        public void GetSensorsFromCitizen(string cprNr)
         {
             for (int i = 0; i < Citizens.Count; i++)
             {
-                if (Citizens[i].CprNr == citizenCprNr)
+                if (Citizens[i].CprNr == cprNr)
                 {
-                    Citizens[i].Sensors = SensorDBFacade.GetSensorFromCitizen(citizenCprNr);
+                    Citizens[i].Sensors = SensorDBFacade.GetSensorFromCitizen(cprNr);
                 }
             }
 
@@ -67,7 +67,6 @@ namespace EksamensProjekt.Controller {
         public void GetAllSensorType() {
             SensorTypes = SensorDBFacade.GetSensorType(0);
         }
-
         public void GetSensorTypeFromCitizen(string cprNr)
         {
             SensorTypes = SensorDBFacade.GetSensorTypeFromCitizen(cprNr);
@@ -76,7 +75,16 @@ namespace EksamensProjekt.Controller {
         {
             Citizens = CitizenDBFacade.GetAllCitizen();
         }
-
+        public void GetRelativeFromCitizen(string cprNr)
+        {
+            for (int i = 0; i < Citizens.Count; i++)
+            {
+                if (Citizens[i].CprNr == cprNr)
+                {
+                    Citizens[i].Relatives = SensorDBFacade.GetRelativeFromCitizen(cprNr);
+                }
+            }
+        }
         public void GetAllIllness() {
             IllnessList = CitizenDBFacade.GetIllnessType();
         }
