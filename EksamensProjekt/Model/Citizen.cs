@@ -33,6 +33,7 @@ namespace EksamensProjekt.Model
         {
             this.Name = name;
             this.CprNr = cprNr;
+            this.Relatives = new List<Relative>();
         }
         public Citizen(string cprNr, string name, string address, string city)
         {

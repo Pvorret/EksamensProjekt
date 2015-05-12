@@ -202,7 +202,7 @@ namespace EksamensProjekt.Controller.DBFacades
             {
                 ConnectDB();
                 SqlCommand cmd = new SqlCommand("SP_AddSensorRuleManagement", dbconn);
-
+                cmd.CommandType = CommandType.StoredProcedure;
                 cmd.Parameters.Add(new SqlParameter("@SRM_RuleSet", ruleSet));
                 cmd.Parameters.Add(new SqlParameter("@SRM_S_SerialNumber", serialNumber));
                 cmd.ExecuteNonQuery();
@@ -228,12 +228,14 @@ namespace EksamensProjekt.Controller.DBFacades
                 cmd.Parameters.Add(new SqlParameter("@TRR_ContactHelper", Convert.ToInt32(timeRange.ContactHelper)));
                 cmd.ExecuteNonQuery();
 
-                CloseDB();
-
             }
             catch (SqlException e)
             {
                 throw new Exception("Error! TimeRangeRule kunne ikke tilføjes" + e.Message);
+            }
+            finally
+            {
+                CloseDB();
             }
         }
     }

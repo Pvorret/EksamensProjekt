@@ -37,6 +37,7 @@ namespace EksamensProjekt.Model
         {
             this.CprNr = cprNr;
             this.Name = name;
+            
         }
     }
 }
