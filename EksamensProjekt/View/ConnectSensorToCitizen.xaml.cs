@@ -128,7 +128,7 @@ namespace EksamensProjekt.View
                             {
                                 if (_CitizenController.Citizens[i].Relatives[j].Name == Relative_Dropdown.SelectedItem.ToString())
                                 {
-                                    id = _CitizenController.Citizens[i].Relatives[j].ID;
+                                    id = _CitizenController.Citizens[i].Relatives[j].Id;
                                 }
                             }
                         }
@@ -168,7 +168,7 @@ namespace EksamensProjekt.View
                             {
                                 if (_CitizenController.Citizens[i].Relatives[j].Name == Relative_Dropdown.SelectedItem.ToString())
                                 {
-                                    id = _CitizenController.Citizens[i].Relatives[j].ID;
+                                    id = _CitizenController.Citizens[i].Relatives[j].Id;
                                 }
                             }
                         }
