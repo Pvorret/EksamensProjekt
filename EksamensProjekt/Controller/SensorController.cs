@@ -40,8 +40,6 @@ namespace EksamensProjekt.Controller
         {
             return SensorDBFacade.DeleteSensor(serialNumber);
         }
-
-
         public void ConnectSensorToCitizen(int sensorSerialNumber, string cprNr, string sensorLocation)//NY
         {
             SensorDBFacade.ConnectSensorToCitizen(sensorSerialNumber, cprNr, sensorLocation);

@@ -53,7 +53,17 @@ namespace EksamensProjekt.Controller {
             }
             Relatives.Add(new Relative(name, cprNr, gender, age, address, city, phoneNumber, email, NotAvailableTimes));
         }
+        public void GetSensorsFromCitizen(string citizenCprNr)
+        {
+            for (int i = 0; i < Citizens.Count; i++)
+            {
+                if (Citizens[i].CprNr == citizenCprNr)
+                {
+                    Citizens[i].Sensors = SensorDBFacade.GetSensorFromCitizen(citizenCprNr);
+                }
+            }
 
+        }
         public void GetAllSensorType() {
             SensorTypes = SensorDBFacade.GetSensorType(0);
         }

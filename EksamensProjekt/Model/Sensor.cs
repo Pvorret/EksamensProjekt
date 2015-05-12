@@ -21,6 +21,11 @@ namespace EksamensProjekt.Model
             this.Location = "";
             this.Activated = false;
         }
+        public Sensor(int serialNumber)
+        {
+            this.SerialNumber = serialNumber;
+        }
         public Sensor() { }
+
     }
 }

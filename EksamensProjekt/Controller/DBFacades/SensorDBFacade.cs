@@ -14,7 +14,6 @@ namespace EksamensProjekt.Controller.DBFacades
     {
         public static SqlConnection dbconn;
         static SqlCommand cmd;
-
         public static void ConnectDB() {
             dbconn = new SqlConnection(DBHelper._connectionString);
             dbconn.Open();
@@ -193,6 +192,34 @@ namespace EksamensProjekt.Controller.DBFacades
         public static void CloseDB() {
             dbconn.Close();
             dbconn.Dispose();
+        }
+        public static List<Sensor> GetSensorFromCitizen(string citizenCprNr)
+        {
+            List<Sensor> sensors;
+            try
+            {
+                ConnectDB();
+                sensors = new List<Sensor>();
+                cmd = new SqlCommand("SP_GetSensorFromCitizen", dbconn);
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.Add(new SqlParameter("@CitizenCPRNR", citizenCprNr));
+                SqlDataReader rdr;
+                rdr = cmd.ExecuteReader();
+
+                while (rdr.HasRows && rdr.Read())
+                {
+                    sensors.Add(new Sensor(Convert.ToInt32(rdr["S_SerialNumber"])));
+                }
+            }
+            catch (SqlException e)
+            {
+                throw new Exception("Error! Kunne ikke hente sensors " + e.Message);
+            }
+            finally
+            {
+                CloseDB();
+            }
+            return sensors;
         }
     }
 }

@@ -73,6 +73,7 @@ namespace EksamensProjekt.View
                 if (_CitizenController.Citizens[i].Name == Citizen_DropDown.SelectedItem.ToString())
                 {
                     CPRNR_TextBox.Text = _CitizenController.Citizens[i].CprNr;
+                    _CitizenController.GetSensorsFromCitizen(_CitizenController.Citizens[i].CprNr);
                     for (int j = 0; j < _CitizenController.Citizens[i].Sensors.Count; j++)
                     {
                         SensorDependency_Dropdown.Items.Add(_CitizenController.Citizens[i].Sensors[j].SerialNumber);
@@ -114,7 +115,7 @@ namespace EksamensProjekt.View
                     else if (RuleSet_DropDown.SelectedItem.ToString() == "Tidsrum Regel" && AddActingRule_CheckBox.IsChecked != true)
                     {
                         bool contactHelper;
-                        int id;
+                        string relativeCprNr = "" ;
                         if(ContactHelper_CheckBox.IsChecked == true){
                             contactHelper = true;
                         }
@@ -128,17 +129,17 @@ namespace EksamensProjekt.View
                             {
                                 if (_CitizenController.Citizens[i].Relatives[j].Name == Relative_Dropdown.SelectedItem.ToString())
                                 {
-                                    id = _CitizenController.Citizens[i].Relatives[j].ID;
+                                    relativeCprNr = _CitizenController.Citizens[i].Relatives[j].CprNr;
                                 }
                             }
                         }
                         _RuleSetController.AddSensorRuleManagement("TRR", Convert.ToInt32(Sensor_Dropdown.SelectedItem.ToString()));
-                        _RuleSetController.AddTimeRangeRuleFromSerialNumber(Convert.ToInt32(Sensor_Dropdown.SelectedItem.ToString()), Day_Dropdown.SelectedItem.ToString(), Convert.ToDateTime(StartHour_TextBox.Text + ":" + StartMinute_TextBox.Text), Convert.ToDateTime(EndHour_TextBox.Text + ":" + EndMinute_TextBox.Text), "ikke færdig" , "", contactHelper); //Ikke done.
+                        _RuleSetController.AddTimeRangeRuleFromSerialNumber(Convert.ToInt32(Sensor_Dropdown.SelectedItem.ToString()), Day_Dropdown.SelectedItem.ToString(), Convert.ToDateTime(StartHour_TextBox.Text + ":" + StartMinute_TextBox.Text), Convert.ToDateTime(EndHour_TextBox.Text + ":" + EndMinute_TextBox.Text), relativeCprNr , "", contactHelper); //Ikke done.
                     }
                     else if (RuleSet_DropDown.SelectedItem.ToString() == "Tidsrum Regel" && AddActingRule_CheckBox.IsChecked == true)
                     {
                         bool contactHelper;
-                        int id;
+                        string relativeCprNr = "";
                         bool waitorLook;
                         int timeToWait;
                         int timeToLook;
@@ -168,13 +169,13 @@ namespace EksamensProjekt.View
                             {
                                 if (_CitizenController.Citizens[i].Relatives[j].Name == Relative_Dropdown.SelectedItem.ToString())
                                 {
-                                    id = _CitizenController.Citizens[i].Relatives[j].ID;
+                                    relativeCprNr = _CitizenController.Citizens[i].Relatives[j].CprNr;
                                 }
                             }
                         }
                         _RuleSetController.AddSensorRuleManagement("TRR", Convert.ToInt32(Sensor_Dropdown.SelectedItem.ToString()));
                         _RuleSetController.AddSensorRuleFromSerialNumber(Convert.ToInt32(Sensor_Dropdown.SelectedItem.ToString()), Convert.ToInt32(SensorDependency_Dropdown.SelectedItem.ToString()), waitorLook, timeToWait, timeToLook);
-                        _RuleSetController.AddTimeRangeRuleFromSerialNumber(Convert.ToInt32(Sensor_Dropdown.SelectedItem.ToString()), Day_Dropdown.SelectedItem.ToString(), Convert.ToDateTime(StartHour_TextBox.Text + ":" + StartMinute_TextBox.Text), Convert.ToDateTime(EndHour_TextBox.Text + ":" + EndMinute_TextBox.Text), "ikke færdig", "SR " + _RuleSetController.SensorRuleId, contactHelper); //Ikke done.    
+                        _RuleSetController.AddTimeRangeRuleFromSerialNumber(Convert.ToInt32(Sensor_Dropdown.SelectedItem.ToString()), Day_Dropdown.SelectedItem.ToString(), Convert.ToDateTime(StartHour_TextBox.Text + ":" + StartMinute_TextBox.Text), Convert.ToDateTime(EndHour_TextBox.Text + ":" + EndMinute_TextBox.Text), relativeCprNr, "SR " + _RuleSetController.SensorRuleId, contactHelper); //Ikke done.    
                     }
                     MessageBox.Show("Citizen og Sensor er forbundet!");
                     
