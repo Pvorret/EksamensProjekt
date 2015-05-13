@@ -68,6 +68,7 @@ namespace EksamensProjekt.View
         }
         private void Citizen_DropDown_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+            Relative_Dropdown.Items.Clear();
             for (int i = 0; i < _CitizenController.Citizens.Count; i++)
             {
                 if (_CitizenController.Citizens[i].Name == Citizen_DropDown.SelectedItem.ToString())
@@ -92,12 +93,13 @@ namespace EksamensProjekt.View
             {
                 if(Sensor_Dropdown.SelectedIndex != -1 && SensorLocation_TextBox.Text != "" && Citizen_DropDown.SelectedIndex != -1)
                 {
-                    //_SensorController.ConnectSensorToCitizen(int.Parse(Sensor_Dropdown.SelectedItem.ToString()), CPRNR_TextBox.Text, SensorLocation_TextBox.Text);
+                    _SensorController.ConnectSensorToCitizen(int.Parse(Sensor_Dropdown.SelectedItem.ToString()), CPRNR_TextBox.Text, SensorLocation_TextBox.Text);
                     if (RuleSet_DropDown.SelectedItem.ToString() == "Sensor Regel")
                     {
                         bool waitorLook;
                         int timeToWait;
                         int timeToLook;
+                        bool sendMessageAfter;
                         if (Wait_RadioButton.IsChecked == true)
                         {
                             waitorLook = true;
@@ -110,9 +112,14 @@ namespace EksamensProjekt.View
                             timeToLook = Convert.ToInt32(WaitOrLookLength_TextBox.Text);
                             timeToWait = 0;
                         }
-                        bool whenToSend;
+                        if (Yes_RadioButton.IsChecked == true) {
+                            sendMessageAfter = true;
+                        }
+                        else {
+                            sendMessageAfter = false;
+                        }
                         _RuleSetController.AddSensorRuleManagement("SR", Convert.ToInt32(Sensor_Dropdown.SelectedItem.ToString()));
-                        _RuleSetController.AddSensorRuleFromSerialNumber(Convert.ToInt32(Sensor_Dropdown.SelectedItem.ToString()), Convert.ToInt32(SensorDependency_Dropdown.SelectedItem.ToString()), waitorLook, timeToWait, timeToLook);
+                        _RuleSetController.AddSensorRuleFromSerialNumber(Convert.ToInt32(Sensor_Dropdown.SelectedItem.ToString()), Convert.ToInt32(SensorDependency_Dropdown.SelectedItem.ToString()), waitorLook, timeToWait, timeToLook, sendMessageAfter);
                     }
                     else if (RuleSet_DropDown.SelectedItem.ToString() == "Tidsrums Regel" && AddActingRule_CheckBox.IsChecked == false)
                     {
@@ -135,8 +142,9 @@ namespace EksamensProjekt.View
                                 }
                             }
                         }
+                        string endTime = EndHour_TextBox.Text + ":" + EndMinute_TextBox.Text; 
                         _RuleSetController.AddSensorRuleManagement("TRR", Convert.ToInt32(Sensor_Dropdown.SelectedItem.ToString()));
-                        _RuleSetController.AddTimeRangeRuleFromSerialNumber(Convert.ToInt32(Sensor_Dropdown.SelectedItem.ToString()), Day_Dropdown.SelectedItem.ToString(), Convert.ToDateTime(StartHour_TextBox.Text + ":" + StartMinute_TextBox.Text), Convert.ToDateTime(EndHour_TextBox.Text + ":" + EndMinute_TextBox.Text), relativeCprNr , "", contactHelper); //Ikke done.
+                        _RuleSetController.AddTimeRangeRuleFromSerialNumber(Convert.ToInt32(Sensor_Dropdown.SelectedItem.ToString()), Day_Dropdown.SelectedItem.ToString(), Convert.ToDateTime(StartHour_TextBox.Text + ":" + StartMinute_TextBox.Text), Convert.ToDateTime(endTime), relativeCprNr , "", contactHelper); //Ikke done.
                     }
                     else if (RuleSet_DropDown.SelectedItem.ToString() == "Tidsrums Regel" && AddActingRule_CheckBox.IsChecked == true)
                     {
@@ -145,6 +153,7 @@ namespace EksamensProjekt.View
                         bool waitorLook;
                         int timeToWait;
                         int timeToLook;
+                        bool sendMessageAfter;
                         if (Wait_RadioButton.IsChecked == true)
                         {
                             waitorLook = true;
@@ -156,6 +165,14 @@ namespace EksamensProjekt.View
                             waitorLook = false;
                             timeToLook = Convert.ToInt32(WaitOrLookLength_TextBox.Text);
                             timeToWait = 0;
+                        }
+                        if (Yes_RadioButton.IsChecked == true)
+                        {
+                            sendMessageAfter = true;
+                        }
+                        else
+                        {
+                            sendMessageAfter = false;
                         }
                         if (ContactHelper_CheckBox.IsChecked == true)
                         {
@@ -176,10 +193,11 @@ namespace EksamensProjekt.View
                             }
                         }
                         _RuleSetController.AddSensorRuleManagement("TRR", int.Parse(Sensor_Dropdown.SelectedItem.ToString()));
-                        _RuleSetController.AddSensorRuleFromSerialNumber(Convert.ToInt32(Sensor_Dropdown.SelectedItem.ToString()), Convert.ToInt32(SensorDependency_Dropdown.SelectedItem.ToString()), waitorLook, timeToWait, timeToLook);
+                        _RuleSetController.AddSensorRuleFromSerialNumber(Convert.ToInt32(Sensor_Dropdown.SelectedItem.ToString()), Convert.ToInt32(SensorDependency_Dropdown.SelectedItem.ToString()), waitorLook, timeToWait, timeToLook, sendMessageAfter);
                         _RuleSetController.AddTimeRangeRuleFromSerialNumber(Convert.ToInt32(Sensor_Dropdown.SelectedItem.ToString()), Day_Dropdown.SelectedItem.ToString(), Convert.ToDateTime(StartHour_TextBox.Text + ":" + StartMinute_TextBox.Text), Convert.ToDateTime(EndHour_TextBox.Text + ":" + EndMinute_TextBox.Text), relativeCprNr, "SR " + _RuleSetController.SensorRuleId, contactHelper); //Ikke done.    
                     }
                     MessageBox.Show("Citizen og Sensor er forbundet!");
+                    Close();
                     
                 }
                 else
@@ -189,7 +207,7 @@ namespace EksamensProjekt.View
             }
             catch (Exception d)
             {
-                throw new Exception("Error! Du mangler at indputte nogle informationer" + d.Message);
+                throw new Exception("Error! Du mangler at indputte nogle informationer " + d.Message);
             }
         }
         private void RuleSet_DropDown_SelectionChanged(object sender, SelectionChangedEventArgs e)

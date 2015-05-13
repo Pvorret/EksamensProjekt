@@ -22,12 +22,12 @@ namespace EksamensProjekt.Helper {
             this.TimeToLook = timeToLook;
         }
 
-        public SensorRule(int sensorDependency, bool waitOrLook, int timeToWait, int timeToLook, bool whenToLook) {
+        public SensorRule(int sensorDependency, bool waitOrLook, int timeToWait, int timeToLook, bool whenToSend) {
             this.SensorDependency = sensorDependency;
             this.WaitOrLook = waitOrLook;
             this.TimeToWait = timeToWait;
             this.TimeToLook = timeToLook;
-            this.WhenToSend = WhenToSend;
+            this.WhenToSend = whenToSend;
         }
 
         public static void BehandleinputfraRuleSetController(SensorRule sensorrule) {
