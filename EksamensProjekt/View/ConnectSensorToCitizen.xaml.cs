@@ -68,6 +68,7 @@ namespace EksamensProjekt.View
         }
         private void Citizen_DropDown_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+            Relative_Dropdown.Items.Clear();
             for (int i = 0; i < _CitizenController.Citizens.Count; i++)
             {
                 if (_CitizenController.Citizens[i].Name == Citizen_DropDown.SelectedItem.ToString())
@@ -92,7 +93,7 @@ namespace EksamensProjekt.View
             {
                 if(Sensor_Dropdown.SelectedIndex != -1 && SensorLocation_TextBox.Text != "" && Citizen_DropDown.SelectedIndex != -1)
                 {
-                    //_SensorController.ConnectSensorToCitizen(int.Parse(Sensor_Dropdown.SelectedItem.ToString()), CPRNR_TextBox.Text, SensorLocation_TextBox.Text);
+                    _SensorController.ConnectSensorToCitizen(int.Parse(Sensor_Dropdown.SelectedItem.ToString()), CPRNR_TextBox.Text, SensorLocation_TextBox.Text);
                     if (RuleSet_DropDown.SelectedItem.ToString() == "Sensor Regel")
                     {
                         bool waitorLook;
