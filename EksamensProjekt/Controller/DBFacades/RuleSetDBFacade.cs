@@ -186,6 +186,7 @@ namespace EksamensProjekt.Controller.DBFacades
                 cmd.Parameters.Add(new SqlParameter("@SR_WaitOrLook", sensorRule.WaitOrLook));
                 cmd.Parameters.Add(new SqlParameter("@SR_TimeToWait", sensorRule.TimeToWait));
                 cmd.Parameters.Add(new SqlParameter("@SR_TimeToLook", sensorRule.TimeToLook));
+                cmd.Parameters.Add(new SqlParameter("@SR_WhenToSend", Convert.ToInt32(sensorRule.WhenToSend)));
                 
                 cmd.ExecuteNonQuery();
 

@@ -37,9 +37,9 @@ namespace EksamensProjekt.Controller
 
             return RuleSetDBFacade.GetSensorRuleFromSerialNumber(serialNumber);
         }
-        public void AddSensorRuleFromSerialNumber(int serialNumber, int sensorDependency, bool waitOrLook, int timeToWait, int timeToLook)//Stefan
+        public void AddSensorRuleFromSerialNumber(int serialNumber, int sensorDependency, bool waitOrLook, int timeToWait, int timeToLook, bool whenToSend)//Stefan
         {
-            SensorRule sensorRule = new SensorRule(sensorDependency, waitOrLook, timeToWait, timeToLook);
+            SensorRule sensorRule = new SensorRule(sensorDependency, waitOrLook, timeToWait, timeToLook, whenToSend);
             RuleSetDBFacade.AddSensorRuleFromSerialNumber(serialNumber, sensorRule);
         }
 

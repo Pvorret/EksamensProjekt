@@ -99,6 +99,7 @@ namespace EksamensProjekt.View
                         bool waitorLook;
                         int timeToWait;
                         int timeToLook;
+                        bool sendMessageAfter;
                         if (Wait_RadioButton.IsChecked == true)
                         {
                             waitorLook = true;
@@ -111,8 +112,14 @@ namespace EksamensProjekt.View
                             timeToLook = Convert.ToInt32(WaitOrLookLength_TextBox.Text);
                             timeToWait = 0;
                         }
+                        if (Yes_RadioButton.IsChecked == true) {
+                            sendMessageAfter = true;
+                        }
+                        else {
+                            sendMessageAfter = false;
+                        }
                         _RuleSetController.AddSensorRuleManagement("SR", Convert.ToInt32(Sensor_Dropdown.SelectedItem.ToString()));
-                        _RuleSetController.AddSensorRuleFromSerialNumber(Convert.ToInt32(Sensor_Dropdown.SelectedItem.ToString()), Convert.ToInt32(SensorDependency_Dropdown.SelectedItem.ToString()), waitorLook, timeToWait, timeToLook);
+                        _RuleSetController.AddSensorRuleFromSerialNumber(Convert.ToInt32(Sensor_Dropdown.SelectedItem.ToString()), Convert.ToInt32(SensorDependency_Dropdown.SelectedItem.ToString()), waitorLook, timeToWait, timeToLook, sendMessageAfter);
                     }
                     else if (RuleSet_DropDown.SelectedItem.ToString() == "Tidsrums Regel" && AddActingRule_CheckBox.IsChecked == false)
                     {
@@ -146,7 +153,7 @@ namespace EksamensProjekt.View
                         bool waitorLook;
                         int timeToWait;
                         int timeToLook;
-                        bool SendMessageAfter;
+                        bool sendMessageAfter;
                         if (Wait_RadioButton.IsChecked == true)
                         {
                             waitorLook = true;
@@ -161,11 +168,11 @@ namespace EksamensProjekt.View
                         }
                         if (Yes_RadioButton.IsChecked == true)
                         {
-                            SendMessageAfter = true;
+                            sendMessageAfter = true;
                         }
                         else
                         {
-                            SendMessageAfter = false;
+                            sendMessageAfter = false;
                         }
                         if (ContactHelper_CheckBox.IsChecked == true)
                         {
@@ -186,7 +193,7 @@ namespace EksamensProjekt.View
                             }
                         }
                         _RuleSetController.AddSensorRuleManagement("TRR", int.Parse(Sensor_Dropdown.SelectedItem.ToString()));
-                        _RuleSetController.AddSensorRuleFromSerialNumber(Convert.ToInt32(Sensor_Dropdown.SelectedItem.ToString()), Convert.ToInt32(SensorDependency_Dropdown.SelectedItem.ToString()), waitorLook, timeToWait, timeToLook);
+                        _RuleSetController.AddSensorRuleFromSerialNumber(Convert.ToInt32(Sensor_Dropdown.SelectedItem.ToString()), Convert.ToInt32(SensorDependency_Dropdown.SelectedItem.ToString()), waitorLook, timeToWait, timeToLook, sendMessageAfter);
                         _RuleSetController.AddTimeRangeRuleFromSerialNumber(Convert.ToInt32(Sensor_Dropdown.SelectedItem.ToString()), Day_Dropdown.SelectedItem.ToString(), Convert.ToDateTime(StartHour_TextBox.Text + ":" + StartMinute_TextBox.Text), Convert.ToDateTime(EndHour_TextBox.Text + ":" + EndMinute_TextBox.Text), relativeCprNr, "SR " + _RuleSetController.SensorRuleId, contactHelper); //Ikke done.    
                     }
                     MessageBox.Show("Citizen og Sensor er forbundet!");
