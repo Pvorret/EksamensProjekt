@@ -134,8 +134,9 @@ namespace EksamensProjekt.View
                                 }
                             }
                         }
+                        string endTime = EndHour_TextBox.Text + ":" + EndMinute_TextBox.Text; 
                         _RuleSetController.AddSensorRuleManagement("TRR", Convert.ToInt32(Sensor_Dropdown.SelectedItem.ToString()));
-                        _RuleSetController.AddTimeRangeRuleFromSerialNumber(Convert.ToInt32(Sensor_Dropdown.SelectedItem.ToString()), Day_Dropdown.SelectedItem.ToString(), Convert.ToDateTime(StartHour_TextBox.Text + ":" + StartMinute_TextBox.Text), Convert.ToDateTime(EndHour_TextBox.Text + ":" + EndMinute_TextBox.Text), relativeCprNr , "", contactHelper); //Ikke done.
+                        _RuleSetController.AddTimeRangeRuleFromSerialNumber(Convert.ToInt32(Sensor_Dropdown.SelectedItem.ToString()), Day_Dropdown.SelectedItem.ToString(), Convert.ToDateTime(StartHour_TextBox.Text + ":" + StartMinute_TextBox.Text), Convert.ToDateTime(endTime), relativeCprNr , "", contactHelper); //Ikke done.
                     }
                     else if (RuleSet_DropDown.SelectedItem.ToString() == "Tidsrums Regel" && AddActingRule_CheckBox.IsChecked == true)
                     {
@@ -144,6 +145,7 @@ namespace EksamensProjekt.View
                         bool waitorLook;
                         int timeToWait;
                         int timeToLook;
+                        bool SendMessageAfter;
                         if (Wait_RadioButton.IsChecked == true)
                         {
                             waitorLook = true;
@@ -155,6 +157,14 @@ namespace EksamensProjekt.View
                             waitorLook = false;
                             timeToLook = Convert.ToInt32(WaitOrLookLength_TextBox.Text);
                             timeToWait = 0;
+                        }
+                        if (Yes_RadioButton.IsChecked == true)
+                        {
+                            SendMessageAfter = true;
+                        }
+                        else
+                        {
+                            SendMessageAfter = false;
                         }
                         if (ContactHelper_CheckBox.IsChecked == true)
                         {
@@ -179,6 +189,7 @@ namespace EksamensProjekt.View
                         _RuleSetController.AddTimeRangeRuleFromSerialNumber(Convert.ToInt32(Sensor_Dropdown.SelectedItem.ToString()), Day_Dropdown.SelectedItem.ToString(), Convert.ToDateTime(StartHour_TextBox.Text + ":" + StartMinute_TextBox.Text), Convert.ToDateTime(EndHour_TextBox.Text + ":" + EndMinute_TextBox.Text), relativeCprNr, "SR " + _RuleSetController.SensorRuleId, contactHelper); //Ikke done.    
                     }
                     MessageBox.Show("Citizen og Sensor er forbundet!");
+                    Close();
                     
                 }
                 else
@@ -188,7 +199,7 @@ namespace EksamensProjekt.View
             }
             catch (Exception d)
             {
-                throw new Exception("Error! Du mangler at indputte nogle informationer" + d.Message);
+                throw new Exception("Error! Du mangler at indputte nogle informationer " + d.Message);
             }
         }
         private void RuleSet_DropDown_SelectionChanged(object sender, SelectionChangedEventArgs e)
