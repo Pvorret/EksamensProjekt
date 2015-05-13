@@ -18,6 +18,7 @@ namespace UnitTest {
             bool wait = true;
             int timeToWait = 20;
             int timeToLook = 0;
+            bool whenToSend = true;
 
             sensorcontroller.CreateSensor(SerialNumber, "Hej Sensor");
 
@@ -27,10 +28,10 @@ namespace UnitTest {
             }
             int randomsensorDependency = intlist.ToArray()[random.Next(0, intlist.ToArray().Length)];
 
-            SensorRule sensorrule = new SensorRule(randomsensorDependency, wait, timeToWait, timeToLook);
+            SensorRule sensorrule = new SensorRule(randomsensorDependency, wait, timeToWait, timeToLook, whenToSend);
 
 
-            rulesetcontroller.AddSensorRuleFromSerialNumber(SerialNumber, randomsensorDependency, wait, timeToWait, timeToLook);
+            rulesetcontroller.AddSensorRuleFromSerialNumber(SerialNumber, randomsensorDependency, wait, timeToWait, timeToLook, whenToSend);
 
             foreach (SensorRule s in rulesetcontroller.GetSensorRuleFromSerialNumber(SerialNumber)) {
                 Assert.AreEqual(s, sensorrule);
