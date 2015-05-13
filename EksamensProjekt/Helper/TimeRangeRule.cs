@@ -9,7 +9,7 @@ using EksamensProjekt.Controller;
 namespace EksamensProjekt.Helper {
     public class TimeRangeRule 
     {
-        public string CPRNR { get; set; }
+        public string CPRNR { get; set; } //Ændre navn på property (eks. ContactPerson)
         public string ActingRule { get; set; }
         public bool ContactHelper { get; set; }
         public Time Time { get; set; }

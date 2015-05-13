@@ -110,6 +110,7 @@ namespace EksamensProjekt.View
                             timeToLook = Convert.ToInt32(WaitOrLookLength_TextBox.Text);
                             timeToWait = 0;
                         }
+                        bool whenToSend;
                         _RuleSetController.AddSensorRuleManagement("SR", Convert.ToInt32(Sensor_Dropdown.SelectedItem.ToString()));
                         _RuleSetController.AddSensorRuleFromSerialNumber(Convert.ToInt32(Sensor_Dropdown.SelectedItem.ToString()), Convert.ToInt32(SensorDependency_Dropdown.SelectedItem.ToString()), waitorLook, timeToWait, timeToLook);
                     }
