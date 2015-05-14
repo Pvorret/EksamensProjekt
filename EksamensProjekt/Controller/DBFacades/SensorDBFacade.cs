@@ -110,8 +110,34 @@ namespace EksamensProjekt.Controller.DBFacades
             try
             {
                 ConnectDB();
-                SqlCommand cmd = new SqlCommand("SP_DeleteSensor", dbconn);
+                SqlCommand cmd = new SqlCommand("SP_GetRuleSetIDFromSerialNumber", dbconn);
                 cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.Add(new SqlParameter("@SerialNumber", serialNumber));
+                SqlDataReader reader = cmd.ExecuteReader();
+                int ruleSetManagementId = 0;
+                int sensorRuleId = 0;
+                int timeRangeRuleId = 0;
+                List<int> sensorDependency = new List<int>();
+
+                while (reader.Read())
+                {
+                    ruleSetManagementId = Convert.ToInt32(reader["SRM_ID"]);
+                    sensorRuleId = Convert.ToInt32(reader["SRMSR_SR_ID"]);
+                    timeRangeRuleId = Convert.ToInt32(reader["SRMTRR_TRR_ID"]);
+                    sensorDependency.Add(Convert.ToInt32(reader["SR_ID"]));
+                }
+                foreach (int i in sensorDependency)
+                {
+                    cmd = new SqlCommand("SP_DeleteSensorRuleFromSensorDependency", dbconn);
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.Add(new SqlParameter("@SR_ID", i));
+                    cmd.ExecuteNonQuery();
+                }
+                cmd = new SqlCommand("SP_DeleteSensorV2", dbconn);
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.Add(new SqlParameter("@SRMSR_SR_ID", sensorRuleId));
+                cmd.Parameters.Add(new SqlParameter("@SRMTRR_TRR_ID", timeRangeRuleId));
+                cmd.Parameters.Add(new SqlParameter("@SRM_ID", ruleSetManagementId));
                 cmd.Parameters.Add(new SqlParameter("@SerialNumber", serialNumber));
                 cmd.ExecuteNonQuery();
                 return true;

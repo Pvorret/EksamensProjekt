@@ -5,6 +5,8 @@ using System.Text;
 using System.Threading.Tasks;
 using EksamensProjekt.Model;
 using EksamensProjekt.Controller;
+using System.Text.RegularExpressions;
+using EksamensProjekt.Controller;
 
 namespace EksamensProjekt.Helper {
     public class TimeRangeRule 
@@ -21,5 +23,6 @@ namespace EksamensProjekt.Helper {
             this.ContactHelper = contactHelper;
             this.Time = time;
         }
+        
     }
 }

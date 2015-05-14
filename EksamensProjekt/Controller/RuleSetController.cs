@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using EksamensProjekt.Controller.DBFacades;
 using EksamensProjekt.Model;
 using EksamensProjekt.Helper;
+using System.Text.RegularExpressions;
 using System.Windows;
 
 namespace EksamensProjekt.Controller
@@ -13,6 +14,7 @@ namespace EksamensProjekt.Controller
     public class RuleSetController
     {
         public SensorLog SensorLog;
+        public List<SensorRule> SensorRules = new List<SensorRule>();
         public int SensorRuleId { get; set; }
         public void CreateSensorLog(int serialNumber, string activationTime)
         {
@@ -27,14 +29,11 @@ namespace EksamensProjekt.Controller
             SensorLog.ContactMessage = contactMessage;
             RuleSetDBFacade.UpdateSensorLog(SensorLog);
         }
-        public void AddSensorRuleManagement(string ruleSet, int serialNumber)
-        {
+        public void AddSensorRuleManagement(string ruleSet, int serialNumber) {
             RuleSetDBFacade.AddSensorRuleManagement(ruleSet, serialNumber);
         }
-        public List<SensorRule> GetSensorRuleFromSerialNumber(int serialNumber)
-        {
-            foreach (SensorRule s in RuleSetDBFacade.GetSensorRuleFromSerialNumber(serialNumber))
-            {
+        public List<SensorRule> GetSensorRuleFromSerialNumber(int serialNumber) {
+            foreach (SensorRule s in RuleSetDBFacade.GetSensorRuleFromSerialNumber(serialNumber)) {
                 SensorRule sensorrule = new SensorRule(s.Id, s.SensorDependency, s.WaitOrLook, s.TimeToWait, s.TimeToWait);
                 SensorRule.BehandleinputfraRuleSetController(sensorrule);
             }
@@ -47,8 +46,7 @@ namespace EksamensProjekt.Controller
             RuleSetDBFacade.AddSensorRuleFromSerialNumber(serialNumber, sensorRule);
         }
 
-        public void AddTimeRangeRuleFromSerialNumber(int serialNumber, string day, DateTime startTime, DateTime endTime, string relativeCprNr, string actingRule, bool contactHelper)
-        {
+        public void AddTimeRangeRuleFromSerialNumber(int serialNumber, string day, DateTime startTime, DateTime endTime, string relativeCprNr, string actingRule, bool contactHelper) {
             TimeRangeRule timerange = new TimeRangeRule(relativeCprNr, actingRule, contactHelper, new Time(startTime, endTime, day));
             RuleSetDBFacade.AddTimeRangeRuleFromSerialNumber(serialNumber, timerange);
         }
@@ -72,7 +70,16 @@ namespace EksamensProjekt.Controller
                     }
                 }
             }
-            return false;
+            return false;          
+        }
+        public void CheckActing(string actingRuleString)
+        {
+            string[] rule = Regex.Split(actingRuleString, @"\W+");
+            int id = int.Parse(rule[1]);
+            if (rule[0] == "SR")
+            {
+                SensorRules.Add(RuleSetDBFacade.GetSensorRuleFromID(id));
+            }
         }
         public void SendMessage(List<string> contactPersons)//Stefan
         {
