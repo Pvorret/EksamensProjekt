@@ -23,10 +23,14 @@ namespace EksamensProjekt.Helper {
             this.ContactHelper = contactHelper;
             this.Time = time;
         }
-        public string ProcessTimeRangeRule(int ID)
+        public string ProcessTimeRangeRule(RuleSetController ruleSetController ,int id)//Stefan
         {
-
-            return "";
+            ruleSetController.ContactList.Add(ruleSetController.TimeRangeRules[id].CPRNR);
+            if (ruleSetController.TimeRangeRules[id].ContactHelper == true)
+            {
+                ruleSetController.ContactList.Add("Helper");
+            }
+            return ruleSetController.TimeRangeRules[id].ActingRule;
         }
     }
 }

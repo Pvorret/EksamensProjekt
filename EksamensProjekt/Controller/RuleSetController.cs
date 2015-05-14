@@ -16,6 +16,7 @@ namespace EksamensProjekt.Controller
         public SensorLog SensorLog;
         public List<SensorRule> SensorRules = new List<SensorRule>();
         public List<TimeRangeRule> TimeRangeRules = new List<TimeRangeRule>();
+        public List<string> ContactList = new List<string>();
         public int SensorRuleId { get; set; }
         public void CreateSensorLog(int serialNumber, string activationTime)
         {
