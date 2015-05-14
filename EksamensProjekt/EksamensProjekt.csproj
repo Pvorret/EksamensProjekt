@@ -73,6 +73,9 @@
     <Compile Include="View\AddReligion.xaml.cs">
       <DependentUpon>AddReligion.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\AddSensorRuleOrTimeRangeRule.xaml.cs">
+      <DependentUpon>AddSensorRuleOrTimeRangeRule.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\ConnectSensorToCitizen.xaml.cs">
       <DependentUpon>ConnectSensorToCitizen.xaml</DependentUpon>
     </Compile>
@@ -113,6 +116,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\AddReligion.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\AddSensorRuleOrTimeRangeRule.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
