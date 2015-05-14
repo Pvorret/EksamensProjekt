@@ -12,6 +12,10 @@ namespace EksamensProjekt.Controller.DBFacades
 {
     public class SensorDBFacade
     {
+        static int ruleSetManagementId = 0;
+        static int sensorRuleId = 0;
+        static int timeRangeRuleId = 0;
+        static List<int> sensorDependency = new List<int>();
         public static SqlConnection dbconn;
         static SqlCommand cmd;
         public static void ConnectDB() {
@@ -107,32 +111,11 @@ namespace EksamensProjekt.Controller.DBFacades
         }
         public static bool DeleteSensor(int serialNumber)
         {
+            GetRuleSetIDFromSerialNumber(serialNumber);
+            GetSensorDependencyFromSerialNumber(serialNumber);
             try
             {
                 ConnectDB();
-                SqlCommand cmd = new SqlCommand("SP_GetRuleSetIDFromSerialNumber", dbconn);
-                cmd.CommandType = CommandType.StoredProcedure;
-                cmd.Parameters.Add(new SqlParameter("@SerialNumber", serialNumber));
-                SqlDataReader reader = cmd.ExecuteReader();
-                int ruleSetManagementId = 0;
-                int sensorRuleId = 0;
-                int timeRangeRuleId = 0;
-                List<int> sensorDependency = new List<int>();
-
-                while (reader.Read())
-                {
-                    ruleSetManagementId = Convert.ToInt32(reader["SRM_ID"]);
-                    sensorRuleId = Convert.ToInt32(reader["SRMSR_SR_ID"]);
-                    timeRangeRuleId = Convert.ToInt32(reader["SRMTRR_TRR_ID"]);
-                    sensorDependency.Add(Convert.ToInt32(reader["SR_ID"]));
-                }
-                foreach (int i in sensorDependency)
-                {
-                    cmd = new SqlCommand("SP_DeleteSensorRuleFromSensorDependency", dbconn);
-                    cmd.CommandType = CommandType.StoredProcedure;
-                    cmd.Parameters.Add(new SqlParameter("@SR_ID", i));
-                    cmd.ExecuteNonQuery();
-                }
                 cmd = new SqlCommand("SP_DeleteSensorV2", dbconn);
                 cmd.CommandType = CommandType.StoredProcedure;
                 cmd.Parameters.Add(new SqlParameter("@SRMSR_SR_ID", sensorRuleId));
@@ -262,6 +245,60 @@ namespace EksamensProjekt.Controller.DBFacades
                 CloseDB();
             }
             return sensors;
+        }
+        public static void GetRuleSetIDFromSerialNumber(int serialNumber)
+        {
+            try
+            {
+                ConnectDB();
+                SqlCommand cmd = new SqlCommand("SP_GetRuleSetIDFromSerialNumber", dbconn);
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.Add(new SqlParameter("@SerialNumber", serialNumber));
+                SqlDataReader reader = cmd.ExecuteReader();
+                List<int> sensorDependency = new List<int>();
+
+                while (reader.Read())
+                {
+                    ruleSetManagementId = Convert.ToInt32(reader["SRM_ID"]);
+                    sensorRuleId = Convert.ToInt32(reader["SRMSR_SR_ID"]);
+                    timeRangeRuleId = Convert.ToInt32(reader["SRMTRR_TRR_ID"]);
+                }
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.Message);
+            }
+            finally
+            {
+                CloseDB();
+            }
+        }
+        public static void GetSensorDependencyFromSerialNumber(int serialNumber)
+        {
+            try
+            {
+                ConnectDB();
+                foreach (int i in sensorDependency)
+                {
+                    cmd = new SqlCommand("SP_DeleteSensorRuleFromSensorDependency", dbconn);
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.Add(new SqlParameter("@SR_ID", i));
+                    cmd.ExecuteNonQuery();
+                    SqlDataReader reader = cmd.ExecuteReader();
+                    while (reader.Read())
+                    {
+                        sensorDependency.Add(Convert.ToInt32(reader["SR_ID"]));
+                    }
+                }
+            }
+            catch
+            {
+
+            }
+            finally
+            {
+                CloseDB();
+            }
         }
     }
 }
