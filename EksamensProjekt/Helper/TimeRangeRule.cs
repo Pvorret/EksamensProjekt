@@ -5,6 +5,8 @@ using System.Text;
 using System.Threading.Tasks;
 using EksamensProjekt.Model;
 using EksamensProjekt.Controller;
+using System.Text.RegularExpressions;
+using EksamensProjekt.Controller;
 
 namespace EksamensProjekt.Helper {
     public class TimeRangeRule 
@@ -20,6 +22,15 @@ namespace EksamensProjekt.Helper {
             this.CPRNR = relativeCprNr;
             this.ContactHelper = contactHelper;
             this.Time = time;
+        }
+        public string ProcessTimeRangeRule(RuleSetController ruleSetController ,int id)//Stefan
+        {
+            ruleSetController.ContactList.Add(ruleSetController.TimeRangeRules[id].CPRNR);
+            if (ruleSetController.TimeRangeRules[id].ContactHelper == true)
+            {
+                ruleSetController.ContactList.Add("Helper");
+            }
+            return ruleSetController.TimeRangeRules[id].ActingRule;
         }
     }
 }
