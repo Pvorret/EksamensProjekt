@@ -55,9 +55,16 @@ namespace EksamensProjekt.Controller
         {
             return DBFacades.RuleSetDBFacade.GetTimeRangeRuleFromSerialNumber(serialNumber);
         }
-        public bool CheckTime()
+        public bool CheckTime(Time timeRange, DateTime activationTime)//Stefan
         {
-            return true;
+            if (timeRange.StartTime <= activationTime)
+            {
+                if (timeRange.EndTime >= activationTime)
+                {
+                    return true;
+                }
+            }
+            return false;          
         }
     }
 }
