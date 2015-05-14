@@ -18,6 +18,12 @@ namespace EksamensProjekt.Controller
         public List<TimeRangeRule> TimeRangeRules = new List<TimeRangeRule>();
         public List<string> ContactList = new List<string>();
         public int SensorRuleId { get; set; }
+
+        public void HandelSensorInput(int serialNumber, DateTime ActivationTime)
+        {
+
+        }
+        public void GetSensorInputInformation(int serialNumber) { }
         public void CreateSensorLog(int serialNumber, string activationTime)
         {
             SensorLog = new SensorLog(serialNumber, Convert.ToDateTime(activationTime));
