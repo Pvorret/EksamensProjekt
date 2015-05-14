@@ -6,7 +6,6 @@ using System.Threading.Tasks;
 using EksamensProjekt.Model;
 using EksamensProjekt.Controller;
 using System.Text.RegularExpressions;
-using EksamensProjekt.Controller;
 
 namespace EksamensProjekt.Helper {
     public class TimeRangeRule 

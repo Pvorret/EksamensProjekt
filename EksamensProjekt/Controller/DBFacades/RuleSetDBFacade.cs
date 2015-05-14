@@ -173,15 +173,15 @@ namespace EksamensProjekt.Controller.DBFacades
             }
             return timerangerules;
         }
-        public static SensorRule AddSensorRuleFromSerialNumber(int serialNumber, SensorRule sensorRule) {
+        public static int AddSensorRuleFromSerialNumber(int serialNumber, SensorRule sensorRule) {
+            int id = 0;
             try {
                 ConnectDB();
-                SensorRule sensorRule2 = new SensorRule();
+               
                 SqlCommand cmd = new SqlCommand("SP_AddSensorRuleFromSerialNumber", dbconn);
                 cmd.CommandType = CommandType.StoredProcedure;
 
                 cmd.Parameters.Add(new SqlParameter("@SRM_S_SerialNumber", serialNumber));
-
                 cmd.Parameters.Add(new SqlParameter("@SR_R_SensorDependency", sensorRule.SensorDependency));
                 cmd.Parameters.Add(new SqlParameter("@SR_WaitOrLook", sensorRule.WaitOrLook));
                 cmd.Parameters.Add(new SqlParameter("@SR_TimeToWait", sensorRule.TimeToWait));
@@ -191,20 +191,21 @@ namespace EksamensProjekt.Controller.DBFacades
                 SqlDataReader rdr;
                 rdr = cmd.ExecuteReader();
 
-                while (rdr.Read() && rdr.HasRows) {
-                    int Id = (int)rdr["SR_ID"];
-                    sensorRule2.Id = Id;
+                while (rdr.Read() && rdr.HasRows) 
+                {
+                    id = (int)rdr["SR_ID"];
                 }
-                cmd.ExecuteNonQuery();
-
-                CloseDB();
-
-                return sensorRule2;
+                
             }
             catch (SqlException e) {
 
                 throw new Exception("Error in storing SensorRule i DB " + e.Message);
             }
+            finally
+            {
+                CloseDB();
+            }
+            return id;
         }
         public static void AddSensorRuleManagement(string ruleSet, int serialNumber)
         {
