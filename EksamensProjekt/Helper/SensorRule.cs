@@ -29,6 +29,7 @@ namespace EksamensProjekt.Helper {
             this.TimeToLook = timeToLook;
             this.WhenToSend = whenToSend;
         }
+        public SensorRule() { }
 
         public static void BehandleinputfraRuleSetController(SensorRule sensorrule) {
             //Navnet skal ændres og der skal sættes en return værdi.
