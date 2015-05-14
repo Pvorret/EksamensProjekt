@@ -4,7 +4,7 @@
         Title="Tilføj Sensor" Height="193.234" Width="300" WindowStartupLocation="CenterScreen">
     <Grid Margin="0,0,0,-3">
         <ComboBox Name="Type_ComboBox" HorizontalAlignment="Left" Margin="141,75,0,0" VerticalAlignment="Top" Width="120" SelectionChanged="Type_ComboBox_SelectionChanged_1"/>
-        <TextBox Name="SerialNumber_TextBox" HorizontalAlignment="Left" Height="23" Margin="141,28,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
+        <TextBox Name="SerialNumber_TextBox" HorizontalAlignment="Left" Height="23" Margin="141,28,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120" PreviewTextInput="SerialNumber_TextBox_PreviewTextInput"/>
         <Label Content="Serienummer:" HorizontalAlignment="Left" Margin="32,28,0,0" VerticalAlignment="Top"/>
         <Label Content="Type:" HorizontalAlignment="Left" Margin="32,75,0,0" VerticalAlignment="Top"/>
         <Button Name="CreateSensor_Button" Content="Tilføj" HorizontalAlignment="Left" Margin="32,121,0,0" VerticalAlignment="Top" Width="102" Click="CreateSensor_Button_Click"/>
