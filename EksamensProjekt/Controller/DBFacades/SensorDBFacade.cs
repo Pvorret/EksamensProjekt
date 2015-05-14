@@ -109,10 +109,33 @@ namespace EksamensProjekt.Controller.DBFacades
             }
             return sensors;
         }
+        public static void DeleteSensorRuleFromDependency()
+        {
+            foreach (int i in sensorDependency)
+            {
+                try
+                {
+                    ConnectDB();
+                    cmd = new SqlCommand("SP_DeleteSensorRuleFromSensorDependency", dbconn);
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.Add(new SqlParameter("@SR_ID", i));
+                    cmd.ExecuteNonQuery();
+                }
+                catch (SqlException e)
+                {
+                    MessageBox.Show(e.Message);
+                }
+                finally
+                {
+                    CloseDB();
+                }
+            }
+        }
         public static bool DeleteSensor(int serialNumber)
         {
             GetRuleSetIDFromSerialNumber(serialNumber);
             GetSensorDependencyFromSerialNumber(serialNumber);
+            DeleteSensorRuleFromDependency();
             try
             {
                 ConnectDB();
@@ -260,8 +283,23 @@ namespace EksamensProjekt.Controller.DBFacades
                 while (reader.Read())
                 {
                     ruleSetManagementId = Convert.ToInt32(reader["SRM_ID"]);
-                    sensorRuleId = Convert.ToInt32(reader["SRMSR_SR_ID"]);
-                    timeRangeRuleId = Convert.ToInt32(reader["SRMTRR_TRR_ID"]);
+                    try
+                    {
+                        sensorRuleId = Convert.ToInt32(reader["SRMSR_SR_ID"]);
+                    }
+                    catch (Exception e)
+                    {
+                        //MessageBox.Show(e.Message);
+                    }
+                    try
+                    {
+                        timeRangeRuleId = Convert.ToInt32(reader["SRMTRR_TRR_ID"]);
+                    }
+                    catch (Exception e)
+                    {
+                        //MessageBox.Show(e.Message);
+                    }
+                    
                 }
             }
             catch (Exception e)
@@ -278,17 +316,14 @@ namespace EksamensProjekt.Controller.DBFacades
             try
             {
                 ConnectDB();
-                foreach (int i in sensorDependency)
+                cmd = new SqlCommand("SP_DeleteSensorRuleFromSensorDependency", dbconn);
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.Add(new SqlParameter("@SR_ID", serialNumber));
+                cmd.ExecuteNonQuery();
+                SqlDataReader reader = cmd.ExecuteReader();
+                while (reader.Read())
                 {
-                    cmd = new SqlCommand("SP_DeleteSensorRuleFromSensorDependency", dbconn);
-                    cmd.CommandType = CommandType.StoredProcedure;
-                    cmd.Parameters.Add(new SqlParameter("@SR_ID", i));
-                    cmd.ExecuteNonQuery();
-                    SqlDataReader reader = cmd.ExecuteReader();
-                    while (reader.Read())
-                    {
                         sensorDependency.Add(Convert.ToInt32(reader["SR_ID"]));
-                    }
                 }
             }
             catch
