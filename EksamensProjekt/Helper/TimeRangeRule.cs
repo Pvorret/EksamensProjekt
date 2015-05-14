@@ -23,6 +23,10 @@ namespace EksamensProjekt.Helper {
             this.ContactHelper = contactHelper;
             this.Time = time;
         }
-        
+        public string ProcessTimeRangeRule(int ID)
+        {
+
+            return "";
+        }
     }
 }
