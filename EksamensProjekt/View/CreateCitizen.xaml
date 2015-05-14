@@ -4,26 +4,26 @@
         Title="Tilføj Borgerdata" Height="460" Width="575" WindowStartupLocation="CenterScreen">
     <Grid>
         <Label Content="CPR-NR" FontSize="14px" HorizontalAlignment="Left" Margin="20,20,0,0" VerticalAlignment="Top"/>
-        <TextBox Name="CitizenBirthdate_TextBox" HorizontalAlignment="Left" Height="25" Margin="118,24,0,0" TextWrapping="Wrap" Text="" FontSize="14px" VerticalAlignment="Top" Width="65"/>
-        <TextBox Name="CitizenLast4CPR_TextBox" HorizontalAlignment="Left" Height="25" Margin="208,24,0,0" TextWrapping="Wrap" Text="" FontSize="14px" VerticalAlignment="Top" Width="60"/>
+        <TextBox MaxLength="6" Name="CitizenBirthdate_TextBox" HorizontalAlignment="Left" Height="25" Margin="118,24,0,0" TextWrapping="Wrap" Text="" FontSize="14px" VerticalAlignment="Top" Width="65" PreviewTextInput="CitizenBirthdate_TextBox_PreviewTextInput"/>
+        <TextBox MaxLength="4" Name="CitizenLast4CPR_TextBox" HorizontalAlignment="Left" Height="25" Margin="208,24,0,0" TextWrapping="Wrap" Text="" FontSize="14px" VerticalAlignment="Top" Width="60" PreviewTextInput="CitizenLast4CPR_TextBox_PreviewTextInput"/>
         <Label Content="-" HorizontalAlignment="Left" FontSize="14px" Margin="187,20,0,0" VerticalAlignment="Top"/>
         <Label Content="Navn" FontSize="14px" HorizontalAlignment="Left" Margin="20,54,0,0" VerticalAlignment="Top"/>
-        <TextBox Name="CitizenName_TextBox" HorizontalAlignment="Left" Height="25" Margin="118,57,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="151"/>
+        <TextBox MaxLength="250" Name="CitizenName_TextBox" HorizontalAlignment="Left" Height="25" Margin="118,57,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="151" PreviewTextInput="CitizenName_TextBox_PreviewTextInput"/>
         <Label Content="Køn" FontSize="14px" HorizontalAlignment="Left" Margin="20,88,0,0" VerticalAlignment="Top"/>
         <ComboBox Name="CitizenGender_Dropdown" HorizontalAlignment="Left" Height="25" Margin="117,92,0,0" VerticalAlignment="Top" Width="151"/>
         <Label Content="Alder" FontSize="14px" HorizontalAlignment="Left" Margin="20,122,0,0" VerticalAlignment="Top"/>
-        <TextBox Name="CitizenAge_TextBox" HorizontalAlignment="Left" Height="25" Margin="118,125,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="151"/>
+        <TextBox MaxLength="3" Name="CitizenAge_TextBox" HorizontalAlignment="Left" Height="25" Margin="118,125,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="151" PreviewTextInput="CitizenAge_TextBox_PreviewTextInput"/>
         <Label Content="Tlf nr." FontSize="14px" HorizontalAlignment="Left" Margin="20,156,0,0" VerticalAlignment="Top"/>
-        <TextBox Name="CitizenPhoneNumber_TextBox" HorizontalAlignment="Left" Height="25" Margin="118,160,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="151"/>
+        <TextBox MaxLength="25" Name="CitizenPhoneNumber_TextBox" HorizontalAlignment="Left" Height="25" Margin="118,160,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="151" PreviewTextInput="CitizenPhoneNumber_TextBox_PreviewTextInput"/>
         <Label Content="Trosretning" FontSize="14px" HorizontalAlignment="Left" Margin="20,190,0,0" VerticalAlignment="Top"/>
         <ComboBox Name="CitizenReligion_Dropdown" HorizontalAlignment="Left" Height="25" Margin="117,194,0,0" VerticalAlignment="Top" Width="151" SelectionChanged="CitizenReligion_Dropdown_SelectionChanged"/>
         <Label Content="Addresse" FontSize="14px" HorizontalAlignment="Left" Margin="20,224,0,0" VerticalAlignment="Top"/>
-        <TextBox Name="CitizenAddress_TextBox" HorizontalAlignment="Left" Height="25" Margin="118,228,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="151"/>
+        <TextBox MaxLength="100" Name="CitizenAddress_TextBox" HorizontalAlignment="Left" Height="25" Margin="118,228,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="151"/>
         <Label Content="Postnr + By" FontSize="14px" HorizontalAlignment="Left" Margin="20,258,0,0" VerticalAlignment="Top"/>
-        <TextBox Name="CitizenCity_TextBox" HorizontalAlignment="Left" Height="25" Margin="118,261,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="151"/>
+        <TextBox MaxLength="100" Name="CitizenCity_TextBox" HorizontalAlignment="Left" Height="25" Margin="118,261,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="151"/>
         <ComboBox Name="CitizenSensorNeeds_Dropdown" HorizontalAlignment="Left" Height="25" Margin="117,295,0,0" VerticalAlignment="Top" Width="66" DropDownOpened="CitizenSensorNeeds_Dropdown_DropDownOpened"/>
         <Label Content="Amount" HorizontalAlignment="Left" Margin="183,294,0,0" VerticalAlignment="Top" Width="53"/>
-        <TextBox Name="CitizenSensorNeedsAmount" HorizontalAlignment="Left" Height="23" Margin="236,295,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="33"/>
+        <TextBox MaxLength="2" Name="CitizenSensorNeedsAmount" HorizontalAlignment="Left" Height="23" Margin="236,295,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="33"/>
         <Button Name="AddSensorNeeds_Button" Content="Tilføj SensorBehov" Height="25" HorizontalAlignment="Left" Margin="10,295,0,0" VerticalAlignment="Top" Width="102" Click="AddSensorNeeds_Button_Click"/>
         <ListBox Name="CitizenSensorNeeds_ListBox" HorizontalAlignment="Left" Height="58" Margin="117,325,0,0" VerticalAlignment="Top" Width="151"/>
         <Label Content="Sygdom" FontSize="14px" HorizontalAlignment="Left" Margin="281,20,0,0" VerticalAlignment="Top"/>
@@ -36,18 +36,17 @@
         <Label Content="Dage" FontSize="14px" HorizontalAlignment="Left" Margin="392,190,0,0" VerticalAlignment="Top"/>
         <ComboBox Name="HomeCareDays_Dropdown" HorizontalAlignment="Left" Height="25" Margin="458,194,0,0" VerticalAlignment="Top" Width="85"/>
         <Label Content="t" HorizontalAlignment="Left" Margin="398,219,0,0" VerticalAlignment="Top"/>
-        <TextBox Name="HomeCareStartHour_TextBox" HorizontalAlignment="Left" Height="25" Margin="392,247,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="30"/>
+        <TextBox MaxLength="2" Name="HomeCareStartHour_TextBox" HorizontalAlignment="Left" Height="25" Margin="392,247,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="30" PreviewTextInput="HomeCareStartHour_TextBox_PreviewTextInput"/>
         <Label Content="m" HorizontalAlignment="Left" Margin="430,219,0,0" VerticalAlignment="Top"/>
-        <TextBox Name="HomeCareStartMinute_TextBox" HorizontalAlignment="Left" Height="25" Margin="426,247,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="30"/>
+        <TextBox MaxLength="2" Name="HomeCareStartMinute_TextBox" HorizontalAlignment="Left" Height="25" Margin="426,247,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="30" PreviewTextInput="HomeCareStartMinute_TextBox_PreviewTextInput"/>
         <Label Content="-" HorizontalAlignment="Left" FontSize="14px" Margin="459,243,0,0" VerticalAlignment="Top" RenderTransformOrigin="8.214,0.207"/>
         <Label Content="t" HorizontalAlignment="Left" Margin="486,219,0,0" VerticalAlignment="Top"/>
-        <TextBox Name="HomeCareEndHour_TextBox" HorizontalAlignment="Left" Height="25" Margin="480,247,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="30"/>
+        <TextBox MaxLength="2" Name="HomeCareEndHour_TextBox" HorizontalAlignment="Left" Height="25" Margin="480,247,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="30" PreviewTextInput="HomeCareEndHour_TextBox_PreviewTextInput"/>
         <Label Content="m" HorizontalAlignment="Left" Margin="517,220,0,0" VerticalAlignment="Top"/>
-        <TextBox Name="HomeCareEndMinute_TextBox" HorizontalAlignment="Left" Height="25" Margin="513,247,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="30"/>
+        <TextBox MaxLength="2" Name="HomeCareEndMinute_TextBox" HorizontalAlignment="Left" Height="25" Margin="513,247,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="30" PreviewTextInput="HomeCareEndMinute_TextBox_PreviewTextInput"/>
         <Button Name="AddHomeCareTime_Button" Content="Tilføj Tidspunkt" Height="25" HorizontalAlignment="Left" Margin="281,277,0,0" VerticalAlignment="Top" Width="100" Click="AddHomeCareTime_Button_Click"/>
         <ListBox Name="HomeCareTimes_ListBox" HorizontalAlignment="Left" Height="58" Margin="392,277,0,0" VerticalAlignment="Top" Width="151"/>
         <Button Name="CreateCitizen_Button" Content="Opret Borger" Height="25" HorizontalAlignment="Left" Margin="20,390,0,0" VerticalAlignment="Top" Width="94" Click="CreateCitizen_Button_Click"/>
         <Button Name="Cancel_Button" Content="Annuller" Height="25" HorizontalAlignment="Left" Margin="449,390,0,0" VerticalAlignment="Top" Width="94" Click="Cancel_Button_Click"/>
-
     </Grid>
 </Window>

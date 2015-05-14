@@ -7,6 +7,7 @@ using EksamensProjekt.Controller.DBFacades;
 using EksamensProjekt.Model;
 using EksamensProjekt.Helper;
 using System.Text.RegularExpressions;
+using System.Windows;
 
 namespace EksamensProjekt.Controller
 {
@@ -79,6 +80,20 @@ namespace EksamensProjekt.Controller
             if (rule[0] == "SR")
             {
                 SensorRules.Add(RuleSetDBFacade.GetSensorRuleFromID(id));
+            }
+        }
+        public void SendMessage(List<string> contactPersons)//Stefan
+        {
+            foreach (string CP in contactPersons)
+            {
+                if (CP == "Helper")
+                {
+                    MessageBox.Show("Send Besked til Hjemmehjælper");
+                }
+                else
+                {
+                    MessageBox.Show("Besked send til: " + CP);
+                }
             }
         }
     }

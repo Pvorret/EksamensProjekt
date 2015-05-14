@@ -8,7 +8,7 @@
         <Label Content="Sensor Type" HorizontalAlignment="Left" Margin="25,53,0,0" VerticalAlignment="Top"/>
         <TextBox IsReadOnly="True" Name="SensorType_TextBox" HorizontalAlignment="Left" Height="23" Margin="119,56,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
         <Label Content="Sensor Lokation" HorizontalAlignment="Left" Margin="25,84,0,0" VerticalAlignment="Top"/>
-        <TextBox Name="SensorLocation_TextBox" HorizontalAlignment="Left" Height="23" Margin="119,87,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
+        <TextBox MaxLength="50" Name="SensorLocation_TextBox" HorizontalAlignment="Left" Height="23" Margin="119,87,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120" PreviewTextInput="SensorLocation_TextBox_PreviewTextInput"/>
         <Label Content="Regelsæt" HorizontalAlignment="Left" Margin="25,113,0,0" VerticalAlignment="Top"/>
         <ComboBox Name="RuleSet_DropDown" HorizontalAlignment="Left" Margin="120,115,0,0" VerticalAlignment="Top" Width="120" SelectionChanged="RuleSet_DropDown_SelectionChanged"/>
         <Label Content="Borger" HorizontalAlignment="Left" Margin="25,140,0,0" VerticalAlignment="Top"/>
@@ -24,8 +24,8 @@
         <Label Content="Tjek" HorizontalAlignment="Left" Margin="430,73,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.516,0.485"/>
         <Label Content="SensorAfhængig" HorizontalAlignment="Left" Margin="256,101,0,0" VerticalAlignment="Top"/>
         <ComboBox IsEnabled="False" Name="SensorDependency_Dropdown" HorizontalAlignment="Left" Margin="352,104,0,0" VerticalAlignment="Top" Width="120"/>
-        <Label Content="Vent/Tjek tid" HorizontalAlignment="Left" Margin="256,129,0,0" VerticalAlignment="Top"/>
-        <TextBox IsEnabled="False" Name="WaitOrLookLength_TextBox" HorizontalAlignment="Left" Height="23" Margin="351,132,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
+        <Label Content="Vent/Tjek tid i minuter" HorizontalAlignment="Left" Margin="256,129,0,0" VerticalAlignment="Top"/>
+        <TextBox IsEnabled="False" MaxLength="2" Name="WaitOrLookLength_TextBox" HorizontalAlignment="Left" Height="23" Margin="392,132,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="35" PreviewTextInput="WaitOrLookLength_TextBox_PreviewTextInput"/>
         <Label Content="Send besked når sensor reagerer" HorizontalAlignment="Left" Margin="256,160,0,0" VerticalAlignment="Top"/>
         <RadioButton GroupName="SensorReaction" IsEnabled="False" Name="Yes_RadioButton" HorizontalAlignment="Left" Margin="363,193,0,0" VerticalAlignment="Top" FontSize="14px"/>
         <Label Content="Ja" HorizontalAlignment="Left" Margin="360,201,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.516,0.485"/>
@@ -37,14 +37,14 @@
         <ComboBox IsEnabled="False" Name="Day_Dropdown" HorizontalAlignment="Left" Margin="520,58,0,0" VerticalAlignment="Top" Width="112"/>
         <Label Content="Tid" HorizontalAlignment="Left" Margin="486,112,0,0" VerticalAlignment="Top"/>
         <Label Content="t" HorizontalAlignment="Left" Margin="526,84,0,0" VerticalAlignment="Top"/>
-        <TextBox IsEnabled="False" Name="StartHour_TextBox" HorizontalAlignment="Left" Height="25" Margin="519,112,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="30"/>
+        <TextBox IsEnabled="False" MaxLength="2" Name="StartHour_TextBox" HorizontalAlignment="Left" Height="25" Margin="519,112,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="30" PreviewTextInput="StartHour_TextBox_PreviewTextInput"/>
         <Label Content="m" HorizontalAlignment="Left" Margin="558,84,0,0" VerticalAlignment="Top"/>
-        <TextBox IsEnabled="False" Name="StartMinute_TextBox" HorizontalAlignment="Left" Height="25" Margin="554,112,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="30"/>
+        <TextBox IsEnabled="False" MaxLength="2" Name="StartMinute_TextBox" HorizontalAlignment="Left" Height="25" Margin="554,112,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="30" PreviewTextInput="StartMinute_TextBox_PreviewTextInput"/>
         <Label Content="-" HorizontalAlignment="Left" FontSize="14px" Margin="587,108,0,0" VerticalAlignment="Top" RenderTransformOrigin="8.214,0.207"/>
         <Label Content="t" HorizontalAlignment="Left" Margin="614,84,0,0" VerticalAlignment="Top"/>
-        <TextBox IsEnabled="False" Name="EndHour_TextBox" HorizontalAlignment="Left" Height="25" Margin="607,112,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="30"/>
+        <TextBox IsEnabled="False" MaxLength="2" Name="EndHour_TextBox" HorizontalAlignment="Left" Height="25" Margin="607,112,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="30" PreviewTextInput="EndHour_TextBox_PreviewTextInput"/>
         <Label Content="m" HorizontalAlignment="Left" Margin="645,85,0,0" VerticalAlignment="Top"/>
-        <TextBox IsEnabled="False" Name="EndMinute_TextBox" HorizontalAlignment="Left" Height="25" Margin="641,112,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="30" RenderTransformOrigin="0.439,0.588"/>
+        <TextBox IsEnabled="False" MaxLength="2" Name="EndMinute_TextBox" HorizontalAlignment="Left" Height="25" Margin="641,112,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="30" RenderTransformOrigin="0.5,0.5" PreviewTextInput="EndMinute_TextBox_PreviewTextInput"/>
         <Label Content="Pårørende" HorizontalAlignment="Left" Margin="480,143,0,0" VerticalAlignment="Top"/>
         <ComboBox Name="Relative_Dropdown" IsEnabled="False" HorizontalAlignment="Left" Margin="549,146,0,0" VerticalAlignment="Top" Width="122"/>
         <Label Content="Kontakt hjælper" HorizontalAlignment="Left" Margin="480,173,0,0" VerticalAlignment="Top"/>
