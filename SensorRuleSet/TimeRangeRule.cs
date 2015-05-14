@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace SensorRuleSet {
-    class TimeRangeRule {
+    class TimeRangeRule 
+    {
     }
 }

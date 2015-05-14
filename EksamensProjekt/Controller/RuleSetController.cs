@@ -16,6 +16,7 @@ namespace EksamensProjekt.Controller
         public SensorLog SensorLog;
         public List<SensorRule> SensorRules = new List<SensorRule>();
         public List<TimeRangeRule> TimeRangeRules = new List<TimeRangeRule>();
+        public List<string> ContactList = new List<string>();
         public int SensorRuleId { get; set; }
         public void CreateSensorLog(int serialNumber, string activationTime)
         {
@@ -46,7 +47,6 @@ namespace EksamensProjekt.Controller
             SensorRule sensorRule = new SensorRule(sensorDependency, waitOrLook, timeToWait, timeToLook, whenToSend);
             RuleSetDBFacade.AddSensorRuleFromSerialNumber(serialNumber, sensorRule);
         }
-
         public void AddTimeRangeRuleFromSerialNumber(int serialNumber, string day, DateTime startTime, DateTime endTime, string relativeCprNr, string actingRule, bool contactHelper) {
             TimeRangeRule timerange = new TimeRangeRule(relativeCprNr, actingRule, contactHelper, new Time(startTime, endTime, day));
             RuleSetDBFacade.AddTimeRangeRuleFromSerialNumber(serialNumber, timerange);
