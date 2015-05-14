@@ -27,7 +27,7 @@ namespace EksamensProjekt.Controller.DBFacades
                 cmd.CommandType = CommandType.StoredProcedure;
                 cmd.Parameters.Add(new SqlParameter("@SerialNumber", sensor.SerialNumber));
                 cmd.Parameters.Add(new SqlParameter("@Type", sensor.Type));
-                cmd.Parameters.Add(new SqlParameter("@activated", Convert.ToInt32(sensor.Activated));
+                cmd.Parameters.Add(new SqlParameter("@activated", Convert.ToInt32(sensor.Activated)));
                 cmd.Parameters.Add(new SqlParameter("@Location", ""));
                 cmd.ExecuteNonQuery();
             }

@@ -6,14 +6,12 @@ using System.Threading.Tasks;
 using EksamensProjekt.Controller.DBFacades;
 using EksamensProjekt.Model;
 using EksamensProjekt.Helper;
-using System.Text.RegularExpressions;
 
 namespace EksamensProjekt.Controller
 {
     public class RuleSetController
     {
         public SensorLog SensorLog;
-        public List<SensorRule> SensorRules = new List<SensorRule>();
         public int SensorRuleId { get; set; }
         public void CreateSensorLog(int serialNumber, string activationTime)
         {
@@ -57,14 +55,19 @@ namespace EksamensProjekt.Controller
         {
             return DBFacades.RuleSetDBFacade.GetTimeRangeRuleFromSerialNumber(serialNumber);
         }
-        public void CheckActing(string actingRuleString)
+        public bool CheckTime(Time timeRange, DateTime activationTime)//Stefan
         {
-            string[] rule = Regex.Split(actingRuleString, @"\W+");
-            int id = int.Parse(rule[1]);
-            if (rule[0] == "SR")
+            if (timeRange.Day == activationTime.DayOfWeek.ToString())
             {
-                SensorRules.Add(RuleSetDBFacade.GetSensorRuleFromID(id));
+                if (timeRange.StartTime <= activationTime)
+                {
+                    if (timeRange.EndTime >= activationTime)
+                    {
+                        return true;
+                    }
+                }
             }
+            return false;          
         }
     }
 }
