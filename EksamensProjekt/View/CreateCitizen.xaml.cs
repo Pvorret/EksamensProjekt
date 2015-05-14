@@ -168,6 +168,16 @@ namespace EksamensProjekt.View
             e.Handled = regex.IsMatch(e.Text);
         }
 
+        private void CitizenAddress_Textbox_AddressValidation(object sender, TextCompositionEventArgs e) {
+            Regex regex = new Regex("[^a-zA-Z0-9]");
+            e.Handled = regex.IsMatch(e.Text);
+        }
+
+        private void CitizenCity_TextBox_CityValidation(object sender, TextCompositionEventArgs e) {
+            Regex regex = new Regex("[^a-zA-Z0-9]");
+            e.Handled = regex.IsMatch(e.Text);
+        }
+
         private void HomeCareStartHour_TextBox_PreviewTextInput(object sender, TextCompositionEventArgs e)
         {
             Regex regex = new Regex("[^0-9]");
@@ -191,6 +201,7 @@ namespace EksamensProjekt.View
             Regex regex = new Regex("[^0-9]");
             e.Handled = regex.IsMatch(e.Text);
         }
+
 
     }
 }
