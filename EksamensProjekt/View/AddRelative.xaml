@@ -4,35 +4,35 @@
         Title="Tilføj Pårørende" Height="525" Width="300" WindowStartupLocation="CenterScreen">
     <Grid>
         <Label Content="CPR-NR" FontSize="14px" HorizontalAlignment="Left" Margin="15,24,0,0" VerticalAlignment="Top"/>
-        <TextBox Name="RelativeBirthdate_TextBox" HorizontalAlignment="Left" Height="25" Margin="120,24,0,0" TextWrapping="Wrap" Text="" FontSize="14px" VerticalAlignment="Top" Width="65"/>
-        <TextBox Name="RelativeLast4CPR_TextBox" HorizontalAlignment="Left" Height="25" Margin="211,24,0,0" TextWrapping="Wrap" Text="" FontSize="14px" VerticalAlignment="Top" Width="60"/>
+        <TextBox Name="RelativeBirthdate_TextBox" MaxLength="6" PreviewTextInput="RelativetiveBirthdate_TextBox_NumberValidation" HorizontalAlignment="Left" Height="25" Margin="120,24,0,0" TextWrapping="Wrap" Text="" FontSize="14px" VerticalAlignment="Top" Width="65"/>
+        <TextBox Name="RelativeLast4CPR_TextBox" MaxLength="4" PreviewTextInput="RelativeLast4CPR_TextBox_NumberValidation" HorizontalAlignment="Left" Height="25" Margin="211,24,0,0" TextWrapping="Wrap" Text="" FontSize="14px" VerticalAlignment="Top" Width="60"/>
         <Label Content="-" HorizontalAlignment="Left" FontSize="14px" Margin="190,20,0,0" VerticalAlignment="Top"/>
         <Label Content="Navn" FontSize="14px" HorizontalAlignment="Left" Margin="15,54,0,0" VerticalAlignment="Top"/>
-        <TextBox Name="RelativeName_TextBox" HorizontalAlignment="Left" Height="25" Margin="120,57,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="151"/>
+        <TextBox Name="RelativeName_TextBox" HorizontalAlignment="Left" MaxLength="255" PreviewTextInput="RelativeName_TextBox_TextValidation" Height="25" Margin="120,57,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="151"/>
         <Label Content="Køn" FontSize="14px" HorizontalAlignment="Left" Margin="15,88,0,0" VerticalAlignment="Top"/>
         <ComboBox Name="RelativeGender_Dropdown" HorizontalAlignment="Left" Height="25" Margin="120,92,0,0" VerticalAlignment="Top" Width="151"/>
         <Label Content="Alder" FontSize="14px" HorizontalAlignment="Left" Margin="15,125,0,0" VerticalAlignment="Top"/>
-        <TextBox Name="RelativeAge_TextBox" HorizontalAlignment="Left" Height="25" Margin="120,125,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="151"/>
+        <TextBox Name="RelativeAge_TextBox" HorizontalAlignment="Left" MaxLength="3" PreviewTextInput="RelativeAge_TextBox_NumberValidation" Height="25" Margin="120,125,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="151"/>
         <Label Content="Tlf nr." FontSize="14px" HorizontalAlignment="Left" Margin="15,156,0,0" VerticalAlignment="Top"/>
-        <TextBox Name="RelativePhoneNumber_TextBox" HorizontalAlignment="Left" Height="25" Margin="120,160,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="151"/>
+        <TextBox Name="RelativePhoneNumber_TextBox" HorizontalAlignment="Left" MaxLength="25" PreviewTextInput="RelativePhoneNumber_TextBox_NumberValidation" Height="25" Margin="120,160,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="151"/>
         <Label Content="Email" FontSize="14px" HorizontalAlignment="Left" Margin="15,190,0,0" VerticalAlignment="Top"/>
-        <TextBox Name="RelativeEmail_TextBox" HorizontalAlignment="Left" Height="25" Margin="120,194,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="151"/>
+        <TextBox Name="RelativeEmail_TextBox" HorizontalAlignment="Left" MaxLength="255"  Height="25" Margin="120,194,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="151"/>
         <Label Content="Addresse" FontSize="14px" HorizontalAlignment="Left" Margin="15,224,0,0" VerticalAlignment="Top"/>
-        <TextBox Name="RelativeAddress_TextBox" HorizontalAlignment="Left" Height="25" Margin="120,228,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="151"/>
+        <TextBox Name="RelativeAddress_TextBox" HorizontalAlignment="Left" MaxLength="100" PreviewTextInput="RelativeAddress_Textbox_AddressValidation" Height="25" Margin="120,228,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="151"/>
         <Label Content="Postnr + By" FontSize="14px" HorizontalAlignment="Left" Margin="15,261,0,0" VerticalAlignment="Top"/>
-        <TextBox Name="RelativeCity_TextBox" HorizontalAlignment="Left" Height="25" Margin="120,261,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="151"/>
+        <TextBox Name="RelativeCity_TextBox" HorizontalAlignment="Left" MaxLength="100" PreviewTextInput="RelativeCity_TextBox_CityValidation" Height="25" Margin="120,261,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="151"/>
         <Label Content="Ikke Tængelig" FontSize="14px" HorizontalAlignment="Left" Margin="15,291,0,0" VerticalAlignment="Top"/>
         <Label Content="Dage" FontSize="14px" HorizontalAlignment="Left" Margin="120,291,0,0" VerticalAlignment="Top"/>
         <ComboBox Name="NotAvailableDays_Dropdown" HorizontalAlignment="Left" Height="25" Margin="171,295,0,0" VerticalAlignment="Top" Width="100"/>
         <Label Content="t" HorizontalAlignment="Left" Margin="126,328,0,0" VerticalAlignment="Top"/>
-        <TextBox Name="NotAvailableStartHour_TextBox" HorizontalAlignment="Left" Height="25" Margin="120,356,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="30"/>
+        <TextBox Name="NotAvailableStartHour_TextBox" MaxLength="2" PreviewTextInput="NotAvailableStartHour_TextBox_NumberValidation" HorizontalAlignment="Left" Height="25" Margin="120,356,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="30"/>
         <Label Content="m" HorizontalAlignment="Left" Margin="158,328,0,0" VerticalAlignment="Top"/>
-        <TextBox Name="NotAvailableStartMinute_TextBox" HorizontalAlignment="Left" Height="25" Margin="154,356,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="30"/>
+        <TextBox Name="NotAvailableStartMinute_TextBox" MaxLength="2" PreviewTextInput="NotAvailableStartMinute_TextBox_NumberValidation" HorizontalAlignment="Left" Height="25" Margin="154,356,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="30"/>
         <Label Content="-" HorizontalAlignment="Left" FontSize="14px" Margin="187,352,0,0" VerticalAlignment="Top" RenderTransformOrigin="8.214,0.207"/>
         <Label Content="t" HorizontalAlignment="Left" Margin="214,328,0,0" VerticalAlignment="Top"/>
-        <TextBox Name="NotAvailableEndHour_TextBox" HorizontalAlignment="Left" Height="25" Margin="208,356,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="30"/>
+        <TextBox Name="NotAvailableEndHour_TextBox" MaxLength="2" PreviewTextInput="NotAvailableEndHour_TextBox_NumberValidation" HorizontalAlignment="Left" Height="25" Margin="208,356,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="30"/>
         <Label Content="m" HorizontalAlignment="Left" Margin="245,329,0,0" VerticalAlignment="Top"/>
-        <TextBox Name="NotAvailableEndMinute_TextBox" HorizontalAlignment="Left" Height="25" Margin="241,356,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="30"/>
+        <TextBox Name="NotAvailableEndMinute_TextBox" MaxLength="2" PreviewTextInput="NotAvailableEndMinute_TextBox_NumberValidation" HorizontalAlignment="Left" Height="25" Margin="241,356,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="30"/>
         <Button Name="AddNotAvailableTime_Button" Content="Tilføj Tidspunkt" Height="25" HorizontalAlignment="Left" Margin="15,386,0,0" VerticalAlignment="Top" Width="100" Click="AddNotAvailableTime_Button_Click"/>
         <ListBox Name="NotAvailableTimes_ListBox" HorizontalAlignment="Left" Height="58" Margin="120,386,0,0" VerticalAlignment="Top" Width="151"/>
         <Button Name="AddRelative_Button" Content="Tilføj pårørende" HorizontalAlignment="Left" Margin="15,454,0,0" VerticalAlignment="Top" Width="100" Height="25" Click="AddRelative_Button_Click"/>
