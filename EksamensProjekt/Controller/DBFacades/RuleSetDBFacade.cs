@@ -243,5 +243,37 @@ namespace EksamensProjekt.Controller.DBFacades
                 CloseDB();
             }
         }
+        public static SensorRule GetSensorRuleFromID(int id)
+        {
+            SensorRule sensorRule = new SensorRule();
+            try
+            {
+                ConnectDB();
+
+                SqlCommand cmd = new SqlCommand("SP_GetSensorRuleFromID", dbconn);
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.Add(new SqlParameter("@SR_ID", id));
+                SqlDataReader rdr;
+                rdr = cmd.ExecuteReader();
+
+                while (rdr.HasRows && rdr.Read())
+                {
+                    sensorRule.SensorDependency = Convert.ToInt32(rdr["SR_S_Dependency"]);
+                    sensorRule.WaitOrLook = Convert.ToBoolean(rdr["SR_WaitOrLook"]);
+                    sensorRule.TimeToWait = Convert.ToInt32(rdr["SR_TimeToWait"]);
+                    sensorRule.TimeToLook = Convert.ToInt32(rdr["SR_TimeToLook"]);
+                    sensorRule.WhenToSend = Convert.ToBoolean(rdr["SR_WhenToSend"]);
+                }
+            }
+            catch (SqlException e)
+            {
+                throw new Exception(e.Message);
+            }
+            finally
+            {
+                CloseDB();
+            }
+            return sensorRule;
+        }
     }
 }

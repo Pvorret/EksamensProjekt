@@ -6,12 +6,17 @@ using System.Threading.Tasks;
 using EksamensProjekt.Controller.DBFacades;
 using EksamensProjekt.Model;
 using EksamensProjekt.Helper;
+using System.Text.RegularExpressions;
+using System.Windows;
 
 namespace EksamensProjekt.Controller
 {
     public class RuleSetController
     {
         public SensorLog SensorLog;
+        public List<SensorRule> SensorRules = new List<SensorRule>();
+        public List<TimeRangeRule> TimeRangeRules = new List<TimeRangeRule>();
+        public List<string> ContactList = new List<string>();
         public int SensorRuleId { get; set; }
         public void CreateSensorLog(int serialNumber, string activationTime)
         {
@@ -42,7 +47,6 @@ namespace EksamensProjekt.Controller
             SensorRule sensorRule = new SensorRule(sensorDependency, waitOrLook, timeToWait, timeToLook, whenToSend);
             RuleSetDBFacade.AddSensorRuleFromSerialNumber(serialNumber, sensorRule);
         }
-
         public void AddTimeRangeRuleFromSerialNumber(int serialNumber, string day, DateTime startTime, DateTime endTime, string relativeCprNr, string actingRule, bool contactHelper) {
             TimeRangeRule timerange = new TimeRangeRule(relativeCprNr, actingRule, contactHelper, new Time(startTime, endTime, day));
             RuleSetDBFacade.AddTimeRangeRuleFromSerialNumber(serialNumber, timerange);
@@ -51,9 +55,9 @@ namespace EksamensProjekt.Controller
         {
             return DBFacades.RuleSetDBFacade.GetSensorRuleManagementFromSerialNumber(serialNumber);
         }
-        public List<TimeRangeRule> GetTimeRangeRuleFromSerialNumber(int serialNumber)
+        public void GetTimeRangeRuleFromSerialNumber(int serialNumber)
         {
-            return DBFacades.RuleSetDBFacade.GetTimeRangeRuleFromSerialNumber(serialNumber);
+            TimeRangeRules = DBFacades.RuleSetDBFacade.GetTimeRangeRuleFromSerialNumber(serialNumber);
         }
         public bool CheckTime(Time timeRange, DateTime activationTime)//Stefan
         {
@@ -68,6 +72,29 @@ namespace EksamensProjekt.Controller
                 }
             }
             return false;          
+        }
+        public void CheckActing(string actingRuleString)
+        {
+            string[] rule = Regex.Split(actingRuleString, @"\W+");
+            int id = int.Parse(rule[1]);
+            if (rule[0] == "SR")
+            {
+                SensorRules.Add(RuleSetDBFacade.GetSensorRuleFromID(id));
+            }
+        }
+        public void SendMessage(List<string> contactPersons)//Stefan
+        {
+            foreach (string CP in contactPersons)
+            {
+                if (CP == "Helper")
+                {
+                    MessageBox.Show("Send Besked til Hjemmehjælper");
+                }
+                else
+                {
+                    MessageBox.Show("Besked send til: " + CP);
+                }
+            }
         }
     }
 }

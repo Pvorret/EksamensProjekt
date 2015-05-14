@@ -20,13 +20,13 @@ namespace EksamensProjekt.View
     /// </summary>
     public partial class DeleteSensor : Window
     {
-        CitizenController _controller = new CitizenController();
-        SensorController con = new SensorController();
+        CitizenController _CitizenController = new CitizenController();
+        SensorController _SensorController = new SensorController();
         public DeleteSensor()
         {
             InitializeComponent();
-            con.GetSensor(0);
-            foreach (int i in con.GetSerialNumberList(con.Sensors))
+            _SensorController.GetSensor(0);
+            foreach (int i in _SensorController.GetSerialNumberList(_SensorController.Sensors))
             {
                 Select_ComboBox.Items.Add(i);
             }
@@ -39,17 +39,17 @@ namespace EksamensProjekt.View
 
         private void Select_ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            for (int i = 0; i < con.Sensors.Count; i++)
+            for (int i = 0; i < _SensorController.Sensors.Count; i++)
             {
-                if (Convert.ToInt32(Select_ComboBox.SelectedItem) == con.Sensors[i].SerialNumber)
+                if (Convert.ToInt32(Select_ComboBox.SelectedItem) == _SensorController.Sensors[i].SerialNumber)
                 {
-                    Type_Label.Content = con.Sensors[i].Type;
+                    Type_Label.Content = _SensorController.Sensors[i].Type;
 
-                    if (con.Sensors[i].Activated == false)
+                    if (_SensorController.Sensors[i].Activated == false)
                     {
                         Activ_Label.Content = "Ikke i brug";
                     }
-                    if (con.Sensors[i].Activated == true)
+                    if (_SensorController.Sensors[i].Activated == true)
                     {
                         Activ_Label.Content = "I brug";
                     }
@@ -59,17 +59,18 @@ namespace EksamensProjekt.View
 
         private void Delete_Button_Click(object sender, RoutedEventArgs e)
         {
-            for (int i = 0; i < con.Sensors.Count; i++)
+            for (int i = 0; i < _SensorController.Sensors.Count; i++)
             {
-                if (Convert.ToInt32(Select_ComboBox.SelectedItem) == con.Sensors[i].SerialNumber)
+                if (Convert.ToInt32(Select_ComboBox.SelectedItem) == _SensorController.Sensors[i].SerialNumber)
                 {
-                    if (con.DeleteSensor(con.Sensors[i].SerialNumber) == true)
+                    if (_SensorController.DeleteSensor(_SensorController.Sensors[i].SerialNumber) == true)
                     {
                         Select_ComboBox.Items.Remove(Select_ComboBox.SelectedItem);
                     }
                 }
             }
-            
+            Type_Label.Content = "";
+            Activ_Label.Content = "";
         }
     }
 }

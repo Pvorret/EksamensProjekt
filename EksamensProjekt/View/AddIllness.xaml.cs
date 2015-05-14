@@ -11,6 +11,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using System.Text.RegularExpressions;
 
 namespace EksamensProjekt.View
 {
@@ -35,6 +36,12 @@ namespace EksamensProjekt.View
 
         private void Cancel_Button_Click(object sender, RoutedEventArgs e) {
             this.Close();
+        }
+
+        private void IllnessName_TextBox_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        {
+            Regex regex = new Regex("[^a-zæøåA-ZÆØÅ]");
+            e.Handled = regex.IsMatch(e.Text);
         }
 
     }

@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using EksamensProjekt.Controller;
+using System.Text.RegularExpressions;
 
 namespace EksamensProjekt.View
 {
@@ -91,7 +92,7 @@ namespace EksamensProjekt.View
         {
             try
             {
-                if(Sensor_Dropdown.SelectedIndex != -1 && SensorLocation_TextBox.Text != "" && Citizen_DropDown.SelectedIndex != -1)
+                if (Sensor_Dropdown.SelectedIndex != -1 && SensorLocation_TextBox.Text != "" && Citizen_DropDown.SelectedIndex != -1 && RuleSet_DropDown.SelectedIndex != -1)
                 {
                     _SensorController.ConnectSensorToCitizen(int.Parse(Sensor_Dropdown.SelectedItem.ToString()), CPRNR_TextBox.Text, SensorLocation_TextBox.Text);
                     if (RuleSet_DropDown.SelectedItem.ToString() == "Sensor Regel")
@@ -200,6 +201,12 @@ namespace EksamensProjekt.View
                     Close();
                     
                 }
+                else if (Sensor_Dropdown.SelectedIndex != -1 && SensorLocation_TextBox.Text != "" && Citizen_DropDown.SelectedIndex != -1 && RuleSet_DropDown.SelectedIndex == -1) {
+                    _SensorController.ConnectSensorToCitizen(int.Parse(Sensor_Dropdown.SelectedItem.ToString()), CPRNR_TextBox.Text, SensorLocation_TextBox.Text);
+                    MessageBox.Show("Citizen og Sensor er forbundet!");
+                    Close();
+                 
+                }
                 else
                 {
                     MessageBox.Show("Du mangler at udfylde nogle felter");
@@ -258,5 +265,42 @@ namespace EksamensProjekt.View
             Yes_RadioButton.IsEnabled = true;
             No_RadioButton.IsEnabled = true;
         }
+
+        private void SensorLocation_TextBox_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        {
+            Regex regex = new Regex("[^a-zæøåA-ZÆØÅ]");
+            e.Handled = regex.IsMatch(e.Text);
+        }
+
+        private void WaitOrLookLength_TextBox_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        {
+            Regex regex = new Regex("[^0-9]");
+            e.Handled = regex.IsMatch(e.Text);
+        }
+
+        private void StartHour_TextBox_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        {
+            Regex regex = new Regex("[^0-9]");
+            e.Handled = regex.IsMatch(e.Text);
+        }
+
+        private void StartMinute_TextBox_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        {
+            Regex regex = new Regex("[^0-9]");
+            e.Handled = regex.IsMatch(e.Text);
+        }
+
+        private void EndHour_TextBox_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        {
+            Regex regex = new Regex("[^0-9]");
+            e.Handled = regex.IsMatch(e.Text);
+        }
+
+        private void EndMinute_TextBox_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        {
+            Regex regex = new Regex("[^0-9]");
+            e.Handled = regex.IsMatch(e.Text);
+        }
+
     }
 }
