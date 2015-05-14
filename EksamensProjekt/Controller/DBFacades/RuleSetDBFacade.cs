@@ -182,7 +182,7 @@ namespace EksamensProjekt.Controller.DBFacades
                 cmd.CommandType = CommandType.StoredProcedure;
 
                 cmd.Parameters.Add(new SqlParameter("@SRM_S_SerialNumber", serialNumber));
-                cmd.Parameters.Add(new SqlParameter("@SR_R_SensorDependency", sensorRule.SensorDependency));
+                cmd.Parameters.Add(new SqlParameter("@SR_S_SensorDependency", sensorRule.SensorDependency));
                 cmd.Parameters.Add(new SqlParameter("@SR_WaitOrLook", sensorRule.WaitOrLook));
                 cmd.Parameters.Add(new SqlParameter("@SR_TimeToWait", sensorRule.TimeToWait));
                 cmd.Parameters.Add(new SqlParameter("@SR_TimeToLook", sensorRule.TimeToLook));
@@ -204,7 +204,7 @@ namespace EksamensProjekt.Controller.DBFacades
             finally
             {
                 CloseDB();
-            }
+             }
             return id;
         }
         public static void AddSensorRuleManagement(string ruleSet, int serialNumber)
