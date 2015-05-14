@@ -91,7 +91,7 @@ namespace EksamensProjekt.View
         {
             try
             {
-                if(Sensor_Dropdown.SelectedIndex != -1 && SensorLocation_TextBox.Text != "" && Citizen_DropDown.SelectedIndex != -1)
+                if (Sensor_Dropdown.SelectedIndex != -1 && SensorLocation_TextBox.Text != "" && Citizen_DropDown.SelectedIndex != -1 && RuleSet_DropDown.SelectedIndex != -1)
                 {
                     _SensorController.ConnectSensorToCitizen(int.Parse(Sensor_Dropdown.SelectedItem.ToString()), CPRNR_TextBox.Text, SensorLocation_TextBox.Text);
                     if (RuleSet_DropDown.SelectedItem.ToString() == "Sensor Regel")
@@ -199,6 +199,12 @@ namespace EksamensProjekt.View
                     MessageBox.Show("Citizen og Sensor er forbundet!");
                     Close();
                     
+                }
+                else if (Sensor_Dropdown.SelectedIndex != -1 && SensorLocation_TextBox.Text != "" && Citizen_DropDown.SelectedIndex != -1 && RuleSet_DropDown.SelectedIndex == -1) {
+                    _SensorController.ConnectSensorToCitizen(int.Parse(Sensor_Dropdown.SelectedItem.ToString()), CPRNR_TextBox.Text, SensorLocation_TextBox.Text);
+                    MessageBox.Show("Citizen og Sensor er forbundet!");
+                    Close();
+                 
                 }
                 else
                 {
