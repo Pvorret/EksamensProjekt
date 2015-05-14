@@ -57,11 +57,14 @@ namespace EksamensProjekt.Controller
         }
         public bool CheckTime(Time timeRange, DateTime activationTime)//Stefan
         {
-            if (timeRange.StartTime <= activationTime)
+            if (timeRange.Day == activationTime.DayOfWeek.ToString())
             {
-                if (timeRange.EndTime >= activationTime)
+                if (timeRange.StartTime <= activationTime)
                 {
-                    return true;
+                    if (timeRange.EndTime >= activationTime)
+                    {
+                        return true;
+                    }
                 }
             }
             return false;          
