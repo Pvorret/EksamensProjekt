@@ -194,7 +194,6 @@ namespace EksamensProjekt.Controller.DBFacades
                 while (rdr.Read() && rdr.HasRows) 
                 {
                     id = (int)rdr["SR_ID"];
-                    
                 }
                 
             }
