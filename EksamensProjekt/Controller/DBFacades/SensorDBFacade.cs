@@ -316,19 +316,18 @@ namespace EksamensProjekt.Controller.DBFacades
             try
             {
                 ConnectDB();
-                cmd = new SqlCommand("SP_DeleteSensorRuleFromSensorDependency", dbconn);
+                cmd = new SqlCommand("SP_GetSensorDependencyIDFromSerialNumber", dbconn);
                 cmd.CommandType = CommandType.StoredProcedure;
-                cmd.Parameters.Add(new SqlParameter("@SR_ID", serialNumber));
-                cmd.ExecuteNonQuery();
+                cmd.Parameters.Add(new SqlParameter("@SerialNumber", serialNumber));
                 SqlDataReader reader = cmd.ExecuteReader();
                 while (reader.Read())
                 {
                         sensorDependency.Add(Convert.ToInt32(reader["SR_ID"]));
                 }
             }
-            catch
+            catch(Exception e)
             {
-
+                MessageBox.Show(e.Message);
             }
             finally
             {
