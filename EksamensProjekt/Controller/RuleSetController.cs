@@ -14,6 +14,7 @@ namespace EksamensProjekt.Controller
     {
         public SensorLog SensorLog;
         public List<SensorRule> SensorRules = new List<SensorRule>();
+        public List<TimeRangeRule> TimeRangeRules = new List<TimeRangeRule>();
         public int SensorRuleId { get; set; }
         public void CreateSensorLog(int serialNumber, string activationTime)
         {
@@ -53,9 +54,9 @@ namespace EksamensProjekt.Controller
         {
             return DBFacades.RuleSetDBFacade.GetSensorRuleManagementFromSerialNumber(serialNumber);
         }
-        public List<TimeRangeRule> GetTimeRangeRuleFromSerialNumber(int serialNumber)
+        public void GetTimeRangeRuleFromSerialNumber(int serialNumber)
         {
-            return DBFacades.RuleSetDBFacade.GetTimeRangeRuleFromSerialNumber(serialNumber);
+            TimeRangeRules = DBFacades.RuleSetDBFacade.GetTimeRangeRuleFromSerialNumber(serialNumber);
         }
         public bool CheckTime(Time timeRange, DateTime activationTime)//Stefan
         {
