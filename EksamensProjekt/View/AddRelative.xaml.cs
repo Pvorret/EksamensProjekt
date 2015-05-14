@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -81,6 +82,64 @@ namespace EksamensProjekt.View
 
             _controller.AddRelative(RelativeName_TextBox.Text, relativeCprNr, RelativeGender_Dropdown.SelectedItem.ToString(), RelativeAge_TextBox.Text, RelativeAddress_TextBox.Text, RelativeCity_TextBox.Text, RelativePhoneNumber_TextBox.Text, RelativeEmail_TextBox.Text, Days, StartTime, EndTime);
             this.Close();
+        }
+
+        public void RelativetiveBirthdate_TextBox_NumberValidation(object sender, TextCompositionEventArgs e) 
+        {
+            Regex regex = new Regex("[^0-9]");
+            e.Handled = regex.IsMatch(e.Text); 
+        }
+
+        public void RelativeLast4CPR_TextBox_NumberValidation(object sender, TextCompositionEventArgs e) {
+            Regex regex = new Regex("[^0-9]");
+            e.Handled = regex.IsMatch(e.Text);
+        }
+        public void RelativeName_TextBox_TextValidation(object sender, TextCompositionEventArgs e) 
+        {
+            Regex regex = new Regex("[^a-zæøåéA-ZÆØÅÉ]");
+            e.Handled = regex.IsMatch(e.Text);
+        }
+
+        private void RelativeAge_TextBox_NumberValidation(object sender, TextCompositionEventArgs e)
+        {
+            Regex regex = new Regex("[^0-9]");
+            e.Handled = regex.IsMatch(e.Text);
+        }
+
+        private void RelativePhoneNumber_TextBox_NumberValidation(object sender, TextCompositionEventArgs e) 
+        {
+            Regex regex = new Regex("[^0-9+]");
+            e.Handled = regex.IsMatch(e.Text);
+        }
+
+        private void RelativeAddress_Textbox_AddressValidation(object sender, TextCompositionEventArgs e) 
+        {
+            Regex regex = new Regex("[^a-zA-Z0-9]");
+            e.Handled = regex.IsMatch(e.Text); 
+        }
+
+        private void RelativeCity_TextBox_CityValidation(object sender, TextCompositionEventArgs e) 
+        {
+            Regex regex = new Regex("[^a-zA-Z0-9]");
+            e.Handled = regex.IsMatch(e.Text);
+        }
+
+        private void NotAvailableStartHour_TextBox_NumberValidation(object sender, TextCompositionEventArgs e) 
+        {
+            Regex regex = new Regex("[^0-9]");
+            e.Handled = regex.IsMatch(e.Text);
+        }
+        private void NotAvailableStartMinute_TextBox_NumberValidation(object sender, TextCompositionEventArgs e) {
+            Regex regex = new Regex("[^0-9]");
+            e.Handled = regex.IsMatch(e.Text);
+        }
+        private void NotAvailableEndHour_TextBox_NumberValidation(object sender, TextCompositionEventArgs e) {
+            Regex regex = new Regex("[^0-9]");
+            e.Handled = regex.IsMatch(e.Text);
+        }
+        private void NotAvailableEndMinute_TextBox_NumberValidation(object sender, TextCompositionEventArgs e) {
+            Regex regex = new Regex("[^0-9]");
+            e.Handled = regex.IsMatch(e.Text);
         }
     }
 }

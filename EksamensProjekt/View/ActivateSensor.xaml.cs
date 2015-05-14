@@ -43,7 +43,7 @@ namespace EksamensProjekt.View
         {
             CultureInfo c = new CultureInfo("da-DK"); //Laver et CulturInfo object c hvor vi siger at dens cultur skal være dansk
             
-            char[] a = c.DateTimeFormat.GetDayName(DateTime.Today.DayOfWeek).ToCharArray(); //Her bruger vi object c til at convert ugens dag til dansk sprog
+            char[] a = c.DateTimeFormat.GetDayName(DateTime.Today.DayOfWeek).ToCharArray(); //Her bruger vi object c til at convert ugens dage til dansk
             a[0] = char.ToUpper(a[0]);
             Date_TextBox.Text = new string(a);
             Time_TextBox.Text = DateTime.Now.Hour.ToString() + ":" + DateTime.Now.Minute.ToString();
@@ -64,5 +64,17 @@ namespace EksamensProjekt.View
             }
             
         }
+        public void Date_TextBox_GotFocus(object sender, RoutedEventArgs e) 
+        {
+            TextBox tb = (TextBox)sender;
+            tb.Text = string.Empty;
+            tb.GotFocus -= Date_TextBox_GotFocus;
+        }
+        public void Time_TextBox_GotFocus(object sender, RoutedEventArgs e) {
+            TextBox tb = (TextBox)sender;
+            tb.Text = string.Empty;
+            tb.GotFocus -= Time_TextBox_GotFocus;
+        }
+
     }
 }
