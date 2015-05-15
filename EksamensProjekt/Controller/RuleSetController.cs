@@ -24,6 +24,7 @@ namespace EksamensProjekt.Controller
 
         public void HandelSensorInput(int serialNumber, DateTime activationTime)
         {
+            GetSensorInputInformation(serialNumber, activationTime);
 
         }
         public void GetSensorInputInformation(int serialNumber, DateTime activationTime) // Thomas og Stefan

@@ -31,7 +31,7 @@ namespace EksamensProjekt.Helper {
         }
         public SensorRule() { }
 
-        public static void SensorRuleActivated(RuleSetController RSC, SensorRule sensorrule, DateTime activationTime) 
+        public static void SensorRuleActivated(RuleSetController RSC, SensorRule sensorrule, DateTime activationTime) //af Thomas
         {
             List<SensorLog> sensorLogList = new List<SensorLog>();
             if (sensorrule.WaitOrLook == true)
