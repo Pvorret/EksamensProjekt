@@ -294,8 +294,8 @@ namespace EksamensProjekt.Controller.DBFacades {
                     string C_Name = reader["C_Name"].ToString();
                     string A_Address = reader["A_Address"].ToString();
                     string A_City = reader["A_City"].ToString();
-                    DateTime T_StartTime = DateTime.Parse(reader["T_StartTime"].ToString());
-                    DateTime T_EndTime = DateTime.Parse(reader["T_EndTime"].ToString());
+                    DateTime T_StartTime = Convert.ToDateTime(reader["T_StartTime"]);
+                    DateTime T_EndTime = Convert.ToDateTime(reader["T_EndTime"]);
                     string T_Day = reader["T_Day"].ToString();
 
                     Citizen citizen = new Citizen(C_CPRNR, C_Name, A_Address, A_City);

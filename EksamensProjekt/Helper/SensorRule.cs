@@ -46,7 +46,7 @@ namespace EksamensProjekt.Helper {
                     sensorLogList = RSC.GetSensorLogFromDateTime(checkeTime);
                     foreach (SensorLog SL in sensorLogList)
                     {
-                        if (SL.SerialNumber == sensorrule.SensorDependency)
+                        if (SL.SerialNumber == sensorrule.SensorDependency && checkeTime < WaitTime)
                         {
                             if (sensorrule.WhenToSend == false)
                             {
