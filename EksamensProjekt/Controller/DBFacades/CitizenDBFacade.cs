@@ -298,6 +298,8 @@ namespace EksamensProjekt.Controller.DBFacades {
                     DateTime T_EndTime = DateTime.Parse(reader["T_EndTime"].ToString());
                     string T_Day = reader["T_Day"].ToString();
 
+                    Time time = new Time(T_StartTime, T_EndTime, T_Day));
+
                     Citizen citizen = new Citizen(C_CPRNR, C_Name, A_Address, A_City);
                     citizen.HomeCareTimes.Add(new Time(T_StartTime, T_EndTime, T_Day));
                     CitizenTimeList.Add(citizen);
