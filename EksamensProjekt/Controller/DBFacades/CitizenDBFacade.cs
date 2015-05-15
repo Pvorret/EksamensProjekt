@@ -297,9 +297,10 @@ namespace EksamensProjekt.Controller.DBFacades {
                     DateTime T_StartTime = Convert.ToDateTime(reader["T_StartTime"]);
                     DateTime T_EndTime = Convert.ToDateTime(reader["T_EndTime"]);
                     string T_Day = reader["T_Day"].ToString();
-
                     Citizen citizen = new Citizen(C_CPRNR, C_Name, A_Address, A_City);
-                    citizen.HomeCareTimes.Add(new Time(T_StartTime, T_EndTime, T_Day));
+                    List<Time> time = new List<Time>();
+                    time.Add(new Time(T_StartTime, T_EndTime, T_Day));
+                    citizen.HomeCareTimes = time;
                     CitizenTimeList.Add(citizen);
                 }
             }
