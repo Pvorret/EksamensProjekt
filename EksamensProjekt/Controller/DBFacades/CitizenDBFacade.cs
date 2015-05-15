@@ -258,12 +258,14 @@ namespace EksamensProjekt.Controller.DBFacades {
                     string A_Address = reader["A_Address"].ToString();
                     string A_City = reader["A_City"].ToString();
 
-                    DateTime T_StartTime = DateTime.Parse(reader["StartTime"].ToString());
-                    DateTime T_EndTime = DateTime.Parse(reader["EndTime"].ToString());
+                    DateTime T_StartTime = Convert.ToDateTime(reader["T_StartTime"]);
+                    DateTime T_EndTime = Convert.ToDateTime(reader["T_EndTime"]);
                     string T_Day = reader["T_Day"].ToString();
 
                     Relative relative = new Relative(R_CPRNR, R_Name, R_Phone, A_Address, A_City);
-                    relative.NotAvailableTimes.Add(new Time(T_StartTime, T_EndTime, T_Day));
+                    List<Time> time = new List<Time>();
+                    time.Add(new Time(T_StartTime, T_EndTime, T_Day));
+                    relative.NotAvailableTimes = time;
                     RelativeTimeList.Add(relative);
                 }
             }
@@ -280,6 +282,7 @@ namespace EksamensProjekt.Controller.DBFacades {
         public static List<Citizen> GetCitizenTime(int serialNumber)//stefan
         {
             List<Citizen> CitizenTimeList = new List<Citizen>();
+            List<Time> timeList = new List<Time>();
             try
             {
                 ConnectDB();
@@ -294,14 +297,14 @@ namespace EksamensProjekt.Controller.DBFacades {
                     string C_Name = reader["C_Name"].ToString();
                     string A_Address = reader["A_Address"].ToString();
                     string A_City = reader["A_City"].ToString();
-                    DateTime T_StartTime = DateTime.Parse(reader["T_StartTime"].ToString());
-                    DateTime T_EndTime = DateTime.Parse(reader["T_EndTime"].ToString());
+                    DateTime T_StartTime = Convert.ToDateTime(reader["T_StartTime"]);
+                    DateTime T_EndTime = Convert.ToDateTime(reader["T_EndTime"]);
                     string T_Day = reader["T_Day"].ToString();
-
                     Citizen citizen = new Citizen(C_CPRNR, C_Name, A_Address, A_City);
-                    citizen.HomeCareTimes.Add(new Time(T_StartTime, T_EndTime, T_Day));
-                    CitizenTimeList.Add(citizen);
+                    citizen.HomeCareTimes = timeList;
 
+                    timeList.Add(new Time(T_StartTime, T_EndTime, T_Day));
+                    CitizenTimeList.Add(citizen);
                 }
             }
             catch (SqlException e)

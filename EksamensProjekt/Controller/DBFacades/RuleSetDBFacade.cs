@@ -105,9 +105,9 @@ namespace EksamensProjekt.Controller.DBFacades
 
             return sensorruleList;
         }
-        public static Dictionary<string, int> GetSensorRuleManagementFromSerialNumber(int serialNumber)
+        public static List<string> GetSensorRuleManagementFromSerialNumber(int serialNumber)
         {
-            Dictionary<string, int> ruleManagement = new Dictionary<string, int>();
+            List<string> ruleManagement = new List<string>();
             try
             {
                 ConnectDB();
@@ -121,7 +121,7 @@ namespace EksamensProjekt.Controller.DBFacades
 
                 while (rdr.HasRows && rdr.Read())
                 {
-                    ruleManagement.Add(rdr["SRM_RuleSet"].ToString(), Convert.ToInt32(rdr["SRM_ID"]));
+                    ruleManagement.Add(rdr["SRM_RuleSet"].ToString());
                 }
             }
             catch (SqlException e)
@@ -141,9 +141,9 @@ namespace EksamensProjekt.Controller.DBFacades
             {
                 ConnectDB();
 
-                SqlCommand cmd = new SqlCommand("SP_GetTimeRangeRuleManagementFromSerialNumber", dbconn);
+                SqlCommand cmd = new SqlCommand("SP_GetTimeRangeRuleFromSerialNumber", dbconn);
                 cmd.CommandType = CommandType.StoredProcedure;
-                cmd.Parameters.Add(new SqlParameter("@SerialNumber", serialNumber));
+                cmd.Parameters.Add(new SqlParameter("@S_SerialNumber", serialNumber));
                 
                 SqlDataReader rdr;
                 rdr = cmd.ExecuteReader();
@@ -157,9 +157,9 @@ namespace EksamensProjekt.Controller.DBFacades
                     DateTime endTime = Convert.ToDateTime(rdr["T_EndTime"]);
                     string day = rdr["T_Day"].ToString();
                     int id = Convert.ToInt32(rdr["TRR_ID"]);
-                    bool contactHelper = Convert.ToBoolean(int.Parse(rdr["TRR_ContactHelper"].ToString()));
+                    bool contactHelper = Convert.ToBoolean(rdr["TRR_ContactHelper"]);
 
-                    TimeRangeRule TRR = new TimeRangeRule(actingRule, cprNr, contactHelper, new Time(id, startTime, endTime, day));
+                    TimeRangeRule TRR = new TimeRangeRule(id, actingRule, cprNr, contactHelper, new Time(id, startTime, endTime, day));
                     timerangerules.Add(TRR);
                 }
             }
