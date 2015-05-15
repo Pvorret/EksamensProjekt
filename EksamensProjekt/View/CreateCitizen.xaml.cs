@@ -72,10 +72,10 @@ namespace EksamensProjekt.View
         }
         private void AddNewIllness_Button_Click(object sender, RoutedEventArgs e)
         {
-            AddIllness AI = new AddIllness();
-            AI.ShowDialog();
-            CitizenIllness_ListBox.Items.Add(AI.NewIllness);
-            IllnessList.Add(AI.NewIllness);
+                AddIllness AI = new AddIllness();
+                AI.ShowDialog();
+                CitizenIllness_ListBox.Items.Add(AI.NewIllness);
+                IllnessList.Add(AI.NewIllness);                        
         }
 
         private void CitizenReligion_Dropdown_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -85,8 +85,12 @@ namespace EksamensProjekt.View
                 AR = new AddReligion();
                 AR.ShowDialog();
                 CitizenReligion_Dropdown.Items.Insert(CitizenReligion_Dropdown.Items.Count -1, AR.NewReligion);
-                CitizenReligion_Dropdown.SelectedItem = AR.NewReligion;               
+                CitizenReligion_Dropdown.SelectedItem = AR.NewReligion;            
+   
+                if (AR.NewReligion == null)
+                return ; 
             }
+            
 
         }
 
