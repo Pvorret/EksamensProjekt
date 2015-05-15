@@ -62,6 +62,7 @@ namespace EksamensProjekt.Helper {
                             RSC.Contact = false;
                         }
                     }
+                    checkeTime = DateTime.Now;
                 }
             }
             if (sensorrule.WaitOrLook == false)

@@ -18,7 +18,7 @@ namespace EksamensProjekt.Controller
         public List<TimeRangeRule> TimeRangeRules = new List<TimeRangeRule>();
         public List<Citizen> CitizenList = new List<Citizen>();
         public List<string> ContactList = new List<string>();
-        public Dictionary<string, int> SensorRuleManagement = new Dictionary<string, int>();
+        public List<string> SensorRuleManagement = new List<string>();
         public bool Contact = true;
         public int SensorRuleId { get; set; }
         public int SensorRuleManagementId { get; set; }
@@ -27,7 +27,7 @@ namespace EksamensProjekt.Controller
             RuleSetController RSC = new RuleSetController();
             GetSensorInputInformation(serialNumber, activationTime, RSC);
             bool ruleExecuted = false;
-            foreach (string s in RSC.SensorRuleManagement.Keys)
+            foreach (string s in RSC.SensorRuleManagement)
             {
                 if (s == "TRR" && ruleExecuted == false)
                 {
@@ -51,14 +51,17 @@ namespace EksamensProjekt.Controller
                     if (RSC.SensorRules.Count == 1)
                     {
                         SensorRule SR = new SensorRule();
-                        SR.SensorRuleActivated(RSC, RSC.SensorRules[1], activationTime);
+                        SR.SensorRuleActivated(RSC, RSC.SensorRules[0], activationTime);
                     }
                 else
                         if (s == "SR" && ruleExecuted == false)
                         {
                             RSC.SensorRules = GetSensorRuleFromSerialNumber(serialNumber);
-                            SensorRule SR = new SensorRule();
-                            SR.SensorRuleActivated(RSC, RSC.SensorRules[1], activationTime);
+                            if (RSC.SensorRules.Count != 0)
+                            {
+                                SensorRule SR = new SensorRule();
+                                SR.SensorRuleActivated(RSC, RSC.SensorRules[0], activationTime);
+                            }
                         }
                 
             }
@@ -110,7 +113,7 @@ namespace EksamensProjekt.Controller
             TimeRangeRule timerange = new TimeRangeRule(relativeCprNr, actingRule, contactHelper, new Time(startTime, endTime, day));
             RuleSetDBFacade.AddTimeRangeRuleFromSerialNumber(serialNumber, timerange);
         }
-        public Dictionary<string, int> GetSensorRuleManagementFromSerialNumber(int serialNumber)
+        public List<string> GetSensorRuleManagementFromSerialNumber(int serialNumber)
         {
             return DBFacades.RuleSetDBFacade.GetSensorRuleManagementFromSerialNumber(serialNumber);
         }
