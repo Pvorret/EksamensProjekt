@@ -15,7 +15,7 @@ namespace EksamensProjekt.Model
         public List<Relative> Relatives { get; set; }
         public List<Sensor> Sensors { get; set; }
 
-        public Citizen(string name, string cprNr, string gender, string age, string address, string city, string phoneNumber, List<string> illness, string religion, Dictionary<string, int> sensorTypes, List<Time> homeCareTimes)
+        public Citizen(string name, string cprNr, string gender, string age, string address, string city, string phoneNumber, List<string> illness, string religion, Dictionary<string, int> sensorTypes/*, List<Time> homeCareTimes*/)
         {
             this.Name = name;
             this.CprNr = cprNr;
@@ -27,7 +27,7 @@ namespace EksamensProjekt.Model
             this.Illness = illness;
             this.Religion = religion;
             this.SensorTypesNeeded = sensorTypes;
-            this.HomeCareTimes = homeCareTimes;
+            //this.HomeCareTimes = homeCareTimes;
         }
         public Citizen(string name, string cprNr)
         {
