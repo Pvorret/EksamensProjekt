@@ -19,6 +19,7 @@ namespace EksamensProjekt.Controller
         public List<Citizen> CitizenList = new List<Citizen>();
         public List<string> ContactList = new List<string>();
         public Dictionary<string, int> SensorRuleManagement = new Dictionary<string, int>();
+        public bool Contact = true;
         public int SensorRuleId { get; set; }
 
         public void HandelSensorInput(int serialNumber, DateTime activationTime)
@@ -55,7 +56,6 @@ namespace EksamensProjekt.Controller
         public List<SensorRule> GetSensorRuleFromSerialNumber(int serialNumber) {
             foreach (SensorRule s in RuleSetDBFacade.GetSensorRuleFromSerialNumber(serialNumber)) {
                 SensorRule sensorrule = new SensorRule(s.Id, s.SensorDependency, s.WaitOrLook, s.TimeToWait, s.TimeToWait);
-                SensorRule.BehandleinputfraRuleSetController(sensorrule);
             }
 
             return RuleSetDBFacade.GetSensorRuleFromSerialNumber(serialNumber);
@@ -113,6 +113,10 @@ namespace EksamensProjekt.Controller
                     MessageBox.Show("Besked send til: " + CP);
                 }
             }
+        }
+        public List<SensorLog> GetSensorLogFromDateTime(DateTime checkTime)
+        {
+            return SensorDBFacade.GetSensorLogFromDateTime(checkTime);
         }
     }
 }
