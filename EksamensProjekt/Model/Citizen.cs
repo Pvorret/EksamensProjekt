@@ -27,7 +27,7 @@ namespace EksamensProjekt.Model
             this.Illness = illness;
             this.Religion = religion;
             this.SensorTypesNeeded = sensorTypes;
-            this.HomeCareTimes = new List<Time>();
+            this.HomeCareTimes = homeCareTimes;
         }
         public Citizen(string name, string cprNr)
         {
