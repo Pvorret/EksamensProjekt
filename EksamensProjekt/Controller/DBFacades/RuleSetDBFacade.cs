@@ -88,20 +88,22 @@ namespace EksamensProjekt.Controller.DBFacades
 
                 while (rdr.HasRows && rdr.Read()) {
                     int Id = (int)rdr["SR_ID"];
-                    int SensorDependency = (int)rdr["SR_S_SensorDependecy"];
-                    bool WaitOrLook = Convert.ToBoolean(int.Parse(rdr["SR_WaitOrLook"].ToString()));
+                    int SensorDependency = (int)rdr["SR_S_SensorDependency"];
+                    bool WaitOrLook = Convert.ToBoolean(rdr["SR_WaitOrLook"]);
                     int TimeToWait = (int)rdr["SR_TimeToWait"];
                     int TimeToLook = (int)rdr["SR_TimeToLook"];
                     SensorRule sensorrule = new SensorRule(Id, SensorDependency, WaitOrLook, TimeToWait, TimeToLook);
                     sensorruleList.Add(sensorrule);
                 }
-
-                CloseDB();
             }
             catch (SqlException) {
                 
                 throw new Exception("Error in getting SensorRules");
-            }           
+            }
+            finally
+            {
+                CloseDB();
+            }
 
             return sensorruleList;
         }

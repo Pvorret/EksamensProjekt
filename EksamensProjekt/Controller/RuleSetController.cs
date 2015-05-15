@@ -13,7 +13,7 @@ namespace EksamensProjekt.Controller
 {
     public class RuleSetController
     {
-        public SensorLog SensorLog;
+        public SensorLog SensorLg;
         public List<SensorRule> SensorRules = new List<SensorRule>();
         public List<TimeRangeRule> TimeRangeRules = new List<TimeRangeRule>();
         public List<Citizen> CitizenList = new List<Citizen>();
@@ -22,6 +22,7 @@ namespace EksamensProjekt.Controller
         public bool Contact = true;
         public int SensorRuleId { get; set; }
         public int SensorRuleManagementId { get; set; }
+        
         public void HandelSensorInput(int serialNumber, DateTime activationTime)
         {
             RuleSetController RSC = new RuleSetController();
@@ -53,7 +54,7 @@ namespace EksamensProjekt.Controller
                         SensorRule SR = new SensorRule();
                         SR.SensorRuleActivated(RSC, RSC.SensorRules[0], activationTime);
                     }
-                else
+                    else
                         if (s == "SR" && ruleExecuted == false)
                         {
                             RSC.SensorRules = GetSensorRuleFromSerialNumber(serialNumber);
@@ -64,6 +65,29 @@ namespace EksamensProjekt.Controller
                             }
                         }
                 
+            }
+            if (ContactList.Count == 0)
+            {
+                foreach (Citizen C in RSC.CitizenList)
+                {
+                    foreach (Relative R in C.Relatives)
+                    {
+                        foreach (Time T in R.NotAvailableTimes)
+                        {
+                            if (CheckTime(T, activationTime) == true)
+                            {
+                                RSC.ContactList.Add(R.CprNr);
+                            }
+                        }
+                    }
+                    foreach (Time t in C.HomeCareTimes)
+                    {
+                        if (ContactList.Count == 0)
+                        {
+                            RSC.ContactList.Add("Helper");
+                        }
+                    }
+                }
             }
             if (Contact == true)
             {
@@ -83,24 +107,24 @@ namespace EksamensProjekt.Controller
         }
         public void CreateSensorLog(int serialNumber, string activationTime)
         {
-            SensorLog = new SensorLog(serialNumber, Convert.ToDateTime(activationTime));
-            SensorLog = RuleSetDBFacade.CreateSensorLog(SensorLog);
+            SensorLg = new SensorLog(serialNumber, Convert.ToDateTime(activationTime));
+            SensorLg = RuleSetDBFacade.CreateSensorLog(SensorLg);
         }
         public void UpdateSensorLog(string contactTime, string contactPerson, string contactMessage)
         {
-            SensorLog = new SensorLog();
-            SensorLog.ContactTime = Convert.ToDateTime(contactTime);
-            SensorLog.ContactPerson = contactPerson;
-            SensorLog.ContactMessage = contactMessage;
-            RuleSetDBFacade.UpdateSensorLog(SensorLog);
+            SensorLg = new SensorLog();
+            SensorLg.ContactTime = Convert.ToDateTime(contactTime);
+            SensorLg.ContactPerson = contactPerson;
+            SensorLg.ContactMessage = contactMessage;
+            RuleSetDBFacade.UpdateSensorLog(SensorLg);
         }
         public void AddSensorRuleManagement(string ruleSet, int serialNumber) {
-            RuleSetDBFacade.AddSensorRuleManagement(ruleSet, serialNumber);
+            SensorRuleManagementId = RuleSetDBFacade.AddSensorRuleManagement(ruleSet, serialNumber);
         }
         public List<SensorRule> GetSensorRuleFromSerialNumber(int serialNumber) {
-            foreach (SensorRule s in RuleSetDBFacade.GetSensorRuleFromSerialNumber(serialNumber)) {
-                SensorRule sensorrule = new SensorRule(s.Id, s.SensorDependency, s.WaitOrLook, s.TimeToWait, s.TimeToWait);
-            }
+            //foreach (SensorRule s in RuleSetDBFacade.GetSensorRuleFromSerialNumber(serialNumber)) {
+            //    SensorRule sensorrule = new SensorRule(s.Id, s.SensorDependency, s.WaitOrLook, s.TimeToWait, s.TimeToWait);
+            //}
 
             return RuleSetDBFacade.GetSensorRuleFromSerialNumber(serialNumber);
         }
@@ -146,17 +170,26 @@ namespace EksamensProjekt.Controller
         }
         public void SendMessage(List<string> contactPersons)//Stefan
         {
+            string message = "";
             foreach (string CP in contactPersons)
             {
+                
                 if (CP == "Helper")
                 {
-                    MessageBox.Show("Send Besked til Hjemmehjælper");
+
+                    message = message + ", " + MessageBox.Show("Send Besked til Hjemmehjælper").ToString();
                 }
                 else
                 {
-                    MessageBox.Show("Besked send til: " + CP);
+                    message = message + ", " + MessageBox.Show("Besked send til: " + CP).ToString();
                 }
+                SensorLg.ContactPerson = CP;
             }
+            DateTime messageSendTime = DateTime.Now;
+            SensorLg.ContactMessage = message;
+            SensorLg.ContactTime = messageSendTime;
+
+            RuleSetDBFacade.UpdateSensorLog(SensorLg);
         }
         public List<SensorLog> GetSensorLogFromDateTime(DateTime checkTime)
         {

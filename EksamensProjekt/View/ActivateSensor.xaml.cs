@@ -90,7 +90,7 @@ namespace EksamensProjekt.View
             DateTime activationTime = new DateTime();
             activationTime = Convert.ToDateTime(Date_TextBox.Text);
             TimeSpan actTime = new TimeSpan(Convert.ToInt32(Hour_TextBox.Text), Convert.ToInt32(Minute_TextBox.Text), 0);
-            activationTime.Add(actTime);
+            activationTime = activationTime + actTime;
             RuleSetController RSC = new RuleSetController();
             RSC.HandelSensorInput(Convert.ToInt32(Sensor_DropDown.SelectedItem), activationTime);
         }

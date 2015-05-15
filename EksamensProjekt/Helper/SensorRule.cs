@@ -41,9 +41,12 @@ namespace EksamensProjekt.Helper {
                 bool sensorFound = false;
                 DateTime WaitTime = new DateTime();
                 WaitTime = activationTime.AddMinutes(sensorrule.TimeToWait);
-                while (checkeTime <= WaitTime && sensorFound == false)
+                TimeSpan remainingTime = WaitTime - checkeTime;
+                TimeSpan lastCheck = new TimeSpan(0, 0, 0);
+                DateTime beforeCheck = DateTime.Now;
+                while (lastCheck <= remainingTime && sensorFound == false)
                 {
-                    sensorLogList = RSC.GetSensorLogFromDateTime(checkeTime);
+                    sensorLogList = RSC.GetSensorLogFromDateTime(beforeCheck);
                     foreach (SensorLog SL in sensorLogList)
                     {
                         if (SL.SerialNumber == sensorrule.SensorDependency && checkeTime < WaitTime)
@@ -62,7 +65,8 @@ namespace EksamensProjekt.Helper {
                             RSC.Contact = false;
                         }
                     }
-                    checkeTime = DateTime.Now;
+                    DateTime afterCheck = DateTime.Now;
+                    lastCheck = afterCheck - beforeCheck;
                 }
             }
             if (sensorrule.WaitOrLook == false)
