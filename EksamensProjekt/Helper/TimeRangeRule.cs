@@ -10,6 +10,7 @@ using System.Text.RegularExpressions;
 namespace EksamensProjekt.Helper {
     public class TimeRangeRule 
     {
+        public int Id { get; set; }
         public string CPRNR { get; set; } //Ændre navn på property (eks. ContactPerson)
         public string ActingRule { get; set; }
         public bool ContactHelper { get; set; }
@@ -22,6 +23,15 @@ namespace EksamensProjekt.Helper {
             this.ContactHelper = contactHelper;
             this.Time = time;
         }
+        public TimeRangeRule(int id, string relativeCprNr, string actingRule, bool contactHelper, Time time)
+        {
+            this.Id = id;
+            this.ActingRule = actingRule;
+            this.CPRNR = relativeCprNr;
+            this.ContactHelper = contactHelper;
+            this.Time = time;
+        }
+        public TimeRangeRule() { }
         public string ProcessTimeRangeRule(RuleSetController ruleSetController ,int id)//Stefan
         {
             ruleSetController.ContactList.Add(ruleSetController.TimeRangeRules[id].CPRNR);

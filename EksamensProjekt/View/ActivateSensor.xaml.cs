@@ -45,8 +45,9 @@ namespace EksamensProjekt.View
             
             char[] a = c.DateTimeFormat.GetDayName(DateTime.Today.DayOfWeek).ToCharArray(); //Her bruger vi object c til at convert ugens dage til dansk
             a[0] = char.ToUpper(a[0]);
-            Date_TextBox.Text = new string(a);
-            Time_TextBox.Text = DateTime.Now.Hour.ToString() + ":" + DateTime.Now.Minute.ToString();
+            Date_TextBox.Text = DateTime.Now.Date.ToString();
+            Hour_TextBox.Text = DateTime.Now.Hour.ToString();
+            Minute_TextBox.Text = DateTime.Now.Minute.ToString();
         }
 
         private void Citizen_Dropdown_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -55,10 +56,12 @@ namespace EksamensProjekt.View
             {
                 if (_controller.Citizens[i].Name == Citizen_Dropdown.SelectedItem.ToString())
                 {
-                    _controller.GetSensorTypeFromCitizen(_controller.Citizens[i].CprNr);
-                    for (int j = 0; j < _controller.SensorTypes.Count; j++)
+                    _controller.GetSensorsFromCitizen(_controller.Citizens[i].CprNr);
                     {
-                        Sensor_DropDown.Items.Add(_controller.SensorTypes[j]);
+                        for (int k = 0; k < _controller.Citizens[i].Sensors.Count; k++)
+                        {
+                                Sensor_DropDown.Items.Add(_controller.Citizens[i].Sensors[k].SerialNumber);
+                        }
                     }
                 }
             }
@@ -70,10 +73,26 @@ namespace EksamensProjekt.View
             tb.Text = string.Empty;
             tb.GotFocus -= Date_TextBox_GotFocus;
         }
-        public void Time_TextBox_GotFocus(object sender, RoutedEventArgs e) {
+        public void Hour_TextBox_GotFocus(object sender, RoutedEventArgs e)
+        {
             TextBox tb = (TextBox)sender;
             tb.Text = string.Empty;
-            tb.GotFocus -= Time_TextBox_GotFocus;
+            tb.GotFocus -= Hour_TextBox_GotFocus;
+        }
+        public void Minute_TextBox_GotFocus(object sender, RoutedEventArgs e)
+        {
+            TextBox tb = (TextBox)sender;
+            tb.Text = string.Empty;
+            tb.GotFocus -= Minute_TextBox_GotFocus;
+        }
+        private void Activate_Button_Click(object sender, RoutedEventArgs e)
+        {
+            DateTime activationTime = new DateTime();
+            activationTime = Convert.ToDateTime(Date_TextBox.Text);
+            TimeSpan actTime = new TimeSpan(Convert.ToInt32(Hour_TextBox.Text), Convert.ToInt32(Minute_TextBox.Text), 0);
+            activationTime.Add(actTime);
+            RuleSetController RSC = new RuleSetController();
+            RSC.HandelSensorInput(Convert.ToInt32(Sensor_DropDown.SelectedItem), activationTime);
         }
 
     }
