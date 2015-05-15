@@ -31,7 +31,7 @@ namespace EksamensProjekt.Helper {
         }
         public SensorRule() { }
 
-        public static void SensorRuleActivated(RuleSetController RSC, SensorRule sensorrule, DateTime activationTime) 
+        public void SensorRuleActivated(RuleSetController RSC, SensorRule sensorrule, DateTime activationTime) //af Thomas
         {
             List<SensorLog> sensorLogList = new List<SensorLog>();
             if (sensorrule.WaitOrLook == true)
@@ -46,7 +46,7 @@ namespace EksamensProjekt.Helper {
                     sensorLogList = RSC.GetSensorLogFromDateTime(checkeTime);
                     foreach (SensorLog SL in sensorLogList)
                     {
-                        if (SL.SerialNumber == sensorrule.SensorDependency)
+                        if (SL.SerialNumber == sensorrule.SensorDependency && checkeTime < WaitTime)
                         {
                             if (sensorrule.WhenToSend == false)
                             {
