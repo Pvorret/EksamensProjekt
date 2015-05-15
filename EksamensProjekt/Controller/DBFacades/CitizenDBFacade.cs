@@ -301,7 +301,6 @@ namespace EksamensProjekt.Controller.DBFacades {
                     Citizen citizen = new Citizen(C_CPRNR, C_Name, A_Address, A_City);
                     citizen.HomeCareTimes.Add(new Time(T_StartTime, T_EndTime, T_Day));
                     CitizenTimeList.Add(citizen);
-
                 }
             }
             catch (SqlException e)

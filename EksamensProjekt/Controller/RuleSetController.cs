@@ -18,17 +18,23 @@ namespace EksamensProjekt.Controller
         public List<TimeRangeRule> TimeRangeRules = new List<TimeRangeRule>();
         public List<Citizen> CitizenList = new List<Citizen>();
         public List<string> ContactList = new List<string>();
+        public Dictionary<string, int> SensorRuleManagement = new Dictionary<string, int>();
         public int SensorRuleId { get; set; }
 
         public void HandelSensorInput(int serialNumber, DateTime activationTime)
         {
 
         }
-        public void GetSensorInputInformation(int serialNumber, DateTime activationTime) 
+        public void GetSensorInputInformation(int serialNumber, DateTime activationTime) // Thomas og Stefan
         { 
             SensorLog SL = new SensorLog(serialNumber, activationTime);
             RuleSetDBFacade.CreateSensorLog(SL);
-
+            CitizenList = CitizenDBFacade.GetCitizenTime(serialNumber);
+            foreach (Citizen citizen in CitizenList)
+            {
+                citizen.Relatives = CitizenDBFacade.GetRelativeTime(citizen.CprNr);
+            }
+            SensorRuleManagement = RuleSetDBFacade.GetSensorRuleManagementFromSerialNumber(serialNumber);            
         }
         public void CreateSensorLog(int serialNumber, string activationTime)
         {
