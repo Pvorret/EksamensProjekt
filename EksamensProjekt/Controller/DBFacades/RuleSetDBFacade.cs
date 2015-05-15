@@ -173,7 +173,7 @@ namespace EksamensProjekt.Controller.DBFacades
             }
             return timerangerules;
         }
-        public static int AddSensorRuleFromSerialNumber(int serialNumber, SensorRule sensorRule) {
+        public static int AddSensorRuleFromSerialNumber(int serialNumber, SensorRule sensorRule, int sensorRuleManagementId) {
             int id = 0;
             try {
                 ConnectDB();
@@ -182,11 +182,12 @@ namespace EksamensProjekt.Controller.DBFacades
                 cmd.CommandType = CommandType.StoredProcedure;
 
                 cmd.Parameters.Add(new SqlParameter("@SRM_S_SerialNumber", serialNumber));
-                cmd.Parameters.Add(new SqlParameter("@SR_R_SensorDependency", sensorRule.SensorDependency));
+                cmd.Parameters.Add(new SqlParameter("@SR_S_SensorDependency", sensorRule.SensorDependency));
                 cmd.Parameters.Add(new SqlParameter("@SR_WaitOrLook", sensorRule.WaitOrLook));
                 cmd.Parameters.Add(new SqlParameter("@SR_TimeToWait", sensorRule.TimeToWait));
                 cmd.Parameters.Add(new SqlParameter("@SR_TimeToLook", sensorRule.TimeToLook));
                 cmd.Parameters.Add(new SqlParameter("@SR_WhenToSend", Convert.ToInt32(sensorRule.WhenToSend)));
+                cmd.Parameters.Add(new SqlParameter("@SRM_ID", sensorRuleManagementId));
 
                 SqlDataReader rdr;
                 rdr = cmd.ExecuteReader();
@@ -204,11 +205,12 @@ namespace EksamensProjekt.Controller.DBFacades
             finally
             {
                 CloseDB();
-            }
+             }
             return id;
         }
-        public static void AddSensorRuleManagement(string ruleSet, int serialNumber)
+        public static int AddSensorRuleManagement(string ruleSet, int serialNumber)
         {
+            int id = 0;
             try
             {
                 ConnectDB();
@@ -216,7 +218,13 @@ namespace EksamensProjekt.Controller.DBFacades
                 cmd.CommandType = CommandType.StoredProcedure;
                 cmd.Parameters.Add(new SqlParameter("@SRM_RuleSet", ruleSet));
                 cmd.Parameters.Add(new SqlParameter("@SRM_S_SerialNumber", serialNumber));
-                cmd.ExecuteNonQuery();
+
+                SqlDataReader rdr = cmd.ExecuteReader();
+
+                while(rdr.HasRows && rdr.Read())
+                {
+                    id = Convert.ToInt32(rdr["SRM_ID"]);
+                }
             }
             catch (SqlException e)
             {
@@ -226,6 +234,7 @@ namespace EksamensProjekt.Controller.DBFacades
             {
                 CloseDB();
             }
+            return id;
         }
         public static void AddTimeRangeRuleFromSerialNumber(int serialNumber, TimeRangeRule timeRange)
         {
