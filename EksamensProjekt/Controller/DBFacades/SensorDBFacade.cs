@@ -320,7 +320,7 @@ namespace EksamensProjekt.Controller.DBFacades
                 cmd.CommandType = CommandType.StoredProcedure;
                 cmd.Parameters.Add(new SqlParameter("@SerialNumber", serialNumber));
                 SqlDataReader reader = cmd.ExecuteReader();
-                while (reader.Read())
+                while (reader.Read() && reader.HasRows)
                 {
                         sensorDependency.Add(Convert.ToInt32(reader["SR_ID"]));
                 }
