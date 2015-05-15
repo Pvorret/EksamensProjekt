@@ -21,6 +21,7 @@ namespace EksamensProjekt.Controller
         public Dictionary<string, int> SensorRuleManagement = new Dictionary<string, int>();
         public bool Contact = true;
         public int SensorRuleId { get; set; }
+        public int SensorRuleManagementId { get; set; }
 
         public void HandelSensorInput(int serialNumber, DateTime activationTime)
         {
@@ -60,10 +61,10 @@ namespace EksamensProjekt.Controller
 
             return RuleSetDBFacade.GetSensorRuleFromSerialNumber(serialNumber);
         }
-        public void AddSensorRuleFromSerialNumber(int serialNumber, int sensorDependency, bool waitOrLook, int timeToWait, int timeToLook, bool whenToSend)//Stefan
+        public void AddSensorRuleFromSerialNumber(int serialNumber, int sensorDependency, bool waitOrLook, int timeToWait, int timeToLook, bool whenToSend, int sensorRuleManagementId)//Stefan
         {
             SensorRule sensorRule = new SensorRule(sensorDependency, waitOrLook, timeToWait, timeToLook, whenToSend);
-            SensorRuleId = RuleSetDBFacade.AddSensorRuleFromSerialNumber(serialNumber, sensorRule);
+            SensorRuleId = RuleSetDBFacade.AddSensorRuleFromSerialNumber(serialNumber, sensorRule, sensorRuleManagementId);
         }
         public void AddTimeRangeRuleFromSerialNumber(int serialNumber, string day, DateTime startTime, DateTime endTime, string relativeCprNr, string actingRule, bool contactHelper) {
             TimeRangeRule timerange = new TimeRangeRule(relativeCprNr, actingRule, contactHelper, new Time(startTime, endTime, day));
