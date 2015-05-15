@@ -18,6 +18,7 @@ namespace EksamensProjekt.Controller
         public List<TimeRangeRule> TimeRangeRules = new List<TimeRangeRule>();
         public List<Citizen> CitizenList = new List<Citizen>();
         public List<string> ContactList = new List<string>();
+        public int SensorRuleManagementId { get; set; }
         public int SensorRuleId { get; set; }
 
         public void HandelSensorInput(int serialNumber, DateTime activationTime)
@@ -43,8 +44,9 @@ namespace EksamensProjekt.Controller
             SensorLog.ContactMessage = contactMessage;
             RuleSetDBFacade.UpdateSensorLog(SensorLog);
         }
-        public void AddSensorRuleManagement(string ruleSet, int serialNumber) {
-            RuleSetDBFacade.AddSensorRuleManagement(ruleSet, serialNumber);
+        public void AddSensorRuleManagement(string ruleSet, int serialNumber) 
+        {
+            SensorRuleManagementId = RuleSetDBFacade.AddSensorRuleManagement(ruleSet, serialNumber);
         }
         public List<SensorRule> GetSensorRuleFromSerialNumber(int serialNumber) {
             foreach (SensorRule s in RuleSetDBFacade.GetSensorRuleFromSerialNumber(serialNumber)) {
@@ -54,10 +56,10 @@ namespace EksamensProjekt.Controller
 
             return RuleSetDBFacade.GetSensorRuleFromSerialNumber(serialNumber);
         }
-        public void AddSensorRuleFromSerialNumber(int serialNumber, int sensorDependency, bool waitOrLook, int timeToWait, int timeToLook, bool whenToSend)//Stefan
+        public void AddSensorRuleFromSerialNumber(int serialNumber, int sensorDependency, bool waitOrLook, int timeToWait, int timeToLook, bool whenToSend, int sensorRuleManagementId)//Stefan
         {
             SensorRule sensorRule = new SensorRule(sensorDependency, waitOrLook, timeToWait, timeToLook, whenToSend);
-            SensorRuleId = RuleSetDBFacade.AddSensorRuleFromSerialNumber(serialNumber, sensorRule);
+            SensorRuleId = RuleSetDBFacade.AddSensorRuleFromSerialNumber(serialNumber, sensorRule, sensorRuleManagementId);
         }
         public void AddTimeRangeRuleFromSerialNumber(int serialNumber, string day, DateTime startTime, DateTime endTime, string relativeCprNr, string actingRule, bool contactHelper) {
             TimeRangeRule timerange = new TimeRangeRule(relativeCprNr, actingRule, contactHelper, new Time(startTime, endTime, day));
