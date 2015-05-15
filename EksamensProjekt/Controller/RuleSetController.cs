@@ -25,19 +25,59 @@ namespace EksamensProjekt.Controller
 
         public void HandelSensorInput(int serialNumber, DateTime activationTime)
         {
-            GetSensorInputInformation(serialNumber, activationTime);
-
+            RuleSetController RSC = new RuleSetController();
+            GetSensorInputInformation(serialNumber, activationTime, RSC);
+            bool ruleExecuted = false;
+            foreach (string s in RSC.SensorRuleManagement.Keys)
+            {
+                if (s == "TRR" && ruleExecuted == false)
+                {
+                    TimeRangeRule TRR = new TimeRangeRule();
+                    RSC.TimeRangeRules = RuleSetDBFacade.GetTimeRangeRuleFromSerialNumber(serialNumber);
+                    foreach (TimeRangeRule TR in TimeRangeRules)
+                    {
+                        bool ActiveRule = RSC.CheckTime(TR.Time,activationTime);
+                        if (ActiveRule == true)
+                        {
+                            string ActingRule = TRR.ProcessTimeRangeRule(RSC, TR.Id);
+                            if (ActingRule != "")
+                            {
+                                RSC.CheckActingRule(ActingRule, RSC);
+                            }
+                            ruleExecuted = true;
+                        }
+                    }
+                }
+                else
+                    if (RSC.SensorRules.Count == 1)
+                    {
+                        SensorRule SR = new SensorRule();
+                        SR.SensorRuleActivated(RSC, RSC.SensorRules[1], activationTime);
+                    }
+                else
+                        if (s == "SR" && ruleExecuted == false)
+                        {
+                            RSC.SensorRules = GetSensorRuleFromSerialNumber(serialNumber);
+                            SensorRule SR = new SensorRule();
+                            SR.SensorRuleActivated(RSC, RSC.SensorRules[1], activationTime);
+                        }
+                
+            }
+            if (Contact == true)
+            {
+                RSC.SendMessage(RSC.ContactList);
+            }
         }
-        public void GetSensorInputInformation(int serialNumber, DateTime activationTime) // Thomas og Stefan
+        public void GetSensorInputInformation(int serialNumber, DateTime activationTime, RuleSetController rSC) // Thomas og Stefan
         { 
             SensorLog SL = new SensorLog(serialNumber, activationTime);
             RuleSetDBFacade.CreateSensorLog(SL);
-            CitizenList = CitizenDBFacade.GetCitizenTime(serialNumber);
-            foreach (Citizen citizen in CitizenList)
+            rSC.CitizenList = CitizenDBFacade.GetCitizenTime(serialNumber);
+            foreach (Citizen citizen in rSC.CitizenList)
             {
                 citizen.Relatives = CitizenDBFacade.GetRelativeTime(citizen.CprNr);
             }
-            SensorRuleManagement = RuleSetDBFacade.GetSensorRuleManagementFromSerialNumber(serialNumber);            
+            rSC.SensorRuleManagement = RuleSetDBFacade.GetSensorRuleManagementFromSerialNumber(serialNumber);            
         }
         public void CreateSensorLog(int serialNumber, string activationTime)
         {
@@ -93,13 +133,13 @@ namespace EksamensProjekt.Controller
             }
             return false;          
         }
-        public void CheckActing(string actingRuleString)
+        public void CheckActingRule(string actingRuleString, RuleSetController rSC)
         {
             string[] rule = Regex.Split(actingRuleString, @"\W+");
             int id = int.Parse(rule[1]);
             if (rule[0] == "SR")
             {
-                SensorRules.Add(RuleSetDBFacade.GetSensorRuleFromID(id));
+                rSC.SensorRules.Add(RuleSetDBFacade.GetSensorRuleFromID(id));
             }
         }
         public void SendMessage(List<string> contactPersons)//Stefan

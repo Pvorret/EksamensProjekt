@@ -159,7 +159,7 @@ namespace EksamensProjekt.Controller.DBFacades
                     int id = Convert.ToInt32(rdr["TRR_ID"]);
                     bool contactHelper = Convert.ToBoolean(int.Parse(rdr["TRR_ContactHelper"].ToString()));
 
-                    TimeRangeRule TRR = new TimeRangeRule(actingRule, cprNr, contactHelper, new Time(id, startTime, endTime, day));
+                    TimeRangeRule TRR = new TimeRangeRule(id, actingRule, cprNr, contactHelper, new Time(id, startTime, endTime, day));
                     timerangerules.Add(TRR);
                 }
             }
