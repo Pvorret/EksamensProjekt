@@ -18,6 +18,7 @@ namespace EksamensProjekt.Controller
         public List<TimeRangeRule> TimeRangeRules = new List<TimeRangeRule>();
         public List<Citizen> CitizenList = new List<Citizen>();
         public List<string> ContactList = new List<string>();
+        public bool Contact = true;
         public int SensorRuleId { get; set; }
 
         public void HandelSensorInput(int serialNumber, DateTime activationTime)
@@ -107,6 +108,10 @@ namespace EksamensProjekt.Controller
                     MessageBox.Show("Besked send til: " + CP);
                 }
             }
+        }
+        public List<SensorLog> GetSensorLogFromDateTime(DateTime checkTime)
+        {
+            return SensorDBFacade.GetSensorLogFromDateTime(checkTime);
         }
     }
 }
