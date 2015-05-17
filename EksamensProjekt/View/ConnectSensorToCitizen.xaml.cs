@@ -13,6 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using EksamensProjekt.Controller;
 using System.Text.RegularExpressions;
+using EksamensProjekt.View;
 
 namespace EksamensProjekt.View
 {
@@ -264,6 +265,15 @@ namespace EksamensProjekt.View
             WaitOrLookLength_TextBox.IsEnabled = true;
             Yes_RadioButton.IsEnabled = true;
             No_RadioButton.IsEnabled = true;
+        }
+        private void AddActingRule_CheckBo_Unchecked(object sender, RoutedEventArgs e) 
+        {
+            Wait_RadioButton.IsEnabled = false;
+            Look_RadioButton.IsEnabled = false;
+            SensorDependency_Dropdown.IsEnabled = false;
+            WaitOrLookLength_TextBox.IsEnabled = false;
+            Yes_RadioButton.IsEnabled = false;
+            No_RadioButton.IsEnabled = false;
         }
 
         private void SensorLocation_TextBox_PreviewTextInput(object sender, TextCompositionEventArgs e)

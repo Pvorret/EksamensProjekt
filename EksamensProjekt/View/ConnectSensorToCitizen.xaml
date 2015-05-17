@@ -48,9 +48,12 @@
         <Label Content="Kontakt hjælper" HorizontalAlignment="Left" Margin="480,173,0,0" VerticalAlignment="Top"/>
         <CheckBox Name="ContactHelper_CheckBox" IsEnabled="False" Content="Ja" HorizontalAlignment="Left" Margin="584,180,0,0" VerticalAlignment="Top"/>
         <Label Content="Tilføj Aktiv Regel" HorizontalAlignment="Left" Margin="480,201,0,0" VerticalAlignment="Top"/>
-        <CheckBox Name="AddActingRule_CheckBox" IsEnabled="False" Content="Ja" HorizontalAlignment="Left" Margin="584,207,0,0" VerticalAlignment="Top" Checked="AddActingRule_CheckBox_Checked"/>
+        <CheckBox Name="AddActingRule_CheckBox" IsEnabled="False" Content="Ja" HorizontalAlignment="Left" Margin="584,207,0,0" VerticalAlignment="Top" Checked="AddActingRule_CheckBox_Checked" Unchecked="AddActingRule_CheckBo_Unchecked"/>
         <Button Name="Connect_Button" Content="Forbind" HorizontalAlignment="Left" Margin="25,210,0,0" VerticalAlignment="Top" Width="75" Click="Connect_Button_Click"/>
         <Button Name="Return_Button" Content="Tilbage" HorizontalAlignment="Left" Margin="165,210,0,0" VerticalAlignment="Top" Width="75" Click="Return_Button_Click"/>
+        <ComboBox Name="RuleSet_DropDown" HorizontalAlignment="Left" Margin="119,180,0,0" VerticalAlignment="Top" Width="120" SelectionChanged="RuleSet_DropDown_SelectionChanged"/>
+        <Label Content="RuleSet_DropDown
+               " HorizontalAlignment="Left" Margin="0,179,0,0" VerticalAlignment="Top" Width="114"/>
 
     </Grid>
 </Window>
