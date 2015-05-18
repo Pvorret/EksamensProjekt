@@ -12,41 +12,34 @@ using System.Windows;
 namespace EksamensProjekt.Controller.DBFacades {
     class CitizenDBFacade {
         static SqlConnection dbconn;
-        public static void CreateCitizen(Model.Citizen citizen) {
+        public static void CreateCitizen(Model.Citizen citizen) 
+        {
             try {
                 ConnectDB();
 
                 SqlCommand cmd = new SqlCommand("SP_CreateCitizen", dbconn);
                 cmd.CommandType = CommandType.StoredProcedure;
-
                 cmd.Parameters.Add(new SqlParameter("@C_Name", citizen.Name));
-
                 cmd.Parameters.Add(new SqlParameter("@C_CPRNR", citizen.CprNr));
-
                 cmd.Parameters.Add(new SqlParameter("@C_Gender", citizen.Gender));
-
                 cmd.Parameters.Add(new SqlParameter("@C_Age", citizen.Age));
-
                 cmd.Parameters.Add(new SqlParameter("@C_PhoneNumber", citizen.PhoneNumber));
-
                 cmd.Parameters.Add(new SqlParameter("@C_Religion", citizen.Religion));
-
                 cmd.Parameters.Add(new SqlParameter("@A_Address", citizen.Address));
-
                 cmd.Parameters.Add(new SqlParameter("@A_City", citizen.City));
-
                 cmd.ExecuteNonQuery();
-                
-
-                CloseDB();
             }
-            catch (SqlException e) {
-
+            catch (SqlException e) 
+            {
                 throw new Exception("Error in creating Citizen" + e.Message);
             }
+            finally
+            {
+                CloseDB();
+            }
         }
-        public static void AddSensorTypeToCitizen(string cprNr, Dictionary<string, int> sensorType) {
-
+        public static void AddSensorTypeToCitizen(string cprNr, Dictionary<string, int> sensorType) 
+        {
             try {
                 ConnectDB();
                 foreach (KeyValuePair<string, int> sensortypeamount in sensorType) {
@@ -56,14 +49,16 @@ namespace EksamensProjekt.Controller.DBFacades {
                     cmd.Parameters.Add(new SqlParameter("@C_CPRNR", cprNr));
                     cmd.Parameters.Add(new SqlParameter("@ST_Type", sensortypeamount.Key));
                     cmd.Parameters.Add(new SqlParameter("@CST_AmountNeeded", sensortypeamount.Value));
-
                     cmd.ExecuteNonQuery();
                 }
-                CloseDB();
             }
-            catch (SqlException e) {
-                
+            catch (SqlException e) 
+            {
                 throw new Exception("Error in adding a SensorTypes to a Citizen " + e.Message);
+            }
+            finally
+            {
+                CloseDB();
             }
         }
         public static void AddTime(string cprNr, List<Model.Time> times)
@@ -81,11 +76,14 @@ namespace EksamensProjekt.Controller.DBFacades {
                     cmd.Parameters.Add(new SqlParameter("@T_EndTime", time.EndTime));
                     cmd.ExecuteNonQuery();
                 }
-                CloseDB();
             }
             catch (SqlException e)
             {
                 throw new Exception("Error! Kunne ikke tilføje time" + e.Message);
+            }
+            finally
+            {
+                CloseDB();
             }
         }
         public static void AddIllnessToCitizen(Model.Citizen citizen)
@@ -100,13 +98,15 @@ namespace EksamensProjekt.Controller.DBFacades {
                     cmd3.Parameters.Add(new SqlParameter("@I_Name", s));
                     cmd3.Parameters.Add(new SqlParameter("@C_CPRNR", citizen.CprNr));
                     cmd3.ExecuteNonQuery();
-            
                 }
-                CloseDB();
             }
             catch (SqlException e)
             {
                 throw new Exception("Error in Add Illness" + e.Message);
+            }
+            finally
+            {
+                CloseDB();
             }
         }
         public static void AddRelative(Model.Citizen c)
@@ -131,55 +131,16 @@ namespace EksamensProjekt.Controller.DBFacades {
                     cmd2.ExecuteNonQuery();
 
                 }
-                CloseDB();
             }
             catch (SqlException e)
             {
                 throw new Exception("Error in adding Relative" + e.Message);
             }
+            finally
+            {
+                CloseDB();
+            }
         }
-        //public static void AddRelatives (List<Model.Relative> relatives) {
-
-        //    try {
-        //        ConnectDB();
-
-        //        foreach (Model.Relative r in relatives) {
-
-        //            SqlCommand cmd = new SqlCommand("SP_AddRelative", dbconn);
-        //            cmd.CommandType = CommandType.StoredProcedure;
-
-        //            cmd.Parameters.Add(new SqlParameter("@C_CPRNR", r.CitizenCprNr));
-
-        //            cmd.Parameters.Add(new SqlParameter("@R_Name", r.Name));
-
-        //            cmd.Parameters.Add( new SqlParameter("@R_CPRNR", r.CprNr));
-
-        //            cmd.Parameters.Add(new SqlParameter("@R_Gender", r.Gender));
-
-        //            cmd.Parameters.Add(new SqlParameter("@R_Age", r.Age));
-
-        //            cmd.Parameters.Add(new SqlParameter("@R_PhoneNumber", r.PhoneNumber));
-
-        //            foreach (KeyValuePair<string, string> notavailable in r.NotAvailable) {
-        //                cmd.Parameters.Add(new SqlParameter("@T_Day", notavailable.Key));
-
-        //                cmd.Parameters.Add(new SqlParameter("@T_TimePeriod", notavailable.Value));
-
-        //            }
-        //            cmd.Parameters.Add(new SqlParameter("@A_Address", r.Address));
-
-        //            cmd.Parameters.Add(new SqlParameter("@A_City", r.City));
-
-        //            cmd.ExecuteNonQuery();
-        //        }
-
-        //        CloseDB();
-        //    }
-        //    catch (SqlException e) {
-                
-        //        throw new Exception ("Error in adding Relative" + e.Message);
-        //    }
-        //}
         public static List<string> GetIllnessType() {
             List<string> IllnessList = new List<string>();
 

@@ -23,7 +23,7 @@ namespace EksamensProjekt.Controller
         public int SensorRuleId { get; set; }
         public int SensorRuleManagementId { get; set; }
         
-        public void HandelSensorInput(int serialNumber, DateTime activationTime)
+        public void HandelSensorInput(int serialNumber, DateTime activationTime) //af Thomas
         {
             RuleSetController RSC = new RuleSetController();
             GetSensorInputInformation(serialNumber, activationTime, RSC);
@@ -82,7 +82,7 @@ namespace EksamensProjekt.Controller
                     }
                     foreach (Time t in C.HomeCareTimes)
                     {
-                        if (ContactList.Count == 0)
+                        if (RSC.ContactList.Count == 0)
                         {
                             RSC.ContactList.Add("Helper");
                         }
@@ -122,10 +122,6 @@ namespace EksamensProjekt.Controller
             SensorRuleManagementId = RuleSetDBFacade.AddSensorRuleManagement(ruleSet, serialNumber);
         }
         public List<SensorRule> GetSensorRuleFromSerialNumber(int serialNumber) {
-            //foreach (SensorRule s in RuleSetDBFacade.GetSensorRuleFromSerialNumber(serialNumber)) {
-            //    SensorRule sensorrule = new SensorRule(s.Id, s.SensorDependency, s.WaitOrLook, s.TimeToWait, s.TimeToWait);
-            //}
-
             return RuleSetDBFacade.GetSensorRuleFromSerialNumber(serialNumber);
         }
         public void AddSensorRuleFromSerialNumber(int serialNumber, int sensorDependency, bool waitOrLook, int timeToWait, int timeToLook, bool whenToSend, int sensorRuleManagementId)//Stefan
@@ -171,19 +167,21 @@ namespace EksamensProjekt.Controller
         public void SendMessage(List<string> contactPersons)//Stefan
         {
             string message = "";
+            SensorLg = new SensorLog();
             foreach (string CP in contactPersons)
             {
                 
                 if (CP == "Helper")
                 {
-
+                    SensorLg.ContactPerson = CP;
                     message = message + ", " + MessageBox.Show("Send Besked til Hjemmehjælper").ToString();
                 }
                 else
                 {
+                    SensorLg.ContactPerson = CP;
                     message = message + ", " + MessageBox.Show("Besked send til: " + CP).ToString();
                 }
-                SensorLg.ContactPerson = CP;
+                
             }
             DateTime messageSendTime = DateTime.Now;
             SensorLg.ContactMessage = message;
