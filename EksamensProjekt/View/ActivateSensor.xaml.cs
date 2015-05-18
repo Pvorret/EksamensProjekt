@@ -52,6 +52,7 @@ namespace EksamensProjekt.View
 
         private void Citizen_Dropdown_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+            Sensor_DropDown.Items.Clear();
             for (int i = 0; i < _controller.Citizens.Count; i++)
             {
                 if (_controller.Citizens[i].Name == Citizen_Dropdown.SelectedItem.ToString())
@@ -89,7 +90,7 @@ namespace EksamensProjekt.View
         {
             DateTime activationTime = new DateTime();
             activationTime = Convert.ToDateTime(Date_TextBox.Text);
-            TimeSpan actTime = new TimeSpan(Convert.ToInt32(Hour_TextBox.Text), Convert.ToInt32(Minute_TextBox.Text), 0);
+            TimeSpan actTime = new TimeSpan(Convert.ToInt32(Hour_TextBox.Text), Convert.ToInt32(Minute_TextBox.Text), DateTime.Now.Second);
             activationTime = activationTime + actTime;
             RuleSetController RSC = new RuleSetController();
             RSC.HandelSensorInput(Convert.ToInt32(Sensor_DropDown.SelectedItem), activationTime);

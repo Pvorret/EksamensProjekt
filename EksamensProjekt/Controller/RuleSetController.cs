@@ -23,7 +23,7 @@ namespace EksamensProjekt.Controller
         public int SensorRuleId { get; set; }
         public int SensorRuleManagementId { get; set; }
         
-        public void HandelSensorInput(int serialNumber, DateTime activationTime)
+        public void HandelSensorInput(int serialNumber, DateTime activationTime) //af Thomas
         {
             RuleSetController RSC = new RuleSetController();
             GetSensorInputInformation(serialNumber, activationTime, RSC);
@@ -171,19 +171,21 @@ namespace EksamensProjekt.Controller
         public void SendMessage(List<string> contactPersons)//Stefan
         {
             string message = "";
+            SensorLg = new SensorLog();
             foreach (string CP in contactPersons)
             {
                 
                 if (CP == "Helper")
                 {
-
+                    SensorLg.ContactPerson = CP;
                     message = message + ", " + MessageBox.Show("Send Besked til Hjemmehjælper").ToString();
                 }
                 else
                 {
+                    SensorLg.ContactPerson = CP;
                     message = message + ", " + MessageBox.Show("Besked send til: " + CP).ToString();
                 }
-                SensorLg.ContactPerson = CP;
+                
             }
             DateTime messageSendTime = DateTime.Now;
             SensorLg.ContactMessage = message;

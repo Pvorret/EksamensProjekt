@@ -347,7 +347,7 @@ namespace EksamensProjekt.Controller.DBFacades
                 while (reader.Read())
                 {
                     SensorLog sensorLog = new SensorLog();
-                    sensorLog.SerialNumber = Convert.ToInt32(reader["SR_ID"]);
+                    sensorLog.SerialNumber = Convert.ToInt32(reader["SL_S_SerialNumber"]);
                     sensorLogList.Add(sensorLog);
                 }
             }
