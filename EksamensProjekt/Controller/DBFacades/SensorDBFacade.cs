@@ -289,7 +289,7 @@ namespace EksamensProjekt.Controller.DBFacades
                     }
                     catch (Exception e)
                     {
-                        //MessageBox.Show(e.Message);
+                        MessageBox.Show(e.Message);
                     }
                     try
                     {
@@ -297,7 +297,7 @@ namespace EksamensProjekt.Controller.DBFacades
                     }
                     catch (Exception e)
                     {
-                        //MessageBox.Show(e.Message);
+                        MessageBox.Show(e.Message);
                     }
                     
                 }

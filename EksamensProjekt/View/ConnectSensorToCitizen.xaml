@@ -1,7 +1,7 @@
 ﻿<Window x:Class="EksamensProjekt.View.ConnectSensorToCitizen"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="Forbind Sensor Til Borger" Height="275" Width="700" WindowStartupLocation="CenterScreen">
+        Title="Forbind Sensor Til Borger" Height="275" Width="275" WindowStartupLocation="CenterScreen">
     <Grid>
         <Label Content="Sensor" HorizontalAlignment="Left" Margin="25,22,0,0" VerticalAlignment="Top"/>
         <ComboBox Name="Sensor_Dropdown" HorizontalAlignment="Left" Margin="120,22,0,0" VerticalAlignment="Top" Width="120" SelectionChanged="Sensor_Dropdown_SelectionChanged"/>
@@ -13,47 +13,8 @@
         <ComboBox Name="Citizen_DropDown" HorizontalAlignment="Left" Margin="119,119,0,0" VerticalAlignment="Top" Width="120" SelectionChanged="Citizen_DropDown_SelectionChanged"/>
         <Label Content="CPRNR" HorizontalAlignment="Left" Margin="25,146,0,0" VerticalAlignment="Top"/>
         <TextBox Name="CPRNR_TextBox" IsReadOnly="True" HorizontalAlignment="Left" Height="23" Margin="119,149,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
-        <Label Content="Sensor Regel" FontSize="16px" HorizontalAlignment="Left" Margin="353,16,0,0" VerticalAlignment="Top"/>
-        <Label Content="Vent el. tjek for Sensor" HorizontalAlignment="Left" Margin="256,42,0,0" VerticalAlignment="Top"/>
-        <RadioButton GroupName="WaitOrLook" IsEnabled="False" Name="Wait_RadioButton" HorizontalAlignment="Left" Margin="363,65,0,0" VerticalAlignment="Top" FontSize="14px"/>
-        <Label Content="Vent" HorizontalAlignment="Left" Margin="353,73,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.516,0.485"/>
-        <Label Content="eller" HorizontalAlignment="Left" Margin="392,60,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.516,0.485"/>
-        <RadioButton GroupName="WaitOrLook" IsEnabled="False" Name="Look_RadioButton" HorizontalAlignment="Left" Margin="438,65,0,0" VerticalAlignment="Top" FontSize="14px"/>
-        <Label Content="Tjek" HorizontalAlignment="Left" Margin="430,73,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.516,0.485"/>
-        <Label Content="SensorAfhængig" HorizontalAlignment="Left" Margin="256,101,0,0" VerticalAlignment="Top"/>
-        <ComboBox IsEnabled="False" Name="SensorDependency_Dropdown" HorizontalAlignment="Left" Margin="352,104,0,0" VerticalAlignment="Top" Width="120"/>
-        <Label Content="Vent/Tjek tid i minuter" HorizontalAlignment="Left" Margin="256,129,0,0" VerticalAlignment="Top"/>
-        <TextBox IsEnabled="False" MaxLength="2" Name="WaitOrLookLength_TextBox" HorizontalAlignment="Left" Height="23" Margin="392,132,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="35" PreviewTextInput="WaitOrLookLength_TextBox_PreviewTextInput"/>
-        <Label Content="Send besked når sensor reagerer" HorizontalAlignment="Left" Margin="256,160,0,0" VerticalAlignment="Top"/>
-        <RadioButton GroupName="SensorReaction" IsEnabled="False" Name="Yes_RadioButton" HorizontalAlignment="Left" Margin="363,193,0,0" VerticalAlignment="Top" FontSize="14px"/>
-        <Label Content="Ja" HorizontalAlignment="Left" Margin="360,201,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.516,0.485"/>
-        <Label Content="eller" HorizontalAlignment="Left" Margin="392,188,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.516,0.485"/>
-        <RadioButton GroupName="SensorReaction" IsEnabled="False" Name="No_RadioButton" HorizontalAlignment="Left" Margin="438,193,0,0" VerticalAlignment="Top" FontSize="14px"/>
-        <Label Content="Nej" HorizontalAlignment="Left" Margin="430,201,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.516,0.485"/>
-        <Label Content="Tidsrums Regel" FontSize="16px" HorizontalAlignment="Left" Margin="526,16,0,0" VerticalAlignment="Top"/>
-        <Label Content="Dag" HorizontalAlignment="Left" Margin="480,57,0,0" VerticalAlignment="Top"/>
-        <ComboBox IsEnabled="False" Name="Day_Dropdown" HorizontalAlignment="Left" Margin="520,58,0,0" VerticalAlignment="Top" Width="112"/>
-        <Label Content="Tid" HorizontalAlignment="Left" Margin="486,112,0,0" VerticalAlignment="Top"/>
-        <Label Content="t" HorizontalAlignment="Left" Margin="526,84,0,0" VerticalAlignment="Top"/>
-        <TextBox IsEnabled="False" MaxLength="2" Name="StartHour_TextBox" HorizontalAlignment="Left" Height="25" Margin="519,112,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="30" PreviewTextInput="StartHour_TextBox_PreviewTextInput"/>
-        <Label Content="m" HorizontalAlignment="Left" Margin="558,84,0,0" VerticalAlignment="Top"/>
-        <TextBox IsEnabled="False" MaxLength="2" Name="StartMinute_TextBox" HorizontalAlignment="Left" Height="25" Margin="554,112,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="30" PreviewTextInput="StartMinute_TextBox_PreviewTextInput"/>
-        <Label Content="-" HorizontalAlignment="Left" FontSize="14px" Margin="587,108,0,0" VerticalAlignment="Top" RenderTransformOrigin="8.214,0.207"/>
-        <Label Content="t" HorizontalAlignment="Left" Margin="614,84,0,0" VerticalAlignment="Top"/>
-        <TextBox IsEnabled="False" MaxLength="2" Name="EndHour_TextBox" HorizontalAlignment="Left" Height="25" Margin="607,112,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="30" PreviewTextInput="EndHour_TextBox_PreviewTextInput"/>
-        <Label Content="m" HorizontalAlignment="Left" Margin="645,85,0,0" VerticalAlignment="Top"/>
-        <TextBox IsEnabled="False" MaxLength="2" Name="EndMinute_TextBox" HorizontalAlignment="Left" Height="25" Margin="641,112,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="30" RenderTransformOrigin="0.5,0.5" PreviewTextInput="EndMinute_TextBox_PreviewTextInput"/>
-        <Label Content="Pårørende" HorizontalAlignment="Left" Margin="480,143,0,0" VerticalAlignment="Top"/>
-        <ComboBox Name="Relative_Dropdown" IsEnabled="False" HorizontalAlignment="Left" Margin="549,146,0,0" VerticalAlignment="Top" Width="122"/>
-        <Label Content="Kontakt hjælper" HorizontalAlignment="Left" Margin="480,173,0,0" VerticalAlignment="Top"/>
-        <CheckBox Name="ContactHelper_CheckBox" IsEnabled="False" Content="Ja" HorizontalAlignment="Left" Margin="584,180,0,0" VerticalAlignment="Top"/>
-        <Label Content="Tilføj Aktiv Regel" HorizontalAlignment="Left" Margin="480,201,0,0" VerticalAlignment="Top"/>
-        <CheckBox Name="AddActingRule_CheckBox" IsEnabled="False" Content="Ja" HorizontalAlignment="Left" Margin="584,207,0,0" VerticalAlignment="Top" Checked="AddActingRule_CheckBox_Checked" Unchecked="AddActingRule_CheckBo_Unchecked"/>
         <Button Name="Connect_Button" Content="Forbind" HorizontalAlignment="Left" Margin="25,210,0,0" VerticalAlignment="Top" Width="75" Click="Connect_Button_Click"/>
         <Button Name="Return_Button" Content="Tilbage" HorizontalAlignment="Left" Margin="165,210,0,0" VerticalAlignment="Top" Width="75" Click="Return_Button_Click"/>
-        <ComboBox Name="RuleSet_DropDown" HorizontalAlignment="Left" Margin="119,180,0,0" VerticalAlignment="Top" Width="120" SelectionChanged="RuleSet_DropDown_SelectionChanged"/>
-        <Label Content="RuleSet_DropDown
-               " HorizontalAlignment="Left" Margin="0,179,0,0" VerticalAlignment="Top" Width="114"/>
 
     </Grid>
 </Window>

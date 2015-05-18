@@ -47,11 +47,6 @@ namespace EksamensProjekt.View
             Day_Dropdown.Items.Add("Søndag");
         }
 
-        private void Sensor_Dropdown_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            
-        }
-
         private void Citizen_DropDown_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             Relative_Dropdown.Items.Clear();
@@ -78,7 +73,7 @@ namespace EksamensProjekt.View
                 }
             }
         }
-        private void Connect_Button_Click(object sender, RoutedEventArgs e)
+        private void AddRules_Button_Click(object sender, RoutedEventArgs e)
         {
             try
             {
@@ -187,6 +182,7 @@ namespace EksamensProjekt.View
                     _RuleSetController.AddSensorRuleFromSerialNumber(Convert.ToInt32(Sensor_Dropdown.SelectedItem.ToString()), Convert.ToInt32(SensorDependency_Dropdown.SelectedItem.ToString()), waitorLook, timeToWait, timeToLook, sendMessageAfter, _RuleSetController.SensorRuleManagementId);
                     _RuleSetController.AddTimeRangeRuleFromSerialNumber(Convert.ToInt32(Sensor_Dropdown.SelectedItem.ToString()), Day_Dropdown.SelectedItem.ToString(), Convert.ToDateTime(StartHour_TextBox.Text + ":" + StartMinute_TextBox.Text), Convert.ToDateTime(EndHour_TextBox.Text + ":" + EndMinute_TextBox.Text), relativeCprNr, "SR " + _RuleSetController.SensorRuleId, contactHelper); //Ikke done.    
                 }
+                MessageBox.Show("Regler tilføjet til sensor");
                 Close();
 
             }
@@ -244,40 +240,39 @@ namespace EksamensProjekt.View
             No_RadioButton.IsEnabled = true;
         }
 
-        private void SensorLocation_TextBox_PreviewTextInput(object sender, TextCompositionEventArgs e)
-        {
-            Regex regex = new Regex("[^a-zæøåA-ZÆØÅ]");
-            e.Handled = regex.IsMatch(e.Text);
-        }
-
         private void WaitOrLookLength_TextBox_PreviewTextInput(object sender, TextCompositionEventArgs e)
         {
             Regex regex = new Regex("[^0-9]");
             e.Handled = regex.IsMatch(e.Text);
         }
-
         private void StartHour_TextBox_PreviewTextInput(object sender, TextCompositionEventArgs e)
         {
             Regex regex = new Regex("[^0-9]");
             e.Handled = regex.IsMatch(e.Text);
         }
-
         private void StartMinute_TextBox_PreviewTextInput(object sender, TextCompositionEventArgs e)
         {
             Regex regex = new Regex("[^0-9]");
             e.Handled = regex.IsMatch(e.Text);
         }
-
         private void EndHour_TextBox_PreviewTextInput(object sender, TextCompositionEventArgs e)
         {
             Regex regex = new Regex("[^0-9]");
             e.Handled = regex.IsMatch(e.Text);
         }
-
         private void EndMinute_TextBox_PreviewTextInput(object sender, TextCompositionEventArgs e)
         {
             Regex regex = new Regex("[^0-9]");
             e.Handled = regex.IsMatch(e.Text);
+        }
+        private void AddActingRule_CheckBox_Unchecked(object sender, RoutedEventArgs e)
+        {
+            Wait_RadioButton.IsEnabled = false;
+            Look_RadioButton.IsEnabled = false;
+            SensorDependency_Dropdown.IsEnabled = false;
+            WaitOrLookLength_TextBox.IsEnabled = false;
+            Yes_RadioButton.IsEnabled = false;
+            No_RadioButton.IsEnabled = false;
         }
 
 
