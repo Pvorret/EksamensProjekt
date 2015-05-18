@@ -82,7 +82,7 @@ namespace EksamensProjekt.Controller
                     }
                     foreach (Time t in C.HomeCareTimes)
                     {
-                        if (ContactList.Count == 0)
+                        if (RSC.ContactList.Count == 0)
                         {
                             RSC.ContactList.Add("Helper");
                         }
