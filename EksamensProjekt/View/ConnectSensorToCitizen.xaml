@@ -9,12 +9,10 @@
         <TextBox IsReadOnly="True" Name="SensorType_TextBox" HorizontalAlignment="Left" Height="23" Margin="119,56,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
         <Label Content="Sensor Lokation" HorizontalAlignment="Left" Margin="25,84,0,0" VerticalAlignment="Top"/>
         <TextBox MaxLength="50" Name="SensorLocation_TextBox" HorizontalAlignment="Left" Height="23" Margin="119,87,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120" PreviewTextInput="SensorLocation_TextBox_PreviewTextInput"/>
-        <Label Content="Regelsæt" HorizontalAlignment="Left" Margin="25,113,0,0" VerticalAlignment="Top"/>
-        <ComboBox Name="RuleSet_DropDown" HorizontalAlignment="Left" Margin="120,115,0,0" VerticalAlignment="Top" Width="120" SelectionChanged="RuleSet_DropDown_SelectionChanged"/>
-        <Label Content="Borger" HorizontalAlignment="Left" Margin="25,140,0,0" VerticalAlignment="Top"/>
-        <ComboBox Name="Citizen_DropDown" HorizontalAlignment="Left" Margin="120,144,0,0" VerticalAlignment="Top" Width="120" SelectionChanged="Citizen_DropDown_SelectionChanged"/>
-        <Label Content="CPRNR" HorizontalAlignment="Left" Margin="25,171,0,0" VerticalAlignment="Top"/>
-        <TextBox Name="CPRNR_TextBox" IsReadOnly="True" HorizontalAlignment="Left" Height="23" Margin="119,174,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
+        <Label Content="Borger" HorizontalAlignment="Left" Margin="25,115,0,0" VerticalAlignment="Top"/>
+        <ComboBox Name="Citizen_DropDown" HorizontalAlignment="Left" Margin="119,119,0,0" VerticalAlignment="Top" Width="120" SelectionChanged="Citizen_DropDown_SelectionChanged"/>
+        <Label Content="CPRNR" HorizontalAlignment="Left" Margin="25,146,0,0" VerticalAlignment="Top"/>
+        <TextBox Name="CPRNR_TextBox" IsReadOnly="True" HorizontalAlignment="Left" Height="23" Margin="119,149,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
         <Label Content="Sensor Regel" FontSize="16px" HorizontalAlignment="Left" Margin="353,16,0,0" VerticalAlignment="Top"/>
         <Label Content="Vent el. tjek for Sensor" HorizontalAlignment="Left" Margin="256,42,0,0" VerticalAlignment="Top"/>
         <RadioButton GroupName="WaitOrLook" IsEnabled="False" Name="Wait_RadioButton" HorizontalAlignment="Left" Margin="363,65,0,0" VerticalAlignment="Top" FontSize="14px"/>
@@ -50,9 +48,12 @@
         <Label Content="Kontakt hjælper" HorizontalAlignment="Left" Margin="480,173,0,0" VerticalAlignment="Top"/>
         <CheckBox Name="ContactHelper_CheckBox" IsEnabled="False" Content="Ja" HorizontalAlignment="Left" Margin="584,180,0,0" VerticalAlignment="Top"/>
         <Label Content="Tilføj Aktiv Regel" HorizontalAlignment="Left" Margin="480,201,0,0" VerticalAlignment="Top"/>
-        <CheckBox Name="AddActingRule_CheckBox" IsEnabled="False" Content="Ja" HorizontalAlignment="Left" Margin="584,207,0,0" VerticalAlignment="Top" Checked="AddActingRule_CheckBox_Checked"/>
+        <CheckBox Name="AddActingRule_CheckBox" IsEnabled="False" Content="Ja" HorizontalAlignment="Left" Margin="584,207,0,0" VerticalAlignment="Top" Checked="AddActingRule_CheckBox_Checked" Unchecked="AddActingRule_CheckBo_Unchecked"/>
         <Button Name="Connect_Button" Content="Forbind" HorizontalAlignment="Left" Margin="25,210,0,0" VerticalAlignment="Top" Width="75" Click="Connect_Button_Click"/>
         <Button Name="Return_Button" Content="Tilbage" HorizontalAlignment="Left" Margin="165,210,0,0" VerticalAlignment="Top" Width="75" Click="Return_Button_Click"/>
+        <ComboBox Name="RuleSet_DropDown" HorizontalAlignment="Left" Margin="119,180,0,0" VerticalAlignment="Top" Width="120" SelectionChanged="RuleSet_DropDown_SelectionChanged"/>
+        <Label Content="RuleSet_DropDown
+               " HorizontalAlignment="Left" Margin="0,179,0,0" VerticalAlignment="Top" Width="114"/>
 
     </Grid>
 </Window>

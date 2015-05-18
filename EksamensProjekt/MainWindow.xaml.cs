@@ -56,5 +56,11 @@ namespace EksamensProjekt
             CS.Show();
         }
 
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            AddSensorRuleOrTimeRangeRule ASR = new AddSensorRuleOrTimeRangeRule();
+            ASR.Show();
+        }
+
     }
 }

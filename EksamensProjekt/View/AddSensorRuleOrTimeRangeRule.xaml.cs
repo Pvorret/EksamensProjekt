@@ -31,15 +31,7 @@ namespace EksamensProjekt.View
             _SensorController = new SensorController();
             _CitizenController = new CitizenController();
             _RuleSetController = new RuleSetController();
-            _SensorController.GetAllSensors();
             _CitizenController.GetAllCitizen();
-            for (int i = 0; i < _SensorController.Sensors.Count; i++)
-            {
-                if (_SensorController.Sensors[i].Activated == false)
-                {
-                    Sensor_Dropdown.Items.Add(_SensorController.Sensors[i].SerialNumber);
-                }
-            }
             for (int i = 0; i < _CitizenController.Citizens.Count; i++)
             {
                 Citizen_DropDown.Items.Add(_CitizenController.Citizens[i].Name);
@@ -63,6 +55,7 @@ namespace EksamensProjekt.View
         private void Citizen_DropDown_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             Relative_Dropdown.Items.Clear();
+            Sensor_Dropdown.Items.Clear();
             for (int i = 0; i < _CitizenController.Citizens.Count; i++)
             {
                 if (_CitizenController.Citizens[i].Name == Citizen_DropDown.SelectedItem.ToString())
@@ -77,6 +70,10 @@ namespace EksamensProjekt.View
                     for (int k = 0; k < _CitizenController.Citizens[i].Relatives.Count; k++)
                     {
                         Relative_Dropdown.Items.Add(_CitizenController.Citizens[i].Relatives[k].Name);
+                    }
+                    for (int h = 0; h < _CitizenController.Citizens[i].Sensors.Count; h++)
+                    {
+                        Sensor_Dropdown.Items.Add(_CitizenController.Citizens[i].Sensors[h].SerialNumber);
                     }
                 }
             }

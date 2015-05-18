@@ -16,17 +16,22 @@ namespace EksamensProjekt.Controller {
         public List<Time> HomeCareTimes = new List<Time>();
         public List<Time> NotAvailableTimes = new List<Time>();
 
-        //Den har nico lavet
-        public void CreateCitizen(string name, string cprNr, string gender, string age, string address, string city, string phoneNumber, List<string> illness, string religion, Dictionary<string, int> sensorTypes, List<string> days, List<DateTime> startTime, List<DateTime> endTime)
+        
+        public void CreateCitizen(
+            string name, string cprNr, string gender, string age, string address, string city, 
+            string phoneNumber, List<string> illness, string religion, Dictionary<string, int> sensorTypes, 
+            List<string> days, List<DateTime> startTime, List<DateTime> endTime
+            )
         {
             for (int i = 0; i < days.Count; i++)
             {
                 HomeCareTimes.Add(new Time(startTime[i], endTime[i], days[i]));
             }
-
-            Citizen citizen = new Citizen(name, cprNr, gender, age, address, city, phoneNumber, illness, religion, sensorTypes, HomeCareTimes);
+            Citizen citizen = new Citizen(
+                name, cprNr, gender, age, address, city, phoneNumber, 
+                illness, religion, sensorTypes, HomeCareTimes
+                );
             citizen.Relatives = Relatives;
-
             CitizenDBFacade.CreateCitizen(citizen);
             CitizenDBFacade.AddTime(citizen.CprNr, citizen.HomeCareTimes);
             CitizenDBFacade.AddSensorTypeToCitizen(citizen.CprNr, citizen.SensorTypesNeeded);
@@ -36,15 +41,8 @@ namespace EksamensProjekt.Controller {
                 CitizenDBFacade.AddTime(relative.CprNr, relative.NotAvailableTimes);
             }
             CitizenDBFacade.AddIllnessToCitizen(citizen);
-
         }
 
-        //Brugt til tilføjelse af en pårørende i ændre borger
-        //public void AddRelative(string citizenId, string name, string cprNr, string gender, string age, string address, string city, string phoneNumber, string email, List<string> notAvailable)
-        //{
-        //    CitizenDBFacade.AddRelatives(Relatives);
-        //}
-        //Brugt til opret borger
         public void AddRelative(string name,string cprNr, string gender, string age, string address, string city, string phoneNumber, string email, List<string> days, List<DateTime> startTime, List<DateTime> endTime)
         {
             for (int i = 0; i < days.Count; i++)
