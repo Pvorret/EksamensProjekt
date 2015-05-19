@@ -264,33 +264,6 @@ namespace EksamensProjekt.Controller.DBFacades
                 CloseDB();
             }
         }
-        public static List<Relative> GetRelativeFromCitizen(string cprNr)
-        {
-            List<Relative> relatives = new List<Relative>();
-            try
-            {
-                ConnectDB();
-                cmd = new SqlCommand("SP_GetRelativeTimeFromCitizen", dbconn);
-                cmd.CommandType = CommandType.StoredProcedure;
-                cmd.Parameters.Add(new SqlParameter("@Citizen_CPRNR", cprNr));
-                SqlDataReader rdr;
-                rdr = cmd.ExecuteReader();
-
-                while (rdr.HasRows && rdr.Read())
-                {
-                    relatives.Add(new Relative(Convert.ToString(rdr["R_Name"]), Convert.ToString(rdr["R_CPRNR"])));
-                }
-            }
-            catch (SqlException e)
-            {
-                throw new Exception("Error! Kunne ikke hente pårørende " + e.Message);
-            }
-            finally
-            {
-                CloseDB();
-            }
-            return relatives;
-        }
         public static List<string> GetSensorTypeFromCitizen(string cprNr)
         {
             List<string> SensorTypes = new List<string>();

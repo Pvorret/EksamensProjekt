@@ -26,6 +26,7 @@ namespace EksamensProjekt.Controller.DBFacades
         }
         public static int CreateSensorLog(SensorLog sl)
         {
+            int id = 0;
             try
             {
                 ConnectDB();
@@ -37,7 +38,7 @@ namespace EksamensProjekt.Controller.DBFacades
                 
                 while(rdr.HasRows && rdr.Read())
                 {
-                    int id = Convert.ToInt32(rdr["SL_ID"]);
+                    id = Convert.ToInt32(rdr["SL_ID"]);
                 }
             }
             catch (SqlException e)

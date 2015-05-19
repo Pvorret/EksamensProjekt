@@ -69,7 +69,7 @@ namespace EksamensProjekt.Controller {
             {
                 if (Citizens[i].CprNr == cprNr)
                 {
-                    Citizens[i].Relatives = SensorDBFacade.GetRelativeFromCitizen(cprNr);
+                    Citizens[i].Relatives = CitizenDBFacade.GetRelativeFromCitizen(cprNr);
                 }
             }
         }
