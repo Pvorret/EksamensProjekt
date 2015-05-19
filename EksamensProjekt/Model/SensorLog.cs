@@ -15,15 +15,6 @@ namespace EksamensProjekt.Model
         public string ContactPerson { get; set; }
         public string ContactMessage { get; set; }
 
-        public SensorLog(int id, int serialNumber, DateTime activationTime, DateTime contactTime, string contactPerson, string contactMessage)
-        {
-            this.Id = id;
-            this.SerialNumber = serialNumber;
-            this.ActivationTime = activationTime;
-            this.ContactTime = contactTime;
-            this.ContactPerson = contactPerson;
-            this.ContactMessage = contactMessage;
-        }
         public SensorLog(int serialNumber, DateTime activationTime)
         {
             this.SerialNumber = serialNumber;
