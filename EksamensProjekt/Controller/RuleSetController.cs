@@ -39,7 +39,7 @@ namespace EksamensProjekt.Controller
                         bool ActiveRule = RSC.CheckTime(TR.Time,activationTime);
                         if (ActiveRule == true)
                         {
-                            string ActingRule = TRR.ProcessTimeRangeRule(RSC, TR.Id);
+                            string ActingRule = TRR.TimeRangeRuleActivated(RSC, TR.Id);
                             if (ActingRule != "")
                             {
                                 RSC.CheckActingRule(ActingRule, RSC);

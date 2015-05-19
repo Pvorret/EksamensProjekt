@@ -11,7 +11,7 @@ namespace EksamensProjekt.Helper {
     public class TimeRangeRule 
     {
         public int Id { get; set; }
-        public string CPRNR { get; set; } //Ændre navn på property (eks. ContactPerson)
+        public string RelativeCPRNR { get; set; } //Ændre navn på property (eks. ContactPerson)
         public string ActingRule { get; set; }
         public bool ContactHelper { get; set; }
         public Time Time { get; set; }
@@ -19,7 +19,7 @@ namespace EksamensProjekt.Helper {
         public TimeRangeRule(string relativeCprNr, string actingRule, bool contactHelper, Time time) 
         {
             this.ActingRule = actingRule;
-            this.CPRNR = relativeCprNr;
+            this.RelativeCPRNR = relativeCprNr;
             this.ContactHelper = contactHelper;
             this.Time = time;
         }
@@ -27,14 +27,14 @@ namespace EksamensProjekt.Helper {
         {
             this.Id = id;
             this.ActingRule = actingRule;
-            this.CPRNR = relativeCprNr;
+            this.RelativeCPRNR = relativeCprNr;
             this.ContactHelper = contactHelper;
             this.Time = time;
         }
         public TimeRangeRule() { }
-        public string ProcessTimeRangeRule(RuleSetController ruleSetController ,int id)//Stefan
+        public string TimeRangeRuleActivated(RuleSetController ruleSetController ,int id)//Stefan
         {
-            ruleSetController.ContactList.Add(ruleSetController.TimeRangeRules[id].CPRNR);
+            ruleSetController.ContactList.Add(ruleSetController.TimeRangeRules[id].RelativeCPRNR);
             if (ruleSetController.TimeRangeRules[id].ContactHelper == true)
             {
                 ruleSetController.ContactList.Add("Helper");
