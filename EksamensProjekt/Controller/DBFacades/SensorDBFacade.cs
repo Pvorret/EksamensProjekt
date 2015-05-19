@@ -19,11 +19,11 @@ namespace EksamensProjekt.Controller.DBFacades
         static List<int> timeIdList = new List<int>();
         public static SqlConnection dbconn;
         static SqlCommand cmd;
-        public static void ConnectDB() {
+        private static void ConnectDB() {
             dbconn = new SqlConnection(DBHelper._connectionString);
             dbconn.Open();
         }
-        public static void CloseDB()
+        private static void CloseDB()
         {
             dbconn.Close();
             dbconn.Dispose();
@@ -140,11 +140,11 @@ namespace EksamensProjekt.Controller.DBFacades
         }
         public static bool DeleteSensor(int serialNumber)
         {
-            GetRuleSetIDFromSerialNumber(serialNumber);
+            GetRuleSetIdFromSerialNumber(serialNumber);
             GetSensorDependencyFromSerialNumber(serialNumber);
             DeleteSensorRuleFromDependency();
-            GetTimeFromTRRID();
-            DeleteCitizenRelativeTimeFromTID();
+            GetTimeFromTRRid();
+            DeleteCitizenRelativeTimeFromTId();
             try
             {
                 ConnectDB();
@@ -168,7 +168,7 @@ namespace EksamensProjekt.Controller.DBFacades
                 CloseDB();
             }
         }
-        public static void GetRuleSetIDFromSerialNumber(int serialNumber) {
+        public static void GetRuleSetIdFromSerialNumber(int serialNumber) {
             try {
                 ConnectDB();
                 SqlCommand cmd = new SqlCommand("SP_GetRuleSetIDFromSerialNumber", dbconn);
@@ -220,7 +220,7 @@ namespace EksamensProjekt.Controller.DBFacades
                 CloseDB();
             }
         }
-        public static void GetTimeFromTRRID() {
+        public static void GetTimeFromTRRid() {
             ConnectDB();
             try {
                 cmd = new SqlCommand("SP_GetTimeFromSRMTRR_TRR_ID", dbconn);
@@ -244,7 +244,7 @@ namespace EksamensProjekt.Controller.DBFacades
                 CloseDB();
             }
         }
-        public static void DeleteCitizenRelativeTimeFromTID() {
+        public static void DeleteCitizenRelativeTimeFromTId() {
             ConnectDB();
             try {
                 cmd = new SqlCommand("SP_DeleteCitizenRelativeTimeFromCRT_T_ID", dbconn);

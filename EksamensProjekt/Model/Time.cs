@@ -13,7 +13,6 @@ namespace EksamensProjekt.Model
         public DateTime EndTime { get; set; }
         public string Day { get; set; }
 
-
         public Time(int id, DateTime startTime, DateTime endTime, string day)
         {
             this.Id = id;
