@@ -252,7 +252,6 @@ namespace EksamensProjekt.Controller.DBFacades {
         public static List<Citizen> GetCitizenTime(int serialNumber)//stefan
         {
             List<Citizen> CitizenTimeList = new List<Citizen>();
-            List<Time> timeList = new List<Time>();
             try
             {
                 ConnectDB();
@@ -270,10 +269,9 @@ namespace EksamensProjekt.Controller.DBFacades {
                     DateTime T_StartTime = Convert.ToDateTime(reader["T_StartTime"]);
                     DateTime T_EndTime = Convert.ToDateTime(reader["T_EndTime"]);
                     string T_Day = reader["T_Day"].ToString();
-                    Citizen citizen = new Citizen(C_Name, C_CPRNR, A_Address, A_City);
-                    citizen.HomeCareTimes = timeList;
+                    Citizen citizen = new Citizen(C_CPRNR, C_Name, A_Address, A_City);
+                    citizen.HomeCareTimes.Add(new Time(T_StartTime, T_EndTime, T_Day));
 
-                    timeList.Add(new Time(T_StartTime, T_EndTime, T_Day));
                     CitizenTimeList.Add(citizen);
                 }
             }
