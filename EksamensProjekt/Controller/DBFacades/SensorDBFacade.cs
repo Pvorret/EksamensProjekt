@@ -278,7 +278,7 @@ namespace EksamensProjekt.Controller.DBFacades
 
                 while (rdr.HasRows && rdr.Read())
                 {
-                    relatives.Add(new Relative(Convert.ToString(rdr["R_CPRNR"]), Convert.ToString(rdr["R_Name"])));
+                    relatives.Add(new Relative(Convert.ToString(rdr["R_Name"]), Convert.ToString(rdr["R_CPRNR"])));
                 }
             }
             catch (SqlException e)
