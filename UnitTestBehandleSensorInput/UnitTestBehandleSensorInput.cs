@@ -27,6 +27,9 @@ namespace UnitTest {
             bool whenToSend = true;
             bool whenToSend2 = false;
             string sensorType = "Hej Sensor";
+            int sensorrulemanagementid2 = 0;
+
+            //Når man adder sensorrulemanagement til databasen, retunere selve add metoden sensorrulemanagementid, som så skal bruges i AddSensorRuleFromSerialNumber.
 
             foreach (SensorRule sr in rulesetcontroller.GetSensorRuleFromSerialNumber(getSerialNumber)) {
                 Assert.AreEqual(sr.SensorDependency, sensorDependency1);
@@ -46,7 +49,7 @@ namespace UnitTest {
                 }
             }
             
-            rulesetcontroller.AddSensorRuleFromSerialNumber(serialNumber, sensorDependency2, waitOrLook2, timeToWait2, timeToLook2, whenToSend2);
+            rulesetcontroller.AddSensorRuleFromSerialNumber(serialNumber, sensorDependency2, waitOrLook2, timeToWait2, timeToLook2, whenToSend2, sensorrulemanagementid2);
 
             foreach (SensorRule sr in rulesetcontroller.GetSensorRuleFromSerialNumber(serialNumber)) {
                 Assert.AreEqual(sr.SensorDependency, sensorDependency2);
