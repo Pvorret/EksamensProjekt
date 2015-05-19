@@ -249,7 +249,7 @@ namespace EksamensProjekt.Controller.DBFacades
                 cmd.Parameters.Add(new SqlParameter("@T_Day", timeRange.Time.Day));
                 cmd.Parameters.Add(new SqlParameter("@T_StartTime", timeRange.Time.StartTime));
                 cmd.Parameters.Add(new SqlParameter("@T_Endtime", timeRange.Time.EndTime));
-                cmd.Parameters.Add(new SqlParameter("@TRR_R_CPRNR", timeRange.CPRNR));
+                cmd.Parameters.Add(new SqlParameter("@TRR_R_CPRNR", timeRange.RelativeCPRNR));
                 cmd.Parameters.Add(new SqlParameter("@TRR_ActingRule", timeRange.ActingRule));
                 cmd.Parameters.Add(new SqlParameter("@TRR_ContactHelper", Convert.ToInt32(timeRange.ContactHelper)));
                 

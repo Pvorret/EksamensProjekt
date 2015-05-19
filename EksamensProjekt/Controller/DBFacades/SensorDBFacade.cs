@@ -16,6 +16,7 @@ namespace EksamensProjekt.Controller.DBFacades
         static int sensorRuleId = 0;
         static int timeRangeRuleId = 0;
         static List<int> sensorDependency = new List<int>();
+        static List<int> timeIdList = new List<int>();
         public static SqlConnection dbconn;
         static SqlCommand cmd;
         public static void ConnectDB() {
@@ -136,6 +137,8 @@ namespace EksamensProjekt.Controller.DBFacades
             GetRuleSetIDFromSerialNumber(serialNumber);
             GetSensorDependencyFromSerialNumber(serialNumber);
             DeleteSensorRuleFromDependency();
+            GetTimeFromTRRID();
+            DeleteCitizenRelativeTimeFromTID();
             try
             {
                 ConnectDB();
@@ -155,6 +158,101 @@ namespace EksamensProjekt.Controller.DBFacades
             }
             finally
             {
+                CloseDB();
+            }
+        }
+        public static void GetRuleSetIDFromSerialNumber(int serialNumber) {
+            try {
+                ConnectDB();
+                SqlCommand cmd = new SqlCommand("SP_GetRuleSetIDFromSerialNumber", dbconn);
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.Add(new SqlParameter("@SerialNumber", serialNumber));
+                SqlDataReader reader = cmd.ExecuteReader();
+                List<int> sensorDependency = new List<int>();
+
+                while (reader.Read()) {
+                    ruleSetManagementId = Convert.ToInt32(reader["SRM_ID"]);
+                    try {
+                        sensorRuleId = Convert.ToInt32(reader["SRMSR_SR_ID"]);
+                    }
+                    catch (Exception e) {
+                        MessageBox.Show(e.Message);
+                    }
+                    try {
+                        timeRangeRuleId = Convert.ToInt32(reader["SRMTRR_TRR_ID"]);
+                    }
+                    catch (Exception e) {
+                        MessageBox.Show(e.Message);
+                    }
+
+                }
+            }
+            catch (Exception e) {
+                MessageBox.Show(e.Message);
+            }
+            finally {
+                CloseDB();
+            }
+        }
+        public static void GetSensorDependencyFromSerialNumber(int serialNumber) {
+            try {
+                ConnectDB();
+                cmd = new SqlCommand("SP_GetSensorDependencyIDFromSerialNumber", dbconn);
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.Add(new SqlParameter("@SerialNumber", serialNumber));
+                SqlDataReader reader = cmd.ExecuteReader();
+                while (reader.Read() && reader.HasRows) {
+                    sensorDependency.Add(Convert.ToInt32(reader["SR_ID"]));
+                }
+            }
+            catch (Exception e) {
+                MessageBox.Show(e.Message);
+            }
+            finally {
+                CloseDB();
+            }
+        }
+        public static void GetTimeFromTRRID() {
+            ConnectDB();
+            try {
+                cmd = new SqlCommand("SP_GetTimeFromSRMTRR_TRR_ID", dbconn);
+                cmd.CommandType = CommandType.StoredProcedure;
+
+                cmd.Parameters.Add(new SqlParameter("@SRMTRR_TRR_ID", timeRangeRuleId));
+
+                SqlDataReader rdr = cmd.ExecuteReader();
+
+                while (rdr.Read() && rdr.HasRows) {
+                    int timeId = (int)rdr["CRT_T_ID"];
+
+                    timeIdList.Add(timeId);
+                }
+            }
+            catch (SqlException e) {
+
+                throw new Exception("Error!" + e.Message);
+            }
+            finally {
+                CloseDB();
+            }
+        }
+        public static void DeleteCitizenRelativeTimeFromTID() {
+            ConnectDB();
+            try {
+                cmd = new SqlCommand("SP_DeleteCitizenRelativeTimeFromCRT_T_ID");
+                cmd.CommandType = CommandType.StoredProcedure;
+
+                foreach (int i in timeIdList) {
+                    cmd.Parameters.Add(new SqlParameter("@CRT_T_ID", i));
+                    cmd.Parameters.Add(new SqlParameter("@SRMTRR_TRR_ID", timeRangeRuleId));
+                    cmd.ExecuteNonQuery();
+                }
+            }
+            catch (Exception e) {
+                
+                throw new Exception("Error!" + e.Message);
+            }
+            finally {
                 CloseDB();
             }
         }
@@ -268,71 +366,6 @@ namespace EksamensProjekt.Controller.DBFacades
                 CloseDB();
             }
             return sensors;
-        }
-        public static void GetRuleSetIDFromSerialNumber(int serialNumber)
-        {
-            try
-            {
-                ConnectDB();
-                SqlCommand cmd = new SqlCommand("SP_GetRuleSetIDFromSerialNumber", dbconn);
-                cmd.CommandType = CommandType.StoredProcedure;
-                cmd.Parameters.Add(new SqlParameter("@SerialNumber", serialNumber));
-                SqlDataReader reader = cmd.ExecuteReader();
-                List<int> sensorDependency = new List<int>();
-
-                while (reader.Read())
-                {
-                    ruleSetManagementId = Convert.ToInt32(reader["SRM_ID"]);
-                    try
-                    {
-                        sensorRuleId = Convert.ToInt32(reader["SRMSR_SR_ID"]);
-                    }
-                    catch (Exception e)
-                    {
-                        MessageBox.Show(e.Message);
-                    }
-                    try
-                    {
-                        timeRangeRuleId = Convert.ToInt32(reader["SRMTRR_TRR_ID"]);
-                    }
-                    catch (Exception e)
-                    {
-                        MessageBox.Show(e.Message);
-                    }
-                    
-                }
-            }
-            catch (Exception e)
-            {
-                MessageBox.Show(e.Message);
-            }
-            finally
-            {
-                CloseDB();
-            }
-        }
-        public static void GetSensorDependencyFromSerialNumber(int serialNumber)
-        {
-            try
-            {
-                ConnectDB();
-                cmd = new SqlCommand("SP_GetSensorDependencyIDFromSerialNumber", dbconn);
-                cmd.CommandType = CommandType.StoredProcedure;
-                cmd.Parameters.Add(new SqlParameter("@SerialNumber", serialNumber));
-                SqlDataReader reader = cmd.ExecuteReader();
-                while (reader.Read() && reader.HasRows)
-                {
-                        sensorDependency.Add(Convert.ToInt32(reader["SR_ID"]));
-                }
-            }
-            catch(Exception e)
-            {
-                MessageBox.Show(e.Message);
-            }
-            finally
-            {
-                CloseDB();
-            }
         }
         public static List<SensorLog> GetSensorLogFromDateTime(DateTime checkTime)
         {
