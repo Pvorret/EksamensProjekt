@@ -20,12 +20,10 @@ namespace EksamensProjekt.Controller
         {
             Sensors = SensorDBFacade.GetSensor(serialNumber);
         }
-
         public void GetAllSensors()
         {
             Sensors = SensorDBFacade.GetSensor(0);
         }
-
         public List<int> GetSerialNumberList(List<Sensor> sensorList)
         {
             List<int> serialnumbers = new List<int>();
@@ -35,12 +33,11 @@ namespace EksamensProjekt.Controller
             }
             return serialnumbers;
         }
-
         public bool DeleteSensor(int serialNumber)
         {
             return SensorDBFacade.DeleteSensor(serialNumber);
         }
-        public void ConnectSensorToCitizen(int sensorSerialNumber, string cprNr, string sensorLocation)//NY
+        public void ConnectSensorToCitizen(int sensorSerialNumber, string cprNr, string sensorLocation)//Phillip
         {
             SensorDBFacade.ConnectSensorToCitizen(sensorSerialNumber, cprNr, sensorLocation);
         }

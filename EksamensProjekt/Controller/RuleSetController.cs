@@ -13,7 +13,7 @@ namespace EksamensProjekt.Controller
 {
     public class RuleSetController
     {
-        public SensorLog SensorLg;
+        public SensorLog SensorLog;
         public List<SensorRule> SensorRules;
         public List<TimeRangeRule> TimeRangeRules;
         public List<Citizen> CitizenList = new List<Citizen>();
@@ -28,7 +28,7 @@ namespace EksamensProjekt.Controller
             RuleSetController RSC = new RuleSetController();
             RSC.SensorRules = new List<SensorRule>();
             RSC.TimeRangeRules = new List<TimeRangeRule>();
-            GetSensorInputInformation(serialNumber, activationTime, RSC);
+            GetSensorInputInformation(serialNumber, activationTime);
             bool ruleExecuted = false;
             foreach (string s in RSC.SensorRuleManagement)
             {
@@ -44,7 +44,7 @@ namespace EksamensProjekt.Controller
                             string ActingRule = TRR.TimeRangeRuleActivated(RSC, TR.Id);
                             if (ActingRule != "")
                             {
-                                RSC.CheckActingRule(ActingRule, RSC);
+                                RSC.CheckActingRule(ActingRule);
                             }
                             ruleExecuted = true;
                         }
@@ -96,29 +96,16 @@ namespace EksamensProjekt.Controller
                 RSC.SendMessage(RSC.ContactList);
             }
         }
-        public void GetSensorInputInformation(int serialNumber, DateTime activationTime, RuleSetController rSC) // Thomas og Stefan
+        public void GetSensorInputInformation(int serialNumber, DateTime activationTime) // Thomas og Stefan
         { 
             SensorLog SL = new SensorLog(serialNumber, activationTime);
             RuleSetDBFacade.CreateSensorLog(SL);
-            rSC.CitizenList = CitizenDBFacade.GetCitizenTime(serialNumber);
-            foreach (Citizen citizen in rSC.CitizenList)
+            this.CitizenList = CitizenDBFacade.GetCitizenTime(serialNumber);
+            foreach (Citizen citizen in this.CitizenList)
             {
                 citizen.Relatives = CitizenDBFacade.GetRelativeTime(citizen.CprNr);
             }
-            rSC.SensorRuleManagement = RuleSetDBFacade.GetSensorRuleManagementFromSerialNumber(serialNumber);            
-        }
-        public void CreateSensorLog(int serialNumber, string activationTime)
-        {
-            SensorLg = new SensorLog(serialNumber, Convert.ToDateTime(activationTime));
-            SensorLg = RuleSetDBFacade.CreateSensorLog(SensorLg);
-        }
-        public void UpdateSensorLog(string contactTime, string contactPerson, string contactMessage)
-        {
-            SensorLg = new SensorLog();
-            SensorLg.ContactTime = Convert.ToDateTime(contactTime);
-            SensorLg.ContactPerson = contactPerson;
-            SensorLg.ContactMessage = contactMessage;
-            RuleSetDBFacade.UpdateSensorLog(SensorLg);
+            this.SensorRuleManagement = RuleSetDBFacade.GetSensorRuleManagementFromSerialNumber(serialNumber);            
         }
         public void AddSensorRuleManagement(string ruleSet, int serialNumber) {
             SensorRuleManagementId = RuleSetDBFacade.AddSensorRuleManagement(ruleSet, serialNumber);
@@ -134,10 +121,6 @@ namespace EksamensProjekt.Controller
         public void AddTimeRangeRuleFromSerialNumber(int serialNumber, string day, DateTime startTime, DateTime endTime, string relativeCprNr, string actingRule, bool contactHelper) {
             TimeRangeRule timerange = new TimeRangeRule(relativeCprNr, actingRule, contactHelper, new Time(startTime, endTime, day));
             RuleSetDBFacade.AddTimeRangeRuleFromSerialNumber(serialNumber, timerange);
-        }
-        public List<string> GetSensorRuleManagementFromSerialNumber(int serialNumber)
-        {
-            return DBFacades.RuleSetDBFacade.GetSensorRuleManagementFromSerialNumber(serialNumber);
         }
         public void GetTimeRangeRuleFromSerialNumber(int serialNumber)
         {
@@ -158,39 +141,39 @@ namespace EksamensProjekt.Controller
             }
             return false;          
         }
-        public void CheckActingRule(string actingRuleString, RuleSetController rSC)
+        public void CheckActingRule(string actingRuleString)
         {
             string[] rule = Regex.Split(actingRuleString, @"\W+");
             int id = int.Parse(rule[1]);
             if (rule[0] == "SR")
             {
-                rSC.SensorRules.Add(RuleSetDBFacade.GetSensorRuleFromID(id));
+                this.SensorRules.Add(RuleSetDBFacade.GetSensorRuleFromID(id));
             }
         }
         public void SendMessage(List<string> contactPersons)//Stefan
         {
             string message = "";
-            SensorLg = new SensorLog();
+            SensorLog = new SensorLog();
             foreach (string CP in contactPersons)
             {
                 
                 if (CP == "Helper")
                 {
-                    SensorLg.ContactPerson = CP;
+                    SensorLog.ContactPerson = CP;
                     message = message + ", " + MessageBox.Show("Send Besked til Hjemmehjælper").ToString();
                 }
                 else
                 {
-                    SensorLg.ContactPerson = CP;
+                    SensorLog.ContactPerson = CP;
                     message = message + ", " + MessageBox.Show("Besked send til: " + CP).ToString();
                 }
                 
             }
             DateTime messageSendTime = DateTime.Now;
-            SensorLg.ContactMessage = message;
-            SensorLg.ContactTime = messageSendTime;
+            SensorLog.ContactMessage = message;
+            SensorLog.ContactTime = messageSendTime;
 
-            RuleSetDBFacade.UpdateSensorLog(SensorLg);
+            RuleSetDBFacade.UpdateSensorLog(SensorLog);
         }
         public List<SensorLog> GetSensorLogFromDateTime(DateTime checkTime)
         {

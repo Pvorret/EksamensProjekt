@@ -10,7 +10,7 @@ using System.Windows;
 
 namespace EksamensProjekt.Controller.DBFacades
 {
-    public class SensorDBFacade
+    public static class SensorDBFacade
     {
         static int ruleSetManagementId = 0;
         static int sensorRuleId = 0;
@@ -22,6 +22,11 @@ namespace EksamensProjekt.Controller.DBFacades
         public static void ConnectDB() {
             dbconn = new SqlConnection(DBHelper._connectionString);
             dbconn.Open();
+        }
+        public static void CloseDB()
+        {
+            dbconn.Close();
+            dbconn.Dispose();
         }
         public static void CreateSensor(Sensor sensor)//Stefan
         {
@@ -312,7 +317,7 @@ namespace EksamensProjekt.Controller.DBFacades
             }
             return SensorTypes;
         }
-        public static void ConnectSensorToCitizen(int serialNumber, string cprNr, string sensorLocation)//NY
+        public static void ConnectSensorToCitizen(int serialNumber, string cprNr, string sensorLocation)//Phillip
         {
             try
             {
@@ -334,10 +339,6 @@ namespace EksamensProjekt.Controller.DBFacades
                 CloseDB();
             }
 
-        }
-        public static void CloseDB() {
-            dbconn.Close();
-            dbconn.Dispose();
         }
         public static List<Sensor> GetSensorFromCitizen(string citizenCprNr)
         {
