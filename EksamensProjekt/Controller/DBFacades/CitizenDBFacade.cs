@@ -243,7 +243,6 @@ namespace EksamensProjekt.Controller.DBFacades {
         public static List<Citizen> GetCitizenTime(int serialNumber)//stefan
         {
             List<Citizen> CitizenTimeList = new List<Citizen>();
-            List<Time> timeList = new List<Time>();
             try
             {
                 ConnectDB();
@@ -262,10 +261,8 @@ namespace EksamensProjekt.Controller.DBFacades {
                     DateTime T_EndTime = Convert.ToDateTime(reader["T_EndTime"]);
                     string T_Day = reader["T_Day"].ToString();
                     Citizen citizen = new Citizen(C_CPRNR, C_Name, A_Address, A_City);
-                    citizen.HomeCareTimes = timeList;
-
-                    timeList.Add(new Time(T_StartTime, T_EndTime, T_Day));
-                    CitizenTimeList.Add(citizen);
+                    citizen.HomeCareTimes.Add(new Time(T_StartTime, T_EndTime, T_Day));
+                    CitizenTimeList.Add(citizen);                  
                 }
             }
             catch (SqlException e)
