@@ -15,13 +15,8 @@ namespace EksamensProjekt.Controller {
         public List<Citizen> Citizens = new List<Citizen>();
         public List<Time> HomeCareTimes = new List<Time>();
         public List<Time> NotAvailableTimes = new List<Time>();
-
         
-        public void CreateCitizen(
-            string name, string cprNr, string gender, string age, string address, string city, 
-            string phoneNumber, List<string> illness, string religion, Dictionary<string, int> sensorTypes, 
-            List<string> days, List<DateTime> startTime, List<DateTime> endTime
-            )
+        public void CreateCitizen(string name, string cprNr, string gender, string age, string address, string city, string phoneNumber, List<string> illness, string religion, Dictionary<string, int> sensorTypes, List<string> days, List<DateTime> startTime, List<DateTime> endTime)
         {
             for (int i = 0; i < days.Count; i++)
             {
@@ -29,7 +24,7 @@ namespace EksamensProjekt.Controller {
             }
             Citizen citizen = new Citizen(
                 name, cprNr, gender, age, address, city, phoneNumber, 
-                illness, religion, sensorTypes, HomeCareTimes
+                religion, illness, sensorTypes, HomeCareTimes
                 );
             citizen.Relatives = Relatives;
             CitizenDBFacade.CreateCitizen(citizen);
@@ -42,7 +37,6 @@ namespace EksamensProjekt.Controller {
             }
             CitizenDBFacade.AddIllnessToCitizen(citizen);
         }
-
         public void AddRelative(string name,string cprNr, string gender, string age, string address, string city, string phoneNumber, string email, List<string> days, List<DateTime> startTime, List<DateTime> endTime)
         {
             for (int i = 0; i < days.Count; i++)
@@ -65,10 +59,6 @@ namespace EksamensProjekt.Controller {
         public void GetAllSensorType() {
             SensorTypes = SensorDBFacade.GetSensorType(0);
         }
-        public void GetSensorTypeFromCitizen(string cprNr)
-        {
-            SensorTypes = SensorDBFacade.GetSensorTypeFromCitizen(cprNr);
-        }
         public void GetAllCitizen()
         {
             Citizens = CitizenDBFacade.GetAllCitizen();
@@ -79,7 +69,7 @@ namespace EksamensProjekt.Controller {
             {
                 if (Citizens[i].CprNr == cprNr)
                 {
-                    Citizens[i].Relatives = SensorDBFacade.GetRelativeFromCitizen(cprNr);
+                    Citizens[i].Relatives = CitizenDBFacade.GetRelativeFromCitizen(cprNr);
                 }
             }
         }
