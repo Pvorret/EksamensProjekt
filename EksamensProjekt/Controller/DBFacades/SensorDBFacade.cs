@@ -182,23 +182,20 @@ namespace EksamensProjekt.Controller.DBFacades
                     try {
                         sensorRuleId = Convert.ToInt32(reader["SRMSR_SR_ID"]);
                     }
-                    catch (SqlException e) {
-                        //MessageBox.Show(e.Message);
-                        throw new Exception("Error! " + e.Message);
+                    catch (Exception) {
+
                     }
                     try {
                         timeRangeRuleId = Convert.ToInt32(reader["SRMTRR_TRR_ID"]);
                         sensorRuleId = Convert.ToInt32(reader["SRMSR_SR_ID"]);
                     }
-                    catch (SqlException e) {
-                        //MessageBox.Show(e.Message);
-                        throw new Exception("Error! " + e.Message);
+                    catch (Exception) {
+
                     }
 
                 }
             }
             catch (SqlException e) {
-                //MessageBox.Show(e.Message);
                 throw new Exception("Error" + e.Message);
             }
             finally {
