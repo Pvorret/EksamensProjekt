@@ -14,8 +14,8 @@ namespace EksamensProjekt.Controller
     public class RuleSetController
     {
         public SensorLog SensorLg;
-        public List<SensorRule> SensorRules = new List<SensorRule>();
-        public List<TimeRangeRule> TimeRangeRules = new List<TimeRangeRule>();
+        public List<SensorRule> SensorRules;
+        public List<TimeRangeRule> TimeRangeRules;
         public List<Citizen> CitizenList = new List<Citizen>();
         public List<string> ContactList = new List<string>();
         public List<string> SensorRuleManagement = new List<string>();
@@ -26,6 +26,8 @@ namespace EksamensProjekt.Controller
         public void HandelSensorInput(int serialNumber, DateTime activationTime) //af Thomas
         {
             RuleSetController RSC = new RuleSetController();
+            RSC.SensorRules = new List<SensorRule>();
+            RSC.TimeRangeRules = new List<TimeRangeRule>();
             GetSensorInputInformation(serialNumber, activationTime, RSC);
             bool ruleExecuted = false;
             foreach (string s in RSC.SensorRuleManagement)
@@ -39,7 +41,7 @@ namespace EksamensProjekt.Controller
                         bool ActiveRule = RSC.CheckTime(TR.Time,activationTime);
                         if (ActiveRule == true)
                         {
-                            string ActingRule = TRR.ProcessTimeRangeRule(RSC, TR.Id);
+                            string ActingRule = TRR.TimeRangeRuleActivated(RSC, TR.Id);
                             if (ActingRule != "")
                             {
                                 RSC.CheckActingRule(ActingRule, RSC);
@@ -139,6 +141,7 @@ namespace EksamensProjekt.Controller
         }
         public void GetTimeRangeRuleFromSerialNumber(int serialNumber)
         {
+            TimeRangeRules = new List<TimeRangeRule>();
             TimeRangeRules = DBFacades.RuleSetDBFacade.GetTimeRangeRuleFromSerialNumber(serialNumber);
         }
         public bool CheckTime(Time timeRange, DateTime activationTime)//Stefan

@@ -32,7 +32,7 @@ namespace EksamensProjekt.Helper {
             this.Time = time;
         }
         public TimeRangeRule() { }
-        public string ProcessTimeRangeRule(RuleSetController ruleSetController ,int id)//Stefan
+        public string TimeRangeRuleActivated(RuleSetController ruleSetController ,int id)//Stefan
         {
             ruleSetController.ContactList.Add(ruleSetController.TimeRangeRules[id].CPRNR);
             if (ruleSetController.TimeRangeRules[id].ContactHelper == true)
