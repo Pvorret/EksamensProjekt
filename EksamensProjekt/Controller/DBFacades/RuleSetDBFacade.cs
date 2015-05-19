@@ -7,6 +7,7 @@ using System.Data;
 using System.Data.SqlClient;
 using EksamensProjekt.Model;
 using EksamensProjekt.Helper;
+using System.Windows;
 
 namespace EksamensProjekt.Controller.DBFacades
 {
@@ -295,6 +296,33 @@ namespace EksamensProjekt.Controller.DBFacades
                 CloseDB();
             }
             return sensorRule;
+        }
+        public static List<SensorLog> GetSensorLogFromDateTime(DateTime checkTime)
+        {
+            List<SensorLog> sensorLogList = new List<SensorLog>();
+            try
+            {
+                ConnectDB();
+                SqlCommand cmd = new SqlCommand("SP_GetSensorLogFromTime", dbconn);
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.Add(new SqlParameter("@Time", checkTime));
+                SqlDataReader reader = cmd.ExecuteReader();
+                while (reader.Read())
+                {
+                    SensorLog sensorLog = new SensorLog();
+                    sensorLog.SerialNumber = Convert.ToInt32(reader["SL_S_SerialNumber"]);
+                    sensorLogList.Add(sensorLog);
+                }
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.Message);
+            }
+            finally
+            {
+                CloseDB();
+            }
+            return sensorLogList;
         }
     }
 }

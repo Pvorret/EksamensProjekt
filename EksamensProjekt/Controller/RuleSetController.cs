@@ -191,7 +191,7 @@ namespace EksamensProjekt.Controller
         }
         public List<SensorLog> GetSensorLogFromDateTime(DateTime checkTime)
         {
-            return SensorDBFacade.GetSensorLogFromDateTime(checkTime);
+            return RuleSetDBFacade.GetSensorLogFromDateTime(checkTime);
         }
     }
 }
