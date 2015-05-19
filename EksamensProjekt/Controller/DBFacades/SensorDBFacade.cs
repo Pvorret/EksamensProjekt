@@ -15,7 +15,7 @@ namespace EksamensProjekt.Controller.DBFacades
         static int ruleSetManagementId = 0;
         static int sensorRuleId = 0;
         static int timeRangeRuleId = 0;
-        static List<int> sensorDependency = new List<int>();
+        static List<int> sensorDependency;
         static List<int> timeIdList = new List<int>();
         public static SqlConnection dbconn;
         static SqlCommand cmd;
@@ -129,7 +129,8 @@ namespace EksamensProjekt.Controller.DBFacades
                 }
                 catch (SqlException e)
                 {
-                    MessageBox.Show(e.Message);
+                    //MessageBox.Show(e.Message);
+                    throw new Exception("Error" + e.Message);
                 }
                 finally
                 {
@@ -158,7 +159,8 @@ namespace EksamensProjekt.Controller.DBFacades
             }
             catch (SqlException e)
             {
-                MessageBox.Show(e.Message);
+                //MessageBox.Show(e.Message);
+                throw new Exception("Error" + e.Message);
                 return false;
             }
             finally
@@ -173,27 +175,28 @@ namespace EksamensProjekt.Controller.DBFacades
                 cmd.CommandType = CommandType.StoredProcedure;
                 cmd.Parameters.Add(new SqlParameter("@SerialNumber", serialNumber));
                 SqlDataReader reader = cmd.ExecuteReader();
-                List<int> sensorDependency = new List<int>();
+                sensorDependency = new List<int>();
 
-                while (reader.Read()) {
+                while (reader.Read() && reader.HasRows) {
                     ruleSetManagementId = Convert.ToInt32(reader["SRM_ID"]);
                     try {
                         sensorRuleId = Convert.ToInt32(reader["SRMSR_SR_ID"]);
                     }
-                    catch (Exception e) {
-                        MessageBox.Show(e.Message);
+                    catch (Exception) {
+
                     }
                     try {
                         timeRangeRuleId = Convert.ToInt32(reader["SRMTRR_TRR_ID"]);
+                        sensorRuleId = Convert.ToInt32(reader["SRMSR_SR_ID"]);
                     }
-                    catch (Exception e) {
-                        MessageBox.Show(e.Message);
+                    catch (Exception) {
+
                     }
 
                 }
             }
-            catch (Exception e) {
-                MessageBox.Show(e.Message);
+            catch (SqlException e) {
+                throw new Exception("Error" + e.Message);
             }
             finally {
                 CloseDB();
@@ -244,7 +247,7 @@ namespace EksamensProjekt.Controller.DBFacades
         public static void DeleteCitizenRelativeTimeFromTId() {
             ConnectDB();
             try {
-                cmd = new SqlCommand("SP_DeleteCitizenRelativeTimeFromCRT_T_ID");
+                cmd = new SqlCommand("SP_DeleteCitizenRelativeTimeFromCRT_T_ID", dbconn);
                 cmd.CommandType = CommandType.StoredProcedure;
 
                 foreach (int i in timeIdList) {
