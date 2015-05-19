@@ -10,7 +10,6 @@ namespace EksamensProjekt.Model
     {
         public string Email { get; set; }
         public List<Time> NotAvailableTimes { get; set; }
-        public TimeSpan TimeSpan { get; set; }
 
         public Relative(string name, string cprNr, string gender, string age, string address, string city, string phoneNumber, string email, List<Time> notAvailableTimes)
         {
