@@ -23,8 +23,7 @@ namespace EksamensProjekt.Model
             this.Email = email;
             this.NotAvailableTimes = notAvailableTimes;
         }
-
-        public Relative(string cprNr, string name, string phoneNumber, string address, string city)//Stefan
+        public Relative(string name, string cprNr, string phoneNumber, string address, string city)//Stefan
         {
             this.CprNr = cprNr;
             this.Name = name;
@@ -32,7 +31,7 @@ namespace EksamensProjekt.Model
             this.Address = address;
             this.City = city;
         }
-        public Relative(string cprNr, string name)
+        public Relative(string name, string cprNr)
         {
             this.CprNr = cprNr;
             this.Name = name;
