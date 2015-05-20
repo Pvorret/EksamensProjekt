@@ -13,7 +13,7 @@ namespace EksamensProjekt.Controller
 {
     public class RuleSetController
     {
-        public SensorLog SensorLog;
+        public SensorLog SensorLog { get; set; }
         public List<SensorRule> SensorRules;
         public List<TimeRangeRule> TimeRangeRules;
         public List<Citizen> CitizenList = new List<Citizen>();
@@ -98,8 +98,8 @@ namespace EksamensProjekt.Controller
         }
         public void GetSensorInputInformation(int serialNumber, DateTime activationTime) // Thomas og Stefan
         { 
-            SensorLog SL = new SensorLog(serialNumber, activationTime);
-            RuleSetDBFacade.CreateSensorLog(SL);
+            SensorLog = new SensorLog(serialNumber, activationTime);
+            SensorLog.Id = RuleSetDBFacade.CreateSensorLog(SensorLog);
             this.CitizenList = CitizenDBFacade.GetCitizenTime(serialNumber);
             foreach (Citizen citizen in this.CitizenList)
             {

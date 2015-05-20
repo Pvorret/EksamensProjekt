@@ -12,6 +12,16 @@ using System.Windows;
 namespace EksamensProjekt.Controller.DBFacades {
     class CitizenDBFacade {
         static SqlConnection dbconn;
+        private static void ConnectDB()
+        {
+            dbconn = new SqlConnection(DBHelper._connectionString);
+            dbconn.Open();
+        }
+        private static void CloseDB()
+        {
+            dbconn.Close();
+            dbconn.Dispose();
+        }
         public static void CreateCitizen(Model.Citizen citizen) 
         {
             try {
@@ -109,13 +119,12 @@ namespace EksamensProjekt.Controller.DBFacades {
                 CloseDB();
             }
         }
-        public static void AddRelative(Model.Citizen c)
+        public static void AddRelative(Model.Citizen citizen)
         {
             try
             {
                 ConnectDB();
-
-                foreach (Model.Relative r in c.Relatives)
+                foreach (Model.Relative r in citizen.Relatives)
                 {
                     SqlCommand cmd2 = new SqlCommand("SP_AddRelative", dbconn);
                     cmd2.CommandType = CommandType.StoredProcedure;
@@ -127,7 +136,7 @@ namespace EksamensProjekt.Controller.DBFacades {
                     cmd2.Parameters.Add(new SqlParameter("@R_Email", r.Email));
                     cmd2.Parameters.Add(new SqlParameter("@A_Address", r.Address));
                     cmd2.Parameters.Add(new SqlParameter("@A_City", r.City));
-                    cmd2.Parameters.Add(new SqlParameter("@C_CPRNR", c.CprNr));
+                    cmd2.Parameters.Add(new SqlParameter("@C_CPRNR", citizen.CprNr));
                     cmd2.ExecuteNonQuery();
 
                 }
@@ -223,7 +232,7 @@ namespace EksamensProjekt.Controller.DBFacades {
                     DateTime T_EndTime = Convert.ToDateTime(reader["T_EndTime"]);
                     string T_Day = reader["T_Day"].ToString();
 
-                    Relative relative = new Relative(R_CPRNR, R_Name, R_Phone, A_Address, A_City);
+                    Relative relative = new Relative(R_Name, R_CPRNR, R_Phone, A_Address, A_City);
                     List<Time> time = new List<Time>();
                     time.Add(new Time(T_StartTime, T_EndTime, T_Day));
                     relative.NotAvailableTimes = time;
@@ -243,7 +252,6 @@ namespace EksamensProjekt.Controller.DBFacades {
         public static List<Citizen> GetCitizenTime(int serialNumber)//stefan
         {
             List<Citizen> CitizenTimeList = new List<Citizen>();
-            List<Time> timeList = new List<Time>();
             try
             {
                 ConnectDB();
@@ -262,9 +270,8 @@ namespace EksamensProjekt.Controller.DBFacades {
                     DateTime T_EndTime = Convert.ToDateTime(reader["T_EndTime"]);
                     string T_Day = reader["T_Day"].ToString();
                     Citizen citizen = new Citizen(C_CPRNR, C_Name, A_Address, A_City);
-                    citizen.HomeCareTimes = timeList;
+                    citizen.HomeCareTimes.Add(new Time(T_StartTime, T_EndTime, T_Day));
 
-                    timeList.Add(new Time(T_StartTime, T_EndTime, T_Day));
                     CitizenTimeList.Add(citizen);
                 }
             }
@@ -278,13 +285,32 @@ namespace EksamensProjekt.Controller.DBFacades {
             }
             return CitizenTimeList;
         }
-        private static void ConnectDB() {
-            dbconn = new SqlConnection(DBHelper._connectionString);
-            dbconn.Open();
-        }
-        private static void CloseDB() {
-            dbconn.Close();
-            dbconn.Dispose();
+        public static List<Relative> GetRelativeFromCitizen(string cprNr)
+        {
+            List<Relative> relatives = new List<Relative>();
+            try
+            {
+                ConnectDB();
+                SqlCommand cmd = new SqlCommand("SP_GetRelativeTimeFromCitizen", dbconn);
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.Add(new SqlParameter("@Citizen_CPRNR", cprNr));
+                SqlDataReader rdr;
+                rdr = cmd.ExecuteReader();
+
+                while (rdr.HasRows && rdr.Read())
+                {
+                    relatives.Add(new Relative(Convert.ToString(rdr["R_Name"]), Convert.ToString(rdr["R_CPRNR"])));
+                }
+            }
+            catch (SqlException e)
+            {
+                throw new Exception("Error! Kunne ikke hente pårørende " + e.Message);
+            }
+            finally
+            {
+                CloseDB();
+            }
+            return relatives;
         }
     }
 }
