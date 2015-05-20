@@ -47,11 +47,13 @@ namespace UnitTest {
                 Assert.AreEqual(sr.Id, sensorulemanagementid);
             }
 
+            Assert.AreEqual(getSerialNumber, SensorDBFacade.GetSensor(getSerialNumber)[0].SerialNumber);
+            Assert.AreEqual(sensorType, SensorDBFacade.GetSensor(getSerialNumber)[0].Type);
 
-            sensorcontroller.CreateSensor(serialNumber, sensorType);
+            sensorcontroller.CreateSensor(serialNumber, sensorType2);
 
             foreach (Sensor s in SensorDBFacade.GetSensor(0)) {
-                if (s.SerialNumber == serialNumber && s.Type == sensorType) {
+                if (s.SerialNumber == serialNumber && s.Type == sensorType2) {
                     Assert.AreEqual(s.SerialNumber, serialNumber);
                     Assert.AreEqual(s.Type, sensorType);
                 }
