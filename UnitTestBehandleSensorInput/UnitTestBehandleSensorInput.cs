@@ -10,7 +10,7 @@ namespace UnitTest {
         {
             RuleSetController RSC = new RuleSetController();
             DateTime DT = new DateTime(2015,12,14,13,24,00,00);
-            RSC.HandelSensorInput(23323, DT);
+            RSC.HandelSensorInput(23323, DT);//dfsdf
             
         }
     }
