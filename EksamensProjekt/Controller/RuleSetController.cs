@@ -13,7 +13,7 @@ namespace EksamensProjekt.Controller
 {
     public class RuleSetController
     {
-        public SensorLog SensorLg;
+        public SensorLog SensorLog;
         public List<SensorRule> SensorRules = new List<SensorRule>();
         public List<TimeRangeRule> TimeRangeRules = new List<TimeRangeRule>();
         public List<Citizen> CitizenList = new List<Citizen>();
@@ -39,7 +39,7 @@ namespace EksamensProjekt.Controller
                         bool ActiveRule = RSC.CheckTime(TR.Time,activationTime);
                         if (ActiveRule == true)
                         {
-                            string ActingRule = TRR.ProcessTimeRangeRule(RSC, TR.Id);
+                            string ActingRule = TRR.TimeRangeRuleActivated(RSC, TR.Id);
                             if (ActingRule != "")
                             {
                                 RSC.CheckActingRule(ActingRule, RSC);
@@ -108,16 +108,16 @@ namespace EksamensProjekt.Controller
         }
         public void CreateSensorLog(int serialNumber, string activationTime)
         {
-            SensorLg = new SensorLog(serialNumber, Convert.ToDateTime(activationTime));
-            SensorLg = RuleSetDBFacade.CreateSensorLog(SensorLg);
+            SensorLog = new SensorLog(serialNumber, Convert.ToDateTime(activationTime));
+            SensorLog = RuleSetDBFacade.CreateSensorLog(SensorLog);
         }
         public void UpdateSensorLog(string contactTime, string contactPerson, string contactMessage)
         {
-            SensorLg = new SensorLog();
-            SensorLg.ContactTime = Convert.ToDateTime(contactTime);
-            SensorLg.ContactPerson = contactPerson;
-            SensorLg.ContactMessage = contactMessage;
-            RuleSetDBFacade.UpdateSensorLog(SensorLg);
+            SensorLog = new SensorLog();
+            SensorLog.ContactTime = Convert.ToDateTime(contactTime);
+            SensorLog.ContactPerson = contactPerson;
+            SensorLog.ContactMessage = contactMessage;
+            RuleSetDBFacade.UpdateSensorLog(SensorLog);
         }
         public void AddSensorRuleManagement(string ruleSet, int serialNumber) {
             SensorRuleManagementId = RuleSetDBFacade.AddSensorRuleManagement(ruleSet, serialNumber);
@@ -172,31 +172,31 @@ namespace EksamensProjekt.Controller
         public void SendMessage(List<string> contactPersons)//Stefan
         {
             string message = "";
-            SensorLg = new SensorLog();
+            SensorLog = new SensorLog();
             foreach (string CP in contactPersons)
             {
                 
                 if (CP == "Helper")
                 {
-                    SensorLg.ContactPerson = CP;
+                    SensorLog.ContactPerson = CP;
                     message = message + ", " + MessageBox.Show("Send Besked til Hjemmehjælper").ToString();
                 }
                 else
                 {
-                    SensorLg.ContactPerson = CP;
+                    SensorLog.ContactPerson = CP;
                     message = message + ", " + MessageBox.Show("Besked send til: " + CP).ToString();
                 }
                 
             }
             DateTime messageSendTime = DateTime.Now;
-            SensorLg.ContactMessage = message;
-            SensorLg.ContactTime = messageSendTime;
+            SensorLog.ContactMessage = message;
+            SensorLog.ContactTime = messageSendTime;
 
-            RuleSetDBFacade.UpdateSensorLog(SensorLg);
+            RuleSetDBFacade.UpdateSensorLog(SensorLog);
         }
         public List<SensorLog> GetSensorLogFromDateTime(DateTime checkTime)
         {
-            return SensorDBFacade.GetSensorLogFromDateTime(checkTime);
+            return RuleSetDBFacade.GetSensorLogFromDateTime(checkTime);
         }
     }
 }
