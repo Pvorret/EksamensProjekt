@@ -22,7 +22,7 @@ namespace EksamensProjekt.Controller
         public bool Contact = true;
         public int SensorRuleId { get; set; }
         public int SensorRuleManagementId { get; set; }
-        
+
         public void HandelSensorInput(int serialNumber, DateTime activationTime) //af Thomas
         {
             RuleSetController RSC = new RuleSetController();
