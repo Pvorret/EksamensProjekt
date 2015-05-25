@@ -264,35 +264,6 @@ namespace EksamensProjekt.Controller.DBFacades
                 CloseDB();
             }
         }
-        public static List<string> GetSensorTypeFromCitizen(string cprNr)
-        {
-            List<string> SensorTypes = new List<string>();
-
-            try
-            {
-                ConnectDB();
-
-                SqlCommand cmd = new SqlCommand("SP_GetSensorTypeFromCitizen", dbconn);
-                cmd.CommandType = CommandType.StoredProcedure;
-                cmd.Parameters.Add(new SqlParameter("@CprNr", cprNr));
-                SqlDataReader rdr;
-                rdr = cmd.ExecuteReader();
-
-                while (rdr.HasRows && rdr.Read())
-                {
-                    SensorTypes.Add(Convert.ToString(rdr["ST_Type"]));
-                }
-            }
-            catch (SqlException e)
-            {
-                throw new Exception("Error in getting SensorTypes" + e.Message);
-            }
-            finally
-            {
-                CloseDB();
-            }
-            return SensorTypes;
-        }
         public static void ConnectSensorToCitizen(int serialNumber, string cprNr, string sensorLocation)//Phillip
         {
             try
