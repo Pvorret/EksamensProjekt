@@ -41,5 +41,14 @@ namespace EksamensProjekt.Helper {
             }
             return ruleSetController.TimeRangeRules[id].ActingRule;
         }
+        public void CheckActingRule(string actingRuleString, RuleSetController rSC)
+        {
+            string[] rule = Regex.Split(actingRuleString, @"\W+");
+            int id = int.Parse(rule[1]);
+            if (rule[0] == "SR")
+            {
+                rSC.SensorRules.Add(RuleSetDBFacade.GetSensorRuleFromID(id));
+            }
+        }
     }
 }

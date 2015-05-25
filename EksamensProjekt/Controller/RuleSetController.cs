@@ -42,7 +42,7 @@ namespace EksamensProjekt.Controller
                             string ActingRule = TRR.TimeRangeRuleActivated(RSC, TR.Id);
                             if (ActingRule != "")
                             {
-                                RSC.CheckActingRule(ActingRule, RSC);
+                                TRR.CheckActingRule(ActingRule, RSC);
                             }
                             ruleExecuted = true;
                         }
@@ -132,15 +132,6 @@ namespace EksamensProjekt.Controller
                 }
             }
             return false;          
-        }
-        public void CheckActingRule(string actingRuleString, RuleSetController rSC)
-        {
-            string[] rule = Regex.Split(actingRuleString, @"\W+");
-            int id = int.Parse(rule[1]);
-            if (rule[0] == "SR")
-            {
-                rSC.SensorRules.Add(RuleSetDBFacade.GetSensorRuleFromID(id));
-            }
         }
         public void SendMessage(List<string> contactPersons)//Stefan
         {
