@@ -249,11 +249,12 @@ namespace EksamensProjekt.Controller.DBFacades {
             }
             return RelativeTimeList;
         }
-        public static List<Citizen> GetCitizenTime(int serialNumber)//stefan
+        public static Citizen GetCitizenTime(int serialNumber)//stefan
         {
-            List<Citizen> CitizenTimeList = new List<Citizen>();
+            Citizen citizen = new Citizen();
             try
             {
+                
                 ConnectDB();
                 SqlCommand cmd = new SqlCommand("SP_GetCitizenTimeFromSensor", dbconn);
                 cmd.CommandType = CommandType.StoredProcedure;
@@ -269,10 +270,8 @@ namespace EksamensProjekt.Controller.DBFacades {
                     DateTime T_StartTime = Convert.ToDateTime(reader["T_StartTime"]);
                     DateTime T_EndTime = Convert.ToDateTime(reader["T_EndTime"]);
                     string T_Day = reader["T_Day"].ToString();
-                    Citizen citizen = new Citizen(C_CPRNR, C_Name, A_Address, A_City);
+                    citizen = new Citizen(C_CPRNR, C_Name, A_Address, A_City);
                     citizen.HomeCareTimes.Add(new Time(T_StartTime, T_EndTime, T_Day));
-
-                    CitizenTimeList.Add(citizen);
                 }
             }
             catch (SqlException e)
@@ -283,7 +282,7 @@ namespace EksamensProjekt.Controller.DBFacades {
             {
                 CloseDB();
             }
-            return CitizenTimeList;
+            return citizen;
         }
         public static List<Relative> GetRelativeFromCitizen(string cprNr)
         {
