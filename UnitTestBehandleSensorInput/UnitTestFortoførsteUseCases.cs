@@ -15,25 +15,24 @@ namespace UnitTest {
             SensorController sensorcontroller = new SensorController();
             CitizenController citizencontroller = new CitizenController();
             //Random random = new Random();
-            
+
             //Test data i databasen.
-            int getSerialNumber = 99999;
-            int sensorDependency1 = 22222;
+            int getSerialNumber = 888888;
+            int sensorDependency1 = 999999;
             bool waitOrLook = true;
-            int timeToWait = 60;
+            int timeToWait = 2;
             int timeToLook = 0;
             bool whenToSend = true;
-            string sensorType = "Hej Sensor";
-            int sensorulemanagementid = 0;
+            string sensorType = "Test";
 
             //Test data til at ligge i databasen.
-            int serialNumber = 88888;
-            int sensorDependency2 = 22222;
+            int serialNumber = 111111;
+            int sensorDependency2 = 111111;
             bool waitOrLook2 = true;
-            int timeToWait2 = 40;
-            int timeToLook2 = 60;
+            int timeToWait2 = 2;
+            int timeToLook2 = 1;
             bool whenToSend2 = false;
-            string sensorType2 = "Hej Hej Sensor";
+            string sensorType2 = "Dør";
             int sensorrulemanagementid2 = 0;
 
             //Når man adder sensorrulemanagement til databasen, retunere selve add metoden sensorrulemanagementid, som så skal bruges i AddSensorRuleFromSerialNumber.
@@ -44,7 +43,6 @@ namespace UnitTest {
                 Assert.AreEqual(sr.TimeToWait, timeToWait);
                 Assert.AreEqual(sr.TimeToLook, timeToLook);
                 Assert.AreEqual(sr.WhenToSend, whenToSend);
-                Assert.AreEqual(sr.Id, sensorulemanagementid);
             }
 
             Assert.AreEqual(getSerialNumber, SensorDBFacade.GetSensor(getSerialNumber)[0].SerialNumber);
@@ -61,8 +59,11 @@ namespace UnitTest {
 
             //sensorcontroller.ConnectSensorToCitizen();
             //citizencontroller.GetSensorsFromCitizen();
-            
-            
+
+            //sensorrulemanagementid2 = sensrulesetcontroller.AddSensorRuleManagement("SR", serialNumber);
+            //Skal også lige gøres for en timerangerule. Men det hele skal deles op i forhold til SR og TRR.
+
+
             rulesetcontroller.AddSensorRuleFromSerialNumber(serialNumber, sensorDependency2, waitOrLook2, timeToWait2, timeToLook2, whenToSend2, sensorrulemanagementid2);
 
             foreach (SensorRule sr in rulesetcontroller.GetSensorRuleFromSerialNumber(serialNumber)) {
@@ -74,12 +75,11 @@ namespace UnitTest {
             }
 
             sensorcontroller.DeleteSensor(serialNumber);
-           
+
         }
 
         [TestMethod]
-        public void TestAddAndGetTimeRangeRuleFromSensorSerialNumber()
-        {
+        public void TestAddAndGetTimeRangeRuleFromSensorSerialNumber() {
             //RuleSetController rulesetcontroller = new RuleSetController();
             //SensorController sensorcontroller = new SensorController();
 
