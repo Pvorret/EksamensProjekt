@@ -24,9 +24,9 @@ namespace EksamensProjekt.Controller.DBFacades
             dbconn.Close();
             dbconn.Dispose();
         }
-        public static int CreateSensorLog(SensorLog sl)
+        public static SensorLog CreateSensorLog(SensorLog sl)
         {
-            int id = 0;
+            SensorLog sensorLog = new SensorLog();
             try
             {
                 ConnectDB();
@@ -38,7 +38,7 @@ namespace EksamensProjekt.Controller.DBFacades
                 
                 while(rdr.HasRows && rdr.Read())
                 {
-                    id = Convert.ToInt32(rdr["SL_ID"]);
+                    sensorLog.Id = Convert.ToInt32(rdr["SL_ID"]);
                 }
             }
             catch (SqlException e)
@@ -49,7 +49,7 @@ namespace EksamensProjekt.Controller.DBFacades
             {
                 CloseDB();
             }
-            return id;
+            return sensorLog;
         }
         public static void UpdateSensorLog(SensorLog sl)
         {

@@ -51,6 +51,7 @@
   </Choose>
   <ItemGroup>
     <Compile Include="UnitTestBehandleSensorInput.cs" />
+    <Compile Include="UnitTestFortoførsteUseCases.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
