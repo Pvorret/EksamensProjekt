@@ -249,8 +249,9 @@ namespace EksamensProjekt.Controller.DBFacades {
             }
             return RelativeTimeList;
         }
-        public static Citizen GetCitizenTime(int serialNumber)//stefan
+        public static List<Citizen> GetCitizenTime(int serialNumber)//stefan
         {
+            List<Citizen> citizenList = new List<Citizen>();
             Citizen citizen = new Citizen();
             try
             {
@@ -272,6 +273,8 @@ namespace EksamensProjekt.Controller.DBFacades {
                     string T_Day = reader["T_Day"].ToString();
                     citizen = new Citizen(C_CPRNR, C_Name, A_Address, A_City);
                     citizen.HomeCareTimes.Add(new Time(T_StartTime, T_EndTime, T_Day));
+
+                    citizenList.Add(citizen);
                 }
             }
             catch (SqlException e)
@@ -282,7 +285,7 @@ namespace EksamensProjekt.Controller.DBFacades {
             {
                 CloseDB();
             }
-            return citizen;
+            return citizenList;
         }
         public static List<Relative> GetRelativeFromCitizen(string cprNr)
         {
