@@ -260,7 +260,7 @@ namespace EksamensProjekt.Controller.DBFacades {
                 cmd.Parameters.Add(new SqlParameter("@SerialNumber", serialNumber));
                 SqlDataReader reader = cmd.ExecuteReader();
 
-                while (reader.Read())
+                while (reader.Read() && reader.HasRows)
                 {
                     string C_CPRNR = reader["C_CPRNR"].ToString();
                     string C_Name = reader["C_Name"].ToString();

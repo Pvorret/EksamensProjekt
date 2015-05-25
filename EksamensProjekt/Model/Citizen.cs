@@ -35,6 +35,7 @@ namespace EksamensProjekt.Model
             this.Name = name;
             this.Address = address;
             this.City = city;
+            HomeCareTimes = new List<Time>();
         }
         public Citizen(string name, string cprNr)
         {
