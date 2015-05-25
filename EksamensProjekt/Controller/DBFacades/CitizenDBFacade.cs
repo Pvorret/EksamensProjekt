@@ -296,12 +296,25 @@ namespace EksamensProjekt.Controller.DBFacades {
                 SqlCommand cmd = new SqlCommand("SP_GetRelativeTimeFromCitizen", dbconn);
                 cmd.CommandType = CommandType.StoredProcedure;
                 cmd.Parameters.Add(new SqlParameter("@Citizen_CPRNR", cprNr));
-                SqlDataReader rdr;
-                rdr = cmd.ExecuteReader();
+                SqlDataReader rdr = cmd.ExecuteReader();
 
-                while (rdr.HasRows && rdr.Read())
+                while (rdr.Read() && rdr.HasRows)
                 {
-                    relatives.Add(new Relative(Convert.ToString(rdr["R_Name"]), Convert.ToString(rdr["R_CPRNR"])));
+                    if (relatives.Count != 0)
+                    {
+                        for (int i = 0; i < relatives.Count; i++)
+                        {
+                            if (relatives[i].CprNr != Convert.ToString(rdr["R_CPRNR"]))
+                            {
+                                relatives.Add(new Relative(Convert.ToString(rdr["R_Name"]), Convert.ToString(rdr["R_CPRNR"])));
+                            }
+                        }
+                    }
+                    else
+                    {
+                        relatives.Add(new Relative(Convert.ToString(rdr["R_Name"]), Convert.ToString(rdr["R_CPRNR"])));
+                    }
+                    
                 }
             }
             catch (SqlException e)
