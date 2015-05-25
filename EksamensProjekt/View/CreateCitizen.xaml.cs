@@ -62,9 +62,9 @@ namespace EksamensProjekt.View
         }
         private void AddRelative_Button_Click(object sender, RoutedEventArgs e)
         {
+            CitizenRelatives_ListBox.Items.Clear();
             AddRelative AR = new AddRelative(_controller);
             AR.ShowDialog();
-            //_controller = AR._controller;
             for (int i = 0; i < _controller.Relatives.Count; i++)
 			{
                 CitizenRelatives_ListBox.Items.Add(_controller.Relatives[i].Name);			 
@@ -90,8 +90,6 @@ namespace EksamensProjekt.View
                 if (AR.NewReligion == null)
                 return ; 
             }
-            
-
         }
 
         private void AddHomeCareTime_Button_Click(object sender, RoutedEventArgs e)

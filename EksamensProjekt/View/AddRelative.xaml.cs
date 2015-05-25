@@ -43,22 +43,6 @@ namespace EksamensProjekt.View
             NotAvailableDays_Dropdown.Items.Add("Lørdag");
             NotAvailableDays_Dropdown.Items.Add("Søndag");
         }
-        public AddRelative()
-        {
-            InitializeComponent();
-            _controller = new CitizenController();
-            RelativeGender_Dropdown.Items.Add("Mand");
-            RelativeGender_Dropdown.Items.Add("Kvinde");
-
-            NotAvailableDays_Dropdown.Items.Add("Mandag");
-            NotAvailableDays_Dropdown.Items.Add("Tirsdag");
-            NotAvailableDays_Dropdown.Items.Add("Onsdag");
-            NotAvailableDays_Dropdown.Items.Add("Torsdag");
-            NotAvailableDays_Dropdown.Items.Add("Fredag");
-            NotAvailableDays_Dropdown.Items.Add("Lørdag");
-            NotAvailableDays_Dropdown.Items.Add("Søndag");
-        }
-
         private void Cancel_Button_Click(object sender, RoutedEventArgs e)
         {
             this.Close();

@@ -103,27 +103,11 @@ namespace EksamensProjekt.Controller
             }
             rSC.SensorRuleManagement = RuleSetDBFacade.GetSensorRuleManagementFromSerialNumber(serialNumber);            
         }
-        public void CreateSensorLog(int serialNumber, string activationTime)
+        public void AddSensorRuleManagement(string ruleSet, int serialNumber)
         {
-            SensorLog = new SensorLog(serialNumber, Convert.ToDateTime(activationTime));
-            SensorLog = RuleSetDBFacade.CreateSensorLog(SensorLog);
-        }
-        public void UpdateSensorLog(string contactTime, string contactPerson, string contactMessage)
-        {
-            SensorLog = new SensorLog();
-            SensorLog.ContactTime = Convert.ToDateTime(contactTime);
-            SensorLog.ContactPerson = contactPerson;
-            SensorLog.ContactMessage = contactMessage;
-            RuleSetDBFacade.UpdateSensorLog(SensorLog);
-        }
-        public void AddSensorRuleManagement(string ruleSet, int serialNumber) {
             SensorRuleManagementId = RuleSetDBFacade.AddSensorRuleManagement(ruleSet, serialNumber);
         }
         public List<SensorRule> GetSensorRuleFromSerialNumber(int serialNumber) {
-            //foreach (SensorRule s in RuleSetDBFacade.GetSensorRuleFromSerialNumber(serialNumber)) {
-            //    SensorRule sensorrule = new SensorRule(s.Id, s.SensorDependency, s.WaitOrLook, s.TimeToWait, s.TimeToWait);
-            //}
-
             return RuleSetDBFacade.GetSensorRuleFromSerialNumber(serialNumber);
         }
         public void AddSensorRuleFromSerialNumber(int serialNumber, int sensorDependency, bool waitOrLook, int timeToWait, int timeToLook, bool whenToSend, int sensorRuleManagementId)//Stefan
@@ -134,14 +118,6 @@ namespace EksamensProjekt.Controller
         public void AddTimeRangeRuleFromSerialNumber(int serialNumber, string day, DateTime startTime, DateTime endTime, string relativeCprNr, string actingRule, bool contactHelper) {
             TimeRangeRule timerange = new TimeRangeRule(relativeCprNr, actingRule, contactHelper, new Time(startTime, endTime, day));
             RuleSetDBFacade.AddTimeRangeRuleFromSerialNumber(serialNumber, timerange);
-        }
-        public List<string> GetSensorRuleManagementFromSerialNumber(int serialNumber)
-        {
-            return DBFacades.RuleSetDBFacade.GetSensorRuleManagementFromSerialNumber(serialNumber);
-        }
-        public void GetTimeRangeRuleFromSerialNumber(int serialNumber)
-        {
-            TimeRangeRules = DBFacades.RuleSetDBFacade.GetTimeRangeRuleFromSerialNumber(serialNumber);
         }
         public bool CheckTime(Time timeRange, DateTime activationTime)//Stefan
         {
