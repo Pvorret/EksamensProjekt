@@ -74,19 +74,17 @@ namespace EksamensProjekt.Controller
                     {
                         foreach (Time T in R.NotAvailableTimes)
                         {
-                            if (CheckTime(T, activationTime) == true)
+                            if (CheckTime(T, activationTime) == false)
                             {
                                 RSC.ContactList.Add(R.CprNr);
                             }
                         }
                     }
-                    foreach (Time t in C.HomeCareTimes)
-                    {
-                        if (RSC.ContactList.Count == 0)
-                        {
-                            RSC.ContactList.Add("Helper");
-                        }
-                    }
+
+                }
+                if (RSC.ContactList.Count == 0)
+                {
+                    RSC.ContactList.Add("Helper");
                 }
             }
             if (Contact == true)
@@ -100,7 +98,6 @@ namespace EksamensProjekt.Controller
             RuleSetDBFacade.CreateSensorLog(SL);
             rSC.CitizenList = CitizenDBFacade.GetCitizenTime(serialNumber);
             foreach (Citizen citizen in rSC.CitizenList)
-
             {
                 citizen.Relatives = CitizenDBFacade.GetRelativeTime(citizen.CprNr);
             }
