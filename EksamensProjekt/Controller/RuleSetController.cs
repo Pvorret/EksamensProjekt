@@ -162,5 +162,9 @@ namespace EksamensProjekt.Controller
         {
             return RuleSetDBFacade.GetSensorLogFromDateTime(checkTime);
         }
+        public SensorRule GetSensorRuleFromId(int id)
+        {
+            return RuleSetDBFacade.GetSensorRuleFromID(id);
+        }
     }
 }

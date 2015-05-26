@@ -47,7 +47,7 @@ namespace EksamensProjekt.Helper {
             int id = int.Parse(rule[1]);
             if (rule[0] == "SR")
             {
-                rSC.SensorRules.Add(RuleSetDBFacade.GetSensorRuleFromID(id));
+                rSC.SensorRules.Add(rSC.GetSensorRuleFromId(id));
             }
         }
     }
