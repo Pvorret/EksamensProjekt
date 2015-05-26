@@ -11,11 +11,11 @@
                 </LinearGradientBrush>
             </Label.Foreground>
         </Label>
-        <Button Name="ActiveSensor_Button" Content="Aktiver Sensor" HorizontalAlignment="Left" VerticalAlignment="Top" Width="125" Margin="195,236,0,0" Click="ActiveSensor_Button_Click"/>
-        <Button Name="CreateCitizen_Button" Content="Opret Borgerdata" HorizontalAlignment="Left" Margin="195,98,0,0" VerticalAlignment="Top" Width="125" Click="CreateCitizen_Button_Click"/>
-        <Button Name="CreateSensor_Button" Content="Opret Sensor" HorizontalAlignment="Left" Margin="195,132,0,0" VerticalAlignment="Top" Width="125" Click="CreateSensor_Button_Click"/>
-        <Button Name="DeleteSensor_Button" Content="Slet Sensor" HorizontalAlignment="Left" Margin="195,274,0,0" VerticalAlignment="Top" Width="125" Click="DeleteSensor_Button_Click"/>
-        <Button Content="Tilføj Regler til Sensor" HorizontalAlignment="Left" Margin="195,165,0,0" VerticalAlignment="Top" Width="125" Click="Button_Click"/>
-        <Button Name="ConnectSensorAndCitizen_Button" Content="Forbind Sensor og Borger" HorizontalAlignment="Left" Margin="180,201,0,0" VerticalAlignment="Top" Width="155" Click="ConnectSensorAndCitizen_Button_Click"/>
+        <Button Name="CreateCitizen_Button" Content="Opret Borgerdata" HorizontalAlignment="Left" Margin="178,94,0,0" VerticalAlignment="Top" Width="155" Click="CreateCitizen_Button_Click"/>
+        <Button Name="CreateSensor_Button" Content="Opret Sensor" HorizontalAlignment="Left" Margin="178,128,0,0" VerticalAlignment="Top" Width="155" Click="CreateSensor_Button_Click"/>
+        <Button Name="ConnectSensorAndCitizen_Button" Content="Forbind Sensor og Borger" HorizontalAlignment="Left" Margin="179,161,0,0" VerticalAlignment="Top" Width="155" Click="ConnectSensorAndCitizen_Button_Click"/>
+        <Button Content="Tilføj Regler til Sensor" HorizontalAlignment="Left" Margin="178,194,0,0" VerticalAlignment="Top" Width="155" Click="Button_Click"/>
+        <Button Name="ActiveSensor_Button" Content="Aktiver Sensor" HorizontalAlignment="Left" VerticalAlignment="Top" Width="155" Margin="178,232,0,0" Click="ActiveSensor_Button_Click"/>
+        <Button Name="DeleteSensor_Button" Content="Slet Sensor" HorizontalAlignment="Left" Margin="178,270,0,0" VerticalAlignment="Top" Width="155" Click="DeleteSensor_Button_Click"/>
     </Grid>
 </Window>
