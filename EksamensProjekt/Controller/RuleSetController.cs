@@ -25,6 +25,9 @@ namespace EksamensProjekt.Controller
 
         public void HandelSensorInput(int serialNumber, DateTime activationTime) //af Thomas
         {
+            View.ProcessingSensorActivation PSA = new View.ProcessingSensorActivation();
+            PSA.Show();
+            //MessageBox.Show("");
             RuleSetController RSC = new RuleSetController();
             GetSensorInputInformation(serialNumber, activationTime, RSC);
             bool ruleExecuted = false;
@@ -87,6 +90,7 @@ namespace EksamensProjekt.Controller
                     RSC.ContactList.Add("Helper");
                 }
             }
+            PSA.Close();
             if (Contact == true)
             {
                 RSC.SendMessage(RSC.ContactList);

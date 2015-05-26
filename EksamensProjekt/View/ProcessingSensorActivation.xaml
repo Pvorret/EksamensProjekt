@@ -1,0 +1,9 @@
+﻿<Window x:Class="EksamensProjekt.View.ProcessingSensorActivation"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Vent venligst" Height="168.837" Width="348.667" WindowStartupLocation="CenterScreen" >
+    <Grid Margin="0,0,2,-2">
+        <Label Content="Vent venligst" HorizontalAlignment="Left" Margin="130,81,0,0" VerticalAlignment="Top" Width="86" IsEnabled="True"/>
+        <Label Content="Behandler sensor aktivering:" HorizontalAlignment="Left" Margin="86,40,0,0" VerticalAlignment="Top" Width="175" IsEnabled="True"/>
+    </Grid>
+</Window>
