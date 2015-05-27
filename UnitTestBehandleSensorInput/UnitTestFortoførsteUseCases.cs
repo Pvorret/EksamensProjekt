@@ -35,7 +35,6 @@ namespace UnitTest {
             string CitizenCPRNR = "111111-2222";
             string RelativeName = "Testensen";
             string RelativeCPRNR = "222222-1111";
-            //Inde i CitizenDatabseFacaden i GetRelativeFromCitizen, hvorfor er der et forloop som løber en liste igennem og så add til listen hvis der er noget i, og bagefter hvis der så ikke er noget i så lægger den også i.
 
             citizencontroller.GetAllCitizen();
             citizencontroller.GetRelativeFromCitizen(CitizenCPRNR);
@@ -126,10 +125,6 @@ namespace UnitTest {
 
             sensorrulemanagementid2 = rulesetcontroller.SensorRuleManagementId;
 
-            //Når man adder sensorrulemanagement til databasen, retunere selve add metoden sensorrulemanagementid, som så skal bruges i AddSensorRuleFromSerialNumber.
-            //sensorrulemanagementid2 = sensrulesetcontroller.AddSensorRuleManagement("SR", serialNumber);
-            //Skal også lige gøres for en timerangerule. Men det hele skal deles op i forhold til SR og TRR.
-            
             rulesetcontroller.AddSensorRuleFromSerialNumber(serialNumber, sensorDependency2, waitOrLook2, timeToWait2, timeToLook2, whenToSend2, sensorrulemanagementid2);
 
             foreach (SensorRule sr in rulesetcontroller.GetSensorRuleFromSerialNumber(serialNumber)) {
@@ -147,11 +142,11 @@ namespace UnitTest {
             string Day = "Monday";
             DateTime StartTime = Convert.ToDateTime("08:00");
             DateTime EndTime = Convert.ToDateTime("10:00");
-            string RelativeCPRNR = "222222-1111"; //Ved heller ikke rigtig hvad jeg skal gøre med Relative, når jeg ikke rigtig kan teste på Get og Add - Relative.
+            string RelativeCPRNR = "222222-1111";
             int SensorRuleId = 0;
             string ActingRule = "SR" + SensorRuleId;
             bool ContactHelper = true;
-            int SensorSerialNumber = 443333; //Skal lige have fundet ud af hvad jeg gør her, om det bare skal være en som også hele tiden ligger ude i Databasen?
+            int SensorSerialNumber = 443333;
             int sensorDependency2 = 888888;
             bool waitOrLook2 = false;
             int timeToWait2 = 0;
@@ -159,9 +154,6 @@ namespace UnitTest {
             bool whenToSend2 = true;
             int sensorrulemanagementid2 = 0;
             string RuleSet = "TRR";
-
-            //Jeg forstår ikke inde i vinduet AddSensorRuleOrTimeRangeRule, at hvis man har valgt sensor regel = TRR og man så her efter skal koble en sensor regle til.
-            //at man så i koden opretter en SensorRule? Linje 182 og så derefter opretter en TimeRangeRule, for så det jo kun den regel man har at vælge i mellem.
 
             rulesetcontroller.AddSensorRuleManagement(RuleSet, serialNumber);
             sensorrulemanagementid2 = rulesetcontroller.SensorRuleManagementId;
