@@ -23,11 +23,10 @@ namespace EksamensProjekt.Controller
         public int SensorRuleId { get; set; }
         public int SensorRuleManagementId { get; set; }
 
-        public void HandelSensorInput(int serialNumber, DateTime activationTime) //af Thomas
+        public void HandelSensorInput(int serialNumber, DateTime activationTime) // lavet af Thomas
         {
             View.ProcessingSensorActivation PSA = new View.ProcessingSensorActivation();
             PSA.Show();
-            //MessageBox.Show("");
             RuleSetController RSC = new RuleSetController();
             GetSensorInputInformation(serialNumber, activationTime, RSC);
             bool ruleExecuted = false;

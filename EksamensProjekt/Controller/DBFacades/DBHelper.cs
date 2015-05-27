@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using System.Data;
 using System.Data.SqlClient;
 
-namespace EksamensProjekt.Controller.DBFacades
+namespace EksamensProjekt.Controller.DBFacades // lavet af Stefan
 {
     public static class DBHelper
     {

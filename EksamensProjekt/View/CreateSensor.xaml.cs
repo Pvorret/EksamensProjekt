@@ -38,18 +38,15 @@ namespace EksamensProjekt.View
         {
             Close();
         }
-
         private void CreateSensor_Button_Click(object sender, RoutedEventArgs e)
         {
             con.CreateSensor(Convert.ToInt32(SerialNumber_TextBox.Text), Type_ComboBox.SelectedItem.ToString());
             SerialNumber_TextBox.Clear();
             MessageBox.Show("Sensor er oprettet i databasen");
         }
-
         private void Type_ComboBox_SelectionChanged_1(object sender, SelectionChangedEventArgs e) {
 
         }
-
         private void SerialNumber_TextBox_PreviewTextInput(object sender, TextCompositionEventArgs e)
         {
             Regex regex = new Regex("[^0-9]");
