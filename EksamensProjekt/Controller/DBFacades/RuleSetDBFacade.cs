@@ -14,7 +14,7 @@ namespace EksamensProjekt.Controller.DBFacades
     public class RuleSetDBFacade
     {
         static SqlConnection dbconn;
-        private static void ConnectDB()
+        private static void ConnectDB() 
         {
             dbconn = new SqlConnection(DBHelper._connectionString);
             dbconn.Open();
@@ -24,7 +24,7 @@ namespace EksamensProjekt.Controller.DBFacades
             dbconn.Close();
             dbconn.Dispose();
         }
-        public static SensorLog CreateSensorLog(SensorLog sl)
+        public static SensorLog CreateSensorLog(SensorLog sl) //lavet af Phillip
         {
             SensorLog sensorLog = new SensorLog();
             try
@@ -51,7 +51,7 @@ namespace EksamensProjekt.Controller.DBFacades
             }
             return sensorLog;
         }
-        public static void UpdateSensorLog(SensorLog sl)
+        public static void UpdateSensorLog(SensorLog sl) // lavet af Phillip
         {
             try
             {
@@ -73,7 +73,8 @@ namespace EksamensProjekt.Controller.DBFacades
                 CloseDB();
             }
         }
-        public static List<SensorRule> GetSensorRuleFromSerialNumber(int serialNumber) {
+        public static List<SensorRule> GetSensorRuleFromSerialNumber(int serialNumber) // lavet af Nicolaj
+        {
             List<SensorRule> sensorruleList = new List<SensorRule>();
 
             try {
@@ -108,7 +109,7 @@ namespace EksamensProjekt.Controller.DBFacades
 
             return sensorruleList;
         }
-        public static List<string> GetSensorRuleManagementFromSerialNumber(int serialNumber)
+        public static List<string> GetSensorRuleManagementFromSerialNumber(int serialNumber) // lavet af Michael
         {
             List<string> ruleManagement = new List<string>();
             try
@@ -137,7 +138,7 @@ namespace EksamensProjekt.Controller.DBFacades
             }
             return ruleManagement;
         }
-        public static List<TimeRangeRule> GetTimeRangeRuleFromSerialNumber(int serialNumber)
+        public static List<TimeRangeRule> GetTimeRangeRuleFromSerialNumber(int serialNumber) // lavet af Nicolaj
         {
             List<TimeRangeRule> timerangerules = new List<TimeRangeRule>();
             try
@@ -176,7 +177,8 @@ namespace EksamensProjekt.Controller.DBFacades
             }
             return timerangerules;
         }
-        public static int AddSensorRuleFromSerialNumber(int serialNumber, SensorRule sensorRule, int sensorRuleManagementId) {
+        public static int AddSensorRuleFromSerialNumber(int serialNumber, SensorRule sensorRule, int sensorRuleManagementId) // lavet af Nicolaj
+        {
             int id = 0;
             try {
                 ConnectDB();
@@ -211,7 +213,7 @@ namespace EksamensProjekt.Controller.DBFacades
              }
             return id;
         }
-        public static int AddSensorRuleManagement(string ruleSet, int serialNumber)
+        public static int AddSensorRuleManagement(string ruleSet, int serialNumber) // lavet af Michael
         {
             int id = 0;
             try
@@ -239,7 +241,7 @@ namespace EksamensProjekt.Controller.DBFacades
             }
             return id;
         }
-        public static void AddTimeRangeRuleFromSerialNumber(int serialNumber, TimeRangeRule timeRange)
+        public static void AddTimeRangeRuleFromSerialNumber(int serialNumber, TimeRangeRule timeRange) // lavet af Phillip
         {
             try
             {
@@ -265,7 +267,7 @@ namespace EksamensProjekt.Controller.DBFacades
                 CloseDB();
             }
         }
-        public static SensorRule GetSensorRuleFromID(int id)
+        public static SensorRule GetSensorRuleFromID(int id) // lavet af Thomas
         {
             SensorRule sensorRule = new SensorRule();
             try
@@ -297,7 +299,7 @@ namespace EksamensProjekt.Controller.DBFacades
             }
             return sensorRule;
         }
-        public static List<SensorLog> GetSensorLogFromDateTime(DateTime checkTime)
+        public static List<SensorLog> GetSensorLogFromDateTime(DateTime checkTime) // lavet af Thomas
         {
             List<SensorLog> sensorLogList = new List<SensorLog>();
             try

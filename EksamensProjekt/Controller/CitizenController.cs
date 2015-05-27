@@ -16,7 +16,7 @@ namespace EksamensProjekt.Controller {
         public List<Time> HomeCareTimes = new List<Time>();
         public List<Time> NotAvailableTimes = new List<Time>();
         
-        public void CreateCitizen(string name, string cprNr, string gender, string age, string address, string city, string phoneNumber, List<string> illness, string religion, Dictionary<string, int> sensorTypes, List<string> days, List<DateTime> startTime, List<DateTime> endTime)
+        public void CreateCitizen(string name, string cprNr, string gender, string age, string address, string city, string phoneNumber, List<string> illness, string religion, Dictionary<string, int> sensorTypes, List<string> days, List<DateTime> startTime, List<DateTime> endTime) // lavet af Phillip
         {
             for (int i = 0; i < days.Count; i++)
             {
@@ -37,7 +37,7 @@ namespace EksamensProjekt.Controller {
             }
             CitizenDBFacade.AddIllnessToCitizen(citizen);
         }
-        public void AddRelative(string name,string cprNr, string gender, string age, string address, string city, string phoneNumber, string email, List<string> days, List<DateTime> startTime, List<DateTime> endTime)
+        public void AddRelative(string name,string cprNr, string gender, string age, string address, string city, string phoneNumber, string email, List<string> days, List<DateTime> startTime, List<DateTime> endTime) // lavet af Phillip
         {
             for (int i = 0; i < days.Count; i++)
             {
@@ -45,7 +45,7 @@ namespace EksamensProjekt.Controller {
             }
             Relatives.Add(new Relative(name, cprNr, gender, age, address, city, phoneNumber, email, NotAvailableTimes));
         }
-        public void GetSensorsFromCitizen(string cprNr)
+        public void GetSensorsFromCitizen(string cprNr) // lavet af Phillip
         {
             for (int i = 0; i < Citizens.Count; i++)
             {
@@ -56,7 +56,8 @@ namespace EksamensProjekt.Controller {
             }
 
         }
-        public void GetAllSensorType() {
+        public void GetAllSensorType()
+        {
             SensorTypes = SensorDBFacade.GetSensorType(0);
         }
         public void GetAllCitizen()

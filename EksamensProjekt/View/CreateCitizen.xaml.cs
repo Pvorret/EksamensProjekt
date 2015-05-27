@@ -55,7 +55,6 @@ namespace EksamensProjekt.View
             HomeCareDays_Dropdown.Items.Add("Lørdag");
             HomeCareDays_Dropdown.Items.Add("Søndag");
         }
-
         private void Cancel_Button_Click(object sender, RoutedEventArgs e)
         {
             this.Close();
@@ -77,7 +76,6 @@ namespace EksamensProjekt.View
                 CitizenIllness_ListBox.Items.Add(AI.NewIllness);
                 IllnessList.Add(AI.NewIllness);                        
         }
-
         private void CitizenReligion_Dropdown_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             if (CitizenReligion_Dropdown.SelectedItem.ToString() == "Tilføj Anden")
@@ -91,7 +89,6 @@ namespace EksamensProjekt.View
                 return ; 
             }
         }
-
         private void AddHomeCareTime_Button_Click(object sender, RoutedEventArgs e)
         {
             timeHomeCare = HomeCareStartHour_TextBox.Text + ":" + HomeCareStartMinute_TextBox.Text + " - "  + HomeCareEndHour_TextBox.Text + ":" + HomeCareEndMinute_TextBox.Text;
@@ -139,65 +136,54 @@ namespace EksamensProjekt.View
             _controller.CreateCitizen(CitizenName_TextBox.Text, CitizenCPRNR, CitizenGender_Dropdown.SelectedItem.ToString(), CitizenAge_TextBox.Text, CitizenAddress_TextBox.Text, CitizenCity_TextBox.Text, CitizenPhoneNumber_TextBox.Text, IllnessList, CitizenReligion_Dropdown.SelectedItem.ToString(), SensorTypesList, Days, StartTime, EndTime);
             this.Close();
         }
-
         private void CitizenBirthdate_TextBox_PreviewTextInput(object sender, TextCompositionEventArgs e)
         {
             Regex regex = new Regex("[^0-9]");
             e.Handled = regex.IsMatch(e.Text);
         }
-
         private void CitizenLast4CPR_TextBox_PreviewTextInput(object sender, TextCompositionEventArgs e)
         {
             Regex regex = new Regex("[^0-9]");
             e.Handled = regex.IsMatch(e.Text);
         }
-
         private void CitizenName_TextBox_PreviewTextInput(object sender, TextCompositionEventArgs e)
         {
             Regex regex = new Regex("[^a-zæøåA-ZÆØÅ]");
             e.Handled = regex.IsMatch(e.Text);
         }
-
         private void CitizenAge_TextBox_PreviewTextInput(object sender, TextCompositionEventArgs e)
         {
             Regex regex = new Regex("[^0-9]");
             e.Handled = regex.IsMatch(e.Text);
         }
-
         private void CitizenPhoneNumber_TextBox_PreviewTextInput(object sender, TextCompositionEventArgs e)
         {
             Regex regex = new Regex("[^0-9+]");
             e.Handled = regex.IsMatch(e.Text);
         }
-
         private void CitizenAddress_Textbox_AddressValidation(object sender, TextCompositionEventArgs e) {
             Regex regex = new Regex("[^a-zA-Z0-9]");
             e.Handled = regex.IsMatch(e.Text);
         }
-
         private void CitizenCity_TextBox_CityValidation(object sender, TextCompositionEventArgs e) {
             Regex regex = new Regex("[^a-zA-Z0-9]");
             e.Handled = regex.IsMatch(e.Text);
         }
-
         private void HomeCareStartHour_TextBox_PreviewTextInput(object sender, TextCompositionEventArgs e)
         {
             Regex regex = new Regex("[^0-9]");
             e.Handled = regex.IsMatch(e.Text);
         }
-
         private void HomeCareStartMinute_TextBox_PreviewTextInput(object sender, TextCompositionEventArgs e)
         {
             Regex regex = new Regex("[^0-9]");
             e.Handled = regex.IsMatch(e.Text);
         }
-
         private void HomeCareEndHour_TextBox_PreviewTextInput(object sender, TextCompositionEventArgs e)
         {
             Regex regex = new Regex("[^0-9]");
             e.Handled = regex.IsMatch(e.Text);
         }
-
         private void HomeCareEndMinute_TextBox_PreviewTextInput(object sender, TextCompositionEventArgs e)
         {
             Regex regex = new Regex("[^0-9]");

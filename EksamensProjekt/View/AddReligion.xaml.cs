@@ -26,20 +26,17 @@ namespace EksamensProjekt.View
         {
             InitializeComponent();
         }
-
         private void AddReligion_Button_Click(object sender, RoutedEventArgs e)
         {
             NewReligion = ReligionName_TextBox.Text;
             this.Close();
 
         }
-
         private void ReligionName_TextBox_PreviewTextInput(object sender, TextCompositionEventArgs e)
         {
             Regex regex = new Regex("[^a-zæøåA-ZÆØÅ]");
             e.Handled = regex.IsMatch(e.Text);
         }
-
         private void Cancel_Button_Click(object sender, RoutedEventArgs e)
         {
             Close();

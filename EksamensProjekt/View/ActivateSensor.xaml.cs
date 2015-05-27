@@ -31,14 +31,12 @@ namespace EksamensProjekt.View
             for (int i = 0; i < _controller.Citizens.Count; i++)
             {
                 Citizen_Dropdown.Items.Add(_controller.Citizens[i].Name);
-            }
-            
+            }   
         }
         private void Back_Button_Click(object sender, RoutedEventArgs e)
         {
             Close();
         }
-
         private void TimeRightNow_Button_Click(object sender, RoutedEventArgs e)
         {
             CultureInfo c = new CultureInfo("da-DK"); //Laver et CulturInfo object c hvor vi siger at dens cultur skal være dansk
@@ -49,7 +47,6 @@ namespace EksamensProjekt.View
             Hour_TextBox.Text = DateTime.Now.Hour.ToString();
             Minute_TextBox.Text = DateTime.Now.Minute.ToString();
         }
-
         private void Citizen_Dropdown_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             Sensor_DropDown.Items.Clear();

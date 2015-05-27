@@ -31,12 +31,10 @@ namespace EksamensProjekt.View
                 Select_ComboBox.Items.Add(i);
             }
         }
-
         private void Cancel_Button_Click(object sender, RoutedEventArgs e)
         {
             Close();
         }
-
         private void Select_ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             for (int i = 0; i < _SensorController.Sensors.Count; i++)
@@ -56,7 +54,6 @@ namespace EksamensProjekt.View
                 }
             }
         }
-
         private void Delete_Button_Click(object sender, RoutedEventArgs e)
         {
             for (int i = 0; i < _SensorController.Sensors.Count; i++)

@@ -12,17 +12,19 @@ using System.Windows;
 namespace EksamensProjekt.Controller.DBFacades {
     class CitizenDBFacade {
         static SqlConnection dbconn;
-        private static void ConnectDB()
+        
+        private static void ConnectDB() // lavet af Nicolaj
         {
             dbconn = new SqlConnection(DBHelper._connectionString);
             dbconn.Open();
         }
-        private static void CloseDB()
+        
+        private static void CloseDB() // lavet af Nicolaj
         {
             dbconn.Close();
             dbconn.Dispose();
         }
-        public static void CreateCitizen(Model.Citizen citizen) 
+        public static void CreateCitizen(Model.Citizen citizen) // lavet af Nicolaj
         {
             try {
                 ConnectDB();
@@ -48,7 +50,7 @@ namespace EksamensProjekt.Controller.DBFacades {
                 CloseDB();
             }
         }
-        public static void AddSensorTypeToCitizen(string cprNr, Dictionary<string, int> sensorType) 
+        public static void AddSensorTypeToCitizen(string cprNr, Dictionary<string, int> sensorType) // lavet af Phillip
         {
             try {
                 ConnectDB();
@@ -71,7 +73,7 @@ namespace EksamensProjekt.Controller.DBFacades {
                 CloseDB();
             }
         }
-        public static void AddTime(string cprNr, List<Model.Time> times)
+        public static void AddTime(string cprNr, List<Model.Time> times) //lavet af Phillip
         {
             try
             {
@@ -96,7 +98,7 @@ namespace EksamensProjekt.Controller.DBFacades {
                 CloseDB();
             }
         }
-        public static void AddIllnessToCitizen(Model.Citizen citizen)
+        public static void AddIllnessToCitizen(Model.Citizen citizen) //lavet af Phillip
         {
             try
             {
@@ -119,7 +121,7 @@ namespace EksamensProjekt.Controller.DBFacades {
                 CloseDB();
             }
         }
-        public static void AddRelative(Model.Citizen citizen)
+        public static void AddRelative(Model.Citizen citizen) //lavet af Michael
         {
             try
             {
@@ -150,7 +152,8 @@ namespace EksamensProjekt.Controller.DBFacades {
                 CloseDB();
             }
         }
-        public static List<string> GetIllnessType() {
+        public static List<string> GetIllnessType() // lavet af Michael
+        {
             List<string> IllnessList = new List<string>();
 
             try 
@@ -180,7 +183,7 @@ namespace EksamensProjekt.Controller.DBFacades {
             return IllnessList;
 
         }
-        public static List<Model.Citizen> GetAllCitizen()
+        public static List<Model.Citizen> GetAllCitizen() // lavet af Phillip
         {
             List<Model.Citizen> Citizens = new List<Model.Citizen>();
 
@@ -209,7 +212,7 @@ namespace EksamensProjekt.Controller.DBFacades {
             }
             return Citizens;
         }
-        public static List<Relative> GetRelativeTime(string cprNr)//Stefan
+        public static List<Relative> GetRelativeTime(string cprNr)//lavet af Stefan
         {
             List<Relative> RelativeTimeList = new List<Relative>();
             try
@@ -249,19 +252,18 @@ namespace EksamensProjekt.Controller.DBFacades {
             }
             return RelativeTimeList;
         }
-        public static List<Citizen> GetCitizenTime(int serialNumber)//stefan
+        public static List<Citizen> GetCitizenTime(int serialNumber)//lavet af Stefan
         {
             List<Citizen> citizenList = new List<Citizen>();
             Citizen citizen = new Citizen();
             try
             {
-                
+            
                 ConnectDB();
                 SqlCommand cmd = new SqlCommand("SP_GetCitizenTimeFromSensor", dbconn);
                 cmd.CommandType = CommandType.StoredProcedure;
                 cmd.Parameters.Add(new SqlParameter("@SerialNumber", serialNumber));
                 SqlDataReader reader = cmd.ExecuteReader();
-
                 while (reader.Read() && reader.HasRows)
                 {
                     string C_CPRNR = reader["C_CPRNR"].ToString();
@@ -273,7 +275,6 @@ namespace EksamensProjekt.Controller.DBFacades {
                     string T_Day = reader["T_Day"].ToString();
                     citizen = new Citizen(C_CPRNR, C_Name, A_Address, A_City);
                     citizen.HomeCareTimes.Add(new Time(T_StartTime, T_EndTime, T_Day));
-
                     citizenList.Add(citizen);
                 }
             }
@@ -287,7 +288,7 @@ namespace EksamensProjekt.Controller.DBFacades {
             }
             return citizenList;
         }
-        public static List<Relative> GetRelativeFromCitizen(string cprNr)
+        public static List<Relative> GetRelativeFromCitizen(string cprNr) // lavet af Phillip
         {
             List<Relative> relatives = new List<Relative>();
             try
@@ -297,7 +298,6 @@ namespace EksamensProjekt.Controller.DBFacades {
                 cmd.CommandType = CommandType.StoredProcedure;
                 cmd.Parameters.Add(new SqlParameter("@Citizen_CPRNR", cprNr));
                 SqlDataReader rdr = cmd.ExecuteReader();
-
                 while (rdr.Read() && rdr.HasRows)
                 {
                     if (relatives.Count != 0)
@@ -313,8 +313,7 @@ namespace EksamensProjekt.Controller.DBFacades {
                     else
                     {
                         relatives.Add(new Relative(Convert.ToString(rdr["R_Name"]), Convert.ToString(rdr["R_CPRNR"])));
-                    }
-                    
+                    }   
                 }
             }
             catch (SqlException e)

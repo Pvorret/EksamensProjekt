@@ -28,7 +28,7 @@ namespace EksamensProjekt.Controller.DBFacades
             dbconn.Close();
             dbconn.Dispose();
         }
-        public static void CreateSensor(Sensor sensor)//Stefan
+        public static void CreateSensor(Sensor sensor)// lavet af Stefan
         {
             try
             {
@@ -50,7 +50,7 @@ namespace EksamensProjekt.Controller.DBFacades
                 CloseDB();
             }
         }
-        public static List<string> GetSensorType(int id)
+        public static List<string> GetSensorType(int id) // lavet af Thomas
         {
             List<string> sensortype = new List<string>();
             try
@@ -77,7 +77,7 @@ namespace EksamensProjekt.Controller.DBFacades
             }
             return sensortype;
         }
-        public static List<Sensor> GetSensor(int serialNumber)
+        public static List<Sensor> GetSensor(int serialNumber) //lavet af Thomas
         {
             List<Sensor> sensors = new List<Sensor>();
             try
@@ -115,7 +115,7 @@ namespace EksamensProjekt.Controller.DBFacades
             }
             return sensors;
         }
-        public static void DeleteSensorRuleFromDependency()
+        public static void DeleteSensorRuleFromDependency() // lavet af Thomas
         {
             foreach (int i in sensorDependency)
             {
@@ -138,7 +138,7 @@ namespace EksamensProjekt.Controller.DBFacades
                 }
             }
         }
-        public static bool DeleteSensor(int serialNumber)
+        public static bool DeleteSensor(int serialNumber) // lavet af Thomas
         {
             GetRuleSetIdFromSerialNumber(serialNumber);
             GetSensorDependencyFromSerialNumber(serialNumber);
@@ -168,7 +168,8 @@ namespace EksamensProjekt.Controller.DBFacades
                 CloseDB();
             }
         }
-        public static void GetRuleSetIdFromSerialNumber(int serialNumber) {
+        public static void GetRuleSetIdFromSerialNumber(int serialNumber) // lavet af Thomas
+        {
             try {
                 ConnectDB();
                 SqlCommand cmd = new SqlCommand("SP_GetRuleSetIDFromSerialNumber", dbconn);
@@ -202,7 +203,8 @@ namespace EksamensProjekt.Controller.DBFacades
                 CloseDB();
             }
         }
-        public static void GetSensorDependencyFromSerialNumber(int serialNumber) {
+        public static void GetSensorDependencyFromSerialNumber(int serialNumber) // lavet af Thomas
+        {
             try {
                 ConnectDB();
                 cmd = new SqlCommand("SP_GetSensorDependencyIDFromSerialNumber", dbconn);
@@ -220,7 +222,8 @@ namespace EksamensProjekt.Controller.DBFacades
                 CloseDB();
             }
         }
-        public static void GetTimeFromTRRid() {
+        public static void GetTimeFromTRRid() // lavet af Nicolaj
+        {
             ConnectDB();
             try {
                 cmd = new SqlCommand("SP_GetTimeFromSRMTRR_TRR_ID", dbconn);
@@ -244,7 +247,8 @@ namespace EksamensProjekt.Controller.DBFacades
                 CloseDB();
             }
         }
-        public static void DeleteCitizenRelativeTimeFromTId() {
+        public static void DeleteCitizenRelativeTimeFromTId() // lavet af Nicolaj
+        {
             ConnectDB();
             try {
                 cmd = new SqlCommand("SP_DeleteCitizenRelativeTimeFromCRT_T_ID", dbconn);
@@ -264,7 +268,7 @@ namespace EksamensProjekt.Controller.DBFacades
                 CloseDB();
             }
         }
-        public static void ConnectSensorToCitizen(int serialNumber, string cprNr, string sensorLocation)//Phillip
+        public static void ConnectSensorToCitizen(int serialNumber, string cprNr, string sensorLocation) // lavet af Phillip
         {
             try
             {
@@ -287,7 +291,7 @@ namespace EksamensProjekt.Controller.DBFacades
             }
 
         }
-        public static List<Sensor> GetSensorFromCitizen(string citizenCprNr)
+        public static List<Sensor> GetSensorFromCitizen(string citizenCprNr) // lavet af Phillip
         {
             List<Sensor> sensors;
             try
