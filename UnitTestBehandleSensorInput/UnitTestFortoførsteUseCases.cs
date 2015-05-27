@@ -151,7 +151,7 @@ namespace UnitTest {
             int SensorRuleId = 0;
             string ActingRule = "SR" + SensorRuleId;
             bool ContactHelper = true;
-            int SensorSerialNumber = 0; //Skal lige have fundet ud af hvad jeg gør her, om det bare skal være en som også hele tiden ligger ude i Databasen?
+            int SensorSerialNumber = 443333; //Skal lige have fundet ud af hvad jeg gør her, om det bare skal være en som også hele tiden ligger ude i Databasen?
             int sensorDependency2 = 888888;
             bool waitOrLook2 = false;
             int timeToWait2 = 0;
@@ -165,7 +165,7 @@ namespace UnitTest {
 
             rulesetcontroller.AddSensorRuleManagement(RuleSet, serialNumber);
             sensorrulemanagementid2 = rulesetcontroller.SensorRuleManagementId;
-            rulesetcontroller.AddSensorRuleFromSerialNumber(serialNumber, sensorDependency2, waitOrLook2, timeToWait2, timeToLook2, whenToSend2, sensorrulemanagementid2);
+            rulesetcontroller.AddSensorRuleFromSerialNumber(SensorSerialNumber, sensorDependency2, waitOrLook2, timeToWait2, timeToLook2, whenToSend2, sensorrulemanagementid2);
             SensorRuleId = rulesetcontroller.SensorRuleId;
             rulesetcontroller.AddTimeRangeRuleFromSerialNumber(serialNumber, Day, StartTime, EndTime, RelativeCPRNR, ActingRule, ContactHelper);
         }
