@@ -79,9 +79,10 @@ namespace UnitTest {
             int serialNumber = 111111;
             string CitizenCPRNR = "111111-2222";
             string SensorLocation = "Hoveddør";
+            citizencontroller.GetAllCitizen();
             sensorcontroller.ConnectSensorToCitizen(serialNumber, CitizenCPRNR, SensorLocation);
             citizencontroller.GetSensorsFromCitizen(CitizenCPRNR);
-            foreach (Citizen c in citizencontroller.Citizens) { //Ved ikke om man kan gøre sådan her?
+            foreach (Citizen c in citizencontroller.Citizens) {
                 if (c.CprNr == CitizenCPRNR) {
                     foreach (Sensor s in c.Sensors) {
                         Assert.AreEqual(s.SerialNumber, serialNumber);
@@ -159,7 +160,7 @@ namespace UnitTest {
             int sensorrulemanagementid2 = 0;
             string RuleSet = "TRR";
 
-            //Jeg for står ikke inde i vinduet AddSensorRuleOrTimeRangeRule, at hvis man har valgt sensor regel = TRR og man så her efter skal koble en sensor regle til.
+            //Jeg forstår ikke inde i vinduet AddSensorRuleOrTimeRangeRule, at hvis man har valgt sensor regel = TRR og man så her efter skal koble en sensor regle til.
             //at man så i koden opretter en SensorRule? Linje 182 og så derefter opretter en TimeRangeRule, for så det jo kun den regel man har at vælge i mellem.
 
             rulesetcontroller.AddSensorRuleManagement(RuleSet, serialNumber);
@@ -175,35 +176,6 @@ namespace UnitTest {
             sensorcontroller.DeleteSensor(serialNumber);
 
             Assert.AreEqual(serialNumber, SensorDBFacade.GetSensor(serialNumber)[0].SerialNumber);
-        }
-
-        [TestMethod]
-        public void TestAddAndGetTimeRangeRuleFromSensorSerialNumber() {
-            //RuleSetController rulesetcontroller = new RuleSetController();
-            //SensorController sensorcontroller = new SensorController();
-
-            ////int randomSerialNumber = random.Next(0, 1000);
-            //sensorcontroller.CreateSensor(randomSerialNumber, "Hej med dig Sensor");
-            //string day = "Mandag";
-            //DateTime startTime = new DateTime();
-            //startTime.AddHours(10);
-            //startTime.AddMinutes(00);
-            //DateTime endTime = new DateTime();
-            //endTime.AddHours(12);
-            //endTime.AddMinutes(00);
-            //string relativeCprNr = "123456-1234";
-            //bool contactHelper = true;
-            ////string actingRule = "SR " + rulesetcontroller.GetSensorRuleFromSerialNumber(randomSerialNumber)[0].Id.ToString();
-            //foreach (SensorRule s in RuleSetDBFacade.GetSensorRuleFromSerialNumber(randomSerialNumber)) {
-            //    string actingRule = "SR " + s.Id;
-            //    rulesetcontroller.AddTimeRangeRuleFromSerialNumber(randomSerialNumber, day, startTime, endTime, relativeCprNr, actingRule, contactHelper);
-            //    TimeRangeRule timerangerule = new TimeRangeRule(relativeCprNr, actingRule, contactHelper, new Time(startTime, endTime, day));
-            //    foreach (TimeRangeRule t in rulesetcontroller.GetTimeRangeRuleFromSerialNumber(randomSerialNumber)) {
-            //        Assert.AreEqual(t, timerangerule);
-            //    }
-            //}
-
-            //sensorcontroller.DeleteSensor(randomSerialNumber);
         }
     }
 }

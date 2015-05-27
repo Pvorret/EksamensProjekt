@@ -97,9 +97,9 @@ namespace EksamensProjekt.Controller.DBFacades
                     sensorruleList.Add(sensorrule);
                 }
             }
-            catch (SqlException) {
+            catch (SqlException e) {
                 
-                throw new Exception("Error in getting SensorRules");
+                throw new Exception("Error in getting SensorRules" + e.Message);
             }
             finally
             {
